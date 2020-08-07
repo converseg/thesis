@@ -1,7 +1,7 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  4 AUG 2020 14:27
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  6 AUG 2020 20:28
 entering extended mode
-**./main.tex
-(main.tex
+**./thesis.tex
+(thesis.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 (C:\MiKTeX\tex\latex\base\article.cls
@@ -820,10 +820,9 @@ File: english.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
 ))
 \@quotelevel=\count396
 \@quotereset=\count397
- (main.aux (acknowledge.aux) (abstract.aux) (public_abstract.aux)
-(contents.aux) (preface.aux) (chapter_1.aux) (chapter_2.aux) (chapter_3.aux)
-(appendix_1.aux) (appendix_2.aux))
-\openout1 = `main.aux'.
+ (thesis.aux (acknowledge.aux) (abstract.aux) (public_abstract.aux)
+(contents.aux) (preface.aux) (chapter_1.aux) (appendix_1.aux) (appendix_2.aux))
+\openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 195.
 LaTeX Font Info:    ... okay on input line 195.
@@ -845,7 +844,6 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 195.
 LaTeX Font Info:    ... okay on input line 195.
 LaTeX Font Info:    Try loading font information for TU+ptm on input line 195.
 LaTeX Font Info:    No file TUptm.fd. on input line 195.
-
 
 LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
 (Font)              using `TU/lmr/m/n' instead on input line 195.
@@ -897,21 +895,21 @@ LaTeX Info: Redefining \Ref on input line 515.
 LaTeX Info: Redefining \ref on input line 195.
 LaTeX Info: Redefining \pageref on input line 195.
 LaTeX Info: Redefining \nameref on input line 195.
- (main.out) (main.out)
+ (thesis.out) (thesis.out)
 \@outlinefile=\write4
-\openout4 = `main.out'.
+\openout4 = `thesis.out'.
 
 LaTeX Info: Redefining \Ref on input line 195.
 Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `main.bcf'.
+\openout3 = `thesis.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main.bbl' not found.
+Package biblatex Info: ... file 'thesis.bbl' not found.
 
-No file main.bbl.
+No file thesis.bbl.
 Package biblatex Info: Reference section=0 on input line 195.
 Package biblatex Info: Reference segment=0 on input line 195.
 \big@size=\dimen155
@@ -1040,7 +1038,7 @@ LaTeX Font Warning: Font shape `TU/ptm/bx/n' undefined
 ]
 \openout2 = `contents.aux'.
 
- (contents.tex (main.toc
+ (contents.tex (thesis.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
@@ -1049,23 +1047,19 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 )
 \tf@toc=\write5
-\openout5 = `main.toc'.
+\openout5 = `thesis.toc'.
 
  [6
 
 
-] (main.lot
-Overfull \hbox (3.94002pt too wide) detected at line 3
-\TU/ptm/m/n/12 Table 1.  
- []
-
-)
+] (thesis.lot)
 \tf@lot=\write6
-\openout6 = `main.lot'.
+\openout6 = `thesis.lot'.
 
- [7] (main.lof)
+
+[7] (thesis.lof)
 \tf@lof=\write7
-\openout7 = `main.lof'.
+\openout7 = `thesis.lof'.
 
 ) [8]
 \openout2 = `preface.aux'.
@@ -1129,34 +1123,25 @@ Things are pretty mixed up, but I think the worst is over.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 293.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 293.
-(main.aux (acknowledge.aux) (abstract.aux) (public_abstract.aux) (contents.aux)
-(preface.aux) (chapter_1.aux) (appendix_1.aux) (appendix_2.aux))
+(thesis.aux (acknowledge.aux) (abstract.aux) (public_abstract.aux)
+(contents.aux) (preface.aux) (chapter_1.aux) (appendix_1.aux) (appendix_2.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 293.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 293.
 
-
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
-Package logreq Info: Writing requests to 'main.run.xml'.
-\openout1 = `main.run.xml'.
+Package logreq Info: Writing requests to 'thesis.run.xml'.
+\openout1 = `thesis.run.xml'.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 293.
  ) 
 Here is how much of TeX's memory you used:
- 25951 strings out of 427839
- 462168 string characters out of 3155939
- 903567 words of memory out of 3000000
- 29717 multiletter control sequences out of 15000+200000
+ 25938 strings out of 427839
+ 462063 string characters out of 3155939
+ 897768 words of memory out of 3000000
+ 29710 multiletter control sequences out of 15000+200000
  546916 words of font info for 62 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 34i,7n,56p,10357b,3430s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,7n,56p,10359b,3430s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on main.pdf (10 pages).
+Output written on thesis.pdf (10 pages).
