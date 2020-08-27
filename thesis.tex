@@ -21,6 +21,11 @@
  bottom=2.54cm,
  top=2.54cm,
  }
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
 \usepackage[utf8]{inputenc}
 
 %% ref related
@@ -64,6 +69,17 @@
 \renewcommand{\cftafterlottitle}{\hfill}
 \renewcommand{\cftloftitlefont}{\hfill\normalsize\MakeUppercase}
 \renewcommand{\cftafterloftitle}{\hfill}
+
+%% math commands
+\def \R{\ensuremath \mathbb{R}}
+\def \e{\ensuremath \varepsilon}
+\def \d{\ensuremath \delta}
+\def \tr{\ensuremath \text{tr}}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{cor}{Corollary}
+
 %% this package binds all indices to toc
 \usepackage[nottoc]{tocbibind}
 %%% remove toc numbering
@@ -274,6 +290,8 @@ Thesis Supervisor: \myadvisor
 \include{irt_param_est_methods}
 \include{irt_param_est_results}
 \include{knowledge_tracing_background}
+\include{knowledge_tracing_methods}
+\include{knowledge_tracing_results}
 %% main contents %%
 
 %% ref %%

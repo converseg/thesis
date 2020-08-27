@@ -6,11 +6,24 @@ The practice of evaluating student ability purely from a raw percentage score is
 More sophisticated methods have been studied which attempt to more accurately quantify student learning. Cognitive Diagnostic Models (CDM) (TODO: citation) aim to classify whether students possess mastery of a given skill or not. This discrete classification can be useful in determining whether or not a student meets a prerequisite, or deciding whether or not they are ready to move on to the next level of coursework. We focus instead on Item Response Theory, where student knowledge is assumed to be continuous.
 
 \subsection{Item Response Theory}
-Item Response Theory (IRT) is a field of quantitative psychology which uses statistical models to model student ability. These models often give the probability of a question being answered correctly as a function of the student's ability.
+Item Response Theory (IRT) is a field of quantitative psychology which uses statistical models to model student ability. These models often give the probability of a question being answered correctly as a function of the student's ability. In IRT, it is assumed that each student, indexed by $j$, possesses some continuous latent ability $\theta_j$. The term ``latent ability'' is synonymous with ``knowledge''or ``skill.'' Often, it is assumed that amongst the population of students, $\theta_j \sim \mathcal{N}(0,1)$ \cite{thissen}. 
 
+In this work, we often consider the case where each student has multiple latent abilities. For example, in the context of an elementary math exam, we may wish to measure the four distinct skills ``add'', ``subtract'', ``multiply'', and ``divide.'' This scenario is referred to as multidimensional item response theory, and we write the set of student $j$'s $K$ latent abilities as a vector $\Theta_j = (\theta_{1j}, \theta_{2j}, \ldots, \theta_{Kj})^\top$. It is then assumed that the latent abilities of students follow some multivariate Gaussian distirbution, $\mathcal{N}(0, \Sigma)$. For simplicity, the covariance matrix $\Sigma$ is often taken to be the identity matrix, making each latent skill independent of one another.
+
+Note that $\Theta_j$ is not directly observable in any way. Instead, a common goal is to infer student's knowledge $\Theta_j$ from on their responses on some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $U_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
+\begin{equation}
+  u_{ij} = \begin{cases} 1 & \text{if student } j \text{ answers item } i \text{ correctly} \\0 & \text{otherwise} \end{cases} 
+\end{equation}
+IRT models aim to model the probability of a student answering a particular question correctly, so that the probability of student $j$ answering item $i$ correctly is given by some function of $\Theta_j$:
+\begin{equation}
+  P(u_{ij} = 1 | \Theta_j) = f(\Theta_j; V_i)
+\end{equation}
+where $V_i$ is a set of parameters associated with item $i$. In general, $f:\R^K \to [0,1]$ is some continuous function which is strictly increasing with respect to $\Theta_j$.
+
+In the next three sections, we describe various candidates for the function $f$. Though each is presented in the context of single-dimensional IRT ($K = 1$), they can all be easily adapted to higher dimensions.
 \subsubsection{Rasch Model}
 
-\subsubsection{The method with the integral thing}
+\subsubsection{Normal Ogive Model}
 
 \subsubsection{2-Parameter Logistic Model}
 
