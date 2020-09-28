@@ -101,8 +101,9 @@
 %% appendix
 \usepackage{appendix}
 %% biblatex
-\usepackage[style=numeric,language=american,maxnames=4,minnames=3,sortcites=true]{biblatex}
-%\DeclareLanguageMapping{american}{american-apa}
+%\usepackage[style=apa,language=american,maxnames=4,minnames=3,sortcites=true]{biblatex}
+\usepackage[style=numeric]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
 \addbibresource{ref.bib}
 %% uses times font
 \usepackage{mathptmx}
@@ -298,6 +299,8 @@ Thesis Supervisor: \myadvisor
 \newpage
 \section{references}
 \printbibliography[heading=none]
+%\bibliographystyle{plain}
+%\bibliography{ref}
 %% ref %%
 
 %% appendix %%

@@ -1,0 +1,133 @@
+\documentclass[letterpaper]{article}
+%Comments in Latex are made with %
+%%For math symbols
+\usepackage{amsmath} 
+\usepackage{amsfonts}%
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{titlesec}
+\usepackage{mathtools}
+%For Graphics
+%\usepackage{graphicx}
+%\usepackage{multicol}
+%\usepackage{float}
+%%Setup Page
+\usepackage{fullpage} 
+\usepackage[margin=1.25in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+%
+\newcommand{\invamalg}{\mathbin{\rotatebox[origin=c]{180}{$\amalg$}}}
+
+\def \R{\ensuremath \mathbb{R}}
+\def \e{\ensuremath \varepsilon}
+\def \d{\ensuremath \delta}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{cor}{Corollary}
+
+%Start of document
+%\begin{document}
+%%Header
+\chead{\bf Prove true parameters of ML2P model are a minimum of VAE loss}
+
+\begin{document}
+\\
+We define the true and predicted probability of student $j$ answering item $i$ correctly with $P_{ij}$ and $\hat P_{ij}$, respectively. The former comes from the ML2P model, and the latter is the output of a neural network. We assume the more simple case, where $\theta \sim \mathcal{N}(0,I)$, rather than $\mathcal{N}(\mu, \Sigma)$.
+\begin{align}
+  P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K a_{ik}\theta_{jk} + b_i\right)}\\
+  \label{eq:ml2p}
+  \hat P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K \hat a_{ik} (\hat \theta_{jk} + \e_k) + \hat b_i\right)} \\
+    \label{eq:vae_out}
+\end{align}
+\marginpar{I think this should be $(\hat \theta_{jk} + \e_k\hat\sigma_k)$ throughout}
+
+Note that $P_{ij}$ is unknown, and we instead have a response sequence $u_{:j} = (u_{1j},\ldots, u_{nj})^\top$ with $u_{ij} = \text{Bern}(P_{ij})$. This also means that $\mathbb{E}[u_{ij}] = P_{ij}$. The variables $\hat a_{ik}$, $\hat b_i$, $\hat \theta_{ik}$, and are parameter estimates from the VAE. The first two are parameters in the neural network, and the ability estimates are taken from feeding responses to the encoder, i.e., $\hat \theta_j = \text{Encoder}(u_{:j})$. The noise $\e = (\e_k)_{1\leq k \leq K} \sim \mathcal{N}(0,I)$ is introduced by the sampling operation in the VAE.
+
+The loss function for a VAE is given by 
+\begin{align}
+  \mathcal{L}(u_{:j}) &= -\sum_{i=1}^n \left[u_{ij} \log(\hat P_{ij}) + (1-u_{ij})\log(1 - \hat P_{ij})\right] + \mathbb{E}_{q_\alpha(\hat \theta | u_j)}\log\left( \frac{q_{\alpha}(\hat \theta |u_j)}{p(\theta)}\right) \\
+    &= \mathcal{L}_{\text{REC}} + \mathcal{L}_{\text{KL}}
+  \label{eq:vae_loss}
+\end{align}
+We write $P_{ij} = \mathbb{E}(u_{ij})$, and similarly define a new ``expected'' loss function:
+\begin{align}
+  \mathcal{L}_\mathbb{E}(P_j) &= \mathbb{E}_{u_j}[\mathcal{L}(u_{:j})] \\
+  &= -\sum_{i=1}^n (P_{ij} \log(\hat P_{ij}) + (1-P_{ij})\log(1 - \hat P_{ij}) + \mathbb{E}_{q_\alpha(\hat \theta | u_j)}\log\left( \frac{q_{\alpha}(\hat \theta |u_j)}{p(\theta)}\right) \\
+    &= \mathcal{L}_{\mathbb{E}[\text{REC}]} + \mathcal{L}_{\mathbb{E}[\text{KL}]}
+  \label{eq:expected_loss}
+\end{align}
+Notice that calculation of this ``expected loss'' requires the unknown $P_{:j}$. But when we have large amounts of data, we can think of $P_{ij}$ as the average value of the response $u_{ij}$, so using this unknown value here is justified.
+
+Define $z_i = a_{i:} \cdot \theta_{j:} - b_i$ and $\hat z_i = \hat a_{i:} \cdot (\hat \theta_{j:} + \e) - \hat b_i$. Note that $z_i$ is fixed, dependent on the data, and does not depend on any parameters of the neural network. $\hat z_:$ is the input to the final layer of the decoder, and the VAE output is $\hat P_{ij} = \sigma(\hat z_i)$, where $\sigma(\cdot)$ is the sigmoidal activation function. We compute derivatives of the expected loss function, looking individually at the reconstruction and KL terms. 
+
+\begin{align}
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} &= \frac{-1}{1 + e^{-z_i}}\cdot \frac{1}{1 + e^{\hat z_i}} - \frac{1}{1 + e^{z_i}}\cdot \frac{-1}{1 + e^{-\hat z_i}} \\
+  &= \frac{-1}{(1 + e^{-z_i})(1 + e^{\hat z_i})} + \frac{1}{(1 + e^{z_i})(1 + e^{-\hat z_i})} \\
+  &= \frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{\hat a_{ik} (\hat \theta_{kj} + \e_k) - \hat b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-\hat a_{ik}(\hat \theta_{jk} + \e_k) + \hat b_i})} 
+  \label{eq:z_deriv}
+\end{align}
+
+\begin{align}
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat a_{ik}} &= 
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat a_{ik}} \\
+%  &= \left[\frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{\hat a_{ik} (\hat \theta_{kj} + \e_k) - \hat b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-\hat a_{ik}(\hat \theta_{jk} + \e_k) + \hat b_i})}\right] (\hat \theta_{jk} + \e_k) \\
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat b_i} &= 
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat b_i} \\
+%  &= \left[\frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{\hat a_{ik} (\hat \theta_{kj} + \e_k) - \hat b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-\hat a_{ik}(\hat \theta_{jk} + \e_k) + \hat b_i})}\right] (-1) \\
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat \theta_{ik}} &= 
+%  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat \theta_{ik}} \\
+%  &= \left[\frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{\hat a_{ik} (\hat \theta_{kj} + \e_k) - \hat b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-\hat a_{ik}(\hat \theta_{jk} + \e_k) + \hat b_i})}\right] (\hat a_{ik}) 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat a_{ik}} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat a_{ik}} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (\hat \theta_{jk} + \e_k) \\
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat b_i} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat b_i} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (-1) \\
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat \theta_{ik}} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat \theta_{ik}} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (\hat a_{ik}) 
+ \label{eq:param_deriv}
+\end{align}
+
+Rather than setting these to zero and solving, we show that the most intuitive solution, $\hat a_{ik} = a_{ik}$, $\hat b_i = b_i$, and $\hat \theta_{jk} = \theta_{jk}$, is in fact a minimum of the expected loss function. But first, we must take another expectation over the random variable $\e \sim \mathcal{N}(0,I)$. Obviously, we have that $\mathbb{E}[\e_k] = 0$; this makes our calculations very simple. Notice that we have
+\begin{align}
+  \mathbb{E}_\e &\left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  &= \frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{a_{ik} (\theta_{kj} + 0) - b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-a_{ik}(\theta_{jk} + 0) + b_i})} \\
+  &= 0
+\end{align}
+
+Therefore we clearly have 
+\begin{align}
+  &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat a_{ik}}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat b_i}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat \theta_{jk}}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &0
+  \label{solve}
+\end{align}
+This proves that the true parameters give a local minimum for the expected reconstruction error in the VAE loss. 
+
+\\
+
+We now consider the Kullback-Leibler divergence term in the expected loss function. Again assuming independent latent traits, we have
+\begin{equation}
+  \mathcal{L}_{KL} = \mathbb{E}_{q(\theta | u)}[\log \left( \frac{q(\hat \theta | u)}{p(\theta)} \right) = KL(q(\hat \theta |u) || p(\theta)) = -\frac{1}{2} \sum_{k=1}^K (1 + \log(\hat \sigma_k^2) - \hat \theta_k^2 - \hat \sigma_k^2)
+  \label{eq:kl}
+\end{equation}
+
+It is clear that this regularization term is minimized (and equal to zero) when $\hat \theta_{jk} = 0$ and $\hat \sigma_{jk} = 1$. But what happens when we plug in the ``true'' student ability values as before? We have
+\begin{equation}
+  \mathcal{L}_{KL} \Big|_{\hat \theta = \theta, \hat \sigma = \sigma} = KL(p(\theta | u) || p(\theta))
+  \label{eq}
+\end{equation}
+Notice that this is the KL divergence between the \textbf{true posterior} $p(\theta |u)$ and the \textbf{prior} $p(\theta)$. This is interpreted as the average difference of number of bits required to encode samples of $p(\theta |u)$ using a code optimized for $p(\theta)$, rather than one optimized for $p(\theta | u)$. We should be okay with accepting this loss, since the true posterior is not actually known, and we are just using the prior as a reference.
+
+******************************************
+
+TODO: try to show that this is a global minimum. Also take derivatives of the KL loss w.r.t $\hat \theta_{jk}$. The Q-matrix may help with an identifiability issue (existence of other local minimums) in solving the system $(a_{ik}\theta_{jk} + b_i)_{jk} = z_i$. The Q-matrix \textit{may} make the solution unique.
+
+******************************************
+
+
+
+\end{document}
