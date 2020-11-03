@@ -1,0 +1,68 @@
+% !Tex root = thesis.tex
+
+% This is the prelude to my thesis and contains much of what is needed to
+% create my thesis
+
+
+%% Front Matter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\abtitlepgfalse       % print out the microfiche title page
+%\abstractpgfalse      % print out the microfiche abstract
+% \abtitlepgtrue       % print out the microfiche title page
+% \abstractpgtrue      % print out the microfiche abstract
+
+%\titlepgtrue          % print out the title page
+%\copyrightfalse       % claim my true inheritance
+%\signaturepagetrue    % page for thesis committee members
+%\dedicationtrue       % page for the dedication
+%\acktrue              % Print out the acknowledgements
+%\abswithesisfalse     % abstract for the thesis
+%\tablecontentstrue    % page for table of contents
+%\figurespagefalse     % page of figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% TITLE %%%%%%%%%%%%
+\title{Geoff's Thesis}
+
+%%%%%%%%% AUTHOR %%%%%%%%%%%%
+\author{Geoffrey Converse}
+%%%%%%%%% Other Stuff %%%%%%%%%%%%
+\dept{Applied Mathematical and Computational Sciences}
+% for a single advisor
+\setboolean{multipleSupervisors}{false}
+\advisor{Professor Suely Oliveira} %  \hspace{56mm} Second Advisor Title and Name}
+% for multiple advisors; change <value> to line up the names
+%\setboolean{multipleSupervisors}{true}
+%\advisor{Advisor 1\\\hspace{4mm}Advisor 2...}
+%
+% edit the names below to have your committee members names appear
+% on the signature page.  memberOne should be your advisor.
+%
+\memberOne{Professor Suely Oliveira}
+\memberTwo{Member Two}
+\memberThree{Member Three}
+\memberFour{Member Four}
+\memberFive{Member Five}
+% Comment in if there are six committee members, also need to comment in two commands in thesis.cls, search "six committee members" to find where to comment in commands in thesis.cls
+%\memberSix{Member Six}
+
+\submitdate{Date?}
+\copyrightyear{2021}
+
+
+% Abstracts for the various purposes
+%\newcommand{\abstextwithesis}{\myabstract}
+%\newcommand{\abstracttext}{\myabstract}
+
+% Dedication for the thesis.
+\epigraph{epigraph}
+\dedication{dedication}
+
+% Acknowledgement file
+\ackfile{thesisAck}
+% Abstract file - specifies the text for the abstract.  This is used
+% in the PhD Abstract, as well as in the abstract bounded with
+% the dissertation
+\abstractfile{thesisAbstract}
+\publicabstractfile{thesisAbstractpublic}
+
+

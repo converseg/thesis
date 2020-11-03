@@ -1,316 +1,125 @@
-\documentclass[12pt]{article}
-
-%%%%%% start: define some names here %%%%%%
-\newcommand{\longvertspacing}{~\\~\\~\\~\\~\\~\\}
-\newcommand{\mylinespacing}{\vspace{1em}}
-\newcommand{\myoptpg}{\textbf{THIS PAGE IS OPTIONAL}}
-\newcommand{\mytitle}{Dissertation}
-\newcommand{\myname}{Geoffrey Converse}
-\newcommand{\mydegree}{\capitalize{Doctor of Philosophy}}
-\newcommand{\myprogram}{\capitalize{Applied Mathematical and Computational Sciences}}
-\newcommand{\mymonth}{December}
-\newcommand{\myyear}{2021}
-\newcommand{\myadvisor}{Professor Suely Oliveira}
-%%%%%% start: define some names here %%%%%%
-
-\usepackage{geometry}
- \geometry{
- letterpaper,
- left=2.54cm,
- right=2.54cm,
- bottom=2.54cm,
- top=2.54cm,
- }
-\usepackage{amsmath}
+%
+%
+% you should only have one "documentclass" line.  the following lines
+% are samples that give various options.  the nofrontmatter option is
+% nice because it suppresses the title and signature pages when you want
+% to focus only on the main body of the thesis
+%
+% Friday April 10 2010 Ray Hylock <ray-hylock@uiowa.edu>
+% documentclass options:
+%   docabstract				if you want to add a separate doctoral abstract with separate signature page
+%   abstractpage            if you want to add an internal abstract (optional)
+%	publicabstractpage		if you want to add a public abstract page 
+%   ackpage                 if you would like to add an acknowledgements page (optional)
+%   algorithms              if you want a list of algorithms (optional)
+%   appendix                if you have an appendix (optional)
+%   copyrightpage           if you wish to copyright your thesis (optional)
+%   dedicationpage          if you wish to make a dedication (optional)
+%   epigraphpage            if you would like to add an epigraph to the beginning of your thesis (optional)
+%   examples                if you want a list of examples (this uses the ntheorem package)
+%   exampleslemmas          if you want a combined list of examples and lemmas (this uses the ntheorem package) (optional)
+%   examplestheorems        if you want a combined list of examples and theorems (this uses the ntheorem package) (optional)
+%   exampleslemmastheorems  if you want a combined list of examples, lemmas, and theorems (this uses the ntheorem package) (optional)
+%   figures                 if you have any figures (this is required if you have even one figure)
+%   lemmas                  if you want a list of lemmas (this uses the ntheorem package) (optional)
+%   lemmastheorems          ifs you want a combined list of lemmas and theorems (this uses the ntheorem package) (optional)
+%   nofrontmatter           suppresses the title and signiture pages for working on the body
+%   tables                  if you have any tables (this is required if you have even one table)
+%   theorems                if you want a list of theorems (this uses the ntheorem package) (optional)
+%   phd                     if phd student; this will add the doctoral abstract (mandatory for PhD and DMA thesis candidates only)
+%
+\documentclass[abstractpage,publicabstractpage,ackpage,copyrightpage,phd,figures,tables]{uithesis}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{amsthm}
-
-\usepackage[utf8]{inputenc}
-
-%% ref related
-\usepackage{varioref}
-\usepackage[linktocpage=true]{hyperref}
-\usepackage[capitalise,noabbrev]{cleveref}
-%% toc
-\usepackage{tocloft}
-%%% dots: https://tex.stackexchange.com/questions/53898/how-to-get-lines-with-dots-in-the-table-of-contents-for-sections
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
-%%% adjust sectional unit title fonts in toc
-\renewcommand{\cftsecfont}{\normalfont\MakeUppercase} 
-\renewcommand{\cftsubsecfont}{\normalfont}
-\renewcommand{\cftsubsubsecfont}{\normalfont}
-\renewcommand{\cftsecpagefont}{\normalfont}
-%%% use figure/table.num for the lot and lof
-%\renewcommand{\cftfigfont}{Figure~\alph{fig}.}
-%% source: https://tex.stackexchange.com/questions/419103/how-to-change-the-numbering-style-in-list-of-table-and-list-of-figures
-\renewcommand{\cftfigpresnum}{Figure }
-\renewcommand{\cftfigaftersnum}{.\hspace{1ex}}
-\renewcommand{\cfttabpresnum}{Table }
-\renewcommand{\cfttabaftersnum}{.\hspace{1ex}}
-%%% increase spacing between entries in toc
-\setlength{\cftparskip}{2ex}
-%%% decrease spacing between number and title as well as indent
-%\setlength{\cftfignumwidth}{10ex}
-%\setlength{\cfttabnumwidth}{8ex}
-\setlength{\cftfignumwidth}{10.5ex}
-\setlength{\cfttabnumwidth}{8ex}
-\setlength{\cftfigindent}{0ex}
-\setlength{\cfttabindent}{0ex}
-%%% title names
-%%% center uppercase toc titles
-%% https://tex.stackexchange.com/a/255699/154200
-\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\normalsize\MakeUppercase}
-\renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
-\renewcommand{\contentsname}{table of contents}
-\renewcommand{\cftlottitlefont}{\hfill\normalsize\MakeUppercase}
-\renewcommand{\cftafterlottitle}{\hfill}
-\renewcommand{\cftloftitlefont}{\hfill\normalsize\MakeUppercase}
-\renewcommand{\cftafterloftitle}{\hfill}
-
-%% math commands
-\def \R{\ensuremath \mathbb{R}}
-\def \e{\ensuremath \varepsilon}
-\def \d{\ensuremath \delta}
-\def \tr{\ensuremath \text{tr}}
-\theoremstyle{definition}
-\newtheorem{defn}{Definition}[section]
-\newtheorem{thm}{Theorem}[section]
-\newtheorem*{cor}{Corollary}
-
-%% this package binds all indices to toc
-\usepackage[nottoc]{tocbibind}
-%%% remove toc numbering
-\makeatletter
-\let\latexl@section\l@section
-\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
-\let\latexl@subsection\l@subsection
-\def\l@subsection#1#2{\begingroup\let\numberline\@gobble\latexl@subsection{#1}{#2}\endgroup}
-\let\latexl@subsubsection\l@subsubsection
-\def\l@subsubsection#1#2{\begingroup\let\numberline\@gobble\latexl@subsubsection{#1}{#2}\endgroup}
-\makeatother
-%% set figure path
+\usepackage{amsthm} % included in ntheorem with amsthm option
+%\usepackage[amsthm]{ntheorem} % use if going to make theorem lists
+\usepackage{array}
+\usepackage{float}
+\usepackage[toc,page,titletoc]{appendix}
+\usepackage{longtable}
 \usepackage{graphicx}
-\graphicspath{{img/}}
-%% captions
-\usepackage{boxhandler}
-%\usepackage{caption}
-%\captionsetup{labelsep=space,justification=justified,singlelinecheck=off}
-%% appendix
-\usepackage{appendix}
-%% biblatex
-%\usepackage[style=apa,language=american,maxnames=4,minnames=3,sortcites=true]{biblatex}
-\usepackage[style=numeric]{biblatex}
-\DeclareLanguageMapping{american}{american-apa}
-\addbibresource{ref.bib}
-%% uses times font
-\usepackage{mathptmx}
-%% set fontsize
-\fontsize{12}{1} \selectfont
-%% set line spacing
-\usepackage{setspace}
-\singlespacing
-%% set par indent
-%\usepackage{indentfirst}
-\setlength{\parindent}{6.5ex}
-%% customize heading styles
-\usepackage[indentafter]{titlesec}
-%%%% heading 1
-\titleformat{\section}
-  {\normalsize\center}
-  {}
-  {0pt}
-  {\MakeUppercase}
-%%%% heading 2
-\titleformat{\subsection}
-  {\normalsize\center\bf}
-  {}
-  {0pt}
-  {\capitalize}
-%%%% heading 3
-\titleformat{\subsubsection}
-  {\normalsize\bf}
-  {}
-  {0pt}
-  {\capitalize}
-%\titleformat{⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before-code⟩}[⟨after-code⟩]
+\usepackage[font=singlespacing]{caption}
+\usepackage[normalem]{ulem}
+\usepackage{nicefrac}
+\usepackage{units}
+\usepackage{rotating}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{tikz-cd}
+\usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{makecell}
+%\usepackage[nottoc,notlot,notlof]{tocbibind}
 
-%% a new center environment
-\newenvironment{tightcenter}{%
-  \setlength\topsep{0pt}
-  \setlength\parskip{0pt}
-  \begin{center}
-}{%
-  \end{center}
-}
-%% adjust quotation environment margin
-\renewenvironment{quote}{%
-   \list{}{%
-     \leftmargin0cm   % this is the adjusting screw
-     \rightmargin\leftmargin
-   }
-   \item\relax
-}
-{\endlist}
+% compress and sort citations as numbers
+% alter uithesis.cls line 355 from plain2 to unsrt to use this
+%\usepackage[numbers,sort&compress]{natbib}
 
-%%%%%% capitalize from stackexchange %%%%%% 
-\usepackage{ifxetex}
+% does not allow citations to be split between pages; requirement
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\interlinepenalty 10000\relax}{}{}
 
-\usepackage{xparse}
+% Vertical spacing (singlespace) in itemset and enumerate
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=1pt, partopsep=4pt, parsep=2pt}
+\setenumerate{noitemsep,topsep=1pt, partopsep=4pt, parsep=2pt}
 
-\ExplSyntaxOn
-\NewDocumentCommand{\capitalize}{>{\SplitList{~}}m}
- {
-  \seq_clear:N \l_capitalize_words_seq
-  \ProcessList{#1}{\CapitalizeFirst}
-  \seq_use:Nn \l_capitalize_words_seq { ~ }
- }
-\NewDocumentCommand{\CapitalizeFirst}{m}
- {
-  \capitalize_word:n { #1 }
- }
+% single spacing for rows in a table (this does not single space
+% within a row; for that, use \\[-5mm]
+\renewcommand\arraystretch{0.5} % 1/2 of the default spacing (double)
 
-\sys_if_engine_pdftex:TF
- {
-  \cs_set_eq:Nc \capitalize_tl_set:Nn { protected@edef }
- }
- {
-  \cs_set_eq:NN \capitalize_tl_set:Nn \tl_set:Nn
- }
+\allowdisplaybreaks[2]
 
-\cs_new_protected:Nn \capitalize_word:n
- {
-  \capitalize_tl_set:Nn \l_capitalize_word_tl { #1 }
-  \seq_if_in:NfTF \g_capitalize_exceptions_seq { \tl_to_str:n { #1 } }
-   % exception word
-   { \seq_put_right:Nn \l_capitalize_words_seq { #1 } } % exception word
-   % to be uppercased
-   { \seq_put_right:Nx \l_capitalize_words_seq { \tl_mixed_case:V \l_capitalize_word_tl } }
- }
-\cs_generate_variant:Nn \tl_mixed_case:n { V }
-\NewDocumentCommand{\AppendToList}{m}
- {
-  \clist_map_inline:nn { #1 }
-   {
-    \seq_gput_right:Nx \g_capitalize_exceptions_seq { \tl_to_str:n { ##1 } }
-   }
- }
-\cs_generate_variant:Nn \seq_if_in:NnTF { Nf }
-\seq_new:N \l_capitalize_words_seq
-\seq_new:N \g_capitalize_exceptions_seq
-\ExplSyntaxOff
+\include{mycommands}
 
-\AppendToList{a,is,of,óf}
-%%%%%% capitalize from stackexchange %%%%%% 
-
-\title{\MakeUppercase{\normalsize\mytitle}\vspace{-2em}}
-\author{\vspace{-5ex}}
-\date{\vspace{-5ex}}
+\include{prelude}       % Front matter, title page, etc.
 
 \begin{document}
 
-\maketitle
+% Puts some of the front matter in
 
-%% roman for frontmatter
-\pagenumbering{roman}
-\thispagestyle{empty}
-\longvertspacing
-\begin{tightcenter}
-    by
-\end{tightcenter}
-\mylinespacing
-\begin{tightcenter}
-    \myname
-\end{tightcenter}
-\longvertspacing
-\begin{tightcenter}
-A thesis submitted in partial fulfillment \\
-of the requirements for the \\
-\mydegree~\\
-degree in \myprogram~in the  \\
-Graduate College of \\
-The University of Iowa
-\end{tightcenter}
-\mylinespacing
-\begin{tightcenter}
-\mymonth~\myyear
-\end{tightcenter}
-\mylinespacing
-\begin{tightcenter}
-Thesis Supervisor: \myadvisor
-\end{tightcenter}
+\frontmatter
 
-%% copyright page %%
-%%%% OPTIONAL
-%% \include{copyright}
-%% copyright page %%
+% Include the chapters and appendix here
 
-\pagenumbering{roman} 
-\setcounter{page}{2}
-%% dedication page %%
-%%%% OPTIONAL
-%% \include{dedication}
-%% dedication page %%
-
-%% epigraph page %%
-%%%% OPTIONAL
-%% \include{epigraph}
-%% epigraph page %%
-
-%% ack page %%
-%%%% OPTIONAL
-\include{acknowledge}
-%% ack page %%
-
-%% abs page %%
-\include{abstract}
-%% abs page %%
-
-%% public abs page %%
-\include{public_abstract}
-%% public abs page %%
-
-%% content lists %%
-\include{contents}
-%% content lists %%
-
-%% preface %%
-%%%% OPTIONAL
-\include{preface}
-%% preface %%
-
-%% arabic for the rest
-\pagenumbering{arabic}
-
-\begin{doublespace}
-
-%% main contents %%
+\include{chapter1}
 \include{irt_param_est_background}
 \include{irt_param_est_methods}
 \include{irt_param_est_results}
+\include{related_work}
 \include{knowledge_tracing_background}
 \include{knowledge_tracing_methods}
 \include{knowledge_tracing_results}
-%% main contents %%
-
-%% ref %%
-\newpage
-\section{references}
-\printbibliography[heading=none]
-%\bibliographystyle{plain}
-%\bibliography{ref}
-%% ref %%
-
-%% appendix %%
-\appendix
-\include{appendix_1}
-\include{appendix_2}
-%% appendix %%
+%\include{chapter2}
+%\include{chapter3}
+%\include{chapter4}
+%\include{chapter5}
+%\include{chapter6}
+%\include{appendix}
 
 
-\end{doublespace}
 
+
+
+%
+% this command includes the entire bib file in the
+% references section, whether the entry has been
+% cited in the paper or not
+%
+%\nocite{*}
+
+\biblio{thesis}
+
+
+
+\bibliographystyle{plain}
+%\bibliography{thesis} % I guess this makes citations work?
+
+%\singlespacing
 
 \end{document}

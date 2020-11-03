@@ -1,0 +1,50 @@
+% Put user defined commands here
+% The \sideremark command is very useful for margin comments
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+%% math commands
+\def \R{\ensuremath \mathbb{R}}
+\def \e{\ensuremath \varepsilon}
+\def \d{\ensuremath \delta}
+\def \tr{\ensuremath \text{tr}}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{remarkalgorithm}[theorem]{Algorithm}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%
+% the following command can be used to put a remark
+% in the margin of the thesis/paper
+% to include a remark, use \edz{remark}
+% size of the remark font can be changed, not it
+% is set to "scriptsize", can also be "tiny" or "small"
+% or others
+%
+\def\sideremark#1
+{
+\ifvmode\leavevmode\fi\vadjust
+  {\vbox to0pt
+    {\vss\hbox to0pt
+      {\hskip\hsize\hskip1em\vbox
+        {\hsize2cm
+%          \small
+          \scriptsize
+          \raggedright\pretolerance10000\noindent#1\hfill
+        }
+        \hss
+      }
+      \vbox to8pt{\vfil}\vss
+    }
+  }
+}
