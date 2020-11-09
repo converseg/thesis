@@ -29,7 +29,7 @@ where $V_i$ is a set of parameters associated with item $i$. In general, $f:\R^K
 
 In the following sections, we describe various candidates for the function $f$. Though each is presented in the context of single-dimensional IRT ($K = 1$), they can all be easily adapted to higher dimensions.
 
-\subsubsection{Rasch Model}
+\subsection{Rasch Model}
 One of the first models was proposed by Georg Rasch in 1960. Rasch asserted that the probability of a student answering an item correctly is a function of the ratio $\xi / \d$, where $\xi > 0$ represents the student's knowledge, and $\d > 0$ quantifies the difficulty of an item. Consider the $\frac{\xi}{\xi + \d} = \frac{1}{1 + \d / \xi}$ and note that $\frac{\xi}{\xi + \d} \to 1$ as $\xi \to \infty$. After the reparametarization $\xi = e^{\theta}$ and $\d = e^{b}$, we arrive at the 1-Parameter Logistic Model, often referred to as the Rasch Model.
 \begin{equation}
   P(u_{ij} = 1 | \theta_j; b_i) = \frac{1}{1 + e^{b_i - \theta_j}}
@@ -38,7 +38,7 @@ One of the first models was proposed by Georg Rasch in 1960. Rasch asserted that
 
 Note that $\theta \in \R$ and $b \in \R$ still represent student ability and item difficulty, respectively. We can interpret the difficulty parameter $b$ as a threshold: when $\theta = b$, then the student has a $50\%$ chance of answering the question correctly. A plot of Equation \ref{eq:1pl} for a fixed item (fixed $b_i$) is shown in Figure \ref{fig:icc}. The horizontal axis represents $\log \theta$, and the vertical axis represents $P(u_{ij} = 1 | \theta, b_i)$. This type of graph is often referred to as an item characteristic curve (ICC).
 
-\subsubsection{Normal Ogive Model}
+\subsection{Normal Ogive Model}
 A slightly more sophisticated method for measuring student performance is the normal ogive model. We introduce a discrimination parameter, $a_i$, which quantifies the capability of item $i$ in distinguishing between students who have / have not mastered the knowledge concept $\theta$ \cite{thissen}. In other words, $a_i$ tells \textit{how much} of skill $\theta$ is required to answer item $i$ correctly. 
 
 The normal ogive model give the probability of student $j$ answering item $i$ correctly as
@@ -48,7 +48,7 @@ The normal ogive model give the probability of student $j$ answering item $i$ co
 \end{equation}
 Note the similarity between Equation \ref{eq:ogive} and the cumulative distribution function for a Gaussian distribution. The normal ogive model is popular among statisticians for this reason, but can be difficult to use for parameter estimation. 
 
-\subsubsection{2-Parameter Logistic Model}
+\subsection{2-Parameter Logistic Model}
 The model which this work focuses on most is the 2-parameter logistic (2PL) model. Like the normal ogive model, the 2PL model uses both the discrimination and difficulty item parameters. The probability of student $j$ answering item $i$ correctly is given by
 \begin{equation}
   P(u_{ij} = 1 | \theta_j; a_i, b_i) = \frac{1}{1 + e^{-a_i \theta_j + b_i}}
@@ -56,7 +56,7 @@ The model which this work focuses on most is the 2-parameter logistic (2PL) mode
 \end{equation}
 Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \ref{eq:1pl}, but adds in the discrimination parameter $a_i$. If this parameter is scaled by 1.7, then the ICC from the normal ogive model differs from that of the 2PL model by $0.001$??? **TODO: citation and number lookup**. In a sense, we can consider the 2PL model to be a very good approximation of the normal ogive model. Due to the simple form of Equation \ref{eq:2PL}, using this model makes parameter estimation much easier.
 
-\subsubsection{Multidimensional Item Response Theory (MIRT)}
+\subsection{Multidimensional Item Response Theory (MIRT)}
 The previously described statistical models can all be extended to multidimensional latent abilities $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
 \begin{equation}
 Pju_{ij} = 1 | \Theta_j; \vec{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vec{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{\exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
@@ -96,8 +96,8 @@ In recent years, artifical neural networks (ANN) have become an increasingly pop
 
 One of the biggest critiques of ANN is their black-box nature, meaning that the decision process that a trained model uses is typically not explainable by humans. As opposed to simpler methods such as decision trees or linear regression, neural networks are not interpretable. This makes them less desirable in certain applications where researchers wish to know \textit{why} a model predicts a particular data sample the way that it does. For example, if a financial institution is using data science methods to determine whether or not to approve someone's loan, the institution should be able to explain to the customer why they were denied. Most customers will not be satisfied with ``the computer told us so,'' and there is a possibility that a black-box neural network could learn and use features such as race or gender in its prediction, which is illegal in the United States (TODO: definitely need citation or delete).
 
-\subsubsection{Autoencoders}
+\subsection{Autoencoders}
 
-\subsubsection{Variational Autoencoders}
+\subsection{Variational Autoencoders}
 TODO: describe probabilistic derivation of VAE (ie Kingma and Welling). Also talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - bu I've shown this isn't the case in our model, where the decoder is Bernoulli.
 

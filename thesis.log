@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  30 OCT 2020 15:15
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  9 NOV 2020 13:49
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -830,9 +830,9 @@ LaTeX Warning: Unused global option(s):
     [ackpage].
 
 (thesis.aux (chapter1.aux) (irt_param_est_background.aux)
-(irt_param_est_methods.aux) (irt_param_est_results.aux)
-(knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
-(knowledge_tracing_results.aux))
+(irt_param_est_methods.aux) (irt_param_est_results.aux) (ml2pvae_software.aux)
+(related_work.aux) (knowledge_tracing_background.aux)
+(knowledge_tracing_methods.aux) (knowledge_tracing_results.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
@@ -857,13 +857,12 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
- ABD: EveryShipout initializing macros
+
+ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box53
 Package hyperref Info: Link coloring OFF on input line 82.
-
-(C:\MiKTeX\tex\latex\hyperref\nameref.sty
+ (C:\MiKTeX\tex\latex\hyperref\nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
-
 (C:\MiKTeX\tex\generic\oberdiek\gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
@@ -955,16 +954,7 @@ File: img/logistic_1param_icc.eps Graphic file (type eps)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 32.
-
-[4] [5] [6] [7] [8]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 99.
-
-) [9]
+[4] [5] [6] [7] [8]) [9]
 \openout2 = `irt_param_est_methods.aux'.
 
  (irt_param_est_methods.tex
@@ -980,14 +970,25 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ]
 \openout2 = `irt_param_est_results.aux'.
 
- (irt_param_est_results.tex) [11
+ (irt_param_est_results.tex
+CHAPTER 4.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 1.
+
+) [11
+
 
 
 ]
+\openout2 = `ml2pvae_software.aux'.
+
+
+No file ml2pvae_software.tex.
 \openout2 = `related_work.aux'.
 
- (related_work.tex
-CHAPTER 4.
+(related_work.tex
+CHAPTER 5.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 1.
@@ -996,23 +997,45 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 
+
+
 ]
 \openout2 = `knowledge_tracing_background.aux'.
 
- (knowledge_tracing_background.tex) [13
+ (knowledge_tracing_background.tex
+CHAPTER 6.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 1.
+
+) [13
+
 
 
 ]
 \openout2 = `knowledge_tracing_methods.aux'.
 
- (knowledge_tracing_methods.tex)
-[14
+ (knowledge_tracing_methods.tex
+CHAPTER 7.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 1.
+
+) [14
+
 
 
 ]
 \openout2 = `knowledge_tracing_results.aux'.
 
- (knowledge_tracing_results.tex) [15
+ (knowledge_tracing_results.tex
+CHAPTER 8.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 1.
+
+) [15
+
 
 
 ]
@@ -1023,23 +1046,19 @@ Package hyperref Warning: bookmark level for unknown head defaults to 0.
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 125.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 125.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
  (thesis.aux (chapter1.aux) (irt_param_est_background.aux)
-(irt_param_est_methods.aux) (irt_param_est_results.aux) (related_work.aux)
-(knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
-(knowledge_tracing_results.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 125.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 125.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 125.
+(irt_param_est_methods.aux) (irt_param_est_results.aux) (ml2pvae_software.aux)
+(related_work.aux) (knowledge_tracing_background.aux)
+(knowledge_tracing_methods.aux) (knowledge_tracing_results.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 126.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 126.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 126.
  ) 
 Here is how much of TeX's memory you used:
- 24918 strings out of 427839
- 455404 string characters out of 3155939
+ 24925 strings out of 427839
+ 455496 string characters out of 3155939
  526698 words of memory out of 3000000
  28460 multiletter control sequences out of 15000+200000
  8791 words of font info for 39 fonts, out of 3000000 for 9000
