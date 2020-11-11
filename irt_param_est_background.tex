@@ -54,10 +54,10 @@ The model which this work focuses on most is the 2-parameter logistic (2PL) mode
   P(u_{ij} = 1 | \theta_j; a_i, b_i) = \frac{1}{1 + e^{-a_i \theta_j + b_i}}
   \label{eq:2PL}
 \end{equation}
-Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \ref{eq:1pl}, but adds in the discrimination parameter $a_i$. If this parameter is scaled by 1.7, then the ICC from the normal ogive model differs from that of the 2PL model by $0.001$??? **TODO: citation and number lookup**. In a sense, we can consider the 2PL model to be a very good approximation of the normal ogive model. Due to the simple form of Equation \ref{eq:2PL}, using this model makes parameter estimation much easier.
+Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \ref{eq:1pl}, but adds in the discrimination parameter $a_i$. If this parameter is scaled by 1.7, then the ICC from the normal ogive model differs from that of the 2PL model by $0.01$ \cite{baker_kim2004}. In a sense, we can consider the 2PL model to be a very good approximation of the normal ogive model. Due to the simple form of Equation \ref{eq:2PL}, using this model makes parameter estimation much easier.
 
-\subsection{Multidimensional Item Response Theory (MIRT)}
-The previously described statistical models can all be extended to multidimensional latent abilities $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
+\subsection{Multidimensional Item Response Theory}
+The previously described statistical models can all be extended so that each student possesses $K$ latent traits. In multidimensional item response theory (MIRT), models give the probability of a correct answer as a function of the student ability vector $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
 \begin{equation}
 Pju_{ij} = 1 | \Theta_j; \vec{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vec{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{\exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
   \label{eq:ml2p}
@@ -66,17 +66,17 @@ Here, the discrimination parameters $\vec{a_i} \in \R^K$ are given as vector, wh
 
 TODO: mention MDISC and how this scales
 
-In MIRT, it is convenient to notate the relationship between skills and items with binary matrix. Define the Q-matrix (TODO: citation) $Q \in \R^{n\times K}$ so that 
+In MIRT, it is convenient to notate the relationship between skills and items with binary matrix. Define the Q-matrix \cite{daSilva2018} $Q \in \R^{n\times K}$ so that 
 \begin{equation}
   q_{ik} = \begin{cases}
     1 & \text{if item } i \text{ requires skill } k\\
-    0 & otherwise
+    0 & \text{otherwise}
   \end{cases}.
   \label{eq:q_matrix}
 \end{equation}
 In real applications, the Q-matrix is annotated by an expert in the field, as it is usually possible to discern the concepts need to answer an item correctly. In relation to the ML2P model (Equation \ref{eq:ml2p}), notice that if $q_{ik} = 0$, then $a_{ik} = 0$ as well. Though experts can produce a Q-matrix for a given assessment, the matrix of discrimination parameters $(a_{ik})_{i,k}$ can not be discovered so easily.
 
-\section{Parameter Estimation Methods}
+\section{IRT Parameter Estimation}
 
 \subsection{Maximum Likelihood Estimation}
 TODO: item parameter estimation
@@ -96,8 +96,28 @@ In recent years, artifical neural networks (ANN) have become an increasingly pop
 
 One of the biggest critiques of ANN is their black-box nature, meaning that the decision process that a trained model uses is typically not explainable by humans. As opposed to simpler methods such as decision trees or linear regression, neural networks are not interpretable. This makes them less desirable in certain applications where researchers wish to know \textit{why} a model predicts a particular data sample the way that it does. For example, if a financial institution is using data science methods to determine whether or not to approve someone's loan, the institution should be able to explain to the customer why they were denied. Most customers will not be satisfied with ``the computer told us so,'' and there is a possibility that a black-box neural network could learn and use features such as race or gender in its prediction, which is illegal in the United States (TODO: definitely need citation or delete).
 
+The push for explainable AI have led researchers down two paths. One group has tried to incorporate deep learning methods with existing interpretable methods, in hopes of increasing the performance of explainable methods without sacrificing its interpretability (TODO: citation). Another option is to use a sort of hybrid learning, where interpretable models defer to a black-box model if they are not confident in their prediction \cite{rafique2020}. Others have started with deep models and cut back on complexity, making specific modifications which increase interpretability. For example, the loss function of a convolutional neural network can be adapted so that humans can understand the features extracted in the hidden layers \cite{zhang2018interpretable}. 
+
+The field of education is an application which often desires interpretable models. Researchers often need to be able to point out specific details of decisions made by AI. A student deserves an answer to \textit{why} they failed a test, and a teacher should be given instructions on \textit{how} to fix the student's misconceptions.
+
 \subsection{Autoencoders}
+An autoencoder (AE) is a neural network where the input and output layers are the same shape. The objective for a given data point is to minimize the difference between the output, called the reconstruction, and the input. Typically, the middle hidden layers of an AE are of smaller dimension than the input space. In this way, autoencoders are an unsupervised learning technique for (nonlinear) dimension reduction. Mathematically, we can define an autoencoder in two parts as follows.
+
+For an input $x \in \R^n$, define the \textit{encoder} as a function $f: \R^n \to \R^m$ mapping $x \mapsto z := f(x)$. Usually, $m < n$, and $z$ lies in a hidden feature space. The encoder sends an observed data point to its representation in a learned feature space. Define the \textit{decoder} as a function $g: \R^m \to \R^n$ mapping $z \mapsto \hat x := g(z)$. The decoder maps a hidden representation $z$ to a reconstruction of the encoder input. Note that in our case, the functions $f$ and $g$ are both parameterized by neural networks, each of which can have any number of hidden layers. The end-to-end autoencoder is then the function composition $\mathcal{A}(x):= g(f(x)): \R^n \to \R^n$. To train an AE, the loss function minimizes the difference between the input and output. This can be done in a number of ways, including the simple mean squared error loss
+\begin{equation}
+  \mathcal{L}(x) = || x - g(f(x))||_2^2
+  \label{eq:mse}
+\end{equation}
+or cross-entropy loss for binary data
+\begin{equation}
+  \mathcal{L}(x) = \sum_{i=1}^n - x_i \log(g(f(x_i))) - (1-x_i)\log(1- g(f(x_i))).
+  \label{eq:cross_entropy}
+\end{equation}
+
+Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. Denoising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, they corrupt input data by deleting pixels at random and reconstructing the original image. Autoencoders can also be modified for data generation applications using a variational autoencoder.
 
 \subsection{Variational Autoencoders}
+*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Bleia2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''
+
 TODO: describe probabilistic derivation of VAE (ie Kingma and Welling). Also talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - bu I've shown this isn't the case in our model, where the decoder is Bernoulli.
 

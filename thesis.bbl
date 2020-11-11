@@ -1,13 +1,52 @@
 \begin{thebibliography}{1}
 
+\bibitem{Bleia2017}
+D.M. Bleia, A.~Kucukelbirb, and J.D. McAuliffec.
+\newblock Variational inference: A review for statisticians.
+\newblock {\em Journal of the American Statistical Association},
+  112(518):859--877, 2017.
+
+\bibitem{doersch2016}
+Carl Doersch.
+\newblock Tutorial on variational autoencoders, 2016.
+
+\bibitem{kingma2014}
+D.~Kingma and M.~Welling.
+\newblock Auto-encoding variational {Bayes}.
+\newblock In {\em International Conference on Learning Representations}, 2014.
+
 \bibitem{lord1968}
 F.~Lord and M.~R Novick.
 \newblock {\em Statistical theories of mental test scores}.
 \newblock IAP, 1968.
 
+\bibitem{plaut2018}
+Elad Plaut.
+\newblock From principal subspaces to principal components with linear
+  autoencoders.
+\newblock {\em arXiv:1804.10253v2}, 2018.
+
+\bibitem{rafique2020}
+Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.
+\newblock Transparency promotion with model-agnostic linear competitors.
+\newblock In {\em Proceedings of the International Conference on Machine
+  Learning}, 2020.
+
 \bibitem{thissen}
 David Thissen and Howard Wainer.
 \newblock {\em Test Scoring}.
 \newblock Lawrence Erlbaum Associates Publishers, 2001.
+
+\bibitem{vincent2008}
+Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol.
+\newblock Extracting and composing robust features with denoising autoencoders.
+\newblock In {\em International Conference on Machine Learning}, pages
+  1096--1103, 2008.
+
+\bibitem{zhang2018interpretable}
+Quanshi Zhang, Ying Nian~Wu, and Song-Chun Zhu.
+\newblock Interpretable convolutional neural networks.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 8827--8836, 2018.
 
 \end{thebibliography}
