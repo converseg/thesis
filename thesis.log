@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  11 NOV 2020 10:17
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  13 NOV 2020 11:41
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -26,23 +26,6 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\fancyhdr\fancyheadings
-.sty
-Package: fancyheadings 2017/06/30 v3.9a Legacy package to call fancyhdr
-
-
-Package fancyheadings Warning: Please stop using fancyheadings!
-(fancyheadings)                Use fancyhdr instead.
-(fancyheadings)                We will call fancyhdr with the very same
-(fancyheadings)                options you passed to fancyheadings.
-(fancyheadings)                
-(fancyheadings)                fancyhdr is 99 percent compatible with
-(fancyheadings)                fancyheadings. The only incompatibility is
-(fancyheadings)                that \headrulewidth and \footrulewidth and
-(fancyheadings)                their \plain... versions are no longer length
-(fancyheadings)                parameters, but normal macros (to be changed
-(fancyheadings)                with \renewcommand rather than \setlength)..
-
 (C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\fancyhdr\fancyhdr.sty
 Package: fancyhdr 2017/06/30 v3.9a Extensive control of page headers and footer
 s
@@ -55,7 +38,7 @@ s
 \f@nch@O@erf=\skip49
 \f@nch@O@olf=\skip50
 \f@nch@O@orf=\skip51
-)) (C:\MiKTeX\tex\latex\tools\indentfirst.sty
+) (C:\MiKTeX\tex\latex\tools\indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
 (C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithms\algorithmic
@@ -829,10 +812,10 @@ Package: enumitem 2019/02/04 v3.8 Customized lists
 LaTeX Warning: Unused global option(s):
     [ackpage].
 
-(thesis.aux (chapter1.aux) (irt_param_est_background.aux)
-(irt_param_est_methods.aux) (irt_param_est_results.aux) (ml2pvae_software.aux)
-(related_work.aux) (knowledge_tracing_background.aux)
-(knowledge_tracing_methods.aux) (knowledge_tracing_results.aux))
+(thesis.aux (irt_param_est_background.aux) (irt_param_est_methods.aux)
+(irt_param_est_results.aux) (ml2pvae_software.aux) (related_work.aux)
+(knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
+(knowledge_tracing_results.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
@@ -857,12 +840,13 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-
-ABD: EveryShipout initializing macros
+ ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box53
 Package hyperref Info: Link coloring OFF on input line 82.
- (C:\MiKTeX\tex\latex\hyperref\nameref.sty
+
+(C:\MiKTeX\tex\latex\hyperref\nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
 (C:\MiKTeX\tex\generic\oberdiek\gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
@@ -922,65 +906,50 @@ Package hyperref Warning: bookmark level for unknown blankhead defaults to 0.
 [8
 
 ]
-\openout2 = `chapter1.aux'.
-
- (chapter1.tex
-CHAPTER 1.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 4.
-
-) [1
-
-
-
-]
 \openout2 = `irt_param_est_background.aux'.
 
  (irt_param_est_background.tex
-CHAPTER 2.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-[2
+CHAPTER 1.
+[1
 
 
 
-] [3]
+] [2]
 File: img/logistic_1param_icc.eps Graphic file (type eps)
 <img/logistic_1param_icc.eps>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4] [5]
-
-LaTeX Warning: Citation `baker_kim2004' on page 6 undefined on input line 57.
-
-[6] [7] [8] [9] [10]) [11]
+[3] [4] [5] [6] [7] [8] [9]) [10]
 \openout2 = `irt_param_est_methods.aux'.
 
  (irt_param_est_methods.tex
-CHAPTER 3.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [12
+CHAPTER 2.
+[11
 
 
 
-]
+] [12]
+
+! Package amsmath Error: Multiple \label's: label '{eq:ml2p}' will be lost.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36     \label{eq:vae_out}
+                           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[13] [14] [15] [16]) [17]
 \openout2 = `irt_param_est_results.aux'.
 
  (irt_param_est_results.tex
-CHAPTER 4.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [13
+CHAPTER 3.
+) [18
 
 
 
@@ -992,12 +961,8 @@ No file ml2pvae_software.tex.
 \openout2 = `related_work.aux'.
 
 (related_work.tex
-CHAPTER 5.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [14
+CHAPTER 4.
+) [19
 
 
 
@@ -1007,12 +972,8 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \openout2 = `knowledge_tracing_background.aux'.
 
  (knowledge_tracing_background.tex
-CHAPTER 6.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [15
+CHAPTER 5.
+) [20
 
 
 
@@ -1020,12 +981,8 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \openout2 = `knowledge_tracing_methods.aux'.
 
  (knowledge_tracing_methods.tex
-CHAPTER 7.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [16
+CHAPTER 6.
+) [21
 
 
 
@@ -1033,12 +990,8 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \openout2 = `knowledge_tracing_results.aux'.
 
  (knowledge_tracing_results.tex
-CHAPTER 8.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1.
-
-) [17
+CHAPTER 7.
+) [22
 
 
 
@@ -1046,31 +999,27 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: bookmark level for unknown head defaults to 0.
 
-(thesis.bbl) [18
+(thesis.bbl) [23
 
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
- (thesis.aux (chapter1.aux) (irt_param_est_background.aux)
+ (thesis.aux (irt_param_est_background.aux)
 (irt_param_est_methods.aux) (irt_param_est_results.aux) (ml2pvae_software.aux)
 (related_work.aux) (knowledge_tracing_background.aux)
 (knowledge_tracing_methods.aux) (knowledge_tracing_results.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 126.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 126.
-
-
-LaTeX Warning: There were undefined references.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 126.
  ) 
 Here is how much of TeX's memory you used:
- 24938 strings out of 427839
- 455681 string characters out of 3155939
- 526698 words of memory out of 3000000
- 28473 multiletter control sequences out of 15000+200000
- 8791 words of font info for 39 fonts, out of 3000000 for 9000
+ 24949 strings out of 427839
+ 455770 string characters out of 3155939
+ 529628 words of memory out of 3000000
+ 28492 multiletter control sequences out of 15000+200000
+ 9436 words of font info for 42 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 56i,12n,82p,993b,369s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,20n,82p,993b,371s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.pdf (27 pages).
+Output written on thesis.pdf (32 pages).

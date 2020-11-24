@@ -1,10 +1,21 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{Bleia2017}
-D.M. Bleia, A.~Kucukelbirb, and J.D. McAuliffec.
+\bibitem{baker_kim2004}
+F.~Baker and S.~Kim.
+\newblock {\em Item Response Theory Parameter Estimation Techniques}.
+\newblock Taylor \& Francis Group, 2nd edition, 2004.
+
+\bibitem{Blei2017}
+D.M. Blei, A.~Kucukelbir, and J.D. McAuliffe.
 \newblock Variational inference: A review for statisticians.
 \newblock {\em Journal of the American Statistical Association},
   112(518):859--877, 2017.
+
+\bibitem{daSilva2018}
+M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
+\newblock Incorporating the q-matrix into multidimensional item response theory
+  models.
+\newblock {\em Educational and Psychological Measurement}, 2018.
 
 \bibitem{doersch2016}
 Carl Doersch.

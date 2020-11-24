@@ -10,9 +10,10 @@ Item Response Theory (IRT) is a field of quantitative psychology which uses stat
 
 In this work, we often consider the case where each student has multiple latent abilities. For example, in the context of an elementary math exam, we may wish to measure the four distinct skills ``add'', ``subtract'', ``multiply'', and ``divide.'' This scenario is referred to as multidimensional item response theory, and we write the set of student $j$'s $K$ latent abilities as a vector $\Theta_j = (\theta_{1j}, \theta_{2j}, \ldots, \theta_{Kj})^\top$. It is then assumed that the latent abilities of students follow some multivariate Gaussian distirbution, $\mathcal{N}(0, \Sigma)$. For simplicity, the covariance matrix $\Sigma$ is often taken to be the identity matrix, making each latent skill independent of one another.
 
-Note that $\Theta_j$ is not directly observable in any way. Instead, a common goal is to infer student's knowledge $\Theta_j$ from on their responses on some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $U_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
+Note that $\Theta_j$ is not directly observable in any way. Instead, a common goal is to infer student's knowledge $\Theta_j$ from on their responses on some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $\vec u_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
 \begin{equation}
   u_{ij} = \begin{cases} 1 & \text{if student } j \text{ answers item } i \text{ correctly} \\0 & \text{otherwise} \end{cases} 
+  \label{eq:responses}
 \end{equation}
 IRT models aim to model the probability of a student answering a particular question correctly, so that the probability of student $j$ answering item $i$ correctly is given by some function of $\Theta_j$:
 \begin{equation}
@@ -59,14 +60,14 @@ Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \
 \subsection{Multidimensional Item Response Theory}
 The previously described statistical models can all be extended so that each student possesses $K$ latent traits. In multidimensional item response theory (MIRT), models give the probability of a correct answer as a function of the student ability vector $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
 \begin{equation}
-Pju_{ij} = 1 | \Theta_j; \vec{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vec{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{\exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
+P(u_{ij} = 1 | \Theta_j; \vec{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vec{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{\exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
   \label{eq:ml2p}
 \end{equation}
 Here, the discrimination parameters $\vec{a_i} \in \R^K$ are given as vector, where each entry $a_{ik} \in \vec{a_i}$ quantifies \textit{how much} of skill $k$ is required to answer item $i$ correctly. The ML2P model is the main focus of this thesis.
 
 TODO: mention MDISC and how this scales
 
-In MIRT, it is convenient to notate the relationship between skills and items with binary matrix. Define the Q-matrix \cite{daSilva2018} $Q \in \R^{n\times K}$ so that 
+In MIRT, it is convenient to notate the relationship between skills and items with binary matrix. Define the $Q$-matrix \cite{daSilva2018} $Q \in \{0,1\}^{n\times K}$ so that 
 \begin{equation}
   q_{ik} = \begin{cases}
     1 & \text{if item } i \text{ requires skill } k\\
@@ -74,7 +75,7 @@ In MIRT, it is convenient to notate the relationship between skills and items wi
   \end{cases}.
   \label{eq:q_matrix}
 \end{equation}
-In real applications, the Q-matrix is annotated by an expert in the field, as it is usually possible to discern the concepts need to answer an item correctly. In relation to the ML2P model (Equation \ref{eq:ml2p}), notice that if $q_{ik} = 0$, then $a_{ik} = 0$ as well. Though experts can produce a Q-matrix for a given assessment, the matrix of discrimination parameters $(a_{ik})_{i,k}$ can not be discovered so easily.
+In real applications, the $Q$-matrix is annotated by an expert in the field, as it is usually possible to discern the concepts need to answer an item correctly. In relation to the ML2P model (Equation \ref{eq:ml2p}), notice that if $q_{ik} = 0$, then $a_{ik} = 0$ as well. Though experts can produce a $Q$-matrix for a given assessment, the matrix of discrimination parameters $(a_{ik})_{i,k}$ can not be discovered so easily.
 
 \section{IRT Parameter Estimation}
 
@@ -117,7 +118,7 @@ or cross-entropy loss for binary data
 Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. Denoising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, they corrupt input data by deleting pixels at random and reconstructing the original image. Autoencoders can also be modified for data generation applications using a variational autoencoder.
 
 \subsection{Variational Autoencoders}
-*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Bleia2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''
+*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Blei2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''
 
 TODO: describe probabilistic derivation of VAE (ie Kingma and Welling). Also talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - bu I've shown this isn't the case in our model, where the decoder is Bernoulli.
 

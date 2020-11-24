@@ -1,5 +1,4 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: irt_param_est_background.aux
 A level-1 auxiliary file: irt_param_est_methods.aux
 A level-1 auxiliary file: irt_param_est_results.aux
@@ -9,9 +8,4 @@ A level-1 auxiliary file: knowledge_tracing_background.aux
 A level-1 auxiliary file: knowledge_tracing_methods.aux
 A level-1 auxiliary file: knowledge_tracing_results.aux
 The style file: plain2.bst
-Illegal, another \bibstyle command---line 42 of file thesis.aux
- : \bibstyle
- :          {plain}
-I'm skipping whatever remains of this command
 Database file #1: thesis.bib
-(There was 1 error message)

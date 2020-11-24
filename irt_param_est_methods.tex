@@ -1,15 +1,130 @@
 \chapter{Methods - IRT Parameter Estimation}
+The primary contribution of this thesis is the development of a method for IRT parameter estimation which uses a modified VAE. The method, titled ``ML2P-VAE'', is interesting from multiple perspectives. In the application area, it is an unconventional approach can produce estimates as accurate as those of traditional parameter estimation techniques. Further, ML2P-VAE scales much better than traditional methods as the number of latent abilities becomes large. In the field of machine learning, ML2P-VAE is an unsupervised learning technique which yields explainable results. A variational autoencoder is used in an unorthodox way, and the trainable parameters and a hidden neural layer are able to be understood in a real-world context.
 
-\section{ML2P-VAE Description}
+\section{ML2P-VAE Method Description}
+Assume we are given an assessment with $n$ items which tests $K$ latent skills, and that $N$ students take this exam. Data is given as an $N \times n$ binary matrix, as in Equation \ref{eq:responses}. No information about student latent ability parameters $\Theta \in \R^K$ or item parameters $a_{ik}$ and $b_i$ is provided. However, there is access to an expert-annotated binary $Q$-matrix detailing the item-skill associations, as in Equation \ref{eq:q_matrix}.
 
-\subsection{One-Parameter Logistic}
+A number of specifications are required in order to use a VAE as an IRT parameter estimation method. First, set up the neural network so that the input and output layers each have $n$ nodes, each representing one item. The inputs are be the binary response vectors $\vec u_j$ and the outputs are approximations of the probability of student $j$ answering each item correctly. Next, the dimension of the hidden distribution (the output of the encoder) must be equal to $K$, the number of latent skills.
 
-\subsection{2-Parameter Logistic}
+The modifications to a typical VAE architecture are focused on the decoder. No hidden layers are used in the decoder. Instead, a non-dense set of weights connects the decoder input to the decoder output. The non-zero weights here are determined by the $Q$-matrix; recall that the input to the decoder has $K$ nodes, the decoder output hase $n$ nodes, and $Q \in \{0,1\}^{n \times K}$. Further, require the use of the sigmoidal activation function
+\begin{equation}
+  \sigma(z_i) = \frac{1}{1 + e^{z_i}}
+  \label{eq:sigmoid}
+\end{equation}
+in the output layer. Here, $z_i = \sum_{k=1^K} w_{ik}\alpha_{k} + \beta_i$, where $w_{ik}$ is the weight between the $k$-th and $i$-th nodes in the decoder input and decoder output layer, $\alpha_k$ is the activation of the $k$-th node in the decoder input layer, and $\beta_i$ is the additive bias in the output layer. Note the similarity between Equation \ref{eq:sigmoid} and Equation \ref{eq:ml2p}. The constraint on the weights along with the sigmoidal activation function allows for interpretation of the decoder as an ML2P model.
 
-\subsection{3-Parameter Logistic}
-tbd on this
+Specifically, the decoder weights $w_{ik}$ can be interpreted as estimates to the discrimination parameters $a_{ik}$, the output bias $\beta_i$ can be interpreted as estimates to the difficulty parameters $b_i$, and the activations $\alpha_k$ produced by the encoder (given response input $\vec u_j$) can be interpreted as estimates to the student ability parameter $\theta_{kj}$. \sideremark{may want to mention that the value outputed by encoder is then sampled from for dceoder input}
+
+Further modifications can improve the performance of ML2P-VAE. In IRT, discrimination parameters are assumed to be non-negative, because an increase in a skill should never decrease the probability of answering an item correctly. With this assumption in mind, requiring all decoder weights $w_{ik} \geq 0$ avoids a potential identification problem. \sideremark{explain what this means $-\theta a_{ik} = \theta (-a_{ik})$}
 
 \subsection{Full Covariance Matrix Implementation}
+
+\subsection{Variants - 1PL and 3PL}
+
+\subsection{On Convergence}
+
+\subsubsection{Proving local minimum at true solution}
+\sideremark{Can't really guarantee convergence globally with SGD because neural nets are super nonconvex}
+
+We define the true and predicted probability of student $j$ answering item $i$ correctly with $P_{ij}$ and $\hat P_{ij}$, respectively. The former comes from the ML2P model, and the latter is the output of a neural network. We assume the more simple case, where $\Theta \sim \mathcal{N}(0,I)$, rather than $\mathcal{N}(\mu, \Sigma)$.
+\begin{equation}
+  \begin{split}
+  P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K a_{ik}\theta_{jk} + b_i\right)}\\
+  \label{eq:ml2p}
+  \hat P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K \hat a_{ik} (\hat \theta_{jk} + \e_k \hat \sigma_k) + \hat b_i\right)} 
+\end{split}
+    \label{eq:vae_out}
+\end{equation}
+
+Note that $P_{ij}$ is unknown, and we instead have a response sequence $\vec u_j = (u_{1j},\ldots, u_{nj})^\top$ with $u_{ij} = \text{Bern}(P_{ij})$. This also means that $\mathbb{E}[u_{ij}] = P_{ij}$. The variables $\hat a_{ik}$, $\hat b_i$, $\hat \theta_{ik}$, and are parameter estimates from the VAE. The first two are parameters in the neural network, and the ability estimates are taken from feeding responses to the encoder, i.e., $\hat \Theta_j = \text{Encoder}(\vec u_j)$. The noise $\e = (\e_k)_{1\leq k \leq K} \sim \mathcal{N}(0,I)$ is introduced by the sampling operation in the VAE.
+
+The loss function for a VAE is given by 
+\begin{equation}
+  \begin{split}
+  \mathcal{L}(\vec u_j) &= -\sum_{i=1}^n \left[u_{ij} \log(\hat P_{ij}) + (1-u_{ij})\log(1 - \hat P_{ij})\right] + \mathbb{E}_{q_\alpha(\hat \theta | \vec u_j)}\log\left( \frac{q_{\alpha}(\hat \theta |\vec u_j)}{p(\theta)}\right) \\
+    &= \mathcal{L}_{\text{REC}} + \mathcal{L}_{\text{KL}}
+  \end{split}
+  \label{eq:vae_loss}
+\end{equation}
+We break up the VAE loss into two terms, the reconstruction loss $\mathcal{L}_{\text{REC}}$ and the KL-divergence loss $\mathcal{L}_{\text{KL}}$. in the latter, the distribution $q_\alpha(\hat \theta | \vec u_j)$ is the output of the encoder, and $p(\theta)$ is the assumed prior distribution of $\Theta$, which we set to be $\mathcal{N}(0,I)$.
+
+We write $P_{ij} = \mathbb{E}(u_{ij})$, and similarly define a new ``expected'' loss function:
+\begin{equation}
+  \begin{split}
+  \mathcal{L}_\mathbb{E}(P_j) &= \mathbb{E}_{u_j}[\mathcal{L}(u_{:j})] \\
+  &= -\sum_{i=1}^n (P_{ij} \log(\hat P_{ij}) + (1-P_{ij})\log(1 - \hat P_{ij}) + \mathbb{E}_{q_\alpha(\hat \theta | u_j)}\log\left( \frac{q_{\alpha}(\hat \theta |u_j)}{p(\theta)}\right) \\
+    &= \mathcal{L}_{\mathbb{E}[\text{REC}]} + \mathcal{L}_{\mathbb{E}[\text{KL}]}
+  \end{split}
+  \label{eq:expected_loss}
+\end{equation}
+Notice that calculation of this ``expected loss'' requires the unknown $P_{:j}$. But when we have large amounts of data, we can think of $P_{ij}$ as the average value of the response $u_{ij}$, so using this unknown value here is justified.
+
+Define $z_i = a_{i:} \cdot \theta_{j:} - b_i$ and $\hat z_i = \hat a_{i:} \cdot (\hat \theta_{j:} + \e \cdot \hat \sigma) - \hat b_i$. Note that $z_i$ is fixed, dependent on the data, and does not depend on any parameters of the neural network. $\hat z_:$ is the input to the final layer of the decoder, and the VAE output is $\hat P_{ij} = \sigma(\hat z_i)$, where $\sigma(\cdot)$ is the sigmoidal activation function. We compute derivatives of the expected loss function, looking individually at the reconstruction and KL terms. 
+
+\begin{equation}
+  \begin{split}
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} &= \frac{-1}{1 + e^{-z_i}}\cdot \frac{1}{1 + e^{\hat z_i}} - \frac{1}{1 + e^{z_i}}\cdot \frac{-1}{1 + e^{-\hat z_i}} \\
+  &= \frac{-1}{(1 + e^{-z_i})(1 + e^{\hat z_i})} + \frac{1}{(1 + e^{z_i})(1 + e^{-\hat z_i})} \\
+  &= \frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{\hat a_{ik} (\hat \theta_{kj} + \e_k \hat \sigma_k) - \hat b_i})} \\
+  &\quad + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-\hat a_{ik}(\hat \theta_{jk} + \e_k \hat \sigma_k) + \hat b_i})} 
+\end{split}
+  \label{eq:z_deriv}
+\end{equation}
+
+
+\begin{equation}
+  \begin{split}
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat a_{ik}} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat a_{ik}} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (\hat \theta_{jk} + \e_k \hat \sigma_k) \\
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat b_i} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat b_i} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (-1) \\
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat \theta_{ik}} &= 
+  \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\frac{\partial \hat z_i}{\partial \hat \theta_{ik}} = \frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i} (\hat a_{ik}) 
+\end{split}
+ \label{eq:param_deriv}
+\end{equation}
+
+Rather than setting these to zero and solving, we show that the most intuitive solution, $\hat a_{ik} = a_{ik}$, $\hat b_i = b_i$, and $\hat \theta_{jk} = \theta_{jk}$, is in fact a minimum of the expected loss function. But first, we must take another expectation over the random variable $\e \sim \mathcal{N}(0,I)$. Obviously, we have that $\mathbb{E}[\e_k] = 0$; this makes our calculations very simple. Notice that we have
+\begin{equation}
+  \begin{split}
+  \mathbb{E}_\e &\left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat z_i}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  &= \frac{-1}{(1 + e^{-a_{ik}\theta_{jk} + b_i})(1 + e^{a_{ik} (\theta_{kj} + 0 \hat \sigma_k) - b_i})} + \frac{1}{(1 + e^{a_{ik}\theta_{jk} - b_i})(1 + e^{-a_{ik}(\theta_{jk} + 0 \hat \sigma_k) + b_i})} \\
+  &= 0
+\end{split}
+\end{equation}
+
+Therefore we clearly have 
+\begin{equation}
+  \begin{split}
+  &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat a_{ik}}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat b_i}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &\mathbb{E}_\e \left[\frac{\partial \mathcal{L}_{\mathbb{E}[\text{REC}]}}{\partial \hat \theta_{jk}}\right] \Big|_{\hat a_{ik} = a_{ik}, \hat b_i = b_i, \hat \theta_{jk} = \theta_{jk}} \\
+  = &0 \quad \forall i,j,k
+\end{split}
+  \label{solve}
+\end{equation}
+This proves that the true parameters give a local minimum for the expected reconstruction error in the VAE loss. And because the expected cross-entropy loss function $\mathcal{L}_{\mathbb{E}[\text{REC}]}$ is non-negative, the reconstruction error at the true IRT paramters is a global minimum. \sideremark{any chance this is unique?}
+
+We now consider the Kullback-Leibler divergence term in the expected loss function. Again assuming independent latent traits, we have
+\begin{equation}
+  \mathcal{L}_{KL} = \mathbb{E}_{q(\theta | u)}[\log \left( \frac{q(\hat \theta | u)}{p(\theta)} \right) = KL(q(\hat \theta |u) || p(\theta)) = -\frac{1}{2} \sum_{k=1}^K (1 + \log(\hat \sigma_k^2) - \hat \theta_k^2 - \hat \sigma_k^2)
+  \label{eq:kl}
+\end{equation}
+
+It is clear that this regularization term is minimized (and equal to zero) when $\hat \theta_{jk} = 0$ and $\hat \sigma_{jk} = 1$. But what happens when we plug in the ``true'' student ability values as before? We have
+\begin{equation}
+  \mathcal{L}_{KL} \Big|_{\hat \theta = \theta, \hat \sigma = \sigma} = KL(p(\theta | u) || p(\theta))
+  \label{eq}
+\end{equation}
+Notice that this is the KL divergence between the \textbf{true posterior} $p(\theta |u)$ and the \textbf{true prior} $p(\theta)$. This is interpreted as the average difference of number of bits required to encode samples of $p(\theta |u)$ using a code optimized for $p(\theta)$, rather than one optimized for $p(\theta | u)$. \sideremark{We should be okay with accepting this loss, since the true posterior is not actually known, and we are just using the prior as a reference.}
+
+
+
+\subsubsection{Requirements on sparsity of Q-matrix}
+\sideremark{need to look into this idea at some point}
+
+TODO: try to show that this is a global minimum for the full VAE loss function. Also take derivatives of the KL loss w.r.t $\hat \theta_{jk}$. The Q-matrix may help with an identifiability issue (existence of other local minimums) in solving the system $(a_{ik}\theta_{jk} + b_i)_{jk} = z_i$. The Q-matrix \textit{may} make the solution unique.
+
 
 \section{ML2Pvae Software Package for R}
 Plug that I made this and it is publicly available - hopefully on CRAN.
