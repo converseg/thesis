@@ -40,6 +40,7 @@ One of the first models was proposed by Georg Rasch in 1960. Rasch asserted that
 Note that $\theta \in \R$ and $b \in \R$ still represent student ability and item difficulty, respectively. We can interpret the difficulty parameter $b$ as a threshold: when $\theta = b$, then the student has a $50\%$ chance of answering the question correctly. A plot of Equation \ref{eq:1pl} for a fixed item (fixed $b_i$) is shown in Figure \ref{fig:icc}. The horizontal axis represents $\log \theta$, and the vertical axis represents $P(u_{ij} = 1 | \theta, b_i)$. This type of graph is often referred to as an item characteristic curve (ICC).
 
 \subsection{Normal Ogive Model}
+\sideremark{*This section isn't very important to rest of work}
 A slightly more sophisticated method for measuring student performance is the normal ogive model. We introduce a discrimination parameter, $a_i$, which quantifies the capability of item $i$ in distinguishing between students who have / have not mastered the knowledge concept $\theta$ \cite{thissen}. In other words, $a_i$ tells \textit{how much} of skill $\theta$ is required to answer item $i$ correctly. 
 
 The normal ogive model give the probability of student $j$ answering item $i$ correctly as
@@ -78,6 +79,7 @@ In MIRT, it is convenient to notate the relationship between skills and items wi
 In real applications, the $Q$-matrix is annotated by an expert in the field, as it is usually possible to discern the concepts need to answer an item correctly. In relation to the ML2P model (Equation \ref{eq:ml2p}), notice that if $q_{ik} = 0$, then $a_{ik} = 0$ as well. Though experts can produce a $Q$-matrix for a given assessment, the matrix of discrimination parameters $(a_{ik})_{i,k}$ can not be discovered so easily.
 
 \section{IRT Parameter Estimation}
+\sideremark{*How in-depth do these descriptions need to be? Could just give overall idea and describe weaknesses}
 
 \subsection{Maximum Likelihood Estimation}
 TODO: item parameter estimation

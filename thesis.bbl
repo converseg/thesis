@@ -11,6 +11,38 @@ D.M. Blei, A.~Kucukelbir, and J.D. McAuliffe.
 \newblock {\em Journal of the American Statistical Association},
   112(518):859--877, 2017.
 
+\bibitem{aied_paper}
+G.~Converse, M.~Curi, and S.~Oliveira.
+\newblock Autoencoders for educational assessment.
+\newblock In {\em International Conference on Artificial Intelligence in
+  Education (AIED)}, 2019.
+
+\bibitem{r_package}
+Geoffrey Converse.
+\newblock {\em ML2Pvae: Variational Autoencoder Models for IRT Parameter
+  Estimation}, 2020.
+\newblock R package version 1.0.0.
+
+\bibitem{fsdm_paper}
+Geoffrey Converse, Brooke Arnold, Mariana Curi, and Suely Oliveira.
+\newblock Variational autoencoders for baseball player evaluation.
+\newblock In Antonio~J. Tall{\'{o}}n{-}Ballesteros, editor, {\em Fuzzy Systems
+  and Data Mining {V} - Proceedings of {FSDM} 2019, Kitakyushu City, Japan,
+  October 18-21, 2019}, volume 320 of {\em Frontiers in Artificial Intelligence
+  and Applications}, pages 305--311. {IOS} Press, 2019.
+
+\bibitem{ml_paper}
+Geoffrey Converse, Mariana Curi, Suely Oliveira, and Jonathan Templin.
+\newblock Estimation of multidimensional item response theory models with
+  correlated latent variables using variational autoencoders.
+\newblock {\em Machine Learning}, Under review 2020.
+
+\bibitem{ijcnn_paper}
+M.~Curi, G.~Converse, J.~Hajewski, and S.~Oliveira.
+\newblock Interpretable variational autoencoders for cognitive models.
+\newblock In {\em 2019 International Joint Conference on Neural Networks
+  (IJCNN)}, 2019.
+
 \bibitem{daSilva2018}
 M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
 \newblock Incorporating the q-matrix into multidimensional item response theory
@@ -20,6 +52,26 @@ M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
 \bibitem{doersch2016}
 Carl Doersch.
 \newblock Tutorial on variational autoencoders, 2016.
+
+\bibitem{guo2017}
+Q.~Guo, M.~Cutumisu, and Y.~Cui.
+\newblock A neural network approach to estimate student skill mastery in
+  cognitive diagnostic assessments.
+\newblock In {\em 10th International Conference on Educational Data Mining},
+  2017.
+
+\bibitem{ets2005}
+Shelby~J. Haberman.
+\newblock Identifiability of parameters in item response models with
+  unconstrained ability distributions.
+\newblock Technical Report RR-05-24, Research and Development, ETS, December
+  2005.
+
+\bibitem{henson2007}
+R.~Henson and J.~Templin.
+\newblock Large-scale language assessment using cognitive diagnosis models.
+\newblock In {\em Annual meeting of the National Council for Measurement in
+  Education}, 2007.
 
 \bibitem{kingma2014}
 D.~Kingma and M.~Welling.
@@ -43,6 +95,17 @@ Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.
 \newblock In {\em Proceedings of the International Conference on Machine
   Learning}, 2020.
 
+\bibitem{cdm}
+Alexander Robitzsch, Thomas Kiefer, Ann~Cathrice George, and Ali Uenlue.
+\newblock {\em CDM: Cognitive Diagnosis Modeling}, 2020.
+\newblock R package version 7.5-15.
+
+\bibitem{Templin2013}
+Jonathan Templin and Lesa Hoffman.
+\newblock Obtaining diagnostic classification model estimates using mplus.
+\newblock {\em Educational Measurement: Issues and Practice}, 32(2):37–50,
+  2013.
+
 \bibitem{thissen}
 David Thissen and Howard Wainer.
 \newblock {\em Test Scoring}.
@@ -53,6 +116,19 @@ Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol.
 \newblock Extracting and composing robust features with denoising autoencoders.
 \newblock In {\em International Conference on Machine Learning}, pages
   1096--1103, 2008.
+
+\bibitem{SciPy}
+Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, Matt Haberland, Tyler Reddy,
+  David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren {Weckesser},
+  Jonathan {Bright}, Stefan~J. {van der Walt}, Matthew {Brett}, Joshua
+  {Wilson}, K.~{Jarrod Millman}, Nikolay {Mayorov}, Andrew R.~J. {Nelson}, Eric
+  {Jones}, Robert {Kern}, Eric {Larson}, CJ~{Carey}, lhan {Polat}, Yu~{Feng},
+  Eric~W. {Moore}, Jake {Vand erPlas}, Denis {Laxalde}, Josef {Perktold},
+  Robert {Cimrman}, Ian {Henriksen}, E.~A. {Quintero}, Charles~R {Harris},
+  Anne~M. {Archibald}, Antonio~H. {Ribeiro}, Fabian {Pedregosa}, Paul {van
+  Mulbregt}, and SciPy 1.~0 {Contributors}.
+\newblock Scipy 1.0: Fundamental algorithms for scientific computing in python.
+\newblock {\em Nature Methods}, 2020.
 
 \bibitem{zhang2018interpretable}
 Quanshi Zhang, Ying Nian~Wu, and Song-Chun Zhu.
