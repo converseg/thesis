@@ -1,13 +1,24 @@
 \chapter{Knowledge Tracing Background}
 
-\section{Application Goal}
+Knowledge Tracing (KT) is a task introduced by Corbett and Anderson in 1995 \cite{corbett1995}. Their goal was to model the changing knowledge state of students as they progress through an online intelligent tutoring program. This tutoring system helps students practice writing computer programs by testing them on various rules, such as correct use of in-built functions, and providing feedback on their mistakes. The model tracks each student's knowledge as being in either a learned or unlearned state for each rule. After each interaction, there is a probability $P(T)$ that a student makes the transition from the unlearned state to the learned state.
+
+The probability that a student has learned a particular rule at timestep $n$ is
+\begin{equation}
+P(L_n) = P(L_{n-1} | \text{evidence}) + (1 - P(L_{_n-1} | \text{evidence})) \cdot P(T).
+\label{eq:kt}
+\end{equation}
+Then the probability of a student performing a task correctly is the sum of the probability that the rule is learned and the student doesn't make a mistake, and the probability that the rule is unlearned but the student guesses correctly.
+
+There are only four parameters for each rule: the probability that the rule is already in the learned state at timestep 0, the probability of transitioning from the unlearned to learned state, the probability of guessing correctly, and the probability of slipping. These parameters are estimated using a hidden Markov Model, and the probability of a the student having learned a rule is updated via Bayes' Theorem.
+
+In recent years, Bayesian Knowledge Tracing (BKT) has been overcome by deep learning methods. The popularity of neural networks has brought black-box models that yield high accuracy. Many of these methods, detailed in Section \ref{sec:kt_lit}, do not provide a concrete measure of student ability over time. Instead, the only way to track student knowledge is through the predicted probability of them answering questions correctly at a given timestep. 
+
+In Chapter \ref{ch:kt_methods}, new methods using neural networks are presented which produce comparable predictive power to deep learning methods, while providing explainable models with links to Item Response Theory.
+
 
 \section{Mathematical Setup}
 
-\section{Literature Review}
-
-\subsection{Bayesian Knowledge Tracing}
-*may not be important to go in-depth
+\section{Literature Review}\label{sec:kt_lit}
 
 \subsection{Deep Knowledge Tracing}
 *should explain more because of DKT with Q-matrix
@@ -15,6 +26,14 @@
 \subsection{Dynamic Key-Value Memory Networks}
 *may not be important to go in-depth
 
+\subsubsection{Deep-IRT}
+Don't need a lot of details here, but they modify DKVMN to gain connection with IRT
+
+\subsection{Self-Attentive Knowledge Tracing}
+Important just because this is used in KT-IRT
+
 \subsection{Performance Factors Analysis}
-*should explain more, because of deep-pfa
+*should explain more, because of deep-pfa (if that is included)
+
+
 
