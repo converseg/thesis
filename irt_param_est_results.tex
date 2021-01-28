@@ -45,7 +45,7 @@ VAE   & 0.924 & 0.920 & 0.986 & 0.990 & \\
 \label{tab:vae_vs_ae_items}
 \end{table}
 
-Three error measures for VAE and AE estimates are given in Table \ref{tab:vae_vs_ae_items} and Table \ref{tab:vae_vs_ae_theta}. These include absolute value relative bias (AVRB), root mean square error (RMSE) and Pearson correlation (CORR). The statistics for item parameter estimates in Table \ref{tab:vae_vs_ae_item}, where $a_k$ denotes the average measure taken over all items related to latent trait $\theta_k$, and $b$ is the average measure taken over all item difficulty parameters. Note that the AVRB values for difficulty parameters is rather high, likely due to some of the true values of $b_i$ are very near zero. The item parameter estimates from VAE outperform those from AE for each category and measure. This is corroborated by the correlation plots in Figure \ref{fig:vae_vs_ae_a} and Figure \ref{fig:vae_vs_ae_b}.
+Three error measures for VAE and AE estimates are given in Table \ref{tab:vae_vs_ae_items} and Table \ref{tab:vae_vs_ae_theta}. These include absolute value relative bias (AVRB), root mean square error (RMSE) and Pearson correlation (CORR). The statistics for item parameter estimates in Table \ref{tab:vae_vs_ae_items}, where $a_k$ denotes the average measure taken over all items related to latent trait $\theta_k$, and $b$ is the average measure taken over all item difficulty parameters. Note that the AVRB values for difficulty parameters is rather high, likely due to some of the true values of $b_i$ are very near zero. The item parameter estimates from VAE outperform those from AE for each category and measure. This is corroborated by the correlation plots in Figure \ref{fig:vae_vs_ae_a} and Figure \ref{fig:vae_vs_ae_b}.
 
 \begin{figure}[h!]
 \minipage{0.5\textwidth}
@@ -109,8 +109,8 @@ Both autoencoders and variational autoencoders can be used as IRT parameter esti
 
 
 \subsection{ML2P-VAE vs Traditional Methods}
-ML
 \sideremark{TODO: do 1pl in mirt and VAE}
+A summary of each method's performance is given in Table \ref{tab:results}. All experiments were conducted using Tensorflow for R on a laptop computer with a 2.9 GHz Intel Core i7-7500U CPU. The results from traditional methods were obtained using default settings of the MIRT package \cite{mirt}. The ML2P-VAE methods used the previously described hyper-parameters, though both accuracy and runtime could likely be fine-tuned by changing the encoder architecture and implementing techniques such as early stopping.
 
 
 \begin{sidewaystable}
@@ -146,44 +146,144 @@ Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.
 }
 \end{sidewaystable}
 
-%n{sidewaystable}
-%\footnotesize{
-%\centering
-%\begin{tabular}{c|c|ccc|ccc|ccc|c}
-%Data Set & Method & $a$.RMSE & $a$.BIAS & $a$.COR & $b$.RMSE & $b$.BIAS & $b$.COR &  $\theta$.RMSE & $\theta$.BIAS & $\theta$.COR & Runtime \\
-%\hline
-%& MHRM & 0.0693 &  0.0319  & 0.9986   & 0.0256 & -0.0021 & 0.9999  & 0.714  & -0.0033  & 0.7006 & 1110s \\ 
-%(i)& QMCEM & 0.149 & -0.067 & 0.9939 & 0.0376 & -0.002 & 0.9998 & 0.7206 & 0.0023 & 0.6939 & 322s\\
-%6 abilities& MCEM & 0.1497 & -0.0633 & 0.9936 &  0.0383 & 0.0035 & 0.9997 &  0.7206 & -0.0016 & 0.6938 & 1009s\\
-%(Simulated) & ML2P-VAE$_{full}$ & 0.0705 & 0.0255  & 0.9985   & 0.0471 & -0.0079 & 0.9996  & 0.6649   & -0.0178  & 0.7476 & 343s\\
-%& ML2P-VAE$_{est}$ & 0.1803 &  0.0871  & 0.9891 &  0.064 & -0.0131 & 0.9993  & 0.7109 &  0.0772  & 0.7082 & 364s \\
-%& ML2P-VAE$_{ind}$ & 0.1218 &  -0.0004 & 0.9944   & 0.0597 & -0.0145 & 0.9994  & 0.7222 &  0.0316  & 0.6928 & 252s\\
-%\hline 
-%& MHRM* & 0* & 0*& 1* &  0* &  0* &  1* & 0* & 0* &  1* & 162s \\
-%(ii)& QMCEM & 0.0159 & 0.0035 & 0.9999 & 0.0067  & -0.0005 & 1   & 0.0111 & 0.0007 & 0.9999 & 192s\\
-%3 abilities & MCEM & 0.0228  & 0.0148 & 0.9998 & 0.0064  & -0.0008 & 1   & 0.0132 & 0.0026 & 0.9998 & 33s \\
-%(ECPE) & ML2P-VAE$_{full}$ & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-%& ML2P-VAE$_{est}$ & 0.2794  & 0.2152 & 0.9713 & 0.148 & 0.0951  & 0.993 & 0.443 & -0.0628 & 0.8237 & 61s  \\
-%& ML2P-VAE$_{ind}$ & 0.3208  & 0.2184 & 0.9504 & 0.154 & 0.0872  & 0.9932  & 0.3063 & 0.01 & 0.9017 & 49s \\
-%\hline
-%& MHRM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-%(iii)& QMCEM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
-%20 abilities & MCEM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-%(Simulated)& ML2P-VAE$_{full}$ & 0.078 &   0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.9996  & 0.6145 &  0.0065  & 0.7893 & 1292s \\
-%& ML2P-VAE$_{est}$ & 0.2992   & -0.1304  & 0.9822  & 0.1655 &  0.1215  & 0.9987  & 0.7364   & -0.0276  & 0.7257 & 961s \\
-%& ML2P-VAE$_{ind}$ & 0.2043 &  0.0592  & 0.9792  & 0.0958   & -0.0029  & 0.9992  & 0.7054 &  0.0747  & 0.7135 & 850s \\
-%\hline
-%\end{tabular}
-%\caption{Error measures for discrimination ($a$), difficulty ($b$), and ability ($\theta$) parameters from various parameter estimation methods on three different data sets. Note that in data set (ii), there are no true values, so MHRM estimates are accepted as true. In data set (iii), only ML2P-VAE methods are capable of estimating such high-dimensional latent traits}
-%\label{tab:results}
-%}
-%\end{sidewaystable}\section{3-PL Results}
-%(maybe)
+Note that when comparing error measures in data set (i), the ML2P-VAE methods are competitive with traditional methods. In particular, assuming full knowledge of the latent trait covariances in ML2P-VAE yields discrimination, difficulty, and ability parameter estimates of similar accuracy to MHRM. When we relax our assumption of known latent trait correlation, the accuracy of parameter estimates understandably slip.
+
+Although the ML2P-VAE methods are slightly less accurate than MHRM, they are much faster than traditional methods, especially as the number of latent traits increase. Much of this speedup is due to the fact that neural networks do not require numerical integration over the latent abilities. While quadrature or MCMC methods become infeasible on data sets much larger than (i), this is no cause for concern with ML2P-VAE. Note that for neural networks of this size (50-200 inputs and latent dimension 6-20), the longer runtime is more due to the number of data samples, rather than the size of the latent dimension. In fact, the largest neural network we used in these experiments, for data set (iii), only had 1,670 trainable parameters. In common applications, neural networks used for image classification often have hundreds of thousands or even millions of trainable parameters.
+
+\begin{figure}[h]
+\centering
+\figuretitle{Discrimination Parameter Estimates}\\
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/vae_full_disc_6skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/vae_est_disc_6skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/vae_ind_disc_6skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/mhrm_disc_6skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/qmcem_disc_6skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/6skills/mcem_disc_6skills.png}
+    \end{subfigure}
+    \caption{Correlation plots of discrimination parameter estimates for data set (i) with 50 items and 6 latent traits. ML2P-VAE estimates are on the top row, and traditional method estimates are on the bottom row}
+    \label{fig:6skill_cor}
+\end{figure}
+
+We can visualize some of the results in Figures \ref{fig:6skill_cor}, \ref{fig:ecpe_cor}, and \ref{fig:20skill_cor} for data sets (i), (ii), and (iii), respectively. Figure \ref{fig:6skill_cor} shows the correlation between the true and estimated discrimination parameters for the ML2P-VAE$_{full}$ and MHRM methods. We don't include such plots for the difficultly parameters, as all methods estimate each $b_i$ with very high accuracy. From these figures, it appears that while MHRM obtains better results on smaller discrimination parameters, ML2P-VAE$_{full}$ has less error on larger parameters, and the estimation error seems to be independent of the magnitude of the parameter. The other two ML2P-VAE methods do not obtain the same levels of accuracy as when assuming full knowledge of the latent ability correlations. 
+
+\begin{figure}[h]
+\centering
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \figuretitlesmall{Discrimination Parameters}
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_est_disc_ecpe.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \figuretitlesmall{Difficulty Parameters}
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_est_diff_ecpe.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \figuretitlesmall{Ability Parameters}
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_est_theta_ecpe.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_ind_disc_ecpe.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png}
+    \end{subfigure}
+    \caption{Estimates from ML2P-VAE methods plotted against ``accepted'' MHRM estimates from ECPE data}
+    \label{fig:ecpe_cor}
+\end{figure}
+
+When examining the ECPE data, there are no ``true'' values of parameters, so we compare ML2P-VAE's results directly with MHRM's estimates. As seen in Table \ref{tab:results}, the parameter estimates from QMCEM and MCEM are nearly identical to those of MHRM on the ECPE data. Of course, there is not a known covariance matrix between the three latent abilities, so we only analyze ML2P-VAE$_{est}$ and ML2P-VAE$_{ind}$. While both methods perform similar to MHRM in difficulty parameter estimates, we can see that the two yield different results when applied to discrimination and ability parameters. We first note that while ML2P-VAE$_{ind}$ gives accurate estimations for the green and black abilities (and the discrimination parameters associated with those abilities), the red ability estimates are all very near zero for every student. This tells us that the ML2P-VAE$_{ind}$ method found that the red ability has no effect on exam performance. On the other hand, ML2P-VAE$_{est}$ captures the general trend of the MHRM ability  parameters, but the estimates have much more variance. The discrimination parameter estimates also show some correlation, but each of the three abilities are on a different scale.
+\begin{figure}[h]
+\centering
+\figuretitle{Discrimination and Ability Parameter Estimates}\\
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_full_disc_20skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_est_disc_20skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_ind_disc_20skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_full_theta_20skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_est_theta_20skills.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/20skills/vae_ind_theta_20skills.png}
+    \end{subfigure}
+    \caption{ML2P-VAE parameter estimates for data set (iii) with 200 items and 20 latent traits. The top row shows discrimination parameter correlation, and the bottom row shows ability parameter correlation}
+    \label{fig:20skill_cor}
+\end{figure}
+
+While estimating parameters for data set (iii), the dimension of the latent traits ($\R^{20}$) is too large for traditional methods, so we only study the three ML2P-VAE techniques. All three of these methods estimate the difficulty parameters with high accuracy. Similar to in data set (i), we again observe that the ML2P-VAE$_{full}$ error seems to be independent of the size of the discrimination parameter, a promising trend. However, ML2P-VAE does not perform as well when we do not have full knowledge of the latent ability correlation matrix. The discrimination parameter estimates for ML2P-VAE$_{est}$ seem to have no pattern. Upon closer inspection, it can be seen that the discrimination parameter estimates associated with a particular ability are correlated, but each ability is on a different scale. 
+
+The discrepancy between ML2P-VAE$_{full}$ and ML2P-VAE$_{est}$ can be attributed to a poorly estimated covariance matrix. For this data set, the covariance matrix obtained by the method described previously \textit{greatly} overestimates every correlation between latent traits; the average signed bias in the correlation matrix estimation is $-0.61$, and even the closest correlation estimation has signed bias $-0.26$. Finding a better method to compute an approximate correlation matrix could greatly improve this method.
+
+The estimates for data set (iii) produced by ML2P-VAE$_{ind}$ display the same behavior observed in data set (ii). Two of the abilities have discrimination parameters estimated near zero, meaning ML2P-VAE$_{ind}$ deemed these abilities to have no relation with performance on the assessment. But in contrast to the ECPE data, data set (iii) was simulated and we know that this is not true. Outside of this issue, the other discrimination parameters were reasonably estimated, showing clear correlation with the true values on near a 1:1 scale.
 
 
-%Let me add another figure here:
-%\begin{center}
-%    \bxfigure[!hb]{Another figure\label{fig2}}{
-%  \includegraphics[width=0.8\columnwidth]{fig2}
-%}
-%\end{center}
+Though ML2P-VAE$_{est}$ and ML2P-VAE$_{ind}$ have trouble converging to the true discrimination parameters, they are still able to obtain quality estimates to the ability parameters. The values in Table \ref{tab:results} for $\theta$ in data set (iii) are comparable to those of data set (i). The plots in Figure \ref{fig:20skill_cor} show this high correlation in all three ML2P-VAE variants.
+
+\subsubsection{Effect of Training Data Size}
+A common criticism of neural networks is that they are computationally intensive and training them with a gradient descent based algorithm (a first order method) can take a long time. They also require large amounts of data. As mentioned before, the architecture used in this application results in a relatively small neural network.
+
+\begin{figure}[h]
+\centering
+    \begin{subfigure}{.47\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{img/ml_journal_results/vae_full_train_size_error.png}
+    %   \caption{}
+    %   \label{fig:size_error}
+    \end{subfigure}
+    \begin{subfigure}{.47\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{img/ml_journal_results/vae_full_train_size_time.png}
+    %   \caption{}
+    %   \label{fig:size_time}
+    \end{subfigure}
+    \caption{Performance of ML2P-VAE$_{full}$ on data set (iii) when trained on data sets of increasing size. The left plot gives the test RMSE after using different sizes of training data, and the right plot shows the time required to train the neural network}
+    \label{fig:train_size}
+\end{figure}
+
+The longer runtimes in Table \ref{tab:results} for data set (iii) can be attributed more to the fact that there were 50,000 data samples, rather than the large latent dimension. The left plot of Figure \ref{fig:train_size} displays the relation between the size of the training data and estimation accuracy. We see that the error does not decrease very much after the number of training samples becomes greater than 20,000 -- less than half of the available simulated data. The right plot of Figure \ref{fig:train_size} shows that training time grows linearly with the size of training data. 
+
+Both plots in Figure \ref{fig:train_size} demonstrate the trade-off between accuracy and speed, as well as highlighting that ML2P-VAE methods can still be viable, even if the data size is not exceptionally large. This is particularly true in estimating the ability parameter $\Theta$. Estimating the difficulty parameters $b$ is manageable with a smaller data set, while discrimination parameters require a large amount of training data to obtain quality estimates.
+
+\sideremark{could add in some stuff from ML paper Discussion}
+
+%\section{3-PL Results}
+\sideremark{am I going to do anything with 3PL?}
+

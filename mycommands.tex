@@ -25,6 +25,19 @@
 
 \pdfstringdefDisableCommands{\let\uppercase\relax}
 
+% For figures
+\newcommand*{\figuretitle}[1]{
+  {\centering
+  \textbf{#1}
+  \par\medskip}
+}
+\newcommand*{\figuretitlesmall}[1]{
+  {\centering \scriptsize{
+  \textbf{#1}
+  \par\medskip}}
+}
+
+
 %
 % the following command can be used to put a remark
 % in the margin of the thesis/paper

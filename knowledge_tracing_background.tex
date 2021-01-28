@@ -16,15 +16,47 @@ In recent years, Bayesian Knowledge Tracing (BKT) has been overcome by deep lear
 In Chapter \ref{ch:kt_methods}, new methods using neural networks are presented which produce comparable predictive power to deep learning methods, while providing explainable models with links to Item Response Theory.
 
 
-\section{Mathematical Setup}
-
 \section{Literature Review}\label{sec:kt_lit}
+In the modern knowledge tracing application, data is provided as a sequence of student interactions $x_t = (q_t, c_t)$, $0 \leq t \leq L$. $L$ is a hyper-parameter denoting the maximum length of the sequence -- since the number of interactions for each student is different, response sequences shorter than $L$ are padded with null interactions, and response sequences of length longer than $L$ are wrapped into multiple sequences. For example, if $L=128$ and a particular student answers $160$ questions, then this student's interactions will be split into two separate sequences of length $128$ and $32$.
+
+The tag $q_t$ indexes a particular question (item) in the available question bank, and $c_t \in\{0,1\}$ indicates whether the question was answered correctly or not. So for learning system with $n$ available questions, there are $2n$ possible interactions for $x_t$. The knowledge tracing task is to predict $c_{t+1}$ given all previous interactions. Mathematically, the quantity of interest is the probability 
+\begin{equation}
+  P(c_{t+1} = 1 | (q_0,c_0), (q_1,c_1),\ldots,(q_t, c_t), (q_{t+1}, ?)).
+  \label{eq:kt_prob}
+\end{equation}
+Most neural networks optimize the predicted probability in Equation \ref{eq:kt_prob} by  minimizing the cross-entropy loss function, as described in Equation \ref{eq:cross_entropy}.
 
 \subsection{Deep Knowledge Tracing}
-*should explain more because of DKT with Q-matrix
+In 2015, the first use of neural networks for knowledge tracing was introduced by Piech et al. \cite{piech2015}. Deep Knowledge Tracing (DKT) utilizes recurrent neural networks (RNN) and Long-Short Term Memory (LSTM) neural networks to predict a student's success on future questions, given a sequence of previous interactions. RNN are the most simple neural network to deal with sequential time-series data. \sideremark{Do I need to give background on RNN and LSTM?} LSTM are more sophisticated, and are capable of capturing longer-range dependencies due to their ``keep/forget'' functionality.
+
+Similar to natural language processing, tokens (student interactions) need to be represented as a $d$-dimensional vector. DKT does this by one-hot encoding the interactions in the input layer of shape $(2n+1, L)$,  and linearly mapping to a hidden layer of shape $(d, L)$. Each interaction in the sequence is treated independently in this layer. The input layer shape is $2n+1$ for each of the possible $2n$ interactions, along with space for an additional padding token representing a null interaction (for response sequences of length $< L$.
+
+  The architecture of DKT is as follows: The one-hot encoding input layer, the $d$-dimensional embedding, an LSTM layer of size $d$, and a feedforward output layer with $n$ nodes. The final layer uses a sigmoid activation function, and the output at each node represents the probability of answering that item correctly at the given timestep. To calculate loss, only the item tag for the next interaction and corresponding output node is used in the cross-entropy loss calculation.
 
 \subsection{Dynamic Key-Value Memory Networks}
-*may not be important to go in-depth
+More sophisticated neural network approaches to knowledge tracing were introduced by Zhang et al. with Dynamic Key-Value Memory Networks (DKVMN) \cite{zhang2017}. They modify a memory-augmented neural network (MANN) in order to fit into the knowledge tracing framework. A MANN is a time-series neural network, but it does not rely on residual connections like an RNN or LSTM. Rather, a value matrix $M^v$ is stored in memory for each student, and the entries in $M^v$ are updated in each timestep. The predicted output is a probability dependent on the previous value of $M^v$ in timestep $t-1$, as well as the current neural network input in timestep $t$.
+
+In DKVMN, there is some added interpretability by requiring the number of columns of $M^v$ to be equal to the number of knowledge concepts $K$. In this way, the columns of $M^v$ offer an $h$-dimensional representation of the student's skill. DKVMN splits the computations into two parts: \textit{read} from $M^v$ to make a prediction, and \textit{write} to $M^v$ to update its information. The predictive part inputs only an exercise tag $q_t$ without the true response $c_t$. The question tag is linearly embedded into a vector $k_t$. $k_t$ is a representation of question $q_t$, and is then multiplied by a learned matrix $M^k$ and softmaxed. 
+
+This creates a vector $w_t$, where entry $j$ in $w_t$ represents the correlation weight between the question $q_t$ and memory slot $j$. This process of taking the dot product between an item embedding and a trainable matrix and softmaxing is similar to the concept of ``attention'', used in popular NLP techniques such as transformers \cite{vaswani2017}.
+
+Next, \textit{read} from the value matrix by computing 
+\begin{equation}
+  r_t = \sum_{i=1}^K w_t(i) M^v(i).
+  \label{eq:dkvmn_read}
+\end{equation}
+Note that $r_t$ is simply a weighted sum of the columns of $M^v$ and can be treated as a summary of the student's predicted master level of exercise $q_t$. Next, the item embedding $k_t$ is appened to the read content $r_t$ and fed forward through two linear layers. The first uses a $\tanh$ activation function, and the output $p_t$ produced a single node and a sigmoidal activation. In this way, the single value $p_t$ represents the probability that the student will answer item $q_t$ correctly at that timestep.
+
+The second part of DKVMN is to \textit{write} new values into $M^v$ based on the true response of students. Different from the prediction phase, the full tuple $(q_t,c_t)$ is embedded into a vector $v_t$. The manner in which $M^v$ is updated is actually similar to that of an LSTM, allowing for ``remembering'' and ``forgetting''. Two trainable matrices are multiplied by $v_t$ to produce an ``erase`` vector $e_t$ and an ``add`` vector $a_t$. The erase vector has a sigmoidal activation function, so that values near zero do not get erased much at all, and values near 1 get erased quite a bit. The add vector uses a $\tanh$ activation function, so memory slots in $M^v$ can either be increased or decreased. Finally, the columns of the memory matrix are updated via
+\begin{equation}
+  M_{t}^v(i) = (M_{t-1}^v(i) [1 - w_t(i) e_t] ) + w_t(i) a_t
+  \label{eq:update_dkvmn}
+\end{equation}
+Note that the correlation weights $w_t$ computed in the predictive step are again used to determine \textit{how much} of memory slot $i$ should be updated.
+
+\sideremark{should I include image of DKVMN architecture?}
+
+DKVMN's use of a matrix stored in memory allows for longer range dependencies than RNN or LSTM. There is also a bit of interpretability in this method, since a single column of the memory matrix $M_t^v$ gives an $h$-dimensional representation of a single skill for the student at time $t$. However, it cannot be determined \textit{which} skill the column represents. Additionally, if a student answers each available item, then stacking each weights vector $w_t$ into a matrix $W = \{w_t\}_{t=1}^L$ should result in a matrix similar to the item-skill association $Q$-matrix. But again, the columns of this ``learned $Q$-matrix'' $W$ are in no particular order, and can be difficult to interpret.
 
 \subsubsection{Deep-IRT}
 Don't need a lot of details here, but they modify DKVMN to gain connection with IRT
