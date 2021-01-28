@@ -1,4 +1,4 @@
-\chapter{Estimating IRT Parameters via Variational Autoencoders}
+\chapter{Estimating IRT Parameters with Variational Autoencoders}
 The primary contribution of this thesis is the development of a method for IRT parameter estimation which uses a modified VAE. The method, titled ``ML2P-VAE'', is interesting from multiple perspectives. In the application area, it is an unconventional approach can produce estimates as accurate as those of traditional parameter estimation techniques. Further, ML2P-VAE scales much better than traditional methods as the number of latent abilities becomes large. In the field of machine learning, ML2P-VAE is an unsupervised learning technique which yields explainable results. A variational autoencoder is used in an unorthodox way, and the trainable parameters and a hidden neural layer are able to be understood in a real-world context.
 
 \section{ML2P-VAE Method Description}
@@ -58,7 +58,11 @@ This architecture is described as follows. The input and output to the neural ne
 Theorem \ref{thm:cov_vae} shows that in this specific neural network architecture, $\Sigma_0$ can be interpreted as a covariance matrix. Thus, the VAE encoder maps a data point $u_0$ to a multivariate Gaussian distribution $\mathcal{N}(\mu_0, \Sigma_0)$. Additionally, the sampling operation and KL-Divergence calculation can always be carried out without issue. 
 
 
-\subsection{Variants - 1PL and 3PL}
+\subsection{Variants of ML2P-VAE}\label{sec:variants}
+\sideremark{TODO: vae full/ind/est, along with 2pl and 3pl}
+
+We consider three scenarios for ML2P-VAE: (a) the best case scenario where we assume that the covariance matrix between all latent traits is known, (b) we don't know the exact covariance matrix, so it is estimated using other methods, and (c) we simply assume that all traits are independent. Throughout the rest of this section, these three methods are referred to as ML2P-VAE$_{full}$, ML2P-VAE$_{est}$, and ML2P-VAE$_{ind}$, respectively. In scenario (b), we multiply the response matrix ($N$ students by $n$ items) by the $Q$-matrix ($n$ items by $K$ abilities). We then take the Pearson correlation of the columns of this $N\times K$ matrix to obtain an approximate correlation matrix in $\R^{K\times K}$ between abilities.
+
 
 \subsection{On Convergence}
 
