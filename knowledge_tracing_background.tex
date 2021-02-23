@@ -33,7 +33,7 @@ Similar to natural language processing, tokens (student interactions) need to be
 
   The architecture of DKT is as follows: The one-hot encoding input layer, the $d$-dimensional embedding, an LSTM layer of size $d$, and a feedforward output layer with $n$ nodes. The final layer uses a sigmoid activation function, and the output at each node represents the probability of answering that item correctly at the given timestep. To calculate loss, only the item tag for the next interaction and corresponding output node is used in the cross-entropy loss calculation.
 
-\subsection{Dynamic Key-Value Memory Networks}
+  \subsection{Dynamic Key-Value Memory Networks}\label{sec:dkvmn}
 More sophisticated neural network approaches to knowledge tracing were introduced by Zhang et al. with Dynamic Key-Value Memory Networks (DKVMN) \cite{zhang2017}. They modify a memory-augmented neural network (MANN) in order to fit into the knowledge tracing framework. A MANN is a time-series neural network, but it does not rely on residual connections like an RNN or LSTM. Rather, a value matrix $M^v$ is stored in memory for each student, and the entries in $M^v$ are updated in each timestep. The predicted output is a probability dependent on the previous value of $M^v$ in timestep $t-1$, as well as the current neural network input in timestep $t$.
 
 In DKVMN, there is some added interpretability by requiring the number of columns of $M^v$ to be equal to the number of knowledge concepts $K$. In this way, the columns of $M^v$ offer an $h$-dimensional representation of the student's skill. DKVMN splits the computations into two parts: \textit{read} from $M^v$ to make a prediction, and \textit{write} to $M^v$ to update its information. The predictive part inputs only an exercise tag $q_t$ without the true response $c_t$. The question tag is linearly embedded into a vector $k_t$. $k_t$ is a representation of question $q_t$, and is then multiplied by a learned matrix $M^k$ and softmaxed. 
@@ -45,7 +45,7 @@ Next, \textit{read} from the value matrix by computing
   r_t = \sum_{i=1}^K w_t(i) M^v(i).
   \label{eq:dkvmn_read}
 \end{equation}
-Note that $r_t$ is simply a weighted sum of the columns of $M^v$ and can be treated as a summary of the student's predicted master level of exercise $q_t$. Next, the item embedding $k_t$ is appened to the read content $r_t$ and fed forward through two linear layers. The first uses a $\tanh$ activation function, and the output $p_t$ produced a single node and a sigmoidal activation. In this way, the single value $p_t$ represents the probability that the student will answer item $q_t$ correctly at that timestep.
+Note that $r_t$ is simply a weighted sum of the columns of $M^v$ and can be treated as a summary of the student's predicted master level of exercise $q_t$. Next, the item embedding $k_t$ is appended to the read content $r_t$ and fed forward through two linear layers. The first uses a $\tanh$ activation function, and the output $p_t$ produced a single node and a sigmoidal activation. In this way, the single value $p_t$ represents the probability that the student will answer item $q_t$ correctly at that timestep.
 
 The second part of DKVMN is to \textit{write} new values into $M^v$ based on the true response of students. Different from the prediction phase, the full tuple $(q_t,c_t)$ is embedded into a vector $v_t$. The manner in which $M^v$ is updated is actually similar to that of an LSTM, allowing for ``remembering'' and ``forgetting''. Two trainable matrices are multiplied by $v_t$ to produce an ``erase`` vector $e_t$ and an ``add`` vector $a_t$. The erase vector has a sigmoidal activation function, so that values near zero do not get erased much at all, and values near 1 get erased quite a bit. The add vector uses a $\tanh$ activation function, so memory slots in $M^v$ can either be increased or decreased. Finally, the columns of the memory matrix are updated via
 \begin{equation}
@@ -59,13 +59,35 @@ Note that the correlation weights $w_t$ computed in the predictive step are agai
 DKVMN's use of a matrix stored in memory allows for longer range dependencies than RNN or LSTM. There is also a bit of interpretability in this method, since a single column of the memory matrix $M_t^v$ gives an $h$-dimensional representation of a single skill for the student at time $t$. However, it cannot be determined \textit{which} skill the column represents. Additionally, if a student answers each available item, then stacking each weights vector $w_t$ into a matrix $W = \{w_t\}_{t=1}^L$ should result in a matrix similar to the item-skill association $Q$-matrix. But again, the columns of this ``learned $Q$-matrix'' $W$ are in no particular order, and can be difficult to interpret.
 
 \subsubsection{Deep-IRT}
-Don't need a lot of details here, but they modify DKVMN to gain connection with IRT
+Deep-IRT, proposed by Chun-Kit Yeung \cite{yeung_2019} modifies the DKVMN architecture to allow a connection with Item Response Theory. Specifically, two separate feed forward layers are inserted, representing a student's $k$-th ability at time $t$ $\theta_{tk}$ and concept difficulty $\beta_k$. Then the output probability is not another linear layer (as in DVKVMN), but is instead a function of $\theta_{tk}$ and $\beta_k$:
+
+\begin{equation}
+  p_t = \frac{1}{1 + \exp\left( \beta_k - 3\cdot \theta_{tk} \right)}
+  \label{eq:deep_irt_prob}
+\end{equation}
+
+These modifications provide a link to the Rasch model in Equation \ref{eq:rasch}. The multiplication by 3 is for practical reasons to re-scale $\theta_{tk}$. However, note that in Equation \ref{eq:deep_irt_prob}, the difficulty parameter is on the \textit{concept} level, and not the \textit{item} level like the Rasch model (and other IRT models). Though Deep-IRT doesn't seek to directly approximate the Rasch model, the modifications to DKVMN still adds significant interpretability to the deep neural network.
+
 
 \subsection{Self-Attentive Knowledge Tracing}
-Important just because this is used in KT-IRT
+In the field of natural language processing (NLP), the most state-of-the-art methods utilize a mechanism called self-attention \cite{vaswani2017}, which rely on calculating the correlation between pairs of words in a sentence. Popular models such as BERT \cite{bert} and GPT-3 \cite{gpt3} are both transformer-based neural networks for NLP which heavily depend on attention. Self-Attentive Knowledge Tracing (SAKT) adapts this concept for the knowledge tracing task \cite{pandey2019}. 
+
+Similar to other deep learning methods, at timestep $t$, SAKT first embeds each interaction $(q_i, c_i)$, $i<t$ into a learned $d$-dimensional vector $m_i$. Additionally, like DKVMN, the current question $q_t$ without the response is also embedded into a $d$-dimensional vector $e_t$. 
+
+The exercise embedding $e_t$ is multiplied ty a weights matrix to obtain a \textit{query} vector $\vec q_t = W^{Q}e_t$. The interaction embedding $m_i$ is used to create two vectors: a \textit{key} vector $\vec k_i = W^{K}m_i$ and a \textit{value} vector $\vec v_i = W^V m_i$. 
+
+The general idea is that $\vec k_i$ serves as the identifier of a past interaction, and $\vec q_t$ serves as an identifier for the current exercise. If the two exercises are similar in content, then the dot product between these two vectors should be large. The value vector $\vec v_i$ holds more abstract information about the corresponding interaction. The keys and values are organized into matrices $K$ and $V$. We calculate the attention
+\begin{equation}
+  a_{t} = \text{softmax}\left(\frac{K \vec q_t}{\sqrt{d}} \right) V
+  \label{eq:attn}
+\end{equation}
+
+The value $\frac{K \vec q_t}{\sqrt{d}}$ yields a vector where each entry is the dot product between the current exercise query $\vec q_t$ and an interaction key $\vec k_i$. This is scaled by dimension and softmaxed, resulting in a weighted sum of the value vectors $\vec v_i$.
+
+The attention value $a_t$ is sent through a few feed-forward layers, resulting in a vector $f_t = \text{FFN}(a_t)$. The output layer is $p_t = \sigma(f_t W + b)$, the probability that the student will answer the current exercise $q_t$ correctly.
+
 
 \subsection{Performance Factors Analysis}
-*should explain more, because of deep-pfa (if that is included)
-
+*** Not sure if I will include Deep-PFA. If not, then don't need to talk much about PFA.
 
 
