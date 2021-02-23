@@ -59,10 +59,22 @@ Theorem \ref{thm:cov_vae} shows that in this specific neural network architectur
 
 
 \subsection{Variants of ML2P-VAE}\label{sec:variants}
-\sideremark{TODO: vae full/ind/est, along with 2pl and 3pl}
 
-We consider three scenarios for ML2P-VAE: (a) the best case scenario where we assume that the covariance matrix between all latent traits is known, (b) we don't know the exact covariance matrix, so it is estimated using other methods, and (c) we simply assume that all traits are independent. Throughout the rest of this section, these three methods are referred to as ML2P-VAE$_{full}$, ML2P-VAE$_{est}$, and ML2P-VAE$_{ind}$, respectively. In scenario (b), we multiply the response matrix ($N$ students by $n$ items) by the $Q$-matrix ($n$ items by $K$ abilities). We then take the Pearson correlation of the columns of this $N\times K$ matrix to obtain an approximate correlation matrix in $\R^{K\times K}$ between abilities.
+We consider three scenarios for using ML2P-VAE in practice: (a) the best case scenario where we assume that the covariance matrix between all latent traits is known, (b) we don't know the exact covariance matrix, so it is estimated using other methods, and (c) we simply assume that all traits are independent. These three situations result in three variations of the ML2P-VAE method: ML2P-VAE$_{full}$, ML2P-VAE$_{est}$, and ML2P-VAE$_{ind}$, respectively. 
 
+In scenario (b), we multiply the response matrix ($N$ students by $n$ items) by the $Q$-matrix ($n$ items by $K$ abilities). We then take the Pearson correlation of the columns of this $N\times K$ matrix to obtain an approximate correlation matrix in $\R^{K\times K}$ between abilities.
+
+In order to estimate the correlations between latent traits for use of ML2P-VAE$_{est}$, the student response matrix $U \in \R^{N\times n}$ is multiplied by the $Q$-matrix $Q \in \R^{n \times K}$. Then the Pearson correlation of the columns of the resulting matrix produce an approximate correlation matrix $\hat \Sigma \in \R^{K \times K}$: 
+\[M = U \cdot Q , \quad M \in \R^{N\times K}\]
+\begin{equation}
+  \hat \Sigma_{kl} = \frac{\sum_{i=1}^N (k_i - \bar k)(l_i - \bar l)}{\sqrt{\sum_{i=1}^N(k_i - \bar k)^2} \sqrt{\sum_{i=1}^N (l_i - \bar l)^2}}
+  \label{eq:approx_cor_mat}
+\end{equation}
+where $\bar k$ and $\bar l$ are the mean values of the $k$-th and $l$-th columns of $M$, respectively.
+
+A final variation of ML2P-VAE comes when the IRT model to be estimated is changed. If assuming that student responses are generated according to the Rasch model as in Equation \ref{eq:rasch}, rather than the ML2P model as in Equation \ref{eq:ml2p}, then another variation of VAE parameter estimation methods can be considered. A more appropriate name for this alternative estimation method is Rasch-VAE.
+
+Since there are no discrimination parameters in the Rasch model, only item difficulties and student abilities need to be estimated. To account for this, the weights in the VAE decoder are restricted to be \textit{equal} to the $Q$-matrix. This still allows for interpretation of the learned distribution of the VAE as estimates to student abilities $\Theta$, while requiring ``discrimination parameters'' to be equal to either one or zero, fitting more closely to Equation \ref{eq:rasch}.
 
 \subsection{On Convergence}
 
@@ -71,11 +83,12 @@ We consider three scenarios for ML2P-VAE: (a) the best case scenario where we as
 
 We define the true and predicted probability of student $j$ answering item $i$ correctly with $P_{ij}$ and $\hat P_{ij}$, respectively. The former comes from the ML2P model, and the latter is the output of a neural network. We assume the more simple case, where $\Theta \sim \mathcal{N}(0,I)$, rather than $\mathcal{N}(\mu, \Sigma)$.
 \begin{equation}
-  \begin{split}
-  P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K a_{ik}\theta_{jk} + b_i\right)}\\
+  P_{ij} = \frac{1}{1 + \exp\left(-\sum_{k=1}^K a_{ik}\theta_{jk} + b_i\right)}
   \label{eq:ml2p_est}
-  \hat P_{ij} &= \frac{1}{1 + \exp\left(-\sum_{k=1}^K \hat a_{ik} (\hat \theta_{jk} + \e_k \hat \sigma_k) + \hat b_i\right)} 
-\end{split}
+\end{equation}
+
+\begin{equation}
+  \hat P_{ij} = \frac{1}{1 + \exp\left(-\sum_{k=1}^K \hat a_{ik} (\hat \theta_{jk} + \e_k \hat \sigma_k) + \hat b_i\right)} 
     \label{eq:vae_out}
 \end{equation}
 

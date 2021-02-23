@@ -16,6 +16,31 @@ D.M. Blei, A.~Kucukelbir, and J.D. McAuliffe.
 \newblock {\em Journal of the American Statistical Association},
   112(518):859--877, 2017.
 
+\bibitem{bock1981}
+R.~D. Bock and M.~Aitkin.
+\newblock Marginal maximum likelihood estimation of item parameters:
+  Application of an {EM} algorithm.
+\newblock {\em Psychometrika}, 46(4):443--459, 1981.
+
+\bibitem{gpt3}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
+  Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
+  Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon
+  Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris
+  Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess,
+  Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever,
+  and Dario Amodei.
+\newblock Language models are few-shot learners.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
+  editors, {\em Advances in Neural Information Processing Systems}, volume~33,
+  pages 1877--1901. Curran Associates, Inc., 2020.
+
+\bibitem{cai2009}
+Li~Cai.
+\newblock High-dimensional exploratory item factor analysis by a
+  {Metropolis–Hastings} {Robbins–Monro} algorithm.
+\newblock {\em Psychometrika}, 75(1):33–57, 2009.
+
 \bibitem{mirt}
 R.~Philip Chalmers.
 \newblock {mirt}: A multidimensional item response theory package for the {R}
@@ -64,6 +89,12 @@ M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
   models.
 \newblock {\em Educational and Psychological Measurement}, 2018.
 
+\bibitem{bert}
+J.~Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In {\em NAACL-HLT}, 2019.
+
 \bibitem{doersch2016}
 Carl Doersch.
 \newblock Tutorial on variational autoencoders, 2016.
@@ -97,6 +128,11 @@ D.~Kingma and M.~Welling.
 F.~Lord and M.~R Novick.
 \newblock {\em Statistical theories of mental test scores}.
 \newblock IAP, 1968.
+
+\bibitem{pandey2019}
+Shalini Pandey and George Karypis.
+\newblock A self-attentive model for knowledge tracing.
+\newblock {\em International Conference on Educational Data Mining}, 2019.
 
 \bibitem{piech2015}
 Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami,
@@ -158,6 +194,12 @@ Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, Matt Haberland, Tyler Reddy,
   Mulbregt}, and SciPy 1.~0 {Contributors}.
 \newblock Scipy 1.0: Fundamental algorithms for scientific computing in python.
 \newblock {\em Nature Methods}, 2020.
+
+\bibitem{yeung_2019}
+Chun{-}Kit Yeung.
+\newblock Deep-irt: Make deep learning based knowledge tracing explainable
+  using item response theory.
+\newblock {\em CoRR}, abs/1904.11738, 2019.
 
 \bibitem{zhang2017}
 Jiani Zhang, Xingjian Shi, Irwin King, and Dit~Yan Yeung.

@@ -35,10 +35,10 @@ In the following sections, we describe various candidates for the function $f$. 
 One of the first models was proposed by Georg Rasch in 1960. Rasch asserted that the probability of a student answering an item correctly is a function of the ratio $\xi / \d$, where $\xi > 0$ represents the student's knowledge, and $\d > 0$ quantifies the difficulty of an item. Consider the $\frac{\xi}{\xi + \d} = \frac{1}{1 + \d / \xi}$ and note that $\frac{\xi}{\xi + \d} \to 1$ as $\xi \to \infty$. After the reparametarization $\xi = e^{\theta}$ and $\d = e^{b}$, we arrive at the 1-Parameter Logistic Model, often referred to as the Rasch Model.
 \begin{equation}
   P(u_{ij} = 1 | \theta_j; b_i) = \frac{1}{1 + e^{b_i - \theta_j}}
-  \label{eq:1pl}
+  \label{eq:rasch}
 \end{equation}
 
-Note that $\theta \in \R$ and $b \in \R$ still represent student ability and item difficulty, respectively. We can interpret the difficulty parameter $b$ as a threshold: when $\theta = b$, then the student has a $50\%$ chance of answering the question correctly. A plot of Equation \ref{eq:1pl} for a fixed item (fixed $b_i$) is shown in Figure \ref{fig:icc}. The horizontal axis represents $\log \theta$, and the vertical axis represents $P(u_{ij} = 1 | \theta, b_i)$. This type of graph is often referred to as an item characteristic curve (ICC).
+Note that $\theta \in \R$ and $b \in \R$ still represent student ability and item difficulty, respectively. We can interpret the difficulty parameter $b$ as a threshold: when $\theta = b$, then the student has a $50\%$ chance of answering the question correctly. A plot of Equation \ref{eq:rasch} for a fixed item (fixed $b_i$) is shown in Figure \ref{fig:icc}. The horizontal axis represents $\log \theta$, and the vertical axis represents $P(u_{ij} = 1 | \theta, b_i)$. This type of graph is often referred to as an item characteristic curve (ICC).
 
 \subsection{Normal Ogive Model}
 \sideremark{*This section isn't very important to rest of work}
@@ -57,7 +57,7 @@ The model which this work focuses on most is the 2-parameter logistic (2PL) mode
   P(u_{ij} = 1 | \theta_j; a_i, b_i) = \frac{1}{1 + e^{-a_i \theta_j + b_i}}
   \label{eq:2PL}
 \end{equation}
-Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \ref{eq:1pl}, but adds in the discrimination parameter $a_i$. If this parameter is scaled by 1.7, then the ICC from the normal ogive model differs from that of the 2PL model by $0.01$ \cite{baker_kim2004}. In a sense, we can consider the 2PL model to be a very good approximation of the normal ogive model. Due to the simple form of Equation \ref{eq:2PL}, using this model makes parameter estimation much easier.
+Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \ref{eq:rasch}, but adds in the discrimination parameter $a_i$. If this parameter is scaled by 1.7, then the ICC from the normal ogive model differs from that of the 2PL model by $0.01$ \cite{baker_kim2004}. In a sense, we can consider the 2PL model to be a very good approximation of the normal ogive model. Due to the simple form of Equation \ref{eq:2PL}, using this model makes parameter estimation much easier.
 
 \subsection{Multidimensional Item Response Theory}
 The previously described statistical models can all be extended so that each student possesses $K$ latent traits. In multidimensional item response theory (MIRT), models give the probability of a correct answer as a function of the student ability vector $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
@@ -121,7 +121,9 @@ or cross-entropy loss for binary data
 Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. Denoising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, they corrupt input data by deleting pixels at random and reconstructing the original image. Autoencoders can also be modified for data generation applications using a variational autoencoder.
 
 \subsection{Variational Autoencoders}
-*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Blei2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''
+\sideremark{*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Blei2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''}
 
 TODO: describe probabilistic derivation of VAE (ie Kingma and Welling). Also talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - but I've shown this isn't the case in our model, where the decoder is Bernoulli.
+
+
 
