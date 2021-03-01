@@ -10,6 +10,12 @@ F.~Baker and S.~Kim.
 \newblock {\em Item Response Theory Parameter Estimation Techniques}.
 \newblock Taylor \& Francis Group, 2nd edition, 2004.
 
+\bibitem{pattern_rec_book}
+Christopher~M. Bishop.
+\newblock {\em Pattern Recognition and Machine Learning (Information Science
+  and Statistics)}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 2006.
+
 \bibitem{Blei2017}
 D.M. Blei, A.~Kucukelbir, and J.D. McAuliffe.
 \newblock Variational inference: A review for statisticians.
@@ -123,6 +129,11 @@ R.~Henson and J.~Templin.
 D.~Kingma and M.~Welling.
 \newblock Auto-encoding variational {Bayes}.
 \newblock In {\em International Conference on Learning Representations}, 2014.
+
+\bibitem{kullback1951}
+S.~Kullback and R.~A. Leibler.
+\newblock On information and sufficiency.
+\newblock {\em Annals of Mathematical Statistics}, page 79–86, 1951.
 
 \bibitem{lord1968}
 F.~Lord and M.~R Novick.
