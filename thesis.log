@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  27 FEB 2021 16:03
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  1 MAR 2021 10:51
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -980,14 +980,10 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[11] [12] [13] [14] [15] [16]
+[11] [12] [13] [14] [15] [16] [17]
 File: img/vae_visual.png Graphic file (type bmp)
 <img/vae_visual.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [17] [18]
+) [18]
 \openout2 = `irt_param_est_methods.aux'.
 
  (irt_param_est_methods.tex
@@ -1012,35 +1008,28 @@ CHAPTER 3.
 
 
 ] [32] [33]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[34]
 File: img/aied_results/ae_a_corr.png Graphic file (type bmp)
 <img/aied_results/ae_a_corr.png>
 File: img/aied_results/vae_a_corr.png Graphic file (type bmp)
 <img/aied_results/vae_a_corr.png>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 File: img/aied_results/ae_b_corr.png Graphic file (type bmp)
 <img/aied_results/ae_b_corr.png>
 File: img/aied_results/vae_b_corr.png Graphic file (type bmp)
 <img/aied_results/vae_b_corr.png>
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34] [35]
+[35] [36]
 File: img/aied_results/ae_theta1_corr.png Graphic file (type bmp)
 <img/aied_results/ae_theta1_corr.png>
 File: img/aied_results/vae_theta1_corr.png Graphic file (type bmp)
 <img/aied_results/vae_theta1_corr.png>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[36]
-
-LaTeX Warning: Reference `vae_loss' on page 37 undefined on input line 116.
-
-[37] [38] [39]
+ [37] [38] [39]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1048,7 +1037,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.157 ...tle{Discrimination Parameter Estimates}\\
+l.158 ...tle{Discrimination Parameter Estimates}\\
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1072,6 +1061,9 @@ bmp)
 File: img/ml_journal_results/6skills/mcem_disc_6skills.png Graphic file (type b
 mp)
 <img/ml_journal_results/6skills/mcem_disc_6skills.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [40]
 File: img/ml_journal_results/ecpe/vae_est_disc_ecpe.png Graphic file (type bmp)
 
@@ -1091,7 +1083,11 @@ File: img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png Graphic file (type bmp)
 File: img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png Graphic file (type bmp
 )
 <img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png>
- [41]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[41]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1099,7 +1095,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.226 ...nation and Ability Parameter Estimates}\\
+l.227 ...nation and Ability Parameter Estimates}\\
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1123,28 +1119,144 @@ type bmp)
 File: img/ml_journal_results/20skills/vae_ind_theta_20skills.png Graphic file (
 type bmp)
 <img/ml_journal_results/20skills/vae_ind_theta_20skills.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [42] [43]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.266 ...tle{Discrimination Parameter Estimates}\\
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png Graphic 
+file (type bmp)
+<img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png>
+File: img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png Graphic f
+ile (type bmp)
+<img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png>
+File: img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png Graphic f
+ile (type bmp)
+<img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png>
+
+LaTeX Warning: File `img/ml_journal_results/4skills/vae_full_theta_4skills_crop
+ped.png' not found on input line 281.
+
+! Unable to load picture or PDF file 'img/ml_journal_results/4skills/vae_full_t
+heta_4skills_cropped.png'.
+<to be read again> 
+                   }
+l.281 ...kills/vae_full_theta_4skills_cropped.png}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+! Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281 ...kills/vae_full_theta_4skills_cropped.png}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: img/ml_journal_results/4skills/vae_full_theta_4skills_cropped.png Graphic
+ file (type bmp)
+<img/ml_journal_results/4skills/vae_full_theta_4skills_cropped.png>
+
+LaTeX Warning: File `img/ml_journal_results/4skills/vae_est_theta_4skills_cropp
+ed.png' not found on input line 285.
+
+! Unable to load picture or PDF file 'img/ml_journal_results/4skills/vae_est_th
+eta_4skills_cropped.png'.
+<to be read again> 
+                   }
+l.285 ...skills/vae_est_theta_4skills_cropped.png}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+! Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.285 ...skills/vae_est_theta_4skills_cropped.png}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: img/ml_journal_results/4skills/vae_est_theta_4skills_cropped.png Graphic 
+file (type bmp)
+<img/ml_journal_results/4skills/vae_est_theta_4skills_cropped.png>
+
+LaTeX Warning: File `img/ml_journal_results/4skills/vae_ind_theta_4skills_cropp
+ed.png' not found on input line 289.
+
+! Unable to load picture or PDF file 'img/ml_journal_results/4skills/vae_ind_th
+eta_4skills_cropped.png'.
+<to be read again> 
+                   }
+l.289 ...skills/vae_ind_theta_4skills_cropped.png}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+! Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.289 ...skills/vae_ind_theta_4skills_cropped.png}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: img/ml_journal_results/4skills/vae_ind_theta_4skills_cropped.png Graphic 
+file (type bmp)
+<img/ml_journal_results/4skills/vae_ind_theta_4skills_cropped.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[44]
 File: img/ml_journal_results/vae_full_train_size_error.png Graphic file (type b
 mp)
 <img/ml_journal_results/vae_full_train_size_error.png>
 File: img/ml_journal_results/vae_full_train_size_time.png Graphic file (type bm
 p)
 <img/ml_journal_results/vae_full_train_size_time.png>
- [44]) [45]
+ [45] [46]) [47]
 \openout2 = `knowledge_tracing_background.aux'.
 
  (knowledge_tracing_background.tex
 CHAPTER 4.
-[46
+[48
 
 
 
-] [47] [48] [49] [50] [51] [52]) [53]
+] [49] [50] [51] [52] [53] [54]) [55]
 \openout2 = `knowledge_tracing_methods.aux'.
 
  (knowledge_tracing_methods.tex
 CHAPTER 5.
-) [54
+) [56
 
 
 
@@ -1153,7 +1265,7 @@ CHAPTER 5.
 
  (knowledge_tracing_results.tex
 CHAPTER 6.
-) [55
+) [57
 
 
 
@@ -1162,11 +1274,11 @@ CHAPTER 6.
 
  (related_work.tex
 CHAPTER 7.
-[56
+[58
 
 
 
-] [57] [58]
+] [59] [60]
 File: img/fsdm_results/contact_corr.eps Graphic file (type eps)
 <img/fsdm_results/contact_corr.eps>
 File: img/fsdm_results/baserun_corr.eps Graphic file (type eps)
@@ -1179,14 +1291,14 @@ File: img/fsdm_results/pitch_intuit_corr.eps Graphic file (type eps)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [59] [60]
+) [61] [62]
 
 Package hyperref Warning: bookmark level for unknown head defaults to 0.
 
-(thesis.bbl [61
+(thesis.bbl [63
 
 
-] [62] [63]) [64]
+] [64] [65]) [66]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 123.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 123.
  (thesis.aux (introduction.aux)
@@ -1198,20 +1310,17 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 123.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 123.
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 123.
  ) 
 Here is how much of TeX's memory you used:
- 26390 strings out of 427839
- 480471 string characters out of 3155939
- 551373 words of memory out of 3000000
- 29866 multiletter control sequences out of 15000+200000
+ 26416 strings out of 427839
+ 481957 string characters out of 3155939
+ 551661 words of memory out of 3000000
+ 29885 multiletter control sequences out of 15000+200000
  13777 words of font info for 60 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 56i,21n,82p,1010b,455s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,21n,82p,1024b,455s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.pdf (73 pages).
+Output written on thesis.pdf (75 pages).

@@ -6,28 +6,28 @@ Assume we are given an assessment with $n$ items which tests $K$ latent skills, 
 
 A number of specifications are required in order to use a VAE as an IRT parameter estimation method. First, set up the neural network so that the input and output layers each have $n$ nodes, each representing one item. The inputs are be the binary response vectors $\vec u_j$ and the outputs are approximations of the probability of student $j$ answering each item correctly. Next, the dimension of the hidden distribution (the output of the encoder) must be equal to $K$, the number of latent skills.
 
-The modifications to a typical VAE architecture are focused on the decoder. No hidden layers are used in the decoder. Instead, a non-dense set of weights connects the decoder input to the decoder output. The non-zero weights here are determined by the $Q$-matrix; recall that the input to the decoder has $K$ nodes, the decoder output hase $n$ nodes, and $Q \in \{0,1\}^{n \times K}$. Further, require the use of the sigmoidal activation function
+The modifications to a typical VAE architecture are focused on the decoder. No hidden layers are used in the decoder. Instead, a non-dense set of weights connects the decoder input to the decoder output. The non-zero weights here are determined by the $Q$-matrix; recall that the input to the decoder has $K$ nodes, the decoder output has $n$ nodes, and $Q \in \{0,1\}^{n \times K}$. Further, require the use of the sigmoid activation function
 \begin{equation}
   \sigma(z_i) = \frac{1}{1 + e^{z_i}}
   \label{eq:sigmoid}
 \end{equation}
-in the output layer. Here, $z_i = \sum_{k=1^K} w_{ik}\alpha_{k} + \beta_i$, where $w_{ik}$ is the weight between the $k$-th and $i$-th nodes in the decoder input and decoder output layer, $\alpha_k$ is the activation of the $k$-th node in the decoder input layer, and $\beta_i$ is the additive bias in the output layer. Note the similarity between Equation \ref{eq:sigmoid} and Equation \ref{eq:ml2p}. The constraint on the weights along with the sigmoidal activation function allows for interpretation of the decoder as an ML2P model.
+in the output layer. Here, $z_i = \sum_{k=1^K} w_{ik}\alpha_{k} + \beta_i$, where $w_{ik}$ is the weight between the $k$-th and $i$-th nodes in the decoder input and decoder output layer, $\alpha_k$ is the activation of the $k$-th node in the decoder input layer, and $\beta_i$ is the additive bias in the output layer. Note the similarity between Equation \ref{eq:sigmoid} and Equation \ref{eq:ml2p}. The constraint on the weights along with the sigmoid activation function allows for interpretation of the decoder as an ML2P model.
 
-Specifically, the decoder weights $w_{ik}$ can be interpreted as estimates to the discrimination parameters $a_{ik}$, the output bias $\beta_i$ can be interpreted as estimates to the difficulty parameters $b_i$, and the activations $\alpha_k$ produced by the encoder (given response input $\vec u_j$) can be interpreted as estimates to the student ability parameter $\theta_{kj}$. \sideremark{may want to mention that the value outputed by encoder is then sampled from for dceoder input}
+Specifically, the decoder weights $w_{ik}$ can be interpreted as estimates to the discrimination parameters $a_{ik}$, the output bias $\beta_i$ can be interpreted as estimates to the difficulty parameters $b_i$, and the activations $\alpha_k$ produced by the encoder (given response input $\vec u_j$) can be interpreted as estimates to the student ability parameter $\theta_{kj}$. \sideremark{may want to mention that the value outputted by encoder is then sampled from for decoder input}
 
 Further modifications can improve the performance of ML2P-VAE. In IRT, discrimination parameters are assumed to be non-negative, because an increase in a skill should never decrease the probability of answering an item correctly. With this assumption in mind, requiring all decoder weights $w_{ik} \geq 0$ avoids a potential identification problem. \sideremark{explain what this means $-\theta a_{ik} = \theta (-a_{ik})$}
 
 \subsection{Full Covariance Matrix Implementation}\label{sec:cov}
-There are many publicly available code exmples of VAE implementations which assume the latent space follows a standard normal distribution $\mathcal{N}(0,I)$. But it is not so common to train a VAE which assumes the latent prior $p(\Theta)$ has correlated dimensions. Since most applications do not attempt to interpret hidden layers of a VAE, there is no available information on the correlations of abstract, unobservable features. Additionally, it is often beneficial to force the latent dimensions to be independent of one another.
+There are many publicly available code examples of VAE implementations which assume the latent space follows a standard normal distribution $\mathcal{N}(0,I)$. But it is not so common to train a VAE which assumes the latent prior $p(\Theta)$ has correlated dimensions. Since most applications do not attempt to interpret hidden layers of a VAE, there is no available information on the correlations of abstract, unobservable features. Additionally, it is often beneficial to force the latent dimensions to be independent of one another.
 
 In IRT, we may be able to quantify the correlation between latent abilities, presenting need for the ML2P-VAE model to take advantage of this information. This task is nontrivial due to two mechanisms of the VAE:
 \begin{itemize}
   \item[(1)] sampling from the learned distribution, and
-  \item[(2)] calculating Kullback-Liebler Divergence
+  \item[(2)] calculating Kullback-Leibler Divergence
 \end{itemize}
 These two characteristics must be addressed when constructing the neural architecture.
 
-After training a VAE, sending a data point $u_0$ through the encoder needs to give a set of values that correpond to a probability distribution. For a $K$-dimensional multivariate Gaussian distribution, these values are a vectore $\mu_0 \in \R^K$ and a symmetric, positive-definite matrix $\Sigma_0 \in \R^{K\times K}$. Sampling from $\mathcal{N}(\mu_0, \Sigma_0)$ requires a matrix $G_0$ such that $G_0 G_0^\top = \Sigma_0$. This matrix factorization $G_0$ is not unique, but it can be convenient to use the Cholesky decomposition of $\Sigma_0$ \cite{atkinson}. The sample of the multivariate Gaussian is calculated as $z_0 = \mu_0 + G_0 \vec{\e_0}$, where $\vec{\e_0} = (\e_1, \ldots, \e_K)^\top$ and $\e_i \sim \mathcal{N}(0,1)$. 
+After training a VAE, sending a data point $u_0$ through the encoder needs to give a set of values that correspond to a probability distribution. For a $K$-dimensional multivariate Gaussian distribution, these values are a vector $\mu_0 \in \R^K$ and a symmetric, positive-definite matrix $\Sigma_0 \in \R^{K\times K}$. Sampling from $\mathcal{N}(\mu_0, \Sigma_0)$ requires a matrix $G_0$ such that $G_0 G_0^\top = \Sigma_0$. This matrix factorization $G_0$ is not unique, but it can be convenient to use the Cholesky decomposition of $\Sigma_0$ \cite{atkinson}. The sample of the multivariate Gaussian is calculated as $z_0 = \mu_0 + G_0 \vec{\e_0}$, where $\vec{\e_0} = (\e_1, \ldots, \e_K)^\top$ and $\e_i \sim \mathcal{N}(0,1)$. 
 
 The KL-Divergence between two $K$-variate Gaussian distributions is given as
 \begin{equation}
@@ -37,7 +37,7 @@ The KL-Divergence between two $K$-variate Gaussian distributions is given as
   \label{eq:kl_multivariate}
 \end{split}
 \end{equation}
-When using this in a VAE, $\mathcal{N}(\mu_1, \Sigma_1)$ corresponds to the prior $p(\Theta)$, and so $\mu_1$ and $\Sigma_1$ are constant. Then $\Sigma_1^{-1}$ only needs to be computed once, and this matrix inversion won't cause computation time problems at any point. Note that Equation \ref{eq:kl_multivariate} computes $\ln \det \Sigma_0$, so we must ahve $\det \Sigma_0 > 0$ at any point during training. Recall that $\mu_0$ and $\Sigma_0$ correspond to the input $u_0$, and also depend on all the trainable weights and biases in the VAE encoder. These parameters are usually initialized randomly, and the user has little control over their values during training. If $\det \Sigma_0 \leq 0$ for any input $u_0$ at any point during training, then it is not possible to compute the loss and gradient. Thus, a specific architecture which guarantees that $\det \Sigma_0 > 0$, regardless of the input $u_0$ or encoder parameters, is required.
+When using this in a VAE, $\mathcal{N}(\mu_1, \Sigma_1)$ corresponds to the prior $p(\Theta)$, and so $\mu_1$ and $\Sigma_1$ are constant. Then $\Sigma_1^{-1}$ only needs to be computed once, and this matrix inversion won't cause computation time problems at any point. Note that Equation \ref{eq:kl_multivariate} computes $\ln \det \Sigma_0$, so we must have $\det \Sigma_0 > 0$ at any point during training. Recall that $\mu_0$ and $\Sigma_0$ correspond to the input $u_0$, and also depend on all the trainable weights and biases in the VAE encoder. These parameters are usually initialized randomly, and the user has little control over their values during training. If $\det \Sigma_0 \leq 0$ for any input $u_0$ at any point during training, then it is not possible to compute the loss and gradient. Thus, a specific architecture which guarantees that $\det \Sigma_0 > 0$, regardless of the input $u_0$ or encoder parameters, is required.
 
 This architecture is described as follows. The input and output to the neural network consists of $n$ nodes, each representing an item on an assessment. After a sufficient number of hidden layers of sufficient size, the encoder outputs $K + \frac{K(K+1)}{2}$ nodes. The first $K$ nodes represent the mean vector $\mu_0$, and the remaining $\frac{K(K+1)}{2}$ nodes are arranged into a lower triangular matrix $L_0 \in \R^{K\times K}$. The covariance matrix is obtained by using the matrix exponential $\Sigma_0 = e^{L_0} \cdot \left( e^{L_0} \right)^\top$.
 
@@ -48,9 +48,9 @@ This architecture is described as follows. The input and output to the neural ne
 \begin{proof}
   Consider any lower triangular $L_0 \in \R^{K\times K}$. Define 
   \[G_0 = e^{L_0} = \sum_{n=1}^\infty \frac{L_0^n}{n!} = I + L_0 + \frac{1}{2} L_0 \cdot L_0 + \cdots\]
-  $G_0$ is lower triangular, since addition and multiplication of matrices preserve this property. Further, $G_0$ is nonsinguar, because $\det G_0 = \det(e^{L_0}) = e^{\tr L_0} > 0$.
+  $G_0$ is lower triangular, since addition and multiplication of matrices preserve this property. Further, $G_0$ is nonsingular, because $\det G_0 = \det(e^{L_0}) = e^{\tr L_0} > 0$.
 
-  Set $\Sigma_0 = G_0 G_0^\top$. Clearly, $\Sigma_0$ is symmteric as $\Sigma_0^\top = (G_0 G_0^\top)^\top = G_0 G_0^\top = \Sigma_0$. Further, $\det \Sigma_0 = \det G_0 \cdot \det G_0^\top > 0$. So now for any nonzero $x \in \R^K$,
+  Set $\Sigma_0 = G_0 G_0^\top$. Clearly, $\Sigma_0$ is symmetric as $\Sigma_0^\top = (G_0 G_0^\top)^\top = G_0 G_0^\top = \Sigma_0$. Further, $\det \Sigma_0 = \det G_0 \cdot \det G_0^\top > 0$. So now for any nonzero $x \in \R^K$,
   \[\langle \Sigma_0 x, x \rangle = x^\top \Sigma_0 x = x^\top G_0 G_0^\top x = \langle G_0^\top x, G_0^\top x \rangle = ||G_0 x||_2^2 > 0\]
   Therefore, $\Sigma_0$ is positive-definite.
 \end{proof}
@@ -117,7 +117,7 @@ We write $P_{ij} = \mathbb{E}(u_{ij})$, and similarly define a new ``expected'' 
 \end{equation}
 Notice that calculation of this ``expected loss'' requires the unknown $P_{:j}$. But when we have large amounts of data, we can think of $P_{ij}$ as the average value of the response $u_{ij}$, so using this unknown value here is justified.
 
-Define $z_i = a_{i:} \cdot \theta_{j:} - b_i$ and $\hat z_i = \hat a_{i:} \cdot (\hat \theta_{j:} + \e \cdot \hat \sigma) - \hat b_i$. Note that $z_i$ is fixed, dependent on the data, and does not depend on any parameters of the neural network. $\hat z_:$ is the input to the final layer of the decoder, and the VAE output is $\hat P_{ij} = \sigma(\hat z_i)$, where $\sigma(\cdot)$ is the sigmoidal activation function. We compute derivatives of the expected loss function, looking individually at the reconstruction and KL terms. 
+Define $z_i = a_{i:} \cdot \theta_{j:} - b_i$ and $\hat z_i = \hat a_{i:} \cdot (\hat \theta_{j:} + \e \cdot \hat \sigma) - \hat b_i$. Note that $z_i$ is fixed, dependent on the data, and does not depend on any parameters of the neural network. $\hat z_:$ is the input to the final layer of the decoder, and the VAE output is $\hat P_{ij} = \sigma(\hat z_i)$, where $\sigma(\cdot)$ is the sigmoid activation function. We compute derivatives of the expected loss function, looking individually at the reconstruction and KL terms. 
 
 \begin{equation}
   \begin{split}
@@ -193,6 +193,6 @@ The ML2P-VAE method for parameter estimation has been compiled in an easy-to-use
 
 The optional inputs in the model construction include a covariance matrix for latent traits, allowing for correlated skills and the implementation described in Section \ref{sec:cov}. An important feature for model selection gives the choice of the number of item parameters to use in the logistic IRT model. Though the package is called \textbf{ML2Pvae} for the Multidimensional Logistic 2-Parameter model, the package allows for estimating parameters with the 1-Parameter Logistic model, also called the Rasch model. In this case, there is only a difficulty parameter for each item; each  discrimination parameter is fixed to be equal to 1. Other options when building ML2P-VAE models specify the number, size and activation functions of the hidden layers in the encoder.
 
-Using the Keras models returned by the construction functions, \textbf{ML2Pvae} provides a function that can be used to train the VAE on data. This function acts as a wrapper for the \verb!fit()! method in the Keras package. The final two methods obtain item paremeter estimates and student ability parameter estimates. This is done by grabbing the correct weights/biases from the decoder and feeding student responses through the encoder, respectively. 
+Using the Keras models returned by the construction functions, \textbf{ML2Pvae} provides a function that can be used to train the VAE on data. This function acts as a wrapper for the \verb!fit()! method in the Keras package. The final two methods obtain item parameter estimates and student ability parameter estimates. This is done by grabbing the correct weights/biases from the decoder and feeding student responses through the encoder, respectively. 
 
 \sideremark{Should i include a short code demo?}

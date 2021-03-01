@@ -1,6 +1,6 @@
 \chapter{ML2P-VAE Results and Discussion}
 
-The ML2P-VAE method has been used in a various settings in multiple publications \cite{ijcnn_paper, aied_paper, ml_paper}. The first paper introduced the method and gives some preliminary results on a small simulated data set. The second, a follow-up presented at the Conference for Aritificial Intelligence in Education, displays the advantages that a VAE holds over a regular autoencoder in the task of parameter estimation. The final publication, which has been submitted to Machine Learning, compares different variations of ML2P-VAE with traditional parameter estimation methods on both real and simulated data sets of various sizes.
+The ML2P-VAE method has been used in a various settings in multiple publications \cite{ijcnn_paper, aied_paper, ml_paper}. The first paper introduced the method and gives some preliminary results on a small simulated data set. The second, a follow-up presented at the Conference for Artificial Intelligence in Education, displays the advantages that a VAE holds over a regular autoencoder in the task of parameter estimation. The final publication, which has been submitted to Machine Learning, compares different variations of ML2P-VAE with traditional parameter estimation methods on both real and simulated data sets of various sizes.
 
 \section{Description of Data Sets}
 \subsubsection*{Sim-ECPE} This simulated data set is designed to mirror the real-life Examination for the Certificate of Proficiency in English, detailed further in the next description. Sim-ECPE has 28 items assessing 3 latent traits. Values for the item parameters in the ML2P model were generated from a uniform distribution so that $a_{ik} \in [0.25, 1.75]$ and $b_i \in [-3,3]$. The range for the discrimination parameters was chosen such that $0.25 \leq MDISC_i \leq 1.75$ \sideremark{Define MDISC} for all $i$. Up to 10,000 student abilities $\Theta \in \R^3$ were sampled from $\mathcal{N}(0,I)$. Note that in Sim-ECPE, it is assumed that the latent traits are independent. We use a $Q$-matrix consistent with previous literature \cite{daSilva2018, Templin2013, henson2007}.
@@ -10,6 +10,7 @@ The ML2P-VAE method has been used in a various settings in multiple publications
 \subsubsection*{Sim-6} A moderately-sized simulated data set, Sim-6 has 50 items evaluating 6 latent traits. The $Q$-matrix is also generated randomly, where each entry $q_{ki}$ is sampled from $\text{Bern}(0.2)$. To ensure each item requires at least one latent ability, if a column $q_{:i} = 0$ after sampling, then one random element in the column is changed to a 1. The discrimination parameters are chosen so that $a_{ik} \in [0.1, 1.3]$ and $b_i \in[-3,3]$. Abilities $\Theta \in \R^6$ of 20,000 students were sampled from $\mathcal{N}(0, \Sigma)$, where $\Sigma$ is a correlation matrix with all positive values generated using the SciPy package \cite{SciPy}.
 
 \subsubsection*{Sim-20} This large data set is generated in a similar manner to Sim-6, but includes 50,000 students, 200 items, and 20 latent traits. The $Q$-matrix was generated in the exact same was as that of Sim-6, where $q_{ki} \sim \text{Bern}(0.2)$. The difficulty parameters were sampled uniformly so that $b_i \in [-3,3]$, and the discrimination parameters were sampled uniformly so that $a_{ik} \in [0.1, 0.9]$. As in Sim-6, the 20 latent abilities are correlated with one another, and the correlation matrix is generated in the same manner.
+\subsubsection*{Sim-4} Sim-4 contains 3,000 student's responses to an exam with 27 items over 4 latent abilities. Another simulated dataset, the covariance matrix and $Q$-matrix were chosen more deliberately than the previous two datasets. Of the 4 skills in the correlation matrix, one of them is entirely independent of the other three. The other three latent abilities had correlations of 0.25, 0.1, and 0.15 between them. These correlation values are much smaller than those of Sim-6 or Sim-20, resulting in a covariance matrix that is closer to the identity. The $Q$-matrix was chosen so that it contained 16 ``simple'' items (items requiring only one skill), 6 items requiring 2 latent abilities, 4 items requiring 3 latent abilities, and one item requiring all 4 skills. In this way, each of the possible $\binom{4}{k}$ combinations is present in the $Q$-matrix, for $k\in \{1,2,3,4\}$.
 
 \section{Quantitative Results}
 
@@ -113,7 +114,7 @@ Both autoencoders and variational autoencoders can be used as IRT parameter esti
 In this section, a direct comparison of ML2P-VAE with traditional parameter estimation techniques for IRT. Three variants of ML2P-VAE are used: ML2P-VAE$_{full}$, ML2P-VAE$_{est}$, and ML2P-VAE$_{ind}$ as described in Section \ref{sec:variants}. These are compared against Metropolis-Hastings Robbins-Monro (MHRM) \cite{cai2009}, Quasi Monte-Carlo Expectation Maximization (QMCEM) \cite{mirt}, and Monte-Carlo Expectation Maximization (MCEM) \cite{bock1981}. This work has been submitted to the Machine Learning journal \cite{ml_paper}. \sideremark{update if this ever gets accepted}
 
 A summary of each method's performance is given in Table \ref{tab:ml2p_results}. All experiments were conducted using Tensorflow for R on a laptop computer with a 2.9 GHz Intel Core i7-7500U CPU. The results from traditional methods were obtained using default settings of the MIRT package \cite{mirt}. 
-In all variations of ML2P-VAE, we train the neural network with the ADAM optimizer for 10 epochs and batch size 1 (pure stochastic gradient descent). The regularization parameter in Equation \ref{vae_loss} \sideremark{fix reference} was fixed  at $\lambda=1$. The specific encoder architecture of the neural network was dependent on the size of the data set. Sim-6 used two hidden layers of size 32 and 16, ECPE used two hidden layers of 16 and 8 nodes, and Sim-20 utilized two hidden layers of size 64 and 32. In each network, a sigmoidal activation function was used in the encoder hidden layers and a linear activation function in the encoded distribution. As described earlier, the ML2P-VAE model requires the use of a sigmoidal activation function in the output layer of the decoder.
+In all variations of ML2P-VAE, we train the neural network with the ADAM optimizer for 10 epochs and batch size 1 (pure stochastic gradient descent). The specific encoder architecture of the neural network was dependent on the size of the data set. Sim-6 used two hidden layers of size 32 and 16, ECPE used two hidden layers of 16 and 8 nodes, and Sim-20 utilized two hidden layers of size 64 and 32. In each network, a sigmoid activation function was used in the encoder hidden layers and a linear activation function in the encoded distribution. As described earlier, the ML2P-VAE model requires the use of a sigmoidal activation function in the output layer of the decoder.
 
 \begin{sidewaystable}
 \footnotesize{
@@ -183,7 +184,7 @@ Although the ML2P-VAE methods are slightly less accurate than MHRM, they are muc
     \label{fig:6skill_cor}
 \end{figure}
 
-Some of the results are visualized in Figures \ref{fig:6skill_cor}, \ref{fig:ecpe_cor}, and \ref{fig:20skill_cor} for Sim-6, ECPE, and Sim-20, respectively. Figure \ref{fig:6skill_cor} shows the correlation between the true and estimated discrimination parameters for the ML2P-VAE$_{full}$ and MHRM methods. We don't include such plots for the difficultly parameters, as all methods estimate each $b_i$ with very high accuracy. From these figures, it appears that while MHRM obtains better results on smaller discrimination parameters, ML2P-VAE$_{full}$ has less error on larger parameters, and the estimation error seems to be independent of the magnitude of the parameter. The other two ML2P-VAE methods do not obtain the same levels of accuracy as when assuming full knowledge of the latent ability correlations. 
+Some of the results are visualized in Figures \ref{fig:6skill_cor}, \ref{fig:ecpe_cor}, \ref{fig:20skill_cor}, and \ref{fig:4skills_disc} for Sim-6, ECPE, Sim-20, and Sim-4 respectively. Each color in the plots corresponds to a latent ability associated with the ability or discrimination parameter. Figure \ref{fig:6skill_cor} shows the correlation between the true and estimated discrimination parameters for the ML2P-VAE$_{full}$ and MHRM methods. We don't include such plots for the difficultly parameters, as all methods estimate each $b_i$ with very high accuracy. From these figures, it appears that while MHRM obtains better results on smaller discrimination parameters, ML2P-VAE$_{full}$ has less error on larger parameters, and the estimation error seems to be independent of the magnitude of the parameter. The other two ML2P-VAE methods do not obtain the same levels of accuracy as when assuming full knowledge of the latent ability correlations. 
 
 \begin{figure}[h]
 \centering
@@ -258,8 +259,42 @@ The discrepancy between ML2P-VAE$_{full}$ and ML2P-VAE$_{est}$ can be attributed
 
 The estimates for the Sim-20 dataset produced by ML2P-VAE$_{ind}$ display the same behavior observed in the ECPE dataset. Two of the abilities have discrimination parameters estimated near zero, meaning ML2P-VAE$_{ind}$ deemed these abilities to have no relation with performance on the assessment. But in contrast to the ECPE data, Sim-20 was simulated and so it is known that this is not true. Outside of this issue, the other discrimination parameters were reasonably estimated, showing clear correlation with the true values on near a 1:1 scale.
 
-
 Though ML2P-VAE$_{est}$ and ML2P-VAE$_{ind}$ have trouble converging to the true discrimination parameters, they are still able to obtain quality estimates to the ability parameters. The values in Table \ref{tab:ml2p_results} for $\theta$ in Sim-20 are comparable to those of Sim-6. The plots in Figure \ref{fig:20skill_cor} show this high correlation in all three ML2P-VAE variants.
+
+\begin{figure}[h]
+\centering
+\figuretitle{Discrimination Parameter Estimates}\\
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_full_theta_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_est_theta_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{img/ml_journal_results/4skills/vae_ind_theta_4skills_cropped.png}
+    \end{subfigure}
+    \caption{Discrimination parameter estimates for Sim-4 with 27 items and 4 latent skills. The top row shows estimates from ML2P-VAE methods, and the bottom row gives estimates yielded by traditional methods.}
+    \label{fig:4skills_disc}
+\end{figure}
+
+In the Sim-4 dataset, the advantages of ML2P-VAE methods are less apparent. The runtime difference is much smaller, since traditional methods do not struggle so much when integrating over a smaller latent dimension of size 4. This also affects the accuracy of parameter estimates. The latent skill estimates are better in Sim-4 than those of data set Sim-6 for all methods, but particularly the traditional methods. For latent ability $\theta$ and item difficulty $b$, all six methods produced similar estimates, and so these correlation plots are omitted. As seen in Table \ref{tab:ml2p_results}, the corresponding error measures are very close, though traditional methods are slightly more accurate.
+
+A comparison between the Sim-4 discrimination parameter estimates is shown in Figure \ref{fig:4skills_disc}, which clearly visualizes the values in Table \ref{tab:ml2p_results}. Though all ML2P-VAE methods produce highly correlated estimates, they also tend to underestimate the true values. This is most apparent in the plot for ML2P-VAE$_{est}$ and in the relative bias values in Table \ref{tab:ml2p_results}. While traditional parameter estimation results may be more desirable for the Sim-4 dataset, this demonstrates that the ML2P-VAE methods are most useful when the number of latent abilities is large.
 
 \subsubsection{Effect of Training Data Size}
 A common criticism of neural networks is that they are computationally intensive and training them with a gradient descent based algorithm (a first order method) can take a long time. They also require large amounts of data. As mentioned before, the architecture used in this application results in a relatively small neural network.

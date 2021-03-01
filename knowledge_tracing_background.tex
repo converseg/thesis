@@ -9,7 +9,7 @@ P(L_n) = P(L_{n-1} | \text{evidence}) + (1 - P(L_{_n-1} | \text{evidence})) \cdo
 \end{equation}
 Then the probability of a student performing a task correctly is the sum of the probability that the rule is learned and the student doesn't make a mistake, and the probability that the rule is unlearned but the student guesses correctly.
 
-There are only four parameters for each rule: the probability that the rule is already in the learned state at timestep 0, the probability of transitioning from the unlearned to learned state, the probability of guessing correctly, and the probability of slipping. These parameters are estimated using a hidden Markov Model, and the probability of a the student having learned a rule is updated via Bayes' Theorem.
+There are only four parameters for each rule: the probability that the rule is already in the learned state at timestep 0, the probability of transitioning from the unlearned to learned state, the probability of guessing correctly, and the probability of slipping. These parameters are estimated using a hidden Markov Model, and the probability of a student having learned a rule is updated via Bayes' Theorem.
 
 In recent years, Bayesian Knowledge Tracing (BKT) has been overcome by deep learning methods. The popularity of neural networks has brought black-box models that yield high accuracy. Many of these methods, detailed in Section \ref{sec:kt_lit}, do not provide a concrete measure of student ability over time. Instead, the only way to track student knowledge is through the predicted probability of them answering questions correctly at a given timestep. 
 
@@ -31,7 +31,7 @@ In 2015, the first use of neural networks for knowledge tracing was introduced b
 
 Similar to natural language processing, tokens (student interactions) need to be represented as a $d$-dimensional vector. DKT does this by one-hot encoding the interactions in the input layer of shape $(2n+1, L)$,  and linearly mapping to a hidden layer of shape $(d, L)$. Each interaction in the sequence is treated independently in this layer. The input layer shape is $2n+1$ for each of the possible $2n$ interactions, along with space for an additional padding token representing a null interaction (for response sequences of length $< L$.
 
-  The architecture of DKT is as follows: The one-hot encoding input layer, the $d$-dimensional embedding, an LSTM layer of size $d$, and a feedforward output layer with $n$ nodes. The final layer uses a sigmoid activation function, and the output at each node represents the probability of answering that item correctly at the given timestep. To calculate loss, only the item tag for the next interaction and corresponding output node is used in the cross-entropy loss calculation.
+  The architecture of DKT is as follows: The one-hot encoding input layer, the $d$-dimensional embedding, an LSTM layer of size $d$, and a feed-forward output layer with $n$ nodes. The final layer uses a sigmoid activation function, and the output at each node represents the probability of answering that item correctly at the given timestep. To calculate loss, only the item tag for the next interaction and corresponding output node is used in the cross-entropy loss calculation.
 
   \subsection{Dynamic Key-Value Memory Networks}\label{sec:dkvmn}
 More sophisticated neural network approaches to knowledge tracing were introduced by Zhang et al. with Dynamic Key-Value Memory Networks (DKVMN) \cite{zhang2017}. They modify a memory-augmented neural network (MANN) in order to fit into the knowledge tracing framework. A MANN is a time-series neural network, but it does not rely on residual connections like an RNN or LSTM. Rather, a value matrix $M^v$ is stored in memory for each student, and the entries in $M^v$ are updated in each timestep. The predicted output is a probability dependent on the previous value of $M^v$ in timestep $t-1$, as well as the current neural network input in timestep $t$.
@@ -74,7 +74,7 @@ In the field of natural language processing (NLP), the most state-of-the-art met
 
 Similar to other deep learning methods, at timestep $t$, SAKT first embeds each interaction $(q_i, c_i)$, $i<t$ into a learned $d$-dimensional vector $m_i$. Additionally, like DKVMN, the current question $q_t$ without the response is also embedded into a $d$-dimensional vector $e_t$. 
 
-The exercise embedding $e_t$ is multiplied ty a weights matrix to obtain a \textit{query} vector $\vec q_t = W^{Q}e_t$. The interaction embedding $m_i$ is used to create two vectors: a \textit{key} vector $\vec k_i = W^{K}m_i$ and a \textit{value} vector $\vec v_i = W^V m_i$. 
+The exercise embedding $e_t$ is multiplied by a weights matrix to obtain a \textit{query} vector $\vec q_t = W^{Q}e_t$. The interaction embedding $m_i$ is used to create two vectors: a \textit{key} vector $\vec k_i = W^{K}m_i$ and a \textit{value} vector $\vec v_i = W^V m_i$. 
 
 The general idea is that $\vec k_i$ serves as the identifier of a past interaction, and $\vec q_t$ serves as an identifier for the current exercise. If the two exercises are similar in content, then the dot product between these two vectors should be large. The value vector $\vec v_i$ holds more abstract information about the corresponding interaction. The keys and values are organized into matrices $K$ and $V$. We calculate the attention
 \begin{equation}
