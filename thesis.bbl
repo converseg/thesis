@@ -145,6 +145,13 @@ Shalini Pandey and George Karypis.
 \newblock A self-attentive model for knowledge tracing.
 \newblock {\em International Conference on Educational Data Mining}, 2019.
 
+\bibitem{pavlik2009}
+Philip~I. Pavlik, Hao Cen, and Kenneth~R. Koedinger.
+\newblock Performance factors analysis --a new alternative to knowledge
+  tracing.
+\newblock In {\em Conference on Artificial Intelligence in Education}, page
+  531–538, NLD, 2009. IOS Press.
+
 \bibitem{piech2015}
 Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami,
   Leonidas~J Guibas, and Jascha Sohl-Dickstein.
@@ -157,6 +164,11 @@ Elad Plaut.
 \newblock From principal subspaces to principal components with linear
   autoencoders.
 \newblock {\em arXiv:1804.10253v2}, 2018.
+
+\bibitem{deep_pfa}
+Shi Pu, Geoffrey Converse, and Yuchi Huang.
+\newblock Deep performance factors analysis for knowledge tracing.
+\newblock In {\em Submitted for Initial Review}, 2021.
 
 \bibitem{rafique2020}
 Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.

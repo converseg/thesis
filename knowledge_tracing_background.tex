@@ -1,4 +1,4 @@
-\chapter{Knowledge Tracing Background}
+\chapter{Knowledge Tracing Overview}
 
 Knowledge Tracing (KT) is a task introduced by Corbett and Anderson in 1995 \cite{corbett1995}. Their goal was to model the changing knowledge state of students as they progress through an online intelligent tutoring program. This tutoring system helps students practice writing computer programs by testing them on various rules, such as correct use of in-built functions, and providing feedback on their mistakes. The model tracks each student's knowledge as being in either a learned or unlearned state for each rule. After each interaction, there is a probability $P(T)$ that a student makes the transition from the unlearned state to the learned state.
 
@@ -27,7 +27,7 @@ The tag $q_t$ indexes a particular question (item) in the available question ban
 Most neural networks optimize the predicted probability in Equation \ref{eq:kt_prob} by  minimizing the cross-entropy loss function, as described in Equation \ref{eq:cross_entropy}.
 
 \subsection{Deep Knowledge Tracing}
-In 2015, the first use of neural networks for knowledge tracing was introduced by Piech et al. \cite{piech2015}. Deep Knowledge Tracing (DKT) utilizes recurrent neural networks (RNN) and Long-Short Term Memory (LSTM) neural networks to predict a student's success on future questions, given a sequence of previous interactions. RNN are the most simple neural network to deal with sequential time-series data. \sideremark{Do I need to give background on RNN and LSTM?} LSTM are more sophisticated, and are capable of capturing longer-range dependencies due to their ``keep/forget'' functionality.
+In 2015, the first use of neural networks for knowledge tracing was introduced by Piech et al. \cite{piech2015}. Deep Knowledge Tracing (DKT) utilizes recurrent neural networks (RNN) and Long-Short Term Memory (LSTM) neural networks to predict a student's success on future questions, given a sequence of previous interactions. RNN are the most simple neural network to deal with sequential time-series data. LSTM are more sophisticated, and are capable of capturing longer-range dependencies due to their ``keep/forget'' functionality. %\sideremark{Do I need to give background on RNN and LSTM?} %TODO
 
 Similar to natural language processing, tokens (student interactions) need to be represented as a $d$-dimensional vector. DKT does this by one-hot encoding the interactions in the input layer of shape $(2n+1, L)$,  and linearly mapping to a hidden layer of shape $(d, L)$. Each interaction in the sequence is treated independently in this layer. The input layer shape is $2n+1$ for each of the possible $2n$ interactions, along with space for an additional padding token representing a null interaction (for response sequences of length $< L$.
 
@@ -54,7 +54,7 @@ The second part of DKVMN is to \textit{write} new values into $M^v$ based on the
 \end{equation}
 Note that the correlation weights $w_t$ computed in the predictive step are again used to determine \textit{how much} of memory slot $i$ should be updated.
 
-\sideremark{should I include image of DKVMN architecture?}
+%\sideremark{should I include image of DKVMN architecture?} %TODO
 
 DKVMN's use of a matrix stored in memory allows for longer range dependencies than RNN or LSTM. There is also a bit of interpretability in this method, since a single column of the memory matrix $M_t^v$ gives an $h$-dimensional representation of a single skill for the student at time $t$. However, it cannot be determined \textit{which} skill the column represents. Additionally, if a student answers each available item, then stacking each weights vector $w_t$ into a matrix $W = \{w_t\}_{t=1}^L$ should result in a matrix similar to the item-skill association $Q$-matrix. But again, the columns of this ``learned $Q$-matrix'' $W$ are in no particular order, and can be difficult to interpret.
 
@@ -69,25 +69,55 @@ Deep-IRT, proposed by Chun-Kit Yeung \cite{yeung_2019} modifies the DKVMN archit
 These modifications provide a link to the Rasch model in Equation \ref{eq:rasch}. The multiplication by 3 is for practical reasons to re-scale $\theta_{tk}$. However, note that in Equation \ref{eq:deep_irt_prob}, the difficulty parameter is on the \textit{concept} level, and not the \textit{item} level like the Rasch model (and other IRT models). Though Deep-IRT doesn't seek to directly approximate the Rasch model, the modifications to DKVMN still adds significant interpretability to the deep neural network.
 
 
-\subsection{Self-Attentive Knowledge Tracing}
+\subsection{Self-Attentive Knowledge Tracing}\label{sec:sakt}
 In the field of natural language processing (NLP), the most state-of-the-art methods utilize a mechanism called self-attention \cite{vaswani2017}, which rely on calculating the correlation between pairs of words in a sentence. Popular models such as BERT \cite{bert} and GPT-3 \cite{gpt3} are both transformer-based neural networks for NLP which heavily depend on attention. Self-Attentive Knowledge Tracing (SAKT) adapts this concept for the knowledge tracing task \cite{pandey2019}. 
 
 Similar to other deep learning methods, at timestep $t$, SAKT first embeds each interaction $(q_i, c_i)$, $i<t$ into a learned $d$-dimensional vector $m_i$. Additionally, like DKVMN, the current question $q_t$ without the response is also embedded into a $d$-dimensional vector $e_t$. 
 
-The exercise embedding $e_t$ is multiplied by a weights matrix to obtain a \textit{query} vector $\vec q_t = W^{Q}e_t$. The interaction embedding $m_i$ is used to create two vectors: a \textit{key} vector $\vec k_i = W^{K}m_i$ and a \textit{value} vector $\vec v_i = W^V m_i$. 
+The exercise embedding $e_t$ is multiplied by a weights matrix to obtain a \textit{query} vector $\vect q_t = W^{Q}e_t$. The interaction embedding $m_i$ is used to create two vectors: a \textit{key} vector $\vect k_i = W^{K}m_i$ and a \textit{value} vector $\vect v_i = W^V m_i$. 
 
-The general idea is that $\vec k_i$ serves as the identifier of a past interaction, and $\vec q_t$ serves as an identifier for the current exercise. If the two exercises are similar in content, then the dot product between these two vectors should be large. The value vector $\vec v_i$ holds more abstract information about the corresponding interaction. The keys and values are organized into matrices $K$ and $V$. We calculate the attention
+The general idea is that $\vect k_i$ serves as the identifier of a past interaction, and $\vect q_t$ serves as an identifier for the current exercise. If the two exercises are similar in content, then the dot product between these two vectors should be large. The value vector $\vect v_i$ holds more abstract information about the corresponding interaction. The keys and values are organized into matrices $K$ and $V$. We calculate the attention
 \begin{equation}
-  a_{t} = \text{softmax}\left(\frac{K \vec q_t}{\sqrt{d}} \right) V
+  a_{t} = \text{softmax}\left(\frac{K \vect q_t}{\sqrt{d}} \right) V
   \label{eq:attn}
 \end{equation}
 
-The value $\frac{K \vec q_t}{\sqrt{d}}$ yields a vector where each entry is the dot product between the current exercise query $\vec q_t$ and an interaction key $\vec k_i$. This is scaled by dimension and softmaxed, resulting in a weighted sum of the value vectors $\vec v_i$.
+The value $\frac{K \vect q_t}{\sqrt{d}}$ yields a vector where each entry is the dot product between the current exercise query $\vect q_t$ and an interaction key $\vect k_i$. This is scaled by dimension and softmaxed, resulting in a weighted sum of the value vectors $\vect v_i$.
 
 The attention value $a_t$ is sent through a few feed-forward layers, resulting in a vector $f_t = \text{FFN}(a_t)$. The output layer is $p_t = \sigma(f_t W + b)$, the probability that the student will answer the current exercise $q_t$ correctly.
 
 
 \subsection{Performance Factors Analysis}
-*** Not sure if I will include Deep-PFA. If not, then don't need to talk much about PFA.
+An earlier approach to knowledge tracing was proposed by Pavlik et al. in 2009 with Performance Factors Analysis (PFA) \cite{pavlik2009}. The general idea is that a student's learning at a given timestep is a function of the student's past interactions with items related to various knowledge concepts. Specifically, the logit of a student answering item $i$ correctly is a linear combination of concept difficulty, previous successes, and previous failures:
+\begin{equation}
+  p(j,k\in \text{K}_i, s, f) = \sigma\left(\sum_{k \in K}(\beta_k + \gamma_k s_{jk} + \rho_k f_{jk}\right)
+  \label{eq:pfa}
+\end{equation}
 
+In Equation \ref{eq:pfa}, $\text{K}_i$ is a set indicating which knowledge concepts are required for item $i$, the trainable parameter $\beta_k$ represents concept $k$'s difficulty, and $\gamma_k$ and $\rho_k$ serve as trainable weights. $s_{jk}$ and $f_{jk}$ track the prior successes and failures, respectively, of student $j$ on concept $k$. At timestep $t$, we can write $s_{jk}$ and $f_{jk}$ as 
+\begin{equation}
+  \begin{split}
+    s_{jk} = \sum_{i<t} \chi_{c_i=1} \cdot \chi_{k \in \text{K}_i} \\
+    f_{jk} = \sum_{i<t} \chi_{c_i=0} \cdot \chi_{k \in \text{K}_i}
+  \end{split}
+  \label{eq:pfa_indicator}
+\end{equation}
+where $\chi$ is the indicator function on some condition. For example, $\chi_{k\in \text{K}_i}$ indicates whether the previous item $q_i$, $i<t$, required knowledge concept $k$ or not.
 
+The parameters $\beta_k$, $\gamma_k$, and $\rho_k$ are learned so that they maximize the log-likelihood of the given dataset. This is a well-studied problem, as the form of Equation \ref{eq:pfa} is essentially just a logistic regression. Note that similar to Deep-IRT, PFA focuses on the concept-level, rather than item-level, parameters. 
+
+\subsubsection{Deep Performance Factors Analysis}
+Recent work has related PFA to the self-attention mechanism used in SAKT described in Section \ref{sec:sakt}. Pu et al. \cite{deep_pfa} developed Deep Performance Factors Analysis (DPFA) and a new characterization of the weight parameters $\gamma_k$ and $\rho_k$, using learned item embeddings $e_i$ for each question $q_i$.
+
+For the current question $q_{t+1}$, the attention between previous exercises is $A_{i,t+1} = e_i^\top e_{t+1}$, for $i \leq t$. More recent interactions are taken into account by calculating $d_{i,t+1} = -a(t-i+1)+b$, where $a$ and $b$ are trainable parameters. Then the relevance of a past item depends on the dot product similarity and how long ago the interaction took place:
+\begin{equation}
+  w_i = \text{softmax}(A_{i,t+1} + d_{i,t+1})
+  \label{eq:time_bias_attn}
+\end{equation}
+
+The mastery of knowledge concepts after a student completes interaction $(q_i, c_i)$ is given as $v_i = [v_i^0, v_i^1] \in \R^2$. The numbers $v_i^0$ and $v_i^1$ represent the expected mastery of the skills for item $i$ if the item is answered incorrectly or correctly, respectively. DPFA gives the probability of a student answering item $q_{t+1}$ correctly as
+\begin{equation}
+  p_{t+1} = \sigma\left( \beta_{t+1} + \sum_{i \leq t} \left( \chi_{c_i=0}\cdot w_i v_i^0 + \chi_{c_i=1} \cdot w_i v_i^1 \right) \right)
+  \label{eq:dpfa}
+\end{equation}
+where $\beta_{t+1}$ corresponds to the difficulty of the current item and $\sigma(\cdot)$ is the sigmoid function. In comparison with regular PFA in Equation \ref{eq:pfa}, substitutes the terms $\chi_{c_i=0}\cdot w_i v_i^0$ for $\rho_k f_k$ and substitutes $\chi_{c_i=1} \cdot w_i v_i^1$ for $\gamma_k s_k$.
