@@ -4,9 +4,12 @@ The primary contribution of this thesis is the development of a method for IRT p
 \section{ML2P-VAE Method Description}\label{sec:ml2p_vae}
 Assume we are given an assessment with $n$ items which tests $K$ latent skills, and that $N$ students take this exam. Data is given as an $N \times n$ binary matrix, as in Equation \ref{eq:responses}. No information about student latent ability parameters $\Theta \in \R^K$ or item parameters $a_{ik}$ and $b_i$ is provided. However, there is access to an expert-annotated binary $Q$-matrix detailing the item-skill associations, as in Equation \ref{eq:q_matrix}.
 
-A number of specifications are required in order to use a VAE as an IRT parameter estimation method. First, set up the neural network so that the input and output layers each have $n$ nodes, each representing one item. The inputs are be the binary response vectors $\vect u_j$ and the outputs are approximations of the probability of student $j$ answering each item correctly. Next, the dimension of the hidden distribution (the output of the encoder) must be equal to $K$, the number of latent skills.
+\sideremark{TODO: relate to IRT background section and VAE derivation}
 
-The modifications to a typical VAE architecture are focused on the decoder. No hidden layers are used in the decoder. Instead, a non-dense set of weights connects the decoder input to the decoder output. The non-zero weights here are determined by the $Q$-matrix; recall that the input to the decoder has $K$ nodes, the decoder output has $n$ nodes, and $Q \in \{0,1\}^{n \times K}$. Further, require the use of the sigmoid activation function
+A number of specifications are required in order to use a VAE as an IRT parameter estimation method. First, set up the neural network so that the input and output layers each have $n$ nodes, each representing one item. The inputs are be the binary response vectors $\vect u_j$ and the outputs are approximations of the probability of student $j$ answering each item correctly. Next, the dimension of the hidden distribution (the output of the encoder) must be equal to $K$, the number of latent skills. The usual VAE loss function described in Equation \ref{eq:vae_loss} is still used to optimize ML2P-VAE.
+The modifications to a typical VAE architecture are focused on the decoder. No hidden layers are used in the decoder. Instead, a non-dense set of weights connects the decoder input to the decoder output. The non-zero weights here are determined by the $Q$-matrix; recall that the input to the decoder has $K$ nodes, the decoder output has $n$ nodes, and $Q \in \{0,1\}^{n \times K}$. So for a trainable weight $w_{ik}$ in the VAE decoder, if $q_{ik}=0$, then fix $w_{ik}=0$ as well, and it will never be updated during the training process. This modification is key to allowing interpretation of the hidden latent distribution of a VAE.
+
+The ML2P-VAE method requires the use of the sigmoid activation function
 \begin{equation}
   \sigma(z_i) = \frac{1}{1 + e^{z_i}}
   \label{eq:sigmoid}
@@ -57,7 +60,14 @@ This architecture is described as follows. The input and output to the neural ne
   Therefore, $\Sigma_0$ is positive-definite.
 \end{proof}
 
-Theorem \ref{thm:cov_vae} shows that in this specific neural network architecture, $\Sigma_0$ can be interpreted as a covariance matrix. Thus, the VAE encoder maps a data point $u_0$ to a multivariate Gaussian distribution $\mathcal{N}(\mu_0, \Sigma_0)$. Additionally, the sampling operation and KL-Divergence calculation can always be carried out without issue. 
+Theorem \ref{thm:cov_vae} shows that in this specific neural network architecture, $\Sigma_0$ can be interpreted as a covariance matrix. Thus, the VAE encoder maps a data point $u_0$ to a multivariate Gaussian distribution $\mathcal{N}(\mu_0, \Sigma_0)$. Additionally, the sampling operation and KL-Divergence calculation can always be carried out without issue. A visualization of the ML2P-VAE architecture for correlated latent traits is shown in Figure \ref{fig:ml2pvae_visual}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.85\textwidth]{img/ml2pvae_visual.png}
+  \caption{Visualization of the ML2P-VAE architecture for two correlated latent traits and six input items. Note that the trainable weights matrix in the decoder is not dense, but is determined by the given $Q$-matrix.}
+  \label{fig:ml2pvae_visual}
+\end{figure}
 
 
 \subsection{Variants of ML2P-VAE}\label{sec:variants}
@@ -190,7 +200,11 @@ Since there are no discrimination parameters in the Rasch model, only item diffi
 %
 %
 \section{\textbf{ML2Pvae} Software Package for R}
-The ML2P-VAE method for parameter estimation has been compiled in an easy-to-use software package for R \cite{r_package}. This allows researchers who may not have experience with neural networks to implement ML2P-VAE methods on a data set of their choosing. The package \textbf{ML2Pvae} is available on the Comprehensive R Archive Network (CRAN) and can be easily installed using the R command \verb!install.packages(``ML2Pvae'')!. \sideremark{maybe use lstinline from listings for code}
+The ML2P-VAE method for parameter estimation has been compiled in an easy-to-use software package for R \cite{r_package}. This allows researchers who may not have experience with neural networks to implement ML2P-VAE methods on a data set of their choosing. The package \textbf{ML2Pvae} is available on the Comprehensive R Archive Network (CRAN) and can be easily installed using the R command 
+\begin{center}
+\verb!install.packages(``ML2Pvae'')! 
+\end{center}
+\sideremark{maybe use lstinline from listings for code}
 
 \subsection{Package Functionality}
 \textbf{ML2Pvae} uses Tensorflow and Keras to build and train neural networks, but no knowledge of these libraries are required in order to use \textbf{ML2Pvae}. The package exports 5 functions available to the user. Two of these are used to construct Keras models, with optional parameters specifying the architecture of the neural network. The only parameters which require input from the user are the number of items on the exam, the number of latent abilities that the exam assesses, and the $Q$-matrix relating items and abilities.

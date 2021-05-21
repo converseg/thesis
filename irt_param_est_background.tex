@@ -4,14 +4,14 @@ In educational measurement, a common goal is to quantify the knowledge of studen
 
 The practice of evaluating student ability purely from a raw percentage score is known as true score theory \cite{thissen}. But there are clear issues with this approach. Not all questions on an exam or homework assignment is created equally: some questions are easier, and some more difficult. Consider a scenario where two students both answer 17 out of 20 questions correctly on a test for a raw score of $85\%$. But if Student A answered questions 1, 8, and 9 wrong while Student B answered 4, 17, and 20 incorrectly, it is not likely that that Student A and Student B possess the same level of knowledge. For example, questions 1, 8, and 9 could be much more difficult than questions 4, 17, and 20. Additionally, the two sets of problems could cover different types of material. True score theory does not account for either of these situations, and naively quantifies the knowledge of Student A and Student B as equal.
 
-More sophisticated methods have been studied which attempt to more accurately quantify student learning. Cognitive Diagnostic Models (CDM) (TODO: citation) aim to classify whether students possess mastery of a given skill or not. This discrete classification can be useful in determining whether or not a student meets a prerequisite, or deciding whether or not they are ready to move on to the next level of coursework. We focus instead on Item Response Theory, where student knowledge is assumed to be continuous.
+More sophisticated methods have been studied which attempt to more accurately quantify student learning. Cognitive Diagnostic Models (CDM) aim to classify whether students possess mastery of a given skill or not \cite{sinharay2007}. This discrete classification can be useful in determining whether or not a student meets a prerequisite, or deciding whether or not they are proficient enough to move on to the next level of coursework. We focus instead on Item Response Theory, where student knowledge is assumed to be continuous.
 
 \section{Item Response Theory}\label{sec:irt}
 Item Response Theory (IRT) is a field of quantitative psychology which uses statistical models to model student ability \cite{lord1968}. These models often give the probability of a question being answered correctly as a function of the student's ability. In IRT, it is assumed that each student, indexed by $j$, possesses some continuous latent ability $\theta_j$. The term ``latent ability'' is synonymous with ``knowledge''or ``skill.'' Often, it is assumed that amongst the population of students, $\theta_j \sim \mathcal{N}(0,1)$ \cite{thissen}. 
 
 In this work, we often consider the case where each student has multiple latent abilities. For example, in the context of an elementary math exam, we may wish to measure the four distinct skills ``add'', ``subtract'', ``multiply'', and ``divide.'' This scenario is referred to as multidimensional item response theory, and we write the set of student $j$'s $K$ latent abilities as a vector $\Theta_j = (\theta_{1j}, \theta_{2j}, \ldots, \theta_{Kj})^\top$. It is then assumed that the latent abilities of students follow some multivariate Gaussian distirbution, $\mathcal{N}(0, \Sigma)$. For simplicity, the covariance matrix $\Sigma$ is often taken to be the identity matrix, making each latent skill independent of one another.
 
-Note that $\Theta_j$ is not directly observable in any way. Instead, a common goal is to infer student's knowledge $\Theta_j$ from on their responses on some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $\vec u_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
+Note that $\Theta_j$ is not directly observable in any way. Instead, a common goal is to infer student's knowledge $\Theta_j$ from on their responses on some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $\vect u_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
 \begin{equation}
   u_{ij} = \begin{cases} 1 & \text{if student } j \text{ answers item } i \text{ correctly} \\0 & \text{otherwise} \end{cases} 
   \label{eq:responses}
@@ -62,10 +62,10 @@ Equation \ref{eq:2PL} has the same form as that of the Rasch model in Equation \
 \subsection{Multidimensional Item Response Theory}
 The previously described statistical models can all be extended so that each student possesses $K$ latent traits. In multidimensional item response theory (MIRT), models give the probability of a correct answer as a function of the student ability vector $\Theta = (\theta_1,\ldots, \theta_K)^\top$. The generalization of \ref{eq:2PL} is given by the multidimensional logistic 2-parameter (ML2P) model:
 \begin{equation}
-P(u_{ij} = 1 | \Theta_j; \vec{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vec{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{\exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
+P(u_{ij} = 1 | \Theta_j; \vect{a_i}, b_i) = \frac{1}{1 + \exp\left(-\vect{a_i}^\top \Theta_j + b_i\right)} = \frac{1}{1 + \exp\left(-\sum_{k=1}^K a_{ik} \theta_{kj} + b_i \right)}
   \label{eq:ml2p}
 \end{equation}
-Here, the discrimination parameters $\vec{a_i} \in \R^K$ are given as vector, where each entry $a_{ik} \in \vec{a_i}$ quantifies \textit{how much} of skill $k$ is required to answer item $i$ correctly. The ML2P model is the main focus of this thesis.
+Here, the discrimination parameters $\vect{a_i} \in \R^K$ are given as vector, where each entry $a_{ik} \in \vect{a_i}$ quantifies \textit{how much} of skill $k$ is required to answer item $i$ correctly. The ML2P model is the main focus of this thesis.
 
 TODO: mention MDISC and how this scales
 
@@ -79,23 +79,209 @@ In MIRT, it is convenient to notate the relationship between skills and items wi
 \end{equation}
 In real applications, the $Q$-matrix is annotated by an expert in the field, as it is usually possible to discern the concepts need to answer an item correctly. In relation to the ML2P model (Equation \ref{eq:ml2p}), notice that if $q_{ik} = 0$, then $a_{ik} = 0$ as well. Though experts can produce a $Q$-matrix for a given assessment, the matrix of discrimination parameters $(a_{ik})_{i,k}$ can not be discovered so easily.
 
-\section{IRT Parameter Estimation}
-\sideremark{*How in-depth do these descriptions need to be? Could just give overall idea and describe weaknesses}
+\section{IRT Parameter Estimation} \label{sec:irt_est_background}
+IRT models provide a way of predicting student performance on an assessment, given their latent abilities. However, this is not particularly helpful in practice -- in the real world, continuous representations of student ability remain hidden, and the value of item parameters (e.g. difficulty) are not readily accessible.
 
-\subsection{Maximum Likelihood Estimation}
-Mention MLE when items are known or when abilities are known, but talk more about JMLE (more similar to our situation)
+Often, IRT models are used in a post-assessment setting, rather than as a prediction tool. Given the student's responses (often a binary vector indicating correct/incorrect answers), the goal is to infer their continuous latent abilities $\Theta$ of students and the item parameters. Simpler cases can be considered; if an established assessment with known item parameters is given to a new population of students, then only the student parameters need to be estimated. The accepted item parameter values can be used in this estimation to provide a more accurate measure of student's abilities. Likewise, a new assessment could be given to a group of students whose latent skills are already known. That student-specific information can be used to infer estimates to item parameters.
 
-\subsection{Expectation-Maximization}
+In this section, we focus on methods which assume zero knowledge of student or item parameters. As such, all parameters must be estimated jointly, which has shown to be a difficult task when a large number of items, students, and latent traits are present. 
 
-\subsubsection{Monte Carlo Methods}
-MCMC, MHRM, QMCMC brief overview
+Since the only available information is the set of binary responses for a number of students, the optimization function is the log-likelihood of the observed data. Let $U \in \R^{n \times N}$ be the binary matrix of $N$ student responses to an assessment with $n$ items, where $u_{ij} = 1$ if student $j$ answered item $i$ correctly, and $0$ otherwise. Denote $P_{ij} = P(u_{ij} = 1 | \Theta_j \vect a_i, b_i)$ as the probability of student $j$ answering item $i$ correctly, as in Equation \ref{eq:ml2p}.
 
-\subsection{Difficulties Faced}
+Then we have the likelihood function \cite{baker_kim2004} for a all student responses as 
+\begin{equation}
+  L = \prod_{j=1}^N \prod_{i=1}^n P_{ij}^{u_{ij}} \cdot (1 - P_{ij})^{1- u_{ij}}
+  \label{eq:likelihood}
+\end{equation}
+As is common in other machine learning applications we do not directly maximize $L$, but rather the log-likelihood function
+\begin{equation}
+  \log L = \sum_{j=1}^N \sum_{i=1}^n u_{ij} \log P_{ij} + (1-u_{ij})\log (1 - P_{ij})
+  \label{eq:log_likelihood}
+\end{equation}
 
-\subsubsection{Curse of Dimensionality}
 
-\subsection{Recent Approaches}
-CJMLE?
+\subsection{Joint Maximum Likelihood Estimation} \label{sec:mle}
+Maximum Likelihood Estimation (MLE) is a popular method for parameter estimation in many fields, not just psychology or education. In this application, we refer to this method as Joint Maximum Likelihood Estimation (JMLE), since both the item and student parameters are unknown. The high-level goal of parameter estimation is to find the parameters of a probability distribution which are most likely to produce the observed samples \cite{myung2003}. These parameters are found by directly computing the gradient of Equation \ref{eq:log_likelihood} with respect to every individual parameter, then solving a system of equations. For example, we must compute 
+\[\frac{\partial \log L}{\partial \theta_{jk}}, \quad \frac{\partial \log L}{\partial a_{ik}}, \quad \frac{\partial \log L}{\partial b_i}\]
+for $1 \leq i \leq n$, $1 \leq j \leq N$, and $1 \leq k \leq K$. Setting each partial derivative equal to zero yields a system of $NK + nK + n$ equations with $NK + nK + n$ unknowns:
+\begin{equation}
+  \left[ \frac{\partial \log L}{\partial \theta_{11}}, \frac{\partial \log L}{\partial \theta_{12}}, \ldots , \frac{\partial \log L}{\partial \theta_{NK}}, \frac{\partial \log L}{\partial a_{11}}, \frac{\partial \log L}{\partial a_{12}}, \ldots, \frac{\partial \log L}{\partial a_{nK}}, \frac{\partial \log L}{\partial b_1}, \ldots, \frac{\partial \log L}{\partial b_n}\right]^\top = \vect 0
+  \label{eq:solve_system}
+\end{equation}
+
+Due to the size of this system of equations (which can scale in three different dimensions), the system is solved iteratively via Newton-Raphson methods \cite{ben_israel1966}. Denote the vector of parameter estimates as $\vect x \in \R^{NK+nk+n}$, the gradient vector in Equation \ref{eq:solve_system} as $\vect f$, and the Jacobian matrix $J$ of $\vect f$, which holds all second-order partial derivatives of $\log L$. Note that $J$ and $\vect f$ are functions which require an input $\vect x$.
+
+Given an initial guess $\vect x_0$, the Newton-Raphson iteration is defined as
+\begin{equation}
+  \vect x_{t+1} = \vect x_t - J(\vect x_t)^{-1} \vect f(\vect x_t)
+  \label{eq:newton_raphson}
+\end{equation}
+This is where we first encounter a difficulty with dimensionality. The matrix $J$ is quite large -- it has dimension $(NK+nK+n) \times (NK+nK+n)$. Inverting this matrix, as required in Equation \ref{eq:newton_raphson} quickly becomes difficult -- especially when $J(\vect x_t)^{-1}$ needs to be calculated for each iteration (a large matrix inversion at each time step). Symbolically inverting $J(\vect x)$ is also not feasible. \sideremark{TODO: explain or remove}
+
+As such, a number of simplifications must be made. Notice that students are independent of one another (the ability of student $j_1$ does not affect the ability of student $j_2$), so each cross-derivative between different students is zero. In other words, $\frac{\partial^2 \log L}{\partial\theta_{j_1 k} \partial \theta_{j_2 l}} = 0$ for all $j_1 \not= j_2$. This makes the top left $(NK) \times (NK)$ block of $J$ have block-diagonal form, where each of the $N$ sub-blocks is of size $K\times K$. 
+
+In a similar manner, note that items are independent of one another, and cross-derivatives between two variables which relate to different items will be zero. The difficulty/discrimination of item $i_1$ does not affect the difficulty/discrimination of item $i_2$: $\frac{\partial^2 \log L}{\partial b_{i_1} \partial b_{i_2}} = 0$ for $i_1 \not = i_2$ (the same applies to discrimination parameters $a_{ik}$). Now, the bottom right $(nK + n) \times (nK + n)$ is in block-diagonal form, with each of the $n$ sub-blocks has dimension $(K+1) \times (K+1)$. 
+
+These two simplifications are straightforward, as we can clearly see in Equation \ref{eq:log_likelihood} that summing over $j$ and $i$ will cause each cross derivative between $j_1 \not = j_2$ and $i_1 \not = i_2$ to be zero. But the Jacobian $J$ is still not sparse enough -- the bottom left and top right $(nK + n) \times (NK)$ blocks are fully populated. To simplify the computational problem this presents, it is assumed that the cross-derivatives between students and items are fixed to be zero: $\frac{\partial^2 \log L}{\partial\theta_{jk} \partial b_{i}} := 0$ for all $j,k,i$. 
+
+The logic behind this assumption is that ``there is no reason to believe that there should be any covariaion between an individual eaminee and either of the parameters of a given item.'' \cite{baker_kim2004}. However, it can be seen from Equation \ref{eq:log_likelihood} that this is not necessarily true. We can easily show for the ML2P model in Equation \ref{eq:ml2p} that 
+\begin{equation}
+\begin{split}
+  \frac{\partial P_{ij}}{\partial a_{ik}} &= \theta_{jk}P_{ij}(1-P_{ij}) \\
+  \frac{\partial P_{ij}}{\partial \theta_{jk}} &= a_{ik}P_{ij}(1-P_{ij}) \\
+  \frac{\partial P_{ij}}{\partial a_{ik}\partial \theta_{jk}} &= P_{ij}(1-P_{ij})\left[ 1 + a_{ik} \theta_{jk} (1-2P_{ij}) \right]
+\end{split}
+\label{eq:ml2p_deriv}
+\end{equation}
+Then we can calculate
+\begin{equation}
+\begin{split}
+  \frac{\partial \log L}{\partial \theta_{jk}} &= \sum_{i=1}^n  \frac{u_{ij}}{P_{ij}} \cdot \frac{\partial P_{ij}}{\partial \theta_{jk}} + \frac{1-u_{ij}}{1-P_{ij}} \cdot \frac{-\partial P_{ij}}{\partial \theta_{jk}} \\
+  \frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}} &= \frac{-u_{ij}}{P_{ij}^2} \cdot \frac{\partial P_{ij}}{\partial a_{ik}} \cdot \frac{\partial P_{ij}}{\partial \theta_{jk}} + \frac{u_{ij}}{P_{ij}} \cdot \frac{\partial^2 P_{ij}}{\partial \theta_{jk}\partial a_{ik}} \\
+  &+ \frac{1-u_{ij}}{(1-P_{ij})^2} \cdot \frac{\partial P_{ij}}{\partial a_{ik}} \cdot \frac{-\partial P_{ij}}{\partial \theta_{jk}} + \frac{1-u_{ij}}{1-P_{ij}} \cdot \frac{-\partial^2 P_{ij}}{\partial \theta_{jk} \partial a_{ik}} \\
+  \frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}} &= -u_{ij}a_{ik}\theta_{jk}(1-P_{ij})^2 + u_{ij}(1-P_{ij})\left[1 + a_{ik}\theta_{jk}(1-2P_{ij})\right] \\
+  &- (1-u_{ij})a_{ik}\theta_{jk}P_{ij}^2 - (1-u_{ij})P_{ij}\left[1 + a_{ik}\theta_{jk}(1-2P_{ij})\right]
+\end{split}
+  \label{eq:partial_deriv_nonzero}
+\end{equation}
+Note that $u_{ij} \in \{0,1\}$, giving two simpler cases for $\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}}$. There exist many settings of $a_{ik}$ and $\theta_{jk}$ such that  $\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}} \not = 0$. For example, if a random student $j^*$ and ability $k^*$is sampled from the population, then $\mathbb{E}[\theta_{j^*k^*}] = 0$ (recall that student ability is assumed to be normally distributed across a population). Plugging in $\theta_{j^*k^*} = 0$ into Equation \ref{eq:partial_deriv_nonzero} gives
+\[\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}}\Big|_{\theta_{jk}=0} = u_{ij}(1-P_{ij}) - (1-u_{ij})P_{ij} \not= 0 \]
+
+So we can see that the true Jacobian $J$ of the gradient vector $f$ does not have block diagonal structure, because the upper right and bottom left blocks contain nonzero entries. The assumption that items and examinees are independent of one another, while computatationally necessary, limits the effectiveness of JMLE. 
+
+Even with this assumption, the case of multidimensional latent traits still presents a computational burden. With $J$ in block diagonal form, a single iteration of Equation \ref{eq:newton_raphson} requires the inversion of $N$ distinct $K\times K$ sub-matrices and $n$ distinct $(K+1) \times (K+1)$ sub-matrices. To perform these operations in parallel, access to $N + n$ threads (a large amount of resources) is required. And even if given those resources, as the number of latent traits $K$ grows, the individual sub-matrices become more and more difficult to invert.
+
+In addition to computational issues, JMLE for IRT parameter estimation suffers from an identification problem for student ability parameters. The estimates produced by JMLE are only unique up to a linear transformation, and so an anchoring procedure is required in each Newton-Raphson iteration \cite{baker_kim2004}. Each parameter estimate must be re-scaled via Gaussian normalization -- for example, a student ability parameter is updated as $\hat \theta_{jkt} \gets \frac{\theta_{jkt} - \overline{\hat \theta_{:kt}}}{\sigma(\hat \theta_{:kt})}$, where $\overline{\hat \theta_{:kt}}$ is the mean of all student's ability $k$ at iteration $t$ and  $\sigma(\cdot)$ is the standard deviation.
+
+JMLE also experiences difficulties in estimating the ability parameters for students who answer all items correctly or answer all items incorrectly. In this case, maximizing Equation \ref{eq:log_likelihood} causes $\theta$ to become unbounded. Note that for a student with a perfect score, increasing the estimate to their latent ability towards $\infty$ will increase the log-likelihood -- likewise, decreasing a student's ability estimate to $-\infty$ who got all questions incorrect will also result in an increase to the log-likelihood.
+
+A similar phenomenon occurs for the parameters of items which all students answer correctly or all students answer incorrectly. For example, an item that all students get wrong can be interpreted as a rather difficult item. But JMLE takes this to the extreme, and the difficulty parameter is unboundedly increased each iteration. It is straightforward to show that for an item $i^*$ where $u_{i^*j} = 0$ for all $j$, the partial derivative of Equation \ref{eq:log_likelihood} with respect to the difficulty parameter $b_{i^*}$ is strictly increasing:
+\begin{equation}
+  \frac{\partial \log L}{\partial b_{i^*}} = \sum_{j=1}^N P_{i^*j} = N P_{i^*j} > 0
+  \label{eq:diff_item_partial}
+\end{equation}
+
+
+\subsubsection{Recent Adaptations}
+More recently, researchers have modified the JMLE method to overcome some of its flaws. Chen et al. \cite{chen2019} proposed constraining parameters to a feasible set in order to avoid the issue of unbounded parameter estimates. This results in the constrained optimization problem of maximizing the same log-likelihood in Equation \ref{eq:log_likelihood}, subject to the constraints
+\begin{equation}
+  \sqrt{1 + ||\vect \Theta_j||_2^2} \leq C, \quad \sqrt{b_i^2 + ||\vect a_i||_2^2} \leq C, \quad \text{for all } 1\leq i \leq n, \quad 1 \leq j \leq N
+  \label{eq:cjmle_constraints}
+\end{equation}
+
+This optimization problem is solved iteratively via a projected gradient descent method -- note that this is a first-order method -- another simplification from the second-order Newton-Raphson method described in Section \ref{sec:mle}. In general, a regular gradient descent iteration is defined by
+\begin{equation}
+  \vect x_{t+1} = \vect x_t - \eta \nabla f(\vect x_t)
+  \label{eq:grad_descent}
+\end{equation}
+where $\vect x$ are the variables to be optimized, $f$ is the objective function, and $\eta$ is the learning rate \cite{ruder2017}.
+
+The projected gradient descent algorithm used by Chen et al. makes a small adjustment to Equation \ref{eq:grad_descent} to ensure that the iterates $\vect x_{t+1}$ remain in the feasible set. If $||\vect x_t - \eta \nabla f(\vect x_t)||_2^2 \leq C$, then perform the usual update in Equation \ref{eq:grad_descent}. But if $||\vect x_t - \eta \nabla f(\vect x_t)||_2^2 > C$, then project back onto the feasible set:
+\begin{equation}
+  \vect x_{t+1} = \frac{C}{||\vect x_t - \eta \nabla f(\vect x_t)||_2^2} (\vect x_t - \eta \nabla f(\vect x_t))
+  \label{eq:proj_grad_descent}
+\end{equation}
+
+The student and item parameters are updated in an alternating fashion. Given intial guess for the student parameters $\vect \Theta_{j,0}$ and item parameters $[\vect a_{i,0}, b_{i,0}]^\top$ for all students $1\leq j \leq N$ and all items $1\leq i \leq n$, each iteration is performed as
+\begin{equation}
+\begin{split}
+  \text{For each } &j \text{ in parallel:} \\
+  &\vect \Theta_{j,t+1} \gets \Theta_{j,t} - \eta \nabla \log L(\vect \Theta_{j,t}, [\vect a_{i,t}, b_{i,t}]^\top) \\
+  \text{For each } &i \text{ in parallel:} \\
+  &[\vect a_{i,t+1}, b_{i,t+1}]^\top \gets [\vect a_{i,t}, b_{i,t}]^\top - \eta \nabla \log L(\vect \Theta_{j,t+1}, [\vect a_{i,t}, b_{i,t}]^\top)
+\end{split}
+  \label{eq:cjmle_algo}
+\end{equation}
+Notice that when updating the item parameters in iteration $t+1$ (the second line of Equation \ref{eq:cjmle_algo}), the recently computed iterates $\vect \Theta_{j,t+1}$ are used.
+
+The alternating scheme is similar to that proposed by Birnbaum \cite{birnbaum1968} for JMLE for Newton-Raphson iterations in Equation \ref{eq:newton_raphson}. The two simplifications of constraining the feasible parameter space and using a first-order method fix the issue of unbounded parameter estimates and lessens the burden of estimating a large number of students.
+
+However, notice that as the number of students increase, more threads are required to perform Equation \ref{eq:cjmle_algo} fully in parallel. In particular, the number of parameters to be updated via projected gradient descent increases linearly with the number of students. Additionally, the amount of work for each thread depends linearly on the number of latent abilities.
+
+The identifiability issue faced by JMLE is also experienced in CJMLE -- estimates to student and item parameters are only unique up to a linear transformation. So after estimates have been obtained, they must be re-scaled so that among the population of students, $\vect \Theta \sim \mathcal{N}(0,I)$. Note that this assumes a student's $K$ latent abilities are independent and not correlated with one another.
+
+
+\subsection{Marginal MLE via Expectation-Maximization}
+Another method of estimating IRT parameters utilizes the assumption that $\vect \Theta$ follows some prior distribution, usually $\mathcal{N}(0,I)$, while estimating parameters. This comes into play by applying the law of total probability to the observed data likelihood function in Equation \ref{eq:likelihood} to arrive at the marginal likelihood function \cite{baker_kim2004}:
+\begin{equation}
+  L_m = \prod_{j=1}^N P(\vect u_j) = \prod_{j=1}^N \int P(\vect u_j | \vect \Theta) f(\vect \Theta) d\vect \Theta
+  \label{eq:marginal_likelihood}
+\end{equation}
+where $f(\vect \Theta)$ is the prior distribution of student abilities.
+
+Here, the student ability parameters are integrated out -- replacing the assumed point-estimates of student ability (as in JMLE) with a probability distribution over the student population. The goal then is to estimate the item parameters $\vect a_i$ and $b_i$ by taking appropriate derivatives of $\log L_m$. A notable difficulty is the presence of the integral in Equation \ref{eq:marginal_likelihood} -- this will be explored in Section \ref{sec:dim}
+
+The high-level idea of Marginal Maximum Likelihood Estimation (MMLE) is to estimate the item parameters from using the observed student responses and knowledge of the prior distrubtion of student abilities. Though these student parameters are unobservable, the responses $\vect u_j$ can be used to make inferences about $\vect \Theta$; namely, the expectation of the joint distribution of $f(\vect U, \vect \Theta | \vect a, \vect b)$.
+
+Using Bayes Theorem, write the posterior probability of student $j$'s latent abilities as
+\begin{equation}
+  P(\vect \Theta_j | \vect u_j) = \frac{P(\vect u_j | \vect \Theta_j) f(\vect \Theta_j)}{P(\vect u_j)} = \frac{P(\vect u_j | \vect \Theta_j) f(\vect \Theta_j)}{\int P(\vect u_j | \vect \Theta)f(\vect \Theta)d \vect \Theta}
+  \label{eq:bayes}
+\end{equation}
+
+
+Consider taking partial derivatives of $\log L_m$ as described in Equation \ref{eq:marginal_likelihood} with respect to the item parameters $x_i \in [\vect a_i, b_i]^\top$. Using the identity that $\frac{d}{dx}g(x) = g(x) \cdot \left[\frac{d}{dx}\log g(x)\right]$ for all continuously differentiable $g:\R \to (0,\infty)$ and Equation \ref{eq:bayes}, we have 
+\begin{equation}
+\begin{split}
+  \frac{\partial \log L_m}{\partial x_i} &= \sum_{j=1}^N \frac{1}{P(\vect u_j)} \int \frac{\partial}{\partial x_i} \left[ P(\vect u_j | \vect \Theta) \right] f(\vect \Theta) d \vect \Theta \\
+  &= \sum_{j=1}^N \frac{1}{P(\vect u_j)} \int P(\vect u_j | \vect \Theta) \cdot \frac{\partial}{\partial x_i}\left[\log P(\vect u_j | \vect \Theta) \right] f(\vect \Theta) d \vect \Theta \\
+  &= \sum_{j=1}^N \int \frac{P(\vect u_j | \vect \Theta)f(\vect \Theta)}{P(\vect u_j)}  \cdot \frac{\partial}{\partial x_i}\left[\log P(\vect u_j | \vect \Theta) \right] d\vect \Theta \\
+  &= \sum_{j=1}^N \int P(\vect \Theta | \vect u_j) \cdot \frac{\partial}{\partial x_i} \left[\log P(\vect u_j | \vect \Theta) \right] d \vect \Theta
+\end{split}
+  \label{eq:marginal_partial}
+\end{equation}
+
+The particular values of $\frac{\partial \log P(\vect u_j | \vect \Theta)}{\partial a_{ik}}$ and $\frac{\partial \log P(\vect u_j | \vect \Theta)}{\partial b_i}$ can be found with some difficulty \cite{baker_kim2004} to plug into the last line of Equation \ref{eq:marginal_partial}. The simplest case where $K=1$ (unidimensional IRT) gives
+\begin{equation}
+\begin{split}
+  \frac{\partial \log L_m}{\partial a_{i1}} &= \sum_{j=1}^N \int_\R (\theta - b_i)(u_{ij} - P_{ij}) P(\theta | \vect u_j) d \theta \\
+  \frac{\partial \log L_m}{\partial b_i} &= -a_{i1} \sum_{j=1}^N \int_\R (u_{ij} - P_{ij}) P(\theta | \vect u_j) d\theta
+\end{split}
+  \label{eq:unidim_marginal_partial}
+\end{equation}
+Regardless, solving $\frac{\partial \log L_m}{\partial x_i} = 0$ requires computing an integral over the latent ability $\vect \Theta \in \R^K$.
+
+Solving this issue is tackled using quadrature and the Expectation-Maximization (EM) algorithm  \cite{dempster1977} \cite{bock1981}. Some modifications to the EM algorithm use Monte Carlo methods to compute the integral (MCEM) \cite{meng_schilling1996}. The $K$-dimensional integral is discretized into $H:=c_1 \times c_2 \times \cdot \times c_K$ categories of ability levels. Then each student is categorized into one of $X_h$ ability groups, $1\leq h \leq H$
+
+The EM algorithm is described by two steps which are repeated until convergence. Given initial guesses of the estimates $\hat a_{i1}^{(0)}$ and $\hat b_i^{(0)}$ perform for each iteration $t\geq 1$:
+\begin{enumerate}
+  \item Expectation step:
+    \begin{enumerate}
+      \item Use quadrature (or Monte Carlo) to estimate the posterior probability $P(\vect \Theta_j | \vect u_j) \approx P(X_h | \vect u_j)$ for each student. Note that these values depend on the values $\hat a_{i1}^{(t-1)}$ and $\hat b_i^{(t-1)}$.
+      \item Compute the \textit{expected} number of students which fall into each ability level $X_h$. This quantity can be written as $\overline{s}_h:=\sum_{j=1}^N P(X_h | \vect u_j)$. 
+      \item Compute the \textit{expected} number of correct responses to item $i$ by students in ability level $X_h$, which can be written as $\overline{r}_{ih}:=\sum_{j=1}^N u_{ij} P(X_h | \vect u_j)$.
+    \end{enumerate}
+  \item Maximization step:
+    \begin{enumerate}
+      \item The values computed in the expectation step provide an approximate form of Equation \ref{eq:unidim_marginal_partial} (for the unidimensional case):
+  \begin{equation}
+          \begin{split}
+            \frac{\partial \log L_m}{\partial a_{i1}} &\approx \sum_{j=1}^N \sum_{h=1}^H (X_h - b_i)(u_{ij} - P_{ih}) P(X_h | \vect u_j) \\
+          &\approx \sum_{h=1}^H (X_h - b_i)(\overline{r}_{ih} - P_{ih}\overline{s}_h) \\
+            \frac{\partial \log L_m}{\partial b_i} &\approx -a_{i1} \sum_{j=1}^N \sum_{h=1}^H (u_{ij} - P_{ih}) P(X_h| \vect u_j) \\
+          &\approx -a_{i1} \sum_{h=1}^H (\overline{r}_{ih} -P_{ih}\overline{s}_h)
+\end{split}
+          \label{eq:max_step}
+        \end{equation}
+      \item Solve the optimization problem: find the roots of Equation \ref{eq:max_step}, which serve as this iteration's estimates $\hat a_{i1}^{(t)}$ and $\hat b_i^{(t)}$.
+    \end{enumerate}
+\end{enumerate}
+After item parameters have been estimated, then student ability parameters can be estimated independently using MLE.
+
+
+\subsubsection{Curse of Dimensionality} \label{sec:dim}
+Similar to JMLE, using the EM algorithm to perform MMLE faces difficulties with large datasets, though for a different reason. While JMLE requires inverting a large matrix, MMLE must perform many integrals which may be high-dimensional. As the number of latent traits $K$ increases linearly, the number of points required to compute the integral in Equation \ref{eq:marginal_partial} with respect to $\vect \Theta$ grows exponentially \cite{cai2010}. For example, the popular \verb!mirt! package \cite{mirt} sets the default number of quadrature points per ability dimension at only $3$ when $K>=6$. Yet this is still a problem; if $K=10$, then $H = 3^{10} = 59,000$ quadrature points are used in each iteration. In Chapter \ref{ch:ml2pvae_results}, we analyze a synthetic dataset with $K=20$ latent traits -- the EM algorithm certainly cannot handle $H=3^{20} = 3,486,784,401$ quadrature points.
+
+This highlights one aspect of the curse of dimensionality in data science -- as the number of (latent) features increases, performing accurate analysis becomes computationally infeasible. The specific problem in the case of MMLE relates to a large number of quadrature points (or sample points in MCEM) to compute high-dimensional integrals.
+
+
+\subsection{Metropolis-Hasting Robbins-Monroe}
+A more modern Bayesian approach to estimating IRT parameters was introduced by Li Cai \cite{cai2009} \cite{cai2010}. This method combines the Metropolis-Hastings sampling algorithm with the Robbins-Monro stochastic optimization algorithm to maximize the observed data likelihood. The Metropolis-Hastings Robbins Monro (MHRM) method is tailored for high-dimensional IRT models, and does not rely on numerical integration or sampling large volume spaces \cite{han2014}. 
+
+MHRM is the standard for estimating IRT parameters -- it is the default method in software packages such as \verb!mirt! \cite{mirt}. While it was certainly a step forward in IRT parameter estimation, the method still faces difficulty when given a large dataset -- particularly, an increase in the number of students and number of items causes issues. 
+
+When trying to implement MHRM on large datasets, the amount of memory required to keep track of all parameters is multiple gigabytes, and the algorithm will not run. This is due to the fact that the MHRM algorithm still requires a computation of a large Jacobian matrix $J(\vect x) = \frac{\partial^2 \log L}{\partial x_i \partial x_j}$ where $\vect x$ is any parameter to be estimated, similar to in JMLE. After a stochastic approximation, a matrix of the same size must be inverted in each iteration. \sideremark{TODO: I \textit{think} this is why there is still an issue..}
+
 
 %\section{Artificial Neural Networks}
 %In recent years, artificial neural networks (ANN) have become an increasingly popular tool for machine learning problems. Though they have been around since the 1960's (TODO: citation), GPU technology has become more accessible and modern computers are more powerful, allowing anyone interested to train a basic neural network on their machine. ANN can be applied to a diverse set of problems, including regression, classification, computer vision, natural language processing, function approximation, data generation, and more (TODO: citations).

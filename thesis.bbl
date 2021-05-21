@@ -10,6 +10,24 @@ F.~Baker and S.~Kim.
 \newblock {\em Item Response Theory Parameter Estimation Techniques}.
 \newblock Taylor \& Francis Group, 2nd edition, 2004.
 
+\bibitem{ben_israel1966}
+Adi Ben-Israel.
+\newblock A newton-raphson method for the solution of systems of equations.
+\newblock {\em Journal of Mathematical analysis and applications},
+  15(2):243--252, 1966.
+
+\bibitem{bengio1994}
+Y.~Bengio, P.~Simard, and P.~Frasconi.
+\newblock Learning long-term dependencies with gradient descent is difficult.
+\newblock {\em IEEE Transactions on Neural Networks}, 5(2):157--166, 1994.
+
+\bibitem{birnbaum1968}
+Allen Birnbaum.
+\newblock Some latent trait models and their use in inferring an examinee's
+  ability.
+\newblock In F.~Lord and M.~R. Novick, editors, {\em Statistical Theories of
+  Mental Test Scores}, pages 397--479. Addison-Wesley, 1968.
+
 \bibitem{pattern_rec_book}
 Christopher~M. Bishop.
 \newblock {\em Pattern Recognition and Machine Learning (Information Science
@@ -41,17 +59,36 @@ Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
   editors, {\em Advances in Neural Information Processing Systems}, volume~33,
   pages 1877--1901. Curran Associates, Inc., 2020.
 
+\bibitem{buck1998}
+Gary Buck and Kikumi Tatsuoka.
+\newblock Application of the rule-space procedure to language testing:
+  examining attributes of a free response listening test.
+\newblock {\em Language Testing}, 15(2):119–157, 1998.
+
 \bibitem{cai2009}
 Li~Cai.
 \newblock High-dimensional exploratory item factor analysis by a
   {Metropolis–Hastings} {Robbins–Monro} algorithm.
 \newblock {\em Psychometrika}, 75(1):33–57, 2009.
 
+\bibitem{cai2010}
+Li~Cai.
+\newblock Metropolis-hastings robbins-monro algorithm for confirmatory item
+  factor analysis.
+\newblock {\em Journal of Educational and Behavioral Statistics},
+  35(3):307--335, 2010.
+
 \bibitem{mirt}
 R.~Philip Chalmers.
 \newblock {mirt}: A multidimensional item response theory package for the {R}
   environment.
 \newblock {\em Journal of Statistical Software}, 48(6):1--29, 2012.
+
+\bibitem{chen2019}
+Yunxiao Chen, Xiaoou Li, and Siliang Zhang.
+\newblock Joint maximum likelihood estimation for high-dimensional exploratory
+  item factor analysis.
+\newblock {\em Psychometrika}, 84:124--146, 2019.
 
 \bibitem{aied_paper}
 G.~Converse, M.~Curi, and S.~Oliveira.
@@ -76,7 +113,13 @@ Geoffrey Converse, Brooke Arnold, Mariana Curi, and Suely Oliveira.
 Geoffrey Converse, Mariana Curi, Suely Oliveira, and Jonathan Templin.
 \newblock Estimation of multidimensional item response theory models with
   correlated latent variables using variational autoencoders.
-\newblock {\em Machine Learning}, Under review 2020.
+\newblock {\em Machine Learning}, To appear, 2021.
+
+\bibitem{kt_irt}
+Geoffrey Converse, Suely Oliveira, and Shi Pu.
+\newblock Incorporating item response theory into knowledge tracing.
+\newblock In {\em International Conference on Artificial Intelligence in
+  Education (AIED)}, 2021.
 
 \bibitem{corbett1995}
 Albert Corbett and John Anderson.
@@ -95,6 +138,19 @@ M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
   models.
 \newblock {\em Educational and Psychological Measurement}, 2018.
 
+\bibitem{dai2019}
+Zihang Dai, Zhilin Yang, Yiming Yang, Jaime~G. Carbonell, Quoc~V. Le, and
+  Ruslan Salakhutdinov.
+\newblock Transformer-xl: Attentive language models beyond a fixed-length
+  context.
+\newblock {\em CoRR}, abs/1901.02860, 2019.
+
+\bibitem{dempster1977}
+A.~P. Dempster, N.~M. Laird, and D.~B. Rubin.
+\newblock Maximum likelihood from incomplete data via the em algorithm.
+\newblock {\em Journal of the Royal Statistical Society: Series B
+  (Methodological)}, 39(1):1--22, 1977.
+
 \bibitem{bert}
 J.~Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
 \newblock Bert: Pre-training of deep bidirectional transformers for language
@@ -104,6 +160,30 @@ J.~Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
 \bibitem{doersch2016}
 Carl Doersch.
 \newblock Tutorial on variational autoencoders, 2016.
+
+\bibitem{kahou2015}
+Samira Ebrahimi~Kahou, Vincent Michalski, Kishore Konda, Roland Memisevic, and
+  Christopher Pal.
+\newblock Recurrent neural networks for emotion recognition in video.
+\newblock In {\em Proceedings of the 2015 ACM on International Conference on
+  Multimodal Interaction}, page 467–474, 2015.
+
+\bibitem{elman1990}
+Jeffrey~L. Elman.
+\newblock Finding structure in time.
+\newblock {\em Cognitive Science}, 14(2):179--211, 1990.
+
+\bibitem{gilpin2020}
+William Gilpin.
+\newblock Deep learning of dynamical attractors from time series measurements.
+\newblock In {\em Conference on Neural Information Processing Systems}, 2020.
+
+\bibitem{goebel2018}
+Randy Goebel, Ajay Chander, Katharina Holzinger, Freddy Lecue, Zeynep Akata,
+  Simone Stumpf, Peter Kieseberg, and Andreas Holzinger.
+\newblock Explainable ai: the new 42?
+\newblock In {\em International cross-domain conference for machine learning
+  and knowledge extraction}, pages 295--303. Springer, 2018.
 
 \bibitem{guo2017}
 Q.~Guo, M.~Cutumisu, and Y.~Cui.
@@ -119,11 +199,27 @@ Shelby~J. Haberman.
 \newblock Technical Report RR-05-24, Research and Development, ETS, December
   2005.
 
+\bibitem{hammerstrom1993}
+D.~Hammerstrom.
+\newblock Neural networks at work.
+\newblock {\em IEEE Spectrum}, 30(6):26--32, 1993.
+
+\bibitem{han2014}
+Kyung (Chris)~T. Han and Insu Paek.
+\newblock A review of commercial software packages for multidimensional irt
+  modeling.
+\newblock {\em Applied Psychological Measurement}, 38(6):486--498, 2014.
+
 \bibitem{henson2007}
 R.~Henson and J.~Templin.
 \newblock Large-scale language assessment using cognitive diagnosis models.
 \newblock In {\em Annual meeting of the National Council for Measurement in
   Education}, 2007.
+
+\bibitem{hochreiter1997}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
 
 \bibitem{kingma2014}
 D.~Kingma and M.~Welling.
@@ -140,10 +236,44 @@ F.~Lord and M.~R Novick.
 \newblock {\em Statistical theories of mental test scores}.
 \newblock IAP, 1968.
 
+\bibitem{meng_schilling1996}
+Xiao-Li Meng and Stephen Schilling.
+\newblock Fitting full-information item factor models and an empirical
+  investigation of bridge sampling.
+\newblock {\em Journal of the American Statistical Association},
+  91(435):1254--1267, 1996.
+
+\bibitem{mikolov2013}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In {\em Proceedings of the 26th International Conference on Neural
+  Information Processing Systems - Volume 2}, page 3111–3119, Red Hook, NY,
+  USA, 2013. Curran Associates Inc.
+
+\bibitem{myung2003}
+In~Jae Myung.
+\newblock Tutorial on maximum likelihood estimation.
+\newblock {\em Journal of Mathematical Psychology}, 47(1):90--100, 2003.
+
+\bibitem{ecoa}
+The United States~Department of~Justice.
+\newblock The equal credit opportunity act, Jul 2020.
+
+\bibitem{olah2015}
+Christopher Olah.
+\newblock Understanding lstm networks, 2015.
+
 \bibitem{pandey2019}
 Shalini Pandey and George Karypis.
 \newblock A self-attentive model for knowledge tracing.
 \newblock {\em International Conference on Educational Data Mining}, 2019.
+
+\bibitem{pascanu2013}
+Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio.
+\newblock On the difficulty of training recurrent neural networks.
+\newblock In {\em Proceedings of the 30th International Conference on Machine
+  Learning}, volume~28, pages 1310--1318. PMLR, 2013.
 
 \bibitem{pavlik2009}
 Philip~I. Pavlik, Hao Cen, and Kenneth~R. Koedinger.
@@ -168,7 +298,8 @@ Elad Plaut.
 \bibitem{deep_pfa}
 Shi Pu, Geoffrey Converse, and Yuchi Huang.
 \newblock Deep performance factors analysis for knowledge tracing.
-\newblock In {\em Submitted for Initial Review}, 2021.
+\newblock In {\em International Conference on Artificial Intelligence in
+  Education (AIED)}, 2021.
 
 \bibitem{rafique2020}
 Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.
@@ -181,7 +312,29 @@ Alexander Robitzsch, Thomas Kiefer, Ann~Cathrice George, and Ali Uenlue.
 \newblock {\em CDM: Cognitive Diagnosis Modeling}, 2020.
 \newblock R package version 7.5-15.
 
-\bibitem{Templin2013}
+\bibitem{rosenblatt1961}
+Frank Rosenblatt.
+\newblock Principles of neurodynamics. perceptrons and the theory of brain
+  mechanisms.
+\newblock Technical report, Cornell Aeronautical Lab Inc Buffalo NY, 1961.
+
+\bibitem{ruder2017}
+Sebastian Ruder.
+\newblock An overview of gradient descent optimization algorithms, 2017.
+
+\bibitem{sharma2020}
+Sagar Sharma, Simone Sharma, and Anidhya Athaiya.
+\newblock Activation functions in neural networks.
+\newblock {\em International Journal of Engineering Applied Sciences and
+  Technology}, 4(12):310--316, 2020.
+
+\bibitem{sinharay2007}
+Sandip Sinharay and Russell~G. Almond.
+\newblock Assessing fit of cognitive diagnostic models a case study.
+\newblock {\em Educational and Psychological Measurement}, 67(2):239--257,
+  2007.
+
+\bibitem{templin2013}
 Jonathan Templin and Lesa Hoffman.
 \newblock Obtaining diagnostic classification model estimates using mplus.
 \newblock {\em Educational Measurement: Issues and Practice}, 32(2):37–50,
@@ -223,6 +376,12 @@ Chun{-}Kit Yeung.
 \newblock Deep-irt: Make deep learning based knowledge tracing explainable
   using item response theory.
 \newblock {\em CoRR}, abs/1904.11738, 2019.
+
+\bibitem{zhang2000}
+G.P. Zhang.
+\newblock Neural networks for classification: a survey.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics, Part C
+  (Applications and Reviews)}, 30(4):451--462, 2000.
 
 \bibitem{zhang2017}
 Jiani Zhang, Xingjian Shi, Irwin King, and Dit~Yan Yeung.
