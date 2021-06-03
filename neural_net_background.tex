@@ -1,3 +1,4 @@
+% NOTE: all of this content has been moved to irt_background and knowledge_tracing_background
 \chapter{Survey of Relevant Neural Networks}
 
 In recent years, artificial neural networks (ANN) have become an increasingly popular tool for machine learning problems. Though they have been around since the 1960's \cite{rosenblatt1961}, GPU technology has become more accessible and modern computers are more powerful, allowing anyone interested to train a basic neural network on their machine. ANN can be applied to a diverse set of problems, including regression, classification, computer vision, natural language processing, function approximation, data generation, and more \cite{hammerstrom1993} \cite{zhang2000}.
@@ -37,7 +38,7 @@ From observing the dataset $\mathbb{X}$, the latent variables $\vect z_i$ and pa
 
 In order to implement this task, two neural networks $q_\alpha(\vect z | \vect x)$ and $p_\beta(\vect x | \vect z)$ (probabilistic encoder and decoder, respectively) are used to approximate the unobservable true posterior distributions $p_{\alpha^*}(\vect z| \vect x)$ and $p_{\beta^*}(\vect x | \vect z)$. In the encoder/decoder, the indices $\alpha$ and $\beta$ reference settings of the trainable parameters of the neural network. Note that unlike a regular autoencoder, the probabilistic encoder $q_\alpha(\vect z | \vect x)$ of a VAE outputs a probability distribution for $\vect z$ given $\vect x$, rather than a single value.
 
-\subsubsection{A note on Information Theory}
+\subsection{A note on Information Theory}
 Before continuing, we introduce some ideas from information theory: entropy, cross-entropy, and KL-Divergence \cite{pattern_rec_book}. Consider a random variable $x$. For a particular value $x_0$, we can compute the amount of information gained from observing $x_0$ as $h(x_0) = -\log_2 p(x=x_0)$. When we use $\log_2$, the unit for information is ``bits,'' but any logarithm can be used. Note that we gain more information from observing a low-probability event than from observing a high-probability event. 
 
 \textit{Entropy} is defined as the expectation of $h(x)$: the average amount of information that will be learned by observing a random $x$. So the entropy of the random variable $x$ is given as 
@@ -59,7 +60,7 @@ We can simply define \textit{Kullback-Leibler Divergence} (KL-Divergence) \cite{
 \end{equation}
 Intuitively, KL-Divergence is amount of information which is lost if the approximating distribution $q(x)$ is used instead of the true distribution $p(x)$. However, KL-Divergence cannot be interpreted as a metric or as a distance between $p$ and $q$ because it is not symmetric -- in general, $\mathcal{D}_{KL}[p||q] \not = \mathcal{D}_{KL}[q||p]$. KL-Divergence is non-negative, and $\mathcal{D}_{KL}[p||q] = 0$ iff $p(x) = q(x)$.
 
-\subsubsection{VAE Derivation}\label{sec:vae_derive}
+\subsection{VAE Derivation}\label{sec:vae_derive}
 
 We derive the desired loss function for a VAE. The log marginal likelihood is given as
 \begin{equation}
@@ -126,7 +127,7 @@ Usually when working with neural networks, goal is to minimize an loss function,
 where $\vect z^* \sim p_\beta(\vect z) = \mathcal{N}(0,I)$. The parameters $\alpha$ and $\beta$ represent the weights and biases of the encoder and decoder, and are updated via a gradient descent algorithm in order to minimize Equation \ref{eq:vae_loss}. Note that $\mathcal{L}(\alpha, \beta; \vect x)$ can simply be understood as reconstructing a binary input $\vect x$ via the first term, while regularizing on the latent code via the second term.
 
 
-\subsubsection{Implementation Details}
+\subsection{Implementation Details}
 Recall that each observed data point $\vect x_i \in \R^n$ and the corresponding latent code $\vect z_i \in \R^d$. To parameterize the encoder $q_\alpha(\vect z | \vect x)$ as a neural network, an input layer with $n$ nodes is required. The encoder can (but does not need to) include a number of hidden layers of varying size. The output of the encoder must include $2\cdot d$ nodes, assuming that $p_\beta(\vect z) = \mathcal{N}(0,I)$. 
 
 Notice that in Equation \ref{eq:ind_gauss_kl}, there is a term $\log(\sigma_{0,k}^2)$, dependent on input $\vect x_0$ and all parameters of the encoder. If at any point during training $\sigma_{0,k}^2 \leq 0$ for any $k$, then the VAE loss would not be possible to calculate. To avoid this issue and ensure that $\sigma_{0,k}^2 > 0$ regardless of inputs or encoder parameters, the encoder outputs the log-variances rather than the variances. The first $d$ nodes outputted by the encoder represent the latent mean vector $\vect \mu$, and the last $d$ nodes represent the $\log$ latent variances $\log \vect \sigma^2$. So for an observed input $\vect x_0$, the encoder will output a $d$-dimensional standard normal distribution $\mathcal{N}(\vect \mu_0, \vect \sigma_0^2I)$.
