@@ -1,5 +1,24 @@
 \begin{thebibliography}{10}
 
+\bibitem{tensorflow}
+Mart\'{\i}n Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
+  Craig Citro, Greg~S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin,
+  Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard,
+  Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh
+  Levenberg, Dan Man\'{e}, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah,
+  Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar,
+  Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\'{e}gas, Oriol
+  Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang
+  Zheng.
+\newblock {TensorFlow}: Large-scale machine learning on heterogeneous systems,
+  2015.
+\newblock Software available from tensorflow.org.
+
+\bibitem{keras_r}
+JJ~Allaire and François Chollet.
+\newblock {\em keras: {R} Interface to Keras}, 2020.
+\newblock {R} package version 2.3.0.0.9000.
+
 \bibitem{atkinson}
 Kendall Atkinson.
 \newblock {\em An Introduction to Numerical Analysis}.
@@ -113,7 +132,7 @@ Geoffrey Converse, Brooke Arnold, Mariana Curi, and Suely Oliveira.
 Geoffrey Converse, Mariana Curi, Suely Oliveira, and Jonathan Templin.
 \newblock Estimation of multidimensional item response theory models with
   correlated latent variables using variational autoencoders.
-\newblock {\em Machine Learning}, To appear, 2021.
+\newblock {\em Machine Learning}, 2021.
 
 \bibitem{kt_irt}
 Geoffrey Converse, Suely Oliveira, and Shi Pu.
@@ -173,6 +192,12 @@ Jeffrey~L. Elman.
 \newblock Finding structure in time.
 \newblock {\em Cognitive Science}, 14(2):179--211, 1990.
 
+\bibitem{gentile1998}
+Claudio Gentile and Manfred~KK Warmuth.
+\newblock Linear hinge loss and average margin.
+\newblock {\em Advances in neural information processing systems}, 11:225--231,
+  1998.
+
 \bibitem{gilpin2020}
 William Gilpin.
 \newblock Deep learning of dynamical attractors from time series measurements.
@@ -210,6 +235,12 @@ Kyung (Chris)~T. Han and Insu Paek.
   modeling.
 \newblock {\em Applied Psychological Measurement}, 38(6):486--498, 2014.
 
+\bibitem{hastings1970}
+W.~K. Hastings.
+\newblock Monte carlo sampling methods using markov chains and their
+  applications.
+\newblock {\em Biometrika}, 57(1):97--109, 1970.
+
 \bibitem{henson2007}
 R.~Henson and J.~Templin.
 \newblock Large-scale language assessment using cognitive diagnosis models.
@@ -231,10 +262,20 @@ S.~Kullback and R.~A. Leibler.
 \newblock On information and sufficiency.
 \newblock {\em Annals of Mathematical Statistics}, page 79–86, 1951.
 
+\bibitem{nn_svg}
+Alexander LeNail.
+\newblock Nn-svg: Publication-ready neural network architecture schematics.
+\newblock {\em Journal of Open Source Software}, 4(33):747, 2019.
+
 \bibitem{lord1968}
 F.~Lord and M.~R Novick.
 \newblock {\em Statistical theories of mental test scores}.
 \newblock IAP, 1968.
+
+\bibitem{masters1982}
+Geoff~N Masters.
+\newblock A rasch model for partial credit scoring.
+\newblock {\em Psychometrika}, 47(2):149--174, 1982.
 
 \bibitem{meng_schilling1996}
 Xiao-Li Meng and Stephen Schilling.
@@ -255,6 +296,11 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
 In~Jae Myung.
 \newblock Tutorial on maximum likelihood estimation.
 \newblock {\em Journal of Mathematical Psychology}, 47(1):90--100, 2003.
+
+\bibitem{neural_net}
+Michael~A. Nielsen.
+\newblock {\em Neural Networks and Deep Learning}.
+\newblock Determination Press, 2015.
 
 \bibitem{ecoa}
 The United States~Department of~Justice.
@@ -307,10 +353,31 @@ Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.
 \newblock In {\em Proceedings of the International Conference on Machine
   Learning}, 2020.
 
+\bibitem{rasch1960}
+G.~Rasch.
+\newblock Probabilistic models for some intelligence and attainment tests.
+\newblock {\em Danish Institute for Educational Research}, 1960.
+
+\bibitem{reckase2009multidimensional}
+Mark~D. Reckase.
+\newblock Multidimensional item response theory models.
+\newblock In {\em Multidimensional item response theory}, pages 79--112.
+  Springer, 2009.
+
+\bibitem{robbins1951}
+Herbert Robbins and Sutton Monro.
+\newblock A stochastic approximation method.
+\newblock {\em The annals of mathematical statistics}, pages 400--407, 1951.
+
 \bibitem{cdm}
 Alexander Robitzsch, Thomas Kiefer, Ann~Cathrice George, and Ali Uenlue.
 \newblock {\em CDM: Cognitive Diagnosis Modeling}, 2020.
 \newblock R package version 7.5-15.
+
+\bibitem{rojas1996}
+Raul Rojas.
+\newblock The backpropagation algorithm.
+\newblock In {\em Neural networks}, pages 149--182. Springer, 1996.
 
 \bibitem{rosenblatt1961}
 Frank Rosenblatt.
@@ -322,17 +389,36 @@ Frank Rosenblatt.
 Sebastian Ruder.
 \newblock An overview of gradient descent optimization algorithms, 2017.
 
+\bibitem{samejima1997}
+Fumiko Samejima.
+\newblock Graded response model.
+\newblock In {\em Handbook of modern item response theory}, pages 85--100.
+  Springer, 1997.
+
 \bibitem{sharma2020}
 Sagar Sharma, Simone Sharma, and Anidhya Athaiya.
 \newblock Activation functions in neural networks.
 \newblock {\em International Journal of Engineering Applied Sciences and
   Technology}, 4(12):310--316, 2020.
 
+\bibitem{sibi2013}
+P~Sibi, S~Allwyn Jones, and P~Siddarth.
+\newblock Analysis of different activation functions using back propagation
+  neural networks.
+\newblock {\em Journal of theoretical and applied information technology},
+  47(3):1264--1268, 2013.
+
 \bibitem{sinharay2007}
 Sandip Sinharay and Russell~G. Almond.
 \newblock Assessing fit of cognitive diagnostic models a case study.
 \newblock {\em Educational and Psychological Measurement}, 67(2):239--257,
   2007.
+
+\bibitem{tatsuoka1983}
+Kikumi~K. Tatsuoka.
+\newblock Rule space: An approach for dealing with misconceptions based on item
+  response theory.
+\newblock {\em Journal of Educational Measurement}, 20(4):345--354, 1983.
 
 \bibitem{templin2013}
 Jonathan Templin and Lesa Hoffman.
