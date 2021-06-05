@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  3 JUN 2021 12:21
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  5 JUN 2021 17:56
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -809,11 +809,20 @@ File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
 Package: listings 2019/02/27 1.8b (Carsten Heinz)
 
-(C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.sty
+(C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
+File: lstlang1.sty 2019/02/27 1.8b listings language file
+) (C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang2.st
+y
+File: lstlang2.sty 2019/02/27 1.8b listings language file
+)
+(C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang3.sty
+File: lstlang3.sty 2019/02/27 1.8b listings language file
+) (C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.st
+y
 Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count161
-) (C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\enumitem\enumitem.st
-y
+)
+(C:\Users\gconverse\AppData\Roaming\MiKTeX\2.9\tex\latex\enumitem\enumitem.sty
 Package: enumitem 2019/02/04 v3.8 Customized lists
 \labelindent=\skip86
 \enit@outerparindent=\dimen188
@@ -842,24 +851,24 @@ LaTeX Warning: Unused global option(s):
 (knowledge_tracing_results.aux) (related_work.aux) (appendix.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -868,7 +877,7 @@ Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring OFF on input line 84.
+Package hyperref Info: Link coloring OFF on input line 115.
  (C:\MiKTeX\tex\latex\hyperref\nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (C:\MiKTeX\tex\generic\oberdiek\gettitlestring.sty
@@ -876,20 +885,20 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count165
 )
-LaTeX Info: Redefining \ref on input line 84.
-LaTeX Info: Redefining \pageref on input line 84.
-LaTeX Info: Redefining \nameref on input line 84.
+LaTeX Info: Redefining \ref on input line 115.
+LaTeX Info: Redefining \pageref on input line 115.
+LaTeX Info: Redefining \nameref on input line 115.
  (thesis.out) (thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
 \c@lstlisting=\count166
-LaTeX Font Info:    Try loading font information for U+msa on input line 87.
+LaTeX Font Info:    Try loading font information for U+msa on input line 118.
 
 (C:\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 87.
+LaTeX Font Info:    Try loading font information for U+msb on input line 118.
  (C:\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -904,10 +913,6 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
 ] [2] [3] (thesisAck.tex) [2] (thesisAbstract.tex) [3] (thesisAbstractpublic.te
 x [4]) [5] (thesis.toc
-Overfull \hbox (5.73758pt too wide) in paragraph at lines 26--26
- [][] [][]\TU/lmr/m/n/12 ESTIMATING IRT PARAMETERS WITH VARIATIONAL AUTOEN- 
- []
-
 [6
 
 ] [7])
@@ -948,9 +953,6 @@ CHAPTER 1.
 
  (irt_param_est_background.tex
 CHAPTER 2.
-
-LaTeX Warning: Citation `chou2020' on page 2 undefined on input line 8.
-
 [2
 
 
@@ -985,28 +987,36 @@ CHAPTER 3.
 
 
 
-] [36] [37] [38] [39]
+]
+
+LaTeX Warning: Citation `zhehan2018' on page 36 undefined on input line 17.
+
+[36] [37] [38] [39] [40] [41]
 File: img/ml2pvae_visual.png Graphic file (type bmp)
 <img/ml2pvae_visual.png>
- [40] [41] [42]) [43]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[42] [43] [44] [45]) [46]
 \openout2 = `irt_param_est_results.aux'.
 
  (irt_param_est_results.tex
 CHAPTER 4.
-[44
+[47
 
 
 
-] [45] [46] [47]
+] [48] [49] [50]
 File: img/ijcnn_results/10k_a.eps Graphic file (type eps)
 <img/ijcnn_results/10k_a.eps>
 File: img/ijcnn_results/10k_b.eps Graphic file (type eps)
 <img/ijcnn_results/10k_b.eps>
- [48]
+ [51]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[49]
+[52]
 File: img/ijcnn_results/10k_t1_scaled.eps Graphic file (type eps)
 <img/ijcnn_results/10k_t1_scaled.eps>
 File: img/ijcnn_results/10k_t2_scaled.eps Graphic file (type eps)
@@ -1019,7 +1029,7 @@ File: img/ijcnn_results/BxpTheta.jpg Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[50] [51] [52] [53]
+[53] [54] [55] [56]
 File: img/aied_results/ae_a_corr.png Graphic file (type bmp)
 <img/aied_results/ae_a_corr.png>
 File: img/aied_results/vae_a_corr.png Graphic file (type bmp)
@@ -1035,7 +1045,7 @@ File: img/aied_results/vae_b_corr.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[54] [55]
+[57] [58]
 File: img/aied_results/ae_theta1_corr.png Graphic file (type bmp)
 <img/aied_results/ae_theta1_corr.png>
 File: img/aied_results/vae_theta1_corr.png Graphic file (type bmp)
@@ -1044,7 +1054,7 @@ File: img/aied_results/vae_theta1_corr.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[56] [57] [58] [59]
+[59] [60] [61] [62]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1076,7 +1086,7 @@ bmp)
 File: img/ml_journal_results/6skills/mcem_disc_6skills.png Graphic file (type b
 mp)
 <img/ml_journal_results/6skills/mcem_disc_6skills.png>
-[60]
+[63]
 File: img/ml_journal_results/ecpe/vae_est_disc_ecpe.png Graphic file (type bmp)
 
 <img/ml_journal_results/ecpe/vae_est_disc_ecpe.png>
@@ -1095,7 +1105,7 @@ File: img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png Graphic file (type bmp)
 File: img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png Graphic file (type bmp
 )
 <img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png>
- [61]
+ [64]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1130,7 +1140,7 @@ type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[62] [63]
+[65] [66]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1162,7 +1172,7 @@ ile (type bmp)
 File: img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png Graphic f
 ile (type bmp)
 <img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png>
-[64]
+[67]
 File: img/ml_journal_results/vae_full_train_size_error.png Graphic file (type b
 mp)
 <img/ml_journal_results/vae_full_train_size_error.png>
@@ -1173,48 +1183,48 @@ p)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[65] [66] [67] [68] [69]) [70]
+[68] [69] [70] [71] [72]) [73]
 \openout2 = `knowledge_tracing_background.aux'.
 
  (knowledge_tracing_background.tex
 CHAPTER 5.
-[71
+[74
 
 
 
-]
+] [75]
 File: img/rnn_visual.png Graphic file (type bmp)
 <img/rnn_visual.png>
- [72] [73]
+ [76] [77]
 File: img/lstm_visual.png Graphic file (type bmp)
 <img/lstm_visual.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85]) [86]
+[78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90]) [91]
 \openout2 = `knowledge_tracing_methods.aux'.
 
 
 (knowledge_tracing_methods.tex
 CHAPTER 6.
-[87
-
-
-
-] [88]
-File: img/kt_irt/kt_irt_visual_with_equation_2.png Graphic file (type bmp)
-<img/kt_irt/kt_irt_visual_with_equation_2.png>
- [89] [90]) [91]
-\openout2 = `knowledge_tracing_results.aux'.
-
- (knowledge_tracing_results.tex
-CHAPTER 7.
 [92
 
 
 
-] [93] [94] [95]
+] [93]
+File: img/kt_irt/kt_irt_visual_with_equation_2.png Graphic file (type bmp)
+<img/kt_irt/kt_irt_visual_with_equation_2.png>
+ [94] [95]) [96]
+\openout2 = `knowledge_tracing_results.aux'.
+
+ (knowledge_tracing_results.tex
+CHAPTER 7.
+[97
+
+
+
+] [98] [99] [100]
 File: img/kt_irt/synth5_diff_est_lstm.png Graphic file (type bmp)
 <img/kt_irt/synth5_diff_est_lstm.png>
 File: img/kt_irt/disc_est_attn2.png Graphic file (type bmp)
@@ -1225,7 +1235,7 @@ File: img/kt_irt/diff_attn_sim200.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[96] [97]
+[101] [102]
 File: img/kt_irt/theta_est_attn2.png Graphic file (type bmp)
 <img/kt_irt/theta_est_attn2.png>
 File: img/kt_irt/knowledge_trace_lstm_edited.png Graphic file (type bmp)
@@ -1236,16 +1246,16 @@ File: img/kt_irt/knowledge_trace_attn_edited.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[98] [99]) [100]
+[103] [104]) [105]
 \openout2 = `related_work.aux'.
 
  (related_work.tex
 CHAPTER 8.
-[101
+[106
 
 
 
-] [102] [103]
+] [107] [108]
 File: img/fsdm_results/contact_corr.eps Graphic file (type eps)
 <img/fsdm_results/contact_corr.eps>
 File: img/fsdm_results/baserun_corr.eps Graphic file (type eps)
@@ -1258,7 +1268,7 @@ File: img/fsdm_results/pitch_intuit_corr.eps Graphic file (type eps)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [104] [105]
+) [109] [110]
 \openout2 = `appendix.aux'.
 
  (appendix.tex
@@ -1266,58 +1276,61 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Package hyperref Warning: bookmark level for unknown head defaults to 0.
 
 APPENDIX A.
-[106
-
-
-
-]
-APPENDIX B.
 File: img/ffn_visual.png Graphic file (type bmp)
 <img/ffn_visual.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[107
+[111
 
-] [108] [109] [110]
 
-LaTeX Warning: Reference `fig:ffn_example' on page 111 undefined on input line 
-79.
 
-[111] [112] [113]
-APPENDIX C.
-[114
+] [112] [113] [114] [115] [116] [117]
+APPENDIX B.
+
+Overfull \hbox (10.53687pt too wide) in paragraph at lines 129--130
+\TU/lmr/m/n/12 training, and evaluating ML2P-VAE models. The functions [][][]\T
+U/lmtt/m/n/12 build_vae_independent()[]
+ []
+
+[118
 
 ]
-APPENDIX D.
-) [115
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 139.
+ (ml2pvae_tutorial.R [119] [120])
+File: img/ml2pvae_tutorial_plots.png Graphic file (type bmp)
+<img/ml2pvae_tutorial_plots.png>
+ [121]
+APPENDIX C.
+) [122
 
-] (thesis.bbl [116
+] (thesis.bbl [123
 
 
-] [117] [118] [119] [120] [121]) [122]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 124.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 124.
- (thesis.aux
-(introduction.aux) (irt_param_est_background.aux) (irt_param_est_methods.aux)
-(irt_param_est_results.aux) (knowledge_tracing_background.aux)
-(knowledge_tracing_methods.aux) (knowledge_tracing_results.aux)
-(related_work.aux) (appendix.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 124.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 124.
+] [124] [125] [126] [127] [128]) [129] [130]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 155.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 155.
+
+(thesis.aux (introduction.aux) (irt_param_est_background.aux)
+(irt_param_est_methods.aux) (irt_param_est_results.aux)
+(knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
+(knowledge_tracing_results.aux) (related_work.aux) (appendix.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 155.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 155.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 124.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 155.
  ) 
 Here is how much of TeX's memory you used:
- 26693 strings out of 427839
- 487031 string characters out of 3155939
- 563594 words of memory out of 3000000
- 30134 multiletter control sequences out of 15000+200000
- 13785 words of font info for 61 fonts, out of 3000000 for 9000
+ 27603 strings out of 427839
+ 497604 string characters out of 3155939
+ 801348 words of memory out of 3000000
+ 31027 multiletter control sequences out of 15000+200000
+ 13793 words of font info for 62 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 56i,21n,82p,1203b,571s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,21n,82p,1203b,1735s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.pdf (135 pages).
+Output written on thesis.pdf (143 pages).
