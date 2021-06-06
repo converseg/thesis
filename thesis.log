@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  5 JUN 2021 17:56
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  5 JUN 2021 21:44
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1012,11 +1012,11 @@ File: img/ijcnn_results/10k_a.eps Graphic file (type eps)
 <img/ijcnn_results/10k_a.eps>
 File: img/ijcnn_results/10k_b.eps Graphic file (type eps)
 <img/ijcnn_results/10k_b.eps>
- [51]
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[52]
+[51] [52] [53]
 File: img/ijcnn_results/10k_t1_scaled.eps Graphic file (type eps)
 <img/ijcnn_results/10k_t1_scaled.eps>
 File: img/ijcnn_results/10k_t2_scaled.eps Graphic file (type eps)
@@ -1029,32 +1029,29 @@ File: img/ijcnn_results/BxpTheta.jpg Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[53] [54] [55] [56]
+[54] [55] [56]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[57]
 File: img/aied_results/ae_a_corr.png Graphic file (type bmp)
 <img/aied_results/ae_a_corr.png>
 File: img/aied_results/vae_a_corr.png Graphic file (type bmp)
 <img/aied_results/vae_a_corr.png>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 File: img/aied_results/ae_b_corr.png Graphic file (type bmp)
 <img/aied_results/ae_b_corr.png>
 File: img/aied_results/vae_b_corr.png Graphic file (type bmp)
 <img/aied_results/vae_b_corr.png>
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[57] [58]
+[58] [59]
 File: img/aied_results/ae_theta1_corr.png Graphic file (type bmp)
 <img/aied_results/ae_theta1_corr.png>
 File: img/aied_results/vae_theta1_corr.png Graphic file (type bmp)
 <img/aied_results/vae_theta1_corr.png>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[59] [60] [61] [62]
+ [60] [61] [62]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1062,7 +1059,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.275 ...tle{Discrimination Parameter Estimates}\\
+l.277 ...tle{Discrimination Parameter Estimates}\\
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1086,6 +1083,9 @@ bmp)
 File: img/ml_journal_results/6skills/mcem_disc_6skills.png Graphic file (type b
 mp)
 <img/ml_journal_results/6skills/mcem_disc_6skills.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [63]
 File: img/ml_journal_results/ecpe/vae_est_disc_ecpe.png Graphic file (type bmp)
 
@@ -1105,7 +1105,11 @@ File: img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png Graphic file (type bmp)
 File: img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png Graphic file (type bmp
 )
 <img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png>
- [64]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[64]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1113,7 +1117,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.344 ...nation and Ability Parameter Estimates}\\
+l.346 ...nation and Ability Parameter Estimates}\\
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1148,7 +1152,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.383 ...tle{Discrimination Parameter Estimates}\\
+l.385 ...tle{Discrimination Parameter Estimates}\\
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1172,18 +1176,17 @@ ile (type bmp)
 File: img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png Graphic f
 ile (type bmp)
 <img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png>
-[67]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[67] [68]
 File: img/ml_journal_results/vae_full_train_size_error.png Graphic file (type b
 mp)
 <img/ml_journal_results/vae_full_train_size_error.png>
 File: img/ml_journal_results/vae_full_train_size_time.png Graphic file (type bm
 p)
 <img/ml_journal_results/vae_full_train_size_time.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[68] [69] [70] [71] [72]) [73]
+ [69] [70] [71] [72]) [73]
 \openout2 = `knowledge_tracing_background.aux'.
 
  (knowledge_tracing_background.tex
@@ -1325,12 +1328,12 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 155.
  ) 
 Here is how much of TeX's memory you used:
- 27603 strings out of 427839
- 497604 string characters out of 3155939
+ 27605 strings out of 427839
+ 497639 string characters out of 3155939
  801348 words of memory out of 3000000
- 31027 multiletter control sequences out of 15000+200000
+ 31029 multiletter control sequences out of 15000+200000
  13793 words of font info for 62 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 56i,21n,82p,1203b,1735s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,21n,82p,1203b,1743s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on thesis.pdf (143 pages).
