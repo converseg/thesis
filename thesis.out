@@ -31,7 +31,7 @@
 \BOOKMARK [1][-]{section.4.2}{Quantitative\040Results}{chapter.4}% 31
 \BOOKMARK [2][-]{subsection.4.2.1}{Preliminary\040Results}{section.4.2}% 32
 \BOOKMARK [3][-]{subsubsection.4.2.1.1}{Remarks}{subsection.4.2.1}% 33
-\BOOKMARK [2][-]{subsection.4.2.2}{Variational\040Autoencoder\040vs\040Autoencoder}{section.4.2}% 34
+\BOOKMARK [2][-]{subsection.4.2.2}{Variational\040Autoencoder\040vs\040Regular\040Autoencoder\040in\040IRT}{section.4.2}% 34
 \BOOKMARK [2][-]{subsection.4.2.3}{ML2P-VAE\040vs\040Traditional\040Methods}{section.4.2}% 35
 \BOOKMARK [3][-]{subsubsection.4.2.3.1}{Effect\040of\040Training\040Data\040Size}{subsection.4.2.3}% 36
 \BOOKMARK [1][-]{section.4.3}{Discussion}{chapter.4}% 37
