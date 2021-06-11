@@ -1,8 +1,24 @@
 \chapter{Introduction}
-TODO: I should have an introduction to the full work here.
+\sideremark{TODO: don't use too much technical terminology or notation -- expand upon the abstract and include citations}
+\section{Overview}
+
+Outline of introduction:
+\begin{itemize}
+  \item IRT Parameter Estimation
+\begin{itemize}
+  \item Neural networks and big data
+  \item IRT -- better way to model student learning
+  \item Problems -- high dimensionality is hard
+\end{itemize}
+  \item Knowledge Tracing
+\begin{itemize}
+  \item Online/electronic learning, intelligent tutoring, knowledge tracing
+  \item KT methods are unexplainable and don't use IRT
+\end{itemize}
+\end{itemize}
 
 \section{Organization}
-This thesis is organized in three parts. In Part I, the first three chapters introduce Item Response Theory (IRT) and analyzes the novel parameter estimation method, ML2P-VAE. This method uses a modified variational autoencoder to estimation parameters in IRT models. Chapters 5-7 of Part II explore a task commonly seen in electronic learning environments in knowledge tracing. While other deep learning methods for knowledge tracing lack interpretability, new methods presented here present a trade-off between prediction power and explainability. Part III explores two applications of the ML2P-VAE method in areas outside of education: sports analytics and health sciences.
+This thesis is organized in two parts. In Part I, Chapters 2-4 introduce Item Response Theory (IRT) and analyzes the novel parameter estimation method, ML2P-VAE. This method uses a modified variational autoencoder to estimation parameters in IRT models. Chapter 2 provides background on two relevant neural network models (autoencoders and variational autoencoders), along with a summary of traditional IRT parameter estimation methods. Chapter 3describes the ML2P-VAE method in detail, including a software package which was developed for easy implementation of the method. Chapter 4 summarizes all results and experiments performed on educational datasets with ML2P-VAE.
 
-\sideremark{TODO: what is the best way to do this organization chapter?}
+Chapters 5-7 of Part II explore a task commonly seen in electronic learning environments in knowledge tracing. While other deep learning methods for knowledge tracing lack interpretability, new methods presented here present a trade-off between prediction power and explainability. Chapter 5 provides background on time-dependent neural networks such as RNN, LSTM, and Transformers, along with a literature review of other popular knowledge tracing methods. Chapter 6 proposes a method of incorporating Item Response Theory models into the knowledge tracing framework. Chapter 7 provides results of the interpretable adaptation to knowledge tracing, including comparisons to other methods in the literature.
 

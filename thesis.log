@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  10 JUN 2021 21:35
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  11 JUN 2021 13:34
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -848,7 +848,7 @@ LaTeX Warning: Unused global option(s):
 (thesis.aux (introduction.aux) (irt_param_est_background.aux)
 (irt_param_est_methods.aux) (irt_param_est_results.aux)
 (knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
-(knowledge_tracing_results.aux) (related_work.aux) (appendix.aux))
+(knowledge_tracing_results.aux) (conclusion.aux) (appendix.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
@@ -931,7 +931,7 @@ Package hyperref Warning: bookmark level for unknown listhead defaults to 0.
 
 ] (thesis.lof [10
 
-] [11])
+])
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
@@ -939,7 +939,7 @@ Package hyperref Warning: bookmark level for unknown listhead defaults to 0.
 
 Package hyperref Warning: bookmark level for unknown blankhead defaults to 0.
 
-[12]
+[11] [12]
 \openout2 = `introduction.aux'.
 
  (introduction.tex
@@ -1192,63 +1192,71 @@ mp)
 File: img/ml_journal_results/vae_full_train_size_time.png Graphic file (type bm
 p)
 <img/ml_journal_results/vae_full_train_size_time.png>
- [71] [72] [73] [74]) [75]
+ [71] [72] [73] [74]) [75] [76]
 \openout2 = `knowledge_tracing_background.aux'.
 
  (knowledge_tracing_background.tex
 CHAPTER 5.
-[76
+[77
 
 
 
-] [77]
+] [78]
 File: img/rnn_visual.png Graphic file (type bmp)
 <img/rnn_visual.png>
- [78] [79]
+ [79] [80]
 File: img/lstm_visual.png Graphic file (type bmp)
 <img/lstm_visual.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92]) [93]
+[81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92] [93]) [94]
 \openout2 = `knowledge_tracing_methods.aux'.
 
 
 (knowledge_tracing_methods.tex
 CHAPTER 6.
-[94
+[95
 
 
 
-] [95]
+] [96] [97]
 File: img/kt_irt/kt_irt_visual_with_equation_2.png Graphic file (type bmp)
 <img/kt_irt/kt_irt_visual_with_equation_2.png>
- [96] [97]) [98]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `sec:ae_v_vae_results' on page 98 undefined on input l
+ine 63.
+
+[98]) [99]
 \openout2 = `knowledge_tracing_results.aux'.
 
  (knowledge_tracing_results.tex
 CHAPTER 7.
-[99
+[100
 
 
 
-] [100] [101] [102]
+] [101] [102] [103]
 File: img/kt_irt/synth5_diff_est_lstm.png Graphic file (type bmp)
 <img/kt_irt/synth5_diff_est_lstm.png>
- [103]
+ [104]
 File: img/kt_irt/disc_est_attn2.png Graphic file (type bmp)
 <img/kt_irt/disc_est_attn2.png>
 File: img/kt_irt/diff_attn_sim200.png Graphic file (type bmp)
 <img/kt_irt/diff_attn_sim200.png>
- [104]
+ [105]
 File: img/kt_irt/theta_est_attn2.png Graphic file (type bmp)
 <img/kt_irt/theta_est_attn2.png>
 File: img/kt_irt/knowledge_trace_lstm_edited.png Graphic file (type bmp)
 <img/kt_irt/knowledge_trace_lstm_edited.png>
 File: img/kt_irt/knowledge_trace_attn_edited.png Graphic file (type bmp)
 <img/kt_irt/knowledge_trace_attn_edited.png>
- [105] [106]
+ [106] [107]
 File: img/kt_irt/disc_est_no_shuffle_early.png Graphic file (type bmp)
 <img/kt_irt/disc_est_no_shuffle_early.png>
 File: img/kt_irt/disc_est_no_shuffle_late.png Graphic file (type bmp)
@@ -1257,43 +1265,35 @@ File: img/kt_irt/disc_est_no_shuffle_late.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[107] [108]
+[108] [109]
 File: img/kt_irt/synth5_attn_weights_no_ffn_axis2.png Graphic file (type bmp)
 <img/kt_irt/synth5_attn_weights_no_ffn_axis2.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[109]
+[110]
 File: img/kt_irt/synth5_clusters_no_ffn.png Graphic file (type bmp)
 <img/kt_irt/synth5_clusters_no_ffn.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[110] [111]) [112]
-\openout2 = `related_work.aux'.
+[111] [112] [113]) [114]
+\openout2 = `conclusion.aux'.
 
- (related_work.tex
+ (conclusion.tex
 CHAPTER 8.
-[113
+[115
 
 
 
-] [114] [115]
-File: img/fsdm_results/contact_corr.eps Graphic file (type eps)
-<img/fsdm_results/contact_corr.eps>
-File: img/fsdm_results/baserun_corr.eps Graphic file (type eps)
-<img/fsdm_results/baserun_corr.eps>
-File: img/fsdm_results/power_corr.eps Graphic file (type eps)
-<img/fsdm_results/power_corr.eps>
-File: img/fsdm_results/pitch_intuit_corr.eps Graphic file (type eps)
-<img/fsdm_results/pitch_intuit_corr.eps>
+]
 
+LaTeX Warning: Citation `baseball_reference' on page 116 undefined on input lin
+e 17.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) [116] [117]
+[116]) [117]
 \openout2 = `appendix.aux'.
 
  (appendix.tex
@@ -1313,7 +1313,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ] [119] [120] [121] [122] [123] [124]
 APPENDIX B.
 
-Overfull \hbox (10.53687pt too wide) in paragraph at lines 129--130
+Overfull \hbox (10.53687pt too wide) in paragraph at lines 128--129
 \TU/lmr/m/n/12 training, and evaluating ML2P-VAE models. The functions [][][]\T
 U/lmtt/m/n/12 build_vae_independent()[]
  []
@@ -1322,36 +1322,37 @@ U/lmtt/m/n/12 build_vae_independent()[]
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 139.
+nput line 138.
  (ml2pvae_tutorial.R [126] [127])
 File: img/ml2pvae_tutorial_plots.png Graphic file (type bmp)
 <img/ml2pvae_tutorial_plots.png>
- [128]
-APPENDIX C.
-) [129
-
-] (thesis.bbl [130
+) [128] (thesis.bbl [129
 
 
-] [131] [132] [133] [134] [135] [136]) [137]
+] [130] [131]
+[132] [133] [134] [135]) [136]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 155.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 155.
-
-(thesis.aux (introduction.aux) (irt_param_est_background.aux)
-(irt_param_est_methods.aux) (irt_param_est_results.aux)
-(knowledge_tracing_background.aux) (knowledge_tracing_methods.aux)
-(knowledge_tracing_results.aux) (related_work.aux) (appendix.aux))
+ (thesis.aux (introduction.aux)
+(irt_param_est_background.aux) (irt_param_est_methods.aux)
+(irt_param_est_results.aux) (knowledge_tracing_background.aux)
+(knowledge_tracing_methods.aux) (knowledge_tracing_results.aux) (conclusion.aux
+) (appendix.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 155.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 155.
+
+
+LaTeX Warning: There were undefined references.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 155.
  ) 
 Here is how much of TeX's memory you used:
- 27658 strings out of 427839
- 498980 string characters out of 3155939
+ 27636 strings out of 427839
+ 498448 string characters out of 3155939
  801348 words of memory out of 3000000
- 31077 multiletter control sequences out of 15000+200000
- 14714 words of font info for 65 fonts, out of 3000000 for 9000
+ 31062 multiletter control sequences out of 15000+200000
+ 14069 words of font info for 62 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  56i,21n,82p,1271b,1743s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.pdf (151 pages).
+Output written on thesis.pdf (150 pages).

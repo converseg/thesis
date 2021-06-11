@@ -1,4 +1,4 @@
-\chapter{Comparison of Knowledge Tracing Methods}
+\chapter{Knowledge Tracing Results and Discussion}
 
 \section{Description of Datasets}\label{sec:kt_data}
 We use four publicly available datasets, three of which are standard in the knowledge tracing literature. Two of the four datasets are simulated according to IRT models to demonstrate the capability of our IRT-inspired knowledge tracing methods to learn the IRT model parameters. We also include two real-world datasets common in knowledge tracing literature. A summary of each dataset is given in Table \ref{tab:kt_data}.
@@ -71,7 +71,7 @@ As seen in Table \ref{tab:kt_results}, the two IRT-inspired knowledge tracing me
     \textbf{DKT-IRT} & 0.799 & 0.824 & 0.777 & 0.724 \\
     \textbf{SAKT-IRT} & 0.798 & 0.833 & 0.775 & 0.728
   \end{tabular}
-  \caption{TestAUC values for various models on each dataset.}
+  \caption{Test AUC values for various models on each dataset.}
   \label{tab:kt_results}
 \end{table}
 
@@ -174,10 +174,16 @@ The graph $G$ is shown in Figure \ref{fig:synth5_clusters}. The different colors
 \section{Discussion}
 
 \subsection{Future Extensions} \sideremark{TODO -- missing data framework, Q-matrix in attn calc}
+The inclusion of Item Response Theory into the knowledge tracing framework gives significant advantages in terms of explainability and usability. But further work to increase AUC to the level of DKVMN while maintaining explainability is worth exploring, so that the trade-off leans more in favor of utilizing IRT. 
 
+Other ways to incorporate domain knowledge into specific knowledge tracing models deserve further research as well. For example, SAKT uses the attention mechanism to calculated a correlation score with the current item and each previous item. But the information fromt the expert-annotated $Q$-matrix could be of use here: the correlation between items should only be significant if the two items share a common latent trait. So the item-skill association could be injected into Equation \ref{eq:q_cor_weights} in some way, either to mask out the relation between unrelated items (a constraint), or to encourage the matrix $C$ in Figure \ref{fig:attn_item_cor} to more closely follow the known $Q$-matrix (a regularizer). A similar use of the $Q$-matrix could be incorporated into the framework of DKVMN in Equation \ref{eq:dkvmn_weight}.
+
+In a more general extension, the idea of learning an $d$-dimensional representation of item interactions in knowledge tracing can be applied to static exams (i.e. Section \ref{sec:irt}). The input data to IRT parameter estimation methods, including ML2P-VAE from Chapter \ref{ch:ml2pvae_methods}, is a single binary value for each item. Particularly for neural networks, this presents a difficultly for missing data -- what if a student does not answer an item at all? \sideremark{does this section make sense? need to edit}
+
+Though a common practice here is to classify a missing response as an incorrect response \cite{thissen}, the framework of knowledge tracing would allow for completely ignoring missing responses since it is designed to account for students who answer different sets of items. Some adaptions from the dynamic environment to the fixed exam would be necessary, mainly removing the importance of the ordering of responses and time-series. A model similar to SAKT-IRT, with positional encoding removed, would most readily fit the static assessment application.
 
 \subsection{Concluding Remarks}
-The connection between IRT and knowledge tracing presented in this work introduces a trade-off between accuracy and interpretability. Further work to increase AUC to the level of DKVMN while maintaining explainability is worth exploring. Though IRT-inspired knowledge tracing does require an expert to annotate the item-skill association $Q$-matrix while other methods do not, explicitly incorporating this domain knowledge greatly increases the ability to interpret a deep learning model. Further, most intelligent tutoring systems provide an item-skill tag, so availability of the $Q$-matrix is not an unreasonable assumption.
+The connection between IRT and knowledge tracing presented in this thesis introduces a trade-off between accuracy and interpretability. Though IRT-inspired knowledge tracing does require an expert to annotate the item-skill association $Q$-matrix while other methods do not, explicitly incorporating this domain knowledge greatly increases the ability to interpret a deep learning model. Further, most intelligent tutoring systems provide an item-skill tag, so availability of the $Q$-matrix is not an unreasonable assumption.
 
 Our proposed method's ability to function as both a knowledge tracing model while also estimating item parameters gives it a unique interpretation rooted in Item Response Theory. This link with IRT is helpful in practice, because it provides an explicit and easy to obtain quantity for a student's latent abilities. The approximation of a student ability can be interpreted in the frame of IRT, as opposed to only a prediction of correctness for each item. This is a clear advantage that IRT-inspired knowledge tracing has over conventional non-interpretable deep learning methods in knowledge tracing.
 

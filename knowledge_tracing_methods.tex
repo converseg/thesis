@@ -6,19 +6,11 @@ In this section, we introduce an interpretable modification to deep knowledge tr
 
 The connection between knowledge tracing and IRT has been explored before via Deep-IRT. The IRT-inspired knowledge tracing methods presented here differ from Deep-IRT in a few ways. First, Deep-IRT is tightly coupled with DKVMN, while the proposed method is readily applicable to a variety of deep knowledge tracing models. Our approach also allows for items to be associated with multiple skills, and directly emulates the ML2P model in Equation \ref{eq:ml2p} or the Rasch model in Equation \ref{eq:rasch} by producing estimates to discrimination and difficulty parameters. The focus here involves item-level parameters, rather than the concept-level parameters considered in Deep-IRT. The implementation details we use are completely different from that of Deep-IRT. Rather than adding separate networks for each parameter, we modify the output layer using information from the item-skill association $Q$-matrix, similar to the methodology of ML2P-VAE in Section \ref{sec:ml2p_vae}.
 
-In this section, a trade-off is presented between predictive power and interpretability, but the proposed method remains competitive with other deep learning methods. While sacrificing a small amount of accuracy (measured by AUC), IRT-inspired knowledge tracing provides an explicit representation of student knowledge $\vect \Theta$ at each timestep. This representation of student knowledge is an upgrade from other deep knowledge tracing methods, which approximate skill mastery after the fact by averaging the probability of correctly answering all items associated with a particular skill. Additionally, parameters of the proposed modified neural network can be interpreted as approximations to the item parameters $a_{ik}$ and $b_i$ in Equation \ref{eq:ml2p}. In this sense, our proposed models function as both a knowledge tracing and a parameter estimation method.
+In this chapter, a trade-off is presented between predictive power and interpretability, but the proposed method remains competitive with other deep learning methods. While sacrificing a small amount of accuracy (measured by AUC), IRT-inspired knowledge tracing provides an explicit representation of student knowledge $\vect \Theta$ at each timestep. This representation of student knowledge is an upgrade from other deep knowledge tracing methods, which approximate skill mastery after the fact by averaging the probability of correctly answering all items associated with a particular skill. Additionally, parameters of the proposed modified neural network can be interpreted as approximations to the item parameters $a_{ik}$ and $b_i$ in Equation \ref{eq:ml2p}. In this sense, our proposed models function as both a knowledge tracing and a parameter estimation method.
 
 
 \section{Incorporating IRT into Knowledge Tracing} \label{sec:kt_irt_methods}
 Given a tutoring system with $n$ available items, $K$ skills under assessment, and the skill association of each item given as a binary matrix $Q \in \{0,1\}^{n \times K}$ \cite{daSilva2018}, each of the possible $2n$ student interactions $(q_t, c_t)$ is represented as a learned $d$-dimensional vector $\vect x_t \in \mathbb{R}^d$. This can be done by multiplying a one-hot encoding of the $2n+1$ interactions (including a null/padding interaction) by a trainable $(2n+1) \times d$ matrix.
-
-\sideremark{TODO: change image from ``time-series'' to ``temporal''}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=.95\textwidth]{img/kt_irt/kt_irt_visual_with_equation_2.png}
-  \caption{Visualization of integrating IRT into a knowledge tracing model with $L=4$, $n=5$, and $K=3$.}
-  \label{fig:kt_irt_visual}
-\end{figure}
 
 Each student's response sequence includes $\vect x_0$, a null interaction to indicate the start of their interactions. A hyper-parameter $L$ is chosen indicating the maximum length of a student's response sequence. Interaction sequences shorter than $L$ are padded, and interaction sequences longer than $L$ are split into multiple sequences. A student's sequence of embedded interactions $\{\vect x_t\}_{t=0}^L$ is fed through a temporal neural network (TNN), such as an LSTM (similar to DKT \cite{piech2015}) or an attention-based model (similar to SAKT \cite{pandey2019}). This outputs an $h$-dimensional vector $\vect v_t$ for each interaction $\vect x_t$ in the input sequence.
 
@@ -51,6 +43,13 @@ where $\odot$ is element-wise multiplication of matrices. Then the probability t
   \label{eq:nn_out}
 \end{equation}
 where $w_{ik}$, $q_{ik}$, $s_{tk}$, and $z_i$ are entries in $W_p$, $Q$, $\vect s_t$, and $\vect z$, respectively.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.95\textwidth]{img/kt_irt/kt_irt_visual_with_equation_2.png}
+  \caption{Visualization of integrating IRT into a knowledge tracing model with $L=4$, $n=5$, and $K=3$.}
+  \label{fig:kt_irt_visual}
+\end{figure}
 
 This constraint allows for interpretation of the final neural network layers as an approximate ML2P model: note the similarity between Equation \ref{eq:nn_out} and Equation \ref{eq:ml2p}. A visualization of this proposed neural network architecture is seen in Figure \ref{fig:kt_irt_visual}.
 

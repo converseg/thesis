@@ -1,0 +1,23 @@
+\chapter{Discussion}\label{ch:conclusion}
+
+\section{Applications Outside of Education}
+The ML2P-VAE method, introduced in Chapter \ref{ch:ml2pvae_methods} can be applied to areas outside of the realm of education. In general, it can be useful when some unobservable latent code is assumed to generate the observable data, and domain knowledge is available about said latent code. The ML2P-VAE method can be of use in most areas where other confirmatory IRT models are commonly implemented. 
+
+\subsection{Health Sciences Questionnaires}
+BDI, personality 
+
+\subsection{Sports Analytics}
+\sideremark{TODO: edit}
+In this section, we summarize the publication ``Variational Autoencoders for Baseball Player Evaluation,'' \cite{fsdm_paper} presented at the International Conference on Fuzzy Systems and Data Mining, 2019. In this work, the idea of latent traits influencing observable performance is extended from educational measurement to professional sports, specifically player evaluation. Though there does not exist any formal theory relating to latent athletic skills such as what education has in IRT, parallels can still be drawn between the two fields.
+
+This work focuses on professional baseball players. In education, the ``observable performance'' was given by binary responses to questions on exams -- here, the observable data is recorded statistics from a player in a particular season, such as hits, stolen bases, home runs, or strikeouts. Where IRT focused on estimating student's latent knowledge $\vect \Theta$, the goal of this work is to develop \textit{new} measures to quantify a baseball player's skills on the field, which influence what is observed in the box score.
+
+The ideas of the ML2P-VAE model can be used for this task. We first define four underlying skills required for baseball players to be successful: \textit{contact} (how often does the batter hit the ball), \textit{power} (how hard does the player hit the ball), \textit{baserunning} (is the player good at running the bases), and \textit{pitch intuition} (does the player swing when they are supposed to). In ML2P-VAE, the item-skill relationship given by the $Q$-matrix is instrumental in allowing interpretation of a hidden neural network layer. A similar binary matrix is developed in the baseball application, relating the four skills to the observed data. For example, the statistic ``home runs'' requires only the power skills, while avoiding ``strikeouts'' requires both contact and pitch intuition.
+
+After training the modified VAE, we can obtain quantities for every baseball player in each of the four skills. In order to evaluate the effectiveness of our skill values, we compare the skills outputted by the VAE encoder to the commonly used baseball statistics such as contact rate, speed score, isolated power, and on-base percentage \cite{baseball_reference}. We don't strive to exactly replicate these statistics (since we are developing \textit{new} measures), but it can be helpful to reference in order to confirm that our measures actually represent what we intend them to quantify. For example, the players with the largest \textit{power} value include Barry Bonds and Mark McGwire (notable power hitters), and the players with the highest \textit{baserunning} value are Rickey Henderson and Lou Brock (famous base-stealers).
+
+Though there is less mathematical theory supporting the application of ML2P-VAE to the sports analytics field, it still yields interesting results. We are able to interpret a hidden layer of the neural network, and use those values to quantify the latent code's influence on observable performance. The proposed measures of underlying athletic skills can be useful for sports franchises in evaluating a player's usefulness to a team.
+
+\section{Conclusion}
+\sideremark{TODO -- kind of repeat the introduction, but with notation and terminology. Focus more on the results and implications of the research}
+
