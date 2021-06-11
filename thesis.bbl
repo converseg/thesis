@@ -78,12 +78,6 @@ Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
   editors, {\em Advances in Neural Information Processing Systems}, volume~33,
   pages 1877--1901. Curran Associates, Inc., 2020.
 
-\bibitem{buck1998}
-Gary Buck and Kikumi Tatsuoka.
-\newblock Application of the rule-space procedure to language testing:
-  examining attributes of a free response listening test.
-\newblock {\em Language Testing}, 15(2):119–157, 1998.
-
 \bibitem{cai2009}
 Li~Cai.
 \newblock High-dimensional exploratory item factor analysis by a
@@ -198,6 +192,11 @@ Jeffrey~L. Elman.
 \newblock Finding structure in time.
 \newblock {\em Cognitive Science}, 14(2):179--211, 1990.
 
+\bibitem{fruchterman1991}
+Thomas~MJ Fruchterman and Edward~M Reingold.
+\newblock Graph drawing by force-directed placement.
+\newblock {\em Software: Practice and experience}, 21(11):1129--1164, 1991.
+
 \bibitem{gentile1998}
 Claudio Gentile and Manfred~KK Warmuth.
 \newblock Linear hinge loss and average margin.
@@ -230,6 +229,13 @@ Shelby~J. Haberman.
 \newblock Technical Report RR-05-24, Research and Development, ETS, December
   2005.
 
+\bibitem{networkx}
+Aric~A. Hagberg, Daniel~A. Schult, and Pieter~J. Swart.
+\newblock Exploring network structure, dynamics, and function using networkx.
+\newblock In Ga\"el Varoquaux, Travis Vaught, and Jarrod Millman, editors, {\em
+  Proceedings of the 7th Python in Science Conference}, pages 11 -- 15,
+  Pasadena, CA USA, 2008.
+
 \bibitem{hammerstrom1993}
 D.~Hammerstrom.
 \newblock Neural networks at work.
@@ -258,10 +264,22 @@ Sepp Hochreiter and J{\"u}rgen Schmidhuber.
 \newblock Long short-term memory.
 \newblock {\em Neural computation}, 9(8):1735--1780, 1997.
 
+\bibitem{jiang2018}
+Zhehan Jiang and Jonathan Templin.
+\newblock Gibbs samplers for logistic item response models via the
+  pólya–gamma distribution: A computationally efficient data-augmentation
+  strategy.
+\newblock {\em Psychometrika}, 84:358--374, 2018.
+
 \bibitem{kingma2014}
 D.~Kingma and M.~Welling.
 \newblock Auto-encoding variational {Bayes}.
 \newblock In {\em International Conference on Learning Representations}, 2014.
+
+\bibitem{adam}
+Diederik~P Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv preprint arXiv:1412.6980}, 2014.
 
 \bibitem{kullback1951}
 S.~Kullback and R.~A. Leibler.
@@ -272,6 +290,11 @@ S.~Kullback and R.~A. Leibler.
 Alexander LeNail.
 \newblock Nn-svg: Publication-ready neural network architecture schematics.
 \newblock {\em Journal of Open Source Software}, 4(33):747, 2019.
+
+\bibitem{likert1932}
+Rensis Likert.
+\newblock A technique for the measurement of attitudes.
+\newblock {\em Archives of psychology}, 1932.
 
 \bibitem{lord1968}
 F.~Lord and M.~R Novick.

@@ -1,4 +1,4 @@
-\chapter{Deep, Interpretable Methods for Knowledge Tracing} \label{ch:kt_methods}
+\chapter{Deep, Interpretable Knowledge Tracing Methods} \label{ch:kt_methods}
 
 The deep neural network approaches described in the previous section (including DKT, DKVMN, and SAKT) to the knowledge tracing problem have produced very high predictive power. Given a sequence of previous student interactions and a current question, they are capable of outputting the probability that the current question will be answered correctly with high accuracy. For the most part, this is the only metric produced by these models to measure student learning. But there already exists a theoretical framework for computing the probability of a correct response: Item Response Theory, introduced in Section \ref{sec:irt}.
 
@@ -9,7 +9,7 @@ The connection between knowledge tracing and IRT has been explored before via De
 In this section, a trade-off is presented between predictive power and interpretability, but the proposed method remains competitive with other deep learning methods. While sacrificing a small amount of accuracy (measured by AUC), IRT-inspired knowledge tracing provides an explicit representation of student knowledge $\vect \Theta$ at each timestep. This representation of student knowledge is an upgrade from other deep knowledge tracing methods, which approximate skill mastery after the fact by averaging the probability of correctly answering all items associated with a particular skill. Additionally, parameters of the proposed modified neural network can be interpreted as approximations to the item parameters $a_{ik}$ and $b_i$ in Equation \ref{eq:ml2p}. In this sense, our proposed models function as both a knowledge tracing and a parameter estimation method.
 
 
-\section{Incorporating IRT into Knowledge Tracing}
+\section{Incorporating IRT into Knowledge Tracing} \label{sec:kt_irt_methods}
 Given a tutoring system with $n$ available items, $K$ skills under assessment, and the skill association of each item given as a binary matrix $Q \in \{0,1\}^{n \times K}$ \cite{daSilva2018}, each of the possible $2n$ student interactions $(q_t, c_t)$ is represented as a learned $d$-dimensional vector $\vect x_t \in \mathbb{R}^d$. This can be done by multiplying a one-hot encoding of the $2n+1$ interactions (including a null/padding interaction) by a trainable $(2n+1) \times d$ matrix.
 
 \sideremark{TODO: change image from ``time-series'' to ``temporal''}
