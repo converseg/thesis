@@ -467,7 +467,7 @@ After item parameters have been estimated, then student ability parameters can b
 
 
 \subsubsection{Curse of Dimensionality} \label{sec:dim}
-Similar to JMLE, using the EM algorithm to perform MMLE faces difficulties with large datasets, though for a different reason. While JMLE requires inverting a large matrix, MMLE must perform many integrals which may be high-dimensional. As the number of latent traits $K$ increases linearly, the number of points required to compute the integral in Equation \ref{eq:marginal_partial} with respect to $\vect \Theta$ grows exponentially \cite{cai2010}. For example, the popular \verb!mirt! package \cite{mirt} sets the default number of quadrature points per ability dimension at only $3$ when $K\geq6$. Yet this is still a problem; if $K=10$, then $H = 3^{10} = 59,000$ quadrature points are used in each iteration. In Chapter \ref{ch:ml2pvae_results}, we analyze a synthetic dataset with $K=20$ latent traits -- the EM algorithm certainly cannot handle $H=3^{20} = 3,486,784,401$ quadrature points.
+Similar to JMLE, using the EM algorithm to perform MMLE faces difficulties with large datasets, though for a different reason. While JMLE requires inverting a large matrix, MMLE must perform many integrals which may be high-dimensional. As the number of latent traits $K$ increases linearly, the number of points required to compute the integral in Equation \ref{eq:marginal_partial} with respect to $\vect \Theta$ grows exponentially \cite{cai2010}. For example, the popular \verb!mirt! package \cite{mirt} sets the default number of quadrature points per ability dimension at only $3$ when $K\geq6$. Yet this is still a problem; if $K=10$, then $H = 3^{10} = 59,049$ quadrature points are used in each iteration. In Chapter \ref{ch:ml2pvae_results}, we analyze a synthetic dataset with $K=20$ latent traits -- the EM algorithm certainly cannot handle $H=3^{20} = 3,486,784,401$ quadrature points.
 
 This highlights one aspect of the curse of dimensionality in data science -- as the number of features (latent traits) increases, performing accurate analysis becomes computationally infeasible. The specific problem in the case of MMLE relates to a large number of quadrature points (or sample points in MCEM) to compute high-dimensional integrals.
 
@@ -625,3 +625,6 @@ When trying to implement MHRM on large datasets, the amount of memory required t
 %
 
 \sideremark{TODO: What if I move neural net background, then put Variational IRT and others in this section?}
+\subsection{Variational Methods}
+%TODO
+\sideremark{TODO: Wu et al, Wang et al}

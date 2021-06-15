@@ -29,6 +29,11 @@ F.~Baker and S.~Kim.
 \newblock {\em Item Response Theory Parameter Estimation Techniques}.
 \newblock Taylor \& Francis Group, 2nd edition, 2004.
 
+\bibitem{beck1996}
+Aaron~T Beck, Robert~A Steer, and Gregory Brown.
+\newblock Beck depression inventory--ii.
+\newblock {\em Psychological Assessment}, 1996.
+
 \bibitem{ben_israel1966}
 Adi Ben-Israel.
 \newblock A newton-raphson method for the solution of systems of equations.
@@ -112,8 +117,9 @@ Aaron Chou.
 \bibitem{aied_paper}
 G.~Converse, M.~Curi, and S.~Oliveira.
 \newblock Autoencoders for educational assessment.
-\newblock In {\em International Conference on Artificial Intelligence in
-  Education (AIED)}, 2019.
+\newblock In Seiji Isotani, Eva Mill{\'a}n, Amy Ogan, Peter Hastings, Bruce
+  McLaren, and Rose Luckin, editors, {\em Artificial Intelligence in
+  Education}, pages 41--45. Springer International Publishing, 2019.
 
 \bibitem{r_package}
 Geoffrey Converse.
@@ -137,8 +143,9 @@ Geoffrey Converse, Mariana Curi, Suely Oliveira, and Jonathan Templin.
 \bibitem{kt_irt}
 Geoffrey Converse, Suely Oliveira, and Shi Pu.
 \newblock Incorporating item response theory into knowledge tracing.
-\newblock In {\em International Conference on Artificial Intelligence in
-  Education (AIED)}, 2021.
+\newblock In Ido Roll, Danielle McNamara, Sergey Sosnovsky, Rose Luckin, and
+  Vania Dimitrova, editors, {\em Artificial Intelligence in Education}, pages
+  114--118. Springer International Publishing, 2021.
 
 \bibitem{corbett1995}
 Albert Corbett and John Anderson.
@@ -149,7 +156,7 @@ Albert Corbett and John Anderson.
 M.~Curi, G.~Converse, J.~Hajewski, and S.~Oliveira.
 \newblock Interpretable variational autoencoders for cognitive models.
 \newblock In {\em 2019 International Joint Conference on Neural Networks
-  (IJCNN)}, 2019.
+  (IJCNN)}, pages 1--8, 2019.
 
 \bibitem{daSilva2018}
 M.A. da~Silva, R.~Liu, A.C. Huggins-Manley, and J.L. Bazan.
@@ -191,6 +198,17 @@ Samira Ebrahimi~Kahou, Vincent Michalski, Kishore Konda, Roland Memisevic, and
 Jeffrey~L. Elman.
 \newblock Finding structure in time.
 \newblock {\em Cognitive Science}, 14(2):179--211, 1990.
+
+\bibitem{Feng2014}
+Y.~Feng, B.~T. Habing, and A.~Huebner.
+\newblock Parameter estimation of the reduced rum using the em algorithm.
+\newblock {\em Applied Psychological Measurement}, 38:137--150, 2014.
+
+\bibitem{fragoso2013}
+T.M. Fragoso and M.~Curi.
+\newblock Improving psychometric assessment of the beck depression inventory
+  using multidimensional item response theory.
+\newblock {\em Biometrical Journal}, pages 527--540, 2013.
 
 \bibitem{fruchterman1991}
 Thomas~MJ Fruchterman and Edward~M Reingold.
@@ -264,6 +282,12 @@ Sepp Hochreiter and J{\"u}rgen Schmidhuber.
 \newblock Long short-term memory.
 \newblock {\em Neural computation}, 9(8):1735--1780, 1997.
 
+\bibitem{huang2015}
+Chiungjung Huang and Jyun-Hong Chen.
+\newblock Meta-analysis of the factor structures of the beck depression
+  inventory--ii.
+\newblock {\em Assessment}, 22(4):459--472, 2015.
+
 \bibitem{jiang2018}
 Zhehan Jiang and Jonathan Templin.
 \newblock Gibbs samplers for logistic item response models via the
@@ -296,6 +320,11 @@ Rensis Likert.
 \newblock A technique for the measurement of attitudes.
 \newblock {\em Archives of psychology}, 1932.
 
+\bibitem{baseball_reference}
+Sports~Reference LLC.
+\newblock Baseball-reference batting statistics.
+\newblock Baseball-Reference.com, 2021.
+
 \bibitem{lord1968}
 F.~Lord and M.~R Novick.
 \newblock {\em Statistical theories of mental test scores}.
@@ -305,6 +334,11 @@ F.~Lord and M.~R Novick.
 Geoff~N Masters.
 \newblock A rasch model for partial credit scoring.
 \newblock {\em Psychometrika}, 47(2):149--174, 1982.
+
+\bibitem{meijer1999}
+Rob~R Meijer and Michael~L Nering.
+\newblock Computerized adaptive testing: Overview and introduction.
+\newblock {\em Applied psychological measurement}, 23(3):187--194, 1999.
 
 \bibitem{meng_schilling1996}
 Xiao-Li Meng and Stephen Schilling.
@@ -339,6 +373,12 @@ The United States~Department of~Justice.
 Christopher Olah.
 \newblock Understanding lstm networks, 2015.
 
+\bibitem{ong2003}
+James Ong and Sowmya Ramachandran.
+\newblock Intelligent tutoring systems: Using ai to improve training
+  performance and roi.
+\newblock {\em Networker Newsletter}, 19(6):1--6, 2003.
+
 \bibitem{pandey2019}
 Shalini Pandey and George Karypis.
 \newblock A self-attentive model for knowledge tracing.
@@ -349,6 +389,13 @@ Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio.
 \newblock On the difficulty of training recurrent neural networks.
 \newblock In {\em Proceedings of the 30th International Conference on Machine
   Learning}, volume~28, pages 1310--1318. PMLR, 2013.
+
+\bibitem{patz1999}
+Richard~J. Patz and Brian~W. Junker.
+\newblock A straightforward approach to markov chain monte carlo methods for
+  item response models.
+\newblock {\em Journal of Educational and Behavioral Statistics}, 24(2):146,
+  1999.
 
 \bibitem{pavlik2009}
 Philip~I. Pavlik, Hao Cen, and Kenneth~R. Koedinger.
@@ -373,8 +420,10 @@ Elad Plaut.
 \bibitem{deep_pfa}
 Shi Pu, Geoffrey Converse, and Yuchi Huang.
 \newblock Deep performance factors analysis for knowledge tracing.
-\newblock In {\em International Conference on Artificial Intelligence in
-  Education (AIED)}, 2021.
+\newblock In Ido Roll, Danielle McNamara, Sergey Sosnovsky, Rose Luckin, and
+  Vania Dimitrova, editors, {\em International Conference on Artificial
+  Intelligence in Education}, pages 331--341. Springer International
+  Publishing, 2021.
 
 \bibitem{rafique2020}
 Hassan Rafique, Tong Wang, Quihang Lin, and Arshia Sighani.
@@ -397,6 +446,12 @@ Mark~D. Reckase.
 Herbert Robbins and Sutton Monro.
 \newblock A stochastic approximation method.
 \newblock {\em The annals of mathematical statistics}, pages 400--407, 1951.
+
+\bibitem{robie2001}
+Chet Robie, Michael~J Zickar, and Mark~J Schmit.
+\newblock Measurement equivalence between applicant and incumbent groups: An
+  irt analysis of personality scales.
+\newblock {\em Human Performance}, 14(2):187--207, 2001.
 
 \bibitem{cdm}
 Alexander Robitzsch, Thomas Kiefer, Ann~Cathrice George, and Ali Uenlue.
