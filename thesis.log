@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  16 JUN 2021 10:35
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  16 JUN 2021 11:20
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -911,15 +911,15 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
 
 
-] [2] [3] (thesisAck.tex) [2] (thesisAbstract.tex [3]) [4] (thesisAbstractpubli
-c.tex) [5] (thesis.toc
-[6
+] [2] [3] (thesisAck.tex
+[2]) [3] (thesisAbstract.tex [4]) [5] (thesisAbstractpublic.tex) [6]
+(thesis.toc [7
 
-] [7])
+] [8])
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
- [8]
+ [9]
 
 Package hyperref Warning: bookmark level for unknown listhead defaults to 0.
 
@@ -927,9 +927,9 @@ Package hyperref Warning: bookmark level for unknown listhead defaults to 0.
 \tf@lot=\write6
 \openout6 = `thesis.lot'.
 
- [9
+ [10
 
-] (thesis.lof [10
+] (thesis.lof [11
 
 ])
 \tf@lof=\write7
@@ -939,7 +939,7 @@ Package hyperref Warning: bookmark level for unknown listhead defaults to 0.
 
 Package hyperref Warning: bookmark level for unknown blankhead defaults to 0.
 
-[11] [12]
+[12] [13]
 \openout2 = `introduction.aux'.
 
  (introduction.tex
@@ -1348,4 +1348,4 @@ Here is how much of TeX's memory you used:
  1328 hyphenation exceptions out of 8191
  56i,21n,82p,1271b,1743s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.pdf (159 pages).
+Output written on thesis.pdf (160 pages).
