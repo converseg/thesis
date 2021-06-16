@@ -173,7 +173,7 @@ The graph $G$ is shown in Figure \ref{fig:synth5_clusters}. The different colors
 
 \section{Discussion}
 
-\subsection{Future Extensions} \sideremark{TODO -- missing data framework, Q-matrix in attn calc}
+\subsection{Future Extensions}\label{sec:kt_future}
 The inclusion of Item Response Theory into the knowledge tracing framework gives significant advantages in terms of explainability and usability. But further work to increase AUC to the level of DKVMN while maintaining explainability is worth exploring, so that the trade-off leans more in favor of utilizing IRT. 
 
 Other ways to incorporate domain knowledge into specific knowledge tracing models deserve further research as well. For example, SAKT uses the attention mechanism to calculated a correlation score with the current item and each previous item. But the information fromt the expert-annotated $Q$-matrix could be of use here: the correlation between items should only be significant if the two items share a common latent trait. So the item-skill association could be injected into Equation \ref{eq:q_cor_weights} in some way, either to mask out the relation between unrelated items (a constraint), or to encourage the matrix $C$ in Figure \ref{fig:attn_item_cor} to more closely follow the known $Q$-matrix (a regularizer). A similar use of the $Q$-matrix could be incorporated into the framework of DKVMN in Equation \ref{eq:dkvmn_weight}.
