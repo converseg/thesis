@@ -171,6 +171,13 @@ Zihang Dai, Zhilin Yang, Yiming Yang, Jaime~G. Carbonell, Quoc~V. Le, and
   context.
 \newblock {\em CoRR}, abs/1901.02860, 2019.
 
+\bibitem{de2019}
+Antonio~Reis de~S{\'a}~Junior, Graziela Liebel, Arthur Guerra~de Andrade,
+  Laura~Helena Andrade, Clarice Gorenstein, and Yuan-Pang Wang.
+\newblock Can gender and age impact on response pattern of depressive symptoms
+  among college students? a differential item functioning analysis.
+\newblock {\em Frontiers in psychiatry}, 10:50, 2019.
+
 \bibitem{dempster1977}
 A.~P. Dempster, N.~M. Laird, and D.~B. Rubin.
 \newblock Maximum likelihood from incomplete data via the em algorithm.
@@ -355,6 +362,11 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
   Information Processing Systems - Volume 2}, page 3111–3119, Red Hook, NY,
   USA, 2013. Curran Associates Inc.
 
+\bibitem{myers1962}
+Isabel~Briggs Myers.
+\newblock The myers-briggs type indicator: Manual (1962).
+\newblock 1962.
+
 \bibitem{myung2003}
 In~Jae Myung.
 \newblock Tutorial on maximum likelihood estimation.
@@ -497,6 +509,14 @@ Sandip Sinharay and Russell~G. Almond.
 \newblock Assessing fit of cognitive diagnostic models a case study.
 \newblock {\em Educational and Psychological Measurement}, 67(2):239--257,
   2007.
+
+\bibitem{smarr2011}
+Karen~L. Smarr and Autumn~L. Keefer.
+\newblock Measures of depression and depressive symptoms: Beck depression
+  inventory-ii (bdi-ii), center for epidemiologic studies depression scale
+  (ces-d), geriatric depression scale (gds), hospital anxiety and depression
+  scale (hads), and patient health questionnaire-9 (phq-9).
+\newblock {\em Arthritis Care \& Research}, 63(S11):S454--S466, 2011.
 
 \bibitem{tatsuoka1983}
 Kikumi~K. Tatsuoka.
