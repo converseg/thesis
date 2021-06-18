@@ -561,6 +561,17 @@ Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, Matt Haberland, Tyler Reddy,
 \newblock Scipy 1.0: Fundamental algorithms for scientific computing in python.
 \newblock {\em Nature Methods}, 2020.
 
+\bibitem{wang2020}
+Zichao Wang, Yi~Gu, Andrew Lan, and Richard Baraniuk.
+\newblock Varfa: A variational factor analysis framework for efficient bayesian
+  learning analytics.
+\newblock {\em arXiv preprint arXiv:2005.13107}, 2020.
+
+\bibitem{wu2020}
+Mike Wu, Richard~L Davis, Benjamin~W Domingue, Chris Piech, and Noah Goodman.
+\newblock Variational item response theory: Fast, accurate, and expressive.
+\newblock {\em arXiv preprint arXiv:2002.00276}, 2020.
+
 \bibitem{yeung_2019}
 Chun{-}Kit Yeung.
 \newblock Deep-irt: Make deep learning based knowledge tracing explainable

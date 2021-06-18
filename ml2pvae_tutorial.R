@@ -18,7 +18,7 @@ enc_arch <- c(16L, 8L)
 enc_act <- c('relu', 'tanh')
 out_act <- 'sigmoid'
 (*@ \pagebreak @*)
-# Build ML2P-VAE model assuming independent latent traits
+# Build ML2P-VAE model assuming known correlation between latent traits
 models <- build_vae_correlated(
   num_items,
   num_skills,

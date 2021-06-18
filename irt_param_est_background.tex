@@ -1,6 +1,5 @@
 \chapter{Neural Networks and Educational Measurement} \label{ch:irt_background}
-\sideremark{TODO: more about why these two background sections are included}
-In this chapter, we present background information for Part I, parameter estimation in Item Response Theory, including basic neural network architectures, an overview of educational measurement, and a review of other parameter estimation techniques.
+In this chapter we present background information for Part I, variational autoencoders for parameter estimation in Item Response Theory. This includes the architecture of particular neural network models, an overview of educational measurement, and a review of other parameter estimation techniques.
 
 \section*{Neural Networks}
 In recent years, artificial neural networks (ANN) have become an increasingly popular tool for machine learning problems. Though they have been around since the 1960's \cite{rosenblatt1961}, GPU technology has become more accessible and modern computers are more powerful, allowing anyone interested to train a basic neural network on a personal machine. ANN can be applied to a diverse set of problems, including regression, classification, computer vision, natural language processing, function approximation, data generation, and more \cite{hammerstrom1993} \cite{zhang2000}. A brief overview of the mathematical inner workings of ANN is included in Appendix \ref{apdx:ann}.
@@ -27,12 +26,9 @@ or cross-entropy loss for binary data
   \label{eq:cross_entropy}
 \end{equation}
 
-Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. Denoising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, the input data is corrupted by deleting pixels at random. Then, the de-noising AE reconstructs the original image from the corrupted data. Autoencoders can also be modified for data generation applications using a variational autoencoder.
+Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. De-noising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, the input data is corrupted by deleting pixels at random. Then, the de-noising AE reconstructs the original image from the corrupted data. Autoencoders can also be modified for data generation applications using a variational autoencoder.
 
-\section{Variational Autoencoders}
-\sideremark{could include citations: infoVAE, ELBO, ``towards deeper understanding of VAE''}
-
-% could talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - but I've shown this isn't the case in our model, where the decoder is Bernoulli.
+\section{Variational Autoencoders}\label{sec:vae}
 
 The motivation for designing a variational autoencoder (VAE), introduced by Kingma and Welling \cite{kingma2014}, is different from that of a regular autoencoder in that the interest is not rooted specifically to neural networks. Rather, a probabilistic point of view provides the main source of motivation, and ANN are seen as a common tool used to implement a VAE.
 
@@ -62,7 +58,7 @@ Finally, define \textit{Kullback-Leibler Divergence} (KL-Divergence) \cite{kullb
   \mathcal{D}_{KL}\left[ p || q \right] = H[p] - H[p,q] = - \int p(x) \log \left(\frac{q(x)}{p(x)} \right)dx
   \label{eq:kl_div}
 \end{equation}
-Intuitively, KL-Divergence is the average amount of information that is lost if the approximating distribution $q(x)$ is used instead of the true distribution $p(x)$. KL-Divergence cannot be interpreted as a metric or as a distance between the distributions $p(x)$ and $q(x)$ because it is not symmetric -- in general, $\mathcal{D}_{KL}[p||q] \not = \mathcal{D}_{KL}[q||p]$. KL-Divergence is non-negative, and $\mathcal{D}_{KL}[p||q] = 0$ iff $p(x) = q(x)$.
+Intuitively, KL-Divergence is the average amount of information that is lost if the approximating distribution $q(x)$ is used instead of the true distribution $p(x)$. KL-Divergence cannot be interpreted as a metric or as a distance between the distributions $p(x)$ and $q(x)$ because it is not symmetric -- in general, $\mathcal{D}_{KL}[p||q] \not = \mathcal{D}_{KL}[q||p]$. KL-Divergence is non-negative, and $\mathcal{D}_{KL}[p||q] = 0$ if and only if $p(x) = q(x)$.
 
 \subsection{VAE Derivation}\label{sec:vae_derive}
 
@@ -71,7 +67,7 @@ We derive the desired loss function for a VAE. The log marginal likelihood of th
   \log p_{\beta}(\vect x_1,\ldots,\vect x_N) = \sum_{j=1}^N \log p_{\beta}(\vect x_j)
   \label{eq:vae_marginal}
 \end{equation}
-Denoting $\vect x = \vect x_j$, we can rewrite each $p_{\beta}(\vect x_j)$ as %\sideremark{I don't know the best way to index $p_\beta$ }
+Denoting $\vect x = \vect x_j$, we can rewrite each $\log p_{\beta}(\vect x_j)$ term as 
 \begin{equation}
   \begin{split}
     \log p_{\beta}(\vect x) &= \int q_\alpha(\vect z |\vect x) \log p_{\beta} (\vect x)d\vect z \\
@@ -94,7 +90,7 @@ Note that in the final line, the first term is the KL-Divergence between the app
 \end{split}
 \end{equation}
 
-The term $\tilde{\mathcal{L}}(\alpha, \beta; \vect x)$ is referred to as the variational lower bound or Evidence Lower Bound (ELBO). Increasing the ELBO by varying the parameters $\alpha$ and $\beta$ will increase the marginal likelihood $\log p_\beta(\vect x)$, even though we ignore the term $\mathcal{D}_{KL}\left[ q_\alpha (\vect z | \vect x) || p_\beta(\vect z | \vect x) \right]$ in Equation \ref{eq:elbo}.
+The term $\tilde{\mathcal{L}}(\alpha, \beta; \vect x)$ is referred to as the variational lower bound or Evidence Lower Bound (ELBO). Increasing the ELBO by varying the parameters $\alpha$ and $\beta$ will increase the marginal likelihood $\log p_\beta(\vect x)$, even though we ignore the term $\mathcal{D}_{KL}\left[ q_\alpha (\vect z | \vect x) || p_\beta(\vect z | \vect x) \right]$ in Equation \ref{eq:elbo} \cite{zhao2017}.
 
 We take the ELBO $\tilde{\mathcal{L}}(\alpha,\beta; \vect x)$ to be a potential VAE objective function which we wish to maximize. In Equation \ref{eq:elbo}, the first term gives the negative KL-Divergence between the probabilistic encoder $q_\alpha(\vect z | \vect x)$ and the true prior distribution of the latent code $p_\beta(\vect z)$. Note that unlike the true posterior $p_\beta(\vect z | \vect x)$, the true prior $p_\beta(\vect z)$ is known and is nearly always assumed to be independent Gaussian. 
 
@@ -158,7 +154,7 @@ More sophisticated methods have been developed which attempt to more accurately 
 \section{Item Response Theory}\label{sec:irt}
 Item Response Theory (IRT) is a field of quantitative psychology which uses statistical models to model student knowledge \cite{lord1968}. These models often give the probability of a question being answered correctly as a function of the student's ability. In IRT, it is assumed that each student, indexed by $j$, possesses some continuous latent ability $\theta_j$. The term ``latent ability'' is synonymous with ``knowledge,'' ``trait,'' or ``skill.'' Often, it is assumed that amongst the population of students, $\theta_j \sim \mathcal{N}(0,1)$ \cite{thissen}. 
 
-In this work, we often consider the case where each student has multiple latent abilities. For example, in the context of an elementary math exam, we may wish to measure the four distinct skills ``add'', ``subtract'', ``multiply'', and ``divide.'' This scenario is referred to as multidimensional item response theory, and we write the set of student $j$'s $K$ latent abilities as a vector $\vect \Theta_j = (\theta_{1j}, \theta_{2j}, \ldots, \theta_{Kj})^\top$. It is then assumed that the latent abilities of students follow some multivariate Gaussian distirbution, $\mathcal{N}(0, \Sigma)$. For simplicity, the covariance matrix $\Sigma$ is often taken to be the identity matrix, making each latent skill independent of one another. This assumption on $\Sigma$ gives practical advantages in estimation, but is often not realistic in real-world applications.
+In this work, we often consider the case where each student has multiple latent abilities. For example, in the context of an elementary math exam, we may wish to measure the four distinct skills ``add'', ``subtract'', ``multiply'', and ``divide.'' This scenario is referred to as multidimensional item response theory, and we write the set of student $j$'s $K$ latent abilities as a vector $\vect \Theta_j = (\theta_{1j}, \theta_{2j}, \ldots, \theta_{Kj})^\top$. It is then assumed that the latent abilities of students follow some multivariate Gaussian distribution, $\mathcal{N}(0, \Sigma)$. For simplicity, the covariance matrix $\Sigma$ is often taken to be the identity matrix, making each latent skill independent of one another. This assumption on $\Sigma$ gives practical advantages in estimation, but is often not realistic in real-world applications.
 
 Note that $\vect \Theta_j$ is not directly observable in any way. Instead, the usual task is to infer student's knowledge $\vect \Theta_j$ from their responses to some assessment containing $n$ questions, referred to as items. A student's set of responses can be written as a binary $n$-dimensional vector $\vect u_j = (u_{1j}, u_{2j}, \ldots, u_{nj})^\top$, where 
 \begin{equation}
@@ -194,7 +190,7 @@ P(u_{ij} = 1 | \vect \Theta_j) &= f_4(\vect \Theta_j;V_i)
 In the following sections, we describe various candidates for the function $f$. The focus is on dichotomous responses as in \ref{eq:responses}, but can be extended to the graded response model. Though each is presented in the context of single-dimensional IRT ($K = 1$), they can all be easily adapted to higher dimensions where $\Theta_j$ is a vector.
 
 \subsection{Rasch Model}
-One of the first IRT models was proposed by Georg Rasch in 1960 \cite{rasch1960}. Rasch asserted that the probability of a student answering an item correctly is a function of the ratio $\xi / \d$, where $\xi > 0$ represents the student's knowledge, and $\d > 0$ quantifies the difficulty of an item. Consider the value $\frac{\xi}{\xi + \d} = \frac{1}{1 + \d / \xi}$ and note that $\frac{\xi}{\xi + \d} \to 1$ as $\xi \to \infty$. After the reparametarization $\xi = e^{\theta}$ and $\d = e^{b}$, we arrive at the 1-Parameter Logistic Model, often referred to as the Rasch Model \cite{thissen}.
+One of the first IRT models was proposed by Georg Rasch in 1960 \cite{rasch1960}. Rasch asserted that the probability of a student answering an item correctly is a function of the ratio $\xi / \d$, where $\xi > 0$ represents the student's knowledge, and $\d > 0$ quantifies the difficulty of an item. Consider the value $\frac{\xi}{\xi + \d} = \frac{1}{1 + \d / \xi}$ and note that $\frac{\xi}{\xi + \d} \to 1$ as $\xi \to \infty$. After the re-parameterization $\xi = e^{\theta}$ and $\d = e^{b}$, we arrive at the 1-Parameter Logistic Model, often referred to as the Rasch Model \cite{thissen}.
 \begin{equation}
   \begin{split}
     P(u_{ij} = 1 | \xi_j; \d_i) &= \frac{1}{1 + \frac{\d_i}{\xi_j}} = \frac{1}{1 + \frac{e^{b_i}}{e^{\theta_j}}} \\
@@ -279,7 +275,7 @@ As is common in other machine learning applications we do not directly maximize 
   \log L = \sum_{j=1}^N \sum_{i=1}^n u_{ij} \log P_{ij} + (1-u_{ij})\log (1 - P_{ij})
   \label{eq:log_likelihood}
 \end{equation}
-Notice the similarity of Equation \ref{eq:log_likelihood} to the VAE loss function described in Equation \ref{eq:vae_loss}. In the folowing sections, we detail other methods for IRT parameter estimation and their shortcomings in dealing with high-dimensional data.
+Notice the similarity of Equation \ref{eq:log_likelihood} to the VAE loss function described in Equation \ref{eq:vae_loss}. In the following sections, we detail other methods for IRT parameter estimation and their shortcomings in dealing with high-dimensional data.
 
 
 \subsection{Joint Maximum Likelihood Estimation} \label{sec:mle}
@@ -316,7 +312,7 @@ In a similar manner, note that items are independent of one another, and cross-d
 
 These two simplifications are straightforward, as we can clearly see in Equation \ref{eq:log_likelihood} that summing over $j$ and $i$ will cause each cross derivative between $j \not = j'$ and $i \not = i'$ to be zero. But the Jacobian $J$ is still not sparse enough -- the bottom left and top right blocks $C^\top$ and $C$ are fully populated. To simplify the computational problem this presents, it is assumed that the cross-derivatives between students and items are fixed to be zero: $\frac{\partial^2 \log L}{\partial\theta_{jk} \partial b_{i}} := 0$ for all $j,k,i$. 
 
-The logic behind this assumption is that ``there is no reason to believe that there should be any covariaion between an individual eaminee and either of the parameters of a given item.'' \cite{baker_kim2004}. However, it can be seen from Equation \ref{eq:log_likelihood} that this is not necessarily true. We can easily show for the ML2P model in Equation \ref{eq:ml2p} that 
+The logic behind this assumption is that ``there is no reason to believe that there should be any covariation between an individual examinee and either of the parameters of a given item.'' \cite{baker_kim2004}. However, it can be seen from Equation \ref{eq:log_likelihood} that this is not necessarily true. We can easily show for the ML2P model in Equation \ref{eq:ml2p} that 
 \begin{equation}
 \begin{split}
   \frac{\partial P_{ij}}{\partial a_{ik}} &= \theta_{jk}P_{ij}(1-P_{ij}) \\
@@ -340,7 +336,7 @@ Then we can calculate
 Note that $u_{ij} \in \{0,1\}$, giving two simpler cases for $\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}}$. There exist many settings of $a_{ik}$ and $\theta_{jk}$ such that  $\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}} \not = 0$. For example, if a random student $j^*$ and ability $k^*$is sampled from the population, then $\mathbb{E}[\theta_{j^*k^*}] = 0$ (recall that student ability is assumed to be normally distributed across a population). Plugging in $\theta_{j^*k^*} = 0$ into Equation \ref{eq:partial_deriv_nonzero} gives
 \[\frac{\partial^2 \log L}{\partial \theta_{jk} \partial a_{ik}}\Big|_{\theta_{jk}=0} = u_{ij}(1-P_{ij}) - (1-u_{ij})P_{ij} \not= 0 \]
 
-So we can see that the true Jacobian $J$ of the gradient vector $\vect f$ does not have block diagonal structure, because the upper right and bottom left blocks contain nonzero entries. The assumption that items and examinees are independent of one another, while computatationally necessary, limits the effectiveness and accuracy of JMLE. 
+So we can see that the true Jacobian $J$ of the gradient vector $\vect f$ does not have block diagonal structure, because the upper right and bottom left blocks contain nonzero entries. The assumption that items and examinees are independent of one another, while computationally necessary, limits the effectiveness and accuracy of JMLE. 
 
 Even with this assumption, the case of multidimensional latent traits still presents a computational burden. With $J$ in block diagonal form, a single iteration of Equation \ref{eq:newton_raphson} requires the inversion of $N$ distinct $K\times K$ sub-matrices and $n$ distinct $(K+1) \times (K+1)$ sub-matrices. To perform these operations in parallel, access to $N + n$ threads (a large amount of resources) is required. Even if given those resources, as the number of latent traits $K$ grows, the individual sub-matrices become more and more difficult to invert.
 
@@ -348,15 +344,13 @@ In addition to computational issues, JMLE for IRT parameter estimation suffers f
 
 JMLE also experiences difficulties in estimating the ability parameters for students who answer all items correctly or answer all items incorrectly. In this case, maximizing Equation \ref{eq:log_likelihood} causes $\theta$ to become unbounded. Note that for a student with a perfect score, increasing the estimate to their latent ability towards $\infty$ will increase the log-likelihood -- likewise, decreasing a student's ability estimate towards $-\infty$ who answered all questions incorrectly will also result in an increase to the log-likelihood.
 
-A similar phenomenon occurs for the parameters of items which all students answer correctly or all students answer incorrectly. For example, an item that all students get wrong is usually interpreted as a rather difficult item. But JMLE takes this to the extreme, and the difficulty parameter is unboundedly increased each iteration. It is straightforward to show that for an item $i^*$ where $u_{i^*j} = 0$ for all $j$, the partial derivative of Equation \ref{eq:log_likelihood} with respect to the difficulty parameter $b_{i^*}$ of item $i^*$ is strictly increasing:% and concave up:
+A similar phenomenon occurs for the parameters of items which all students answer correctly or all students answer incorrectly. For example, an item that all students get wrong is usually interpreted as a rather difficult item. But JMLE takes this to the extreme, and the difficulty parameter is increased without bound in each iteration. It is straightforward to show that for an item $i^*$ where $u_{i^*j} = 0$ for all $j$, the partial derivative of Equation \ref{eq:log_likelihood} with respect to the difficulty parameter $b_{i^*}$ of item $i^*$ is strictly increasing:
 \begin{equation}
   \begin{split}
   \frac{\partial \log L}{\partial b_{i^*}} &= \sum_{j=1}^N P_{i^*j}  > 0 \\
-  %\frac{\partial^2 \log L}{\partial b_{i^*}^2} &= \sum_{j}(1-P_{ij})P_{ij} > 0
   \end{split}
   \label{eq:diff_item_partial}
 \end{equation}
-\sideremark{I think my math is wrong: this may not be cc up?}
 
 
 \subsubsection{Recent Adaptations}
@@ -379,7 +373,7 @@ The projected gradient descent algorithm used by Chen et al. makes a small adjus
   \label{eq:proj_grad_descent}
 \end{equation}
 
-The student and item parameters are updated in an alternating fashion. Given intial guess at $t=0$ for the student parameters $\vect \Theta_{j,0}$ and item parameters $[\vect a_{i,0}, b_{i,0}]^\top$ for all students $1\leq j \leq N$ and all items $1\leq i \leq n$, each iteration is performed as
+The student and item parameters are updated in an alternating fashion. Given initial guess at $t=0$ for the student parameters $\vect \Theta_{j,0}$ and item parameters $[\vect a_{i,0}, b_{i,0}]^\top$ for all students $1\leq j \leq N$ and all items $1\leq i \leq n$, each iteration is performed as
 \begin{equation}
 \begin{split}
   \text{For each } &j \text{ in parallel:} \\
@@ -408,7 +402,7 @@ where $g(\vect \Theta)$ is the prior distribution of student abilities.
 
 Here, the student ability parameters are integrated out -- replacing the assumed point-estimates of student ability (as in JMLE) with a probability distribution over the student population. The goal then is to estimate the item parameters $\vect a_i$ and $b_i$ by taking appropriate derivatives of $\log \mathcal{M}$. A notable difficulty is the presence of the integral in Equation \ref{eq:marginal_likelihood} -- this will be explored in Section \ref{sec:dim}
 
-The high-level idea of Marginal Maximum Likelihood Estimation (MMLE) is to estimate the item parameters from using the observed student responses and knowledge of the prior distrubtion of student abilities. Though these student parameters are unobservable, the responses $\vect u_j$ can be used to make inferences about $\vect \Theta$; namely, the expectation of the joint distribution of $P(U, \vect \Theta | \vect a, \vect b)$.
+The high-level idea of Marginal Maximum Likelihood Estimation (MMLE) is to estimate the item parameters from using the observed student responses and knowledge of the prior distribution of student abilities. Though these student parameters are unobservable, the responses $\vect u_j$ can be used to make inferences about $\vect \Theta$; namely, the expectation of the joint distribution of $P(U, \vect \Theta | \vect a, \vect b)$.
 
 Using Bayes Theorem, write the posterior probability of student $j$'s latent abilities as
 \begin{equation}
@@ -475,156 +469,15 @@ This highlights one aspect of the curse of dimensionality in data science -- as 
 \subsection{Metropolis-Hasting Robbins-Monroe}
 A more modern Bayesian approach to estimating IRT parameters was introduced by Li Cai \cite{cai2009} \cite{cai2010}. This method combines the Metropolis-Hastings sampling algorithm \cite{hastings1970} with the Robbins-Monro stochastic optimization algorithm \cite{robbins1951} to maximize the observed data likelihood. The Metropolis-Hastings Robbins Monro (MHRM) method is tailored for high-dimensional IRT models, and does not rely on numerical integration or sampling large volume spaces \cite{han2014}. 
 
-MHRM is the standard for estimating IRT parameters -- it is the default method in software packages such as \verb!mirt! \cite{mirt}. While it was certainly a step forward in high-dimensional IRT parameter estimation, the method still faces difficulty when given a very large dataset -- particularly, an increase in the number of students and number of items causes issues.  \sideremark{TODO: add more info on MHRM at some point} 
+MHRM is the standard for estimating IRT parameters -- it is the default method in software packages such as \verb!mirt! \cite{mirt}. While it was certainly a step forward in high-dimensional IRT parameter estimation, the method still faces difficulty when given a very large dataset -- particularly, an increase in the number of students and number of items causes issues.
 
-When trying to implement MHRM on large datasets, the amount of memory required to keep track of all parameters is multiple gigabytes, and the algorithm will not run. This is due to the fact that the MHRM algorithm still requires a computation of a large Jacobian matrix $J(\vect x) = \frac{\partial^2 \log L}{\partial x_i \partial x_j}$ where $\vect x$ is any parameter to be estimated, similar to in JMLE. After a stochastic approximation, a matrix of the same size must be inverted in each iteration. \sideremark{TODO: I \textit{think} this is why there is still an issue..}
+When trying to implement MHRM using \verb!mirt! on large datasets, the amount of memory required to keep track of all parameters is multiple gigabytes, and the algorithm will not run. This is due to the fact that the MHRM algorithm still requires a computation of a large Jacobian matrix $J(\vect x) = \frac{\partial^2 \log L}{\partial x_i \partial x_j}$ where $\vect x$ is any parameter to be estimated, similar to in JMLE. After a stochastic approximation, a matrix of the same size must be inverted in each iteration. 
 
-
-%\section{Artificial Neural Networks}
-%In recent years, artificial neural networks (ANN) have become an increasingly popular tool for machine learning problems. Though they have been around since the 1960's (TODO: citation), GPU technology has become more accessible and modern computers are more powerful, allowing anyone interested to train a basic neural network on their machine. ANN can be applied to a diverse set of problems, including regression, classification, computer vision, natural language processing, function approximation, data generation, and more (TODO: citations).
-%
-%One of the biggest critiques of ANN is their black-box nature, meaning that the decision process that a trained model uses is typically not explainable by humans. As opposed to simpler methods such as decision trees or linear regression, neural networks are not interpretable. This makes them less desirable in certain applications where researchers wish to know \textit{why} a model predicts a particular data sample the way that it does. For example, if a financial institution is using data science methods to determine whether or not to approve someone's loan, the institution should be able to explain to the customer why they were denied. Most customers will not be satisfied with ``the computer told us so,'' and there is a possibility that a black-box neural network could learn and use features such as race or gender in its prediction, which is illegal in the United States (TODO: definitely need citation or delete).
-%
-%The push for explainable AI have led researchers down two paths. One group has tried to incorporate deep learning methods with existing interpretable methods, in hopes of increasing the performance of explainable methods without sacrificing its interpretability (TODO: citation). Another option is to use a sort of hybrid learning, where interpretable models defer to a black-box model if they are not confident in their prediction \cite{rafique2020}. Others have started with deep models and cut back on complexity, making specific modifications which increase interpretability. For example, the loss function of a convolutional neural network can be adapted so that humans can understand the features extracted in the hidden layers \cite{zhang2018interpretable}. 
-%
-%The field of education is an application which often desires interpretable models. Researchers often need to be able to point out specific details of decisions made by AI. A student deserves an answer to \textit{why} they failed a test, and a teacher should be given instructions on \textit{how} to fix the student's misconceptions.
-%
-%\subsection{Autoencoders}
-%An autoencoder (AE) is a neural network where the input and output layers are the same shape. The objective for a given data point is to minimize the difference between the output, called the reconstruction, and the input. Typically, the middle hidden layers of an AE are of smaller dimension than the input space. In this way, autoencoders are an unsupervised learning technique for (nonlinear) dimension reduction. Mathematically, we can define an autoencoder in two parts as follows.
-%
-%For an input $x \in \R^n$, define the \textit{encoder} as a function $f: \R^n \to \R^m$ mapping $x \mapsto z := f(x)$. Usually, $m < n$, and $z$ lies in a hidden feature space. The encoder sends an observed data point to its representation in a learned feature space. Define the \textit{decoder} as a function $g: \R^m \to \R^n$ mapping $z \mapsto \hat x := g(z)$. The decoder maps a hidden representation $z$ to a reconstruction of the encoder input. Note that in our case, the functions $f$ and $g$ are both parameterized by neural networks, each of which can have any number of hidden layers. The end-to-end autoencoder is then the function composition $\mathcal{A}(x):= g(f(x)): \R^n \to \R^n$. To train an AE, the loss function minimizes the difference between the input and output. This can be done in a number of ways, including the simple mean squared error loss
-%\begin{equation}
-%  \mathcal{L}(x) = || x - g(f(x))||_2^2
-%  \label{eq:mse}
-%\end{equation}
-%or cross-entropy loss for binary data
-%\begin{equation}
-%  \mathcal{L}(x) = \sum_{i=1}^n - x_i \log(g(f(x_i))) - (1-x_i)\log(1- g(f(x_i))).
-%  \label{eq:cross_entropy}
-%\end{equation}
-%
-%Autoencoders with only a single hidden layer can be compared with nonlinear principal components analysis (PCA), and using linear activation functions allows for recovery of PCA loading vectors \cite{plaut2018}. AEs have clear applications in image compression straight out-of-the-box, and can be modified for more complicated problems. Denoising autoencoders \cite{vincent2008} are capable of processing noisy images and cleaning them up. To do this, they corrupt input data by deleting pixels at random and reconstructing the original image. Autoencoders can also be modified for data generation applications using a variational autoencoder.
-%
-%\subsection{Variational Autoencoders}
-%\sideremark{*relevant sources: \cite{doersch2016} \cite{kingma2014} \cite{Blei2017}, infoVAE, ELBO, ``towards deeper understanding of VAE''}
-%
-%% could talk about how Zhao et al (InfoVAE) show that if decoder is Gaussian, then maximizing ELBO makes the latent distribution bad - but I've shown this isn't the case in our model, where the decoder is Bernoulli.
-%
-%The motivation for designing a variational autoencoder (VAE), introduced by Kingma and Welling \cite{kingma2014}, is different from regular autoencoders in that it is not rooted in neural networks. Rather, a probabilistic point of view provides the main source of motivation, and neural networks are a very common tool used to implement a VAE.
-%
-%Consider a dataset $\mathbb{X} = \{\vect x_i\}_{i=1}^N$, where each data point $\vect x_i \in \R^n$ is generated by a random process involving an unobserved variable $\vect z \in \R^d$. This unobserved variable is often referred to as ``latent code.'' It is assumed that to generate the observed data point $\vect x_i$, a value $\vect z_i$ is first sampled from a prior distribution $p_*(\vect z)$, and then $x_i$ is generated from a distribution $p_*(\vect x | \vect z)$.
-%
-%From observing the dataset $\mathbb{X}$, the latent variables $\vect z_i$ and parameters of the distributions $p_*(\vect z)$ and $p_*(\vect x | \vect z)$ are unknown. The goal of a VAE is to approximate these values, which leads to the ability to represent/encode data and generate new data. This should be done with a general algorithm that is unaffected by (i) intractability of the marginal likelihood $p(\vect x) = \int p(\vect z) \(\vect x | \vect z) d\vect z$ and (ii) large amounts of data. \sideremark{maybe point out this is a common problem with IRT param est methods} Note that (i) is important because if $p(\vect x)$ is intractable, and thus $p(\vect z | \vect x)$ is intractable, then the EM algorithm cannot be used.
-%
-%In order to implement this task, two neural networks $q_\alpha(\vect z | \vect x)$ and $p_\beta(\vect x | \vect z)$ (probabilistic encoder and decoder, respectively) are used to approximate the unobservable true posterior distributions $p_{\alpha^*}(\vect z| \vect x)$ and $p_{\beta^*}(\vect x | \vect z)$. In the encoder/decoder, the indices $\alpha$ and $\beta$ reference settings of the trainable parameters of the neural network. Note that unlike a regular autoencoder, the probabilistic encoder $q_\alpha(\vect z | \vect x)$ of a VAE outputs a probability distribution for $\vect z$ given $\vect x$, rather than a single value.
-%
-%\subsubsection{A note on Information Theory}
-%Before continuing, we introduce some ideas from information theory: entropy, cross-entropy, and KL-Divergence \cite{pattern_rec_book}. Consider a random variable $x$. For a particular value $x_0$, we can compute the amount of information gained from observing $x_0$ as $h(x_0) = -\log_2 p(x=x_0)$. When we use $\log_2$, the unit for information is ``bits,'' but any logarithm can be used. Note that we gain more information from observing a low-probability event than from observing a high-probability event. 
-%
-%\textit{Entropy} is defined as the expectation of $h(x)$: the average amount of information that will be learned by observing a random $x$. So the entropy of the random variable $x$ is given as 
-%\begin{equation}
-%  H[p] = - \int p(x) \log p(x)dx
-%  \label{eq:entropy}
-%\end{equation}
-%
-%Now assume that we also have access to a distribution $q(x)$ which approximates a possibly unknown $p(x)$. \textit{Cross-entropy} is the average amount of information needed to identify an event $x$ which was drawn from $q$ instead of $p$. Cross-entropy is given as
-%\begin{equation}
-%  H[p,q] = - \int p(x) \log q(x) dx
-%  \label{eq:xentropy}
-%\end{equation}
-%
-%We can simply define \textit{Kullback-Leibler Divergence} (KL-Divergence) \cite{kullback1951} as 
-%\begin{equation}
-%  \mathcal{D}_{KL}\left[ p || q \right] = H[p] - H[p,q] = - \int p(x) \log \left(\frac{q(x)}{p(x)} \right)dx
-%  \label{eq:kl_div}
-%\end{equation}
-%Intuitively, KL-Divergence is amount of information which is lost if the approximating distribution $q(x)$ is used instead of the true distribution $p(x)$. However, KL-Divergence cannot be interpreted as a metric or as a distance between $p$ and $q$ because it is not symmetric -- in general, $\mathcal{D}_{KL}[p||q] \not = \mathcal{D}_{KL}[q||p]$. KL-Divergence is non-negative, and $\mathcal{D}_{KL}[p||q] = 0$ iff $p(x) = q(x)$.
-%
-%\subsubsection{VAE Derivation}\label{sec:vae_derive}
-%
-%We derive the desired loss function for a VAE. The log marginal likelihood is given as
-%\begin{equation}
-%  \log p_{\beta}(\vect x_1,\ldots,\vect x_N) = \sum_{i=1}^N \log p_{\beta}(\vect x_i)
-%  \label{eq:vae_marginal}
-%\end{equation}
-%Denoting $\vect x = \vect x_i$, we can rewrite each $p_{\beta}(\vect x_i)$ as \sideremark{I don't know the best way to index $p_\beta$ }
-%\begin{equation}
-%  \begin{split}
-%    \log p_{\beta}(\vect x) &= \int q_\alpha(\vect z |\vect x) \log p_{\beta} (\vect x)d\vect z \\
-%    &= \int q_\alpha(\vect z | \vect x) \log \left( \frac{p_{\beta}(\vect z | \vect x) p_{\beta}(\vect x)}{p_{\beta}(\vect z | \vect x)} d\vect z \right) \\
-%    &= \int q_\alpha(\vect z | \vect x) \log \left( \frac{p_{\beta}(\vect x, \vect z)}{p_{\beta}(\vect z | \vect x)} \right) d\vect z\\
-%    &= \int q_\alpha(\vect z | \vect x) \left( \log \frac{q_\alpha(\vect z | \vect x)}{p_{\beta}(\vect z | \vect x)} + \log \frac{p_{\beta}(\vect x, \vect z)}{q_\alpha(\vect z | \vect x)}\right) d\vect z \\
-%    &= \mathcal{D}_{KL}\left[ q_\alpha(\vect z |\vect x) || p_{\beta}(\vect z | \vect x) \right] + \int q_\alpha(\vect z | \vect x) \log \left( \frac{p_{\beta}(\vect x, \vect z)}{q_\alpha(\vect z | \vect x)} \right)d\vect z \\
-%    &= \mathcal{D}_{KL}\left[ q_\alpha(\vect z |\vect x) || p_{\beta}(\vect z | \vect x) \right] + \mathbb{E}_{q_\alpha(\vect z | \vect x)}\left[ -\log q_\alpha(\vect z | \vect x) + \log p_{\beta}(\vect x, \vect z) \right] \\
-%    &= \mathcal{D}_{KL}\left[ q_\alpha(\vect z |\vect x) || p_{\beta}(\vect z | \vect x) \right] + \tilde{\mathcal{L}}(\alpha, \beta; \vect x)
-%\label{eq:vae_derive}
-%  \end{split}
-%\end{equation}
-%
-%Note that in the final line, the first term is the KL-Divergence between the approximate and true posterior. Since we don't know the true posterior, we can't calculate this term. But notice that since KL-Divergence is always positive, and we can write 
-%\begin{equation}
-%  \begin{split}
-%    \log p_\beta (\vect x) \geq \tilde{\mathcal{L}}(\alpha, \beta; \vect x) = -\mathcal{D}_{KL}\left[ q_\alpha(\vect z | \vect x) || p_{\beta}(\vect z) \right] + \mathbb{E}_{q_\alpha(\vect z | \vect x)}\left[ \log p_{\beta}(\vect x | \vect z) \right]
-%  \label{eq:elbo}
-%\end{split}
-%\end{equation}
-%
-%The term $\tilde{\mathcal{L}}(\alpha, \beta; \vect x)$ is referred to as the variational lower bound or Evidence Lower Bound (ELBO). Increasing the ELBO by varying the parameters $\alpha$ and $\beta$ will increase the marginal likelihood $\log p_\beta(\vect x)$, even though we ignore the term $\mathcal{D}_{KL}\left[ q_\alpha (\vect z | \vect x) || p_\beta(\vect z | \vect x) \right]$.
-%
-%We take the ELBO $\tilde{\mathcal{L}}(\alpha,\beta; \vect x)$ to be a potential VAE objective function which we want to maximize. In Equation \ref{eq:elbo}, the first term gives the negative KL-Divergence between the probabilistic encoder $q_\alpha(\vect z | \vect x)$ and the true prior distribution of the latent code $p_\beta(\vect z)$. Note that unlike the true posterior $p_\beta(\vect z | \vect x)$, the true prior is known and is nearly always assumed to be independent Gaussian. 
-%
-%For now, we assume that $\vect z \sim \mathcal{N}(0,I)$. Additionally, we assume that the encoder outputs a standard normal distribution. In Section \ref{sec:cov}, we propose architecture which fits the assumption that $\vect z \sim \mathcal{N}(\mu, \Sigma)$ and allows for the encoder to output a multivariate Gaussian distribution.
-%
-%These assumptions make computing $\tilde{\mathcal{L}}(\alpha,\beta;\vect x)$ much easier. It can be shown \cite{doersch2016} that \sideremark{Should I show this?} the KL-Divergence between an independent Gaussian distribution and a standard normal distribution of dimension $K$ is calculated as
-%\begin{equation}
-%  \mathcal{D}_{KL}\left[ \mathcal{N}(\vect \mu_0, \vect \sigma_0^2I) || \mathcal{N}(0,I) \right] = \frac{1}{2}\sum_{k=1}^K \left( \mu_k^2 + \sigma_{0,k}^2 - 1 - \log(\sigma_{0,k}^2)\right)
-%  \label{eq:ind_gauss_kl}
-%\end{equation}
-%Note that the vectors $\vect \mu_0$ and $\vect \sigma_0^2$ are outputted by the encoder $q_\alpha(\vect z | \vect x_0)$, given the observed input $\vect x_0$. Since Equation \ref{eq:ind_gauss_kl} is in closed form, there is no difficulty in calculating the (possibly high-dimensional) integral that is usually required to compute KL-Divergence.
-%
-%The second term in Equation \ref{eq:elbo} is similar to Equation \ref{eq:xentropy}, and depends on the probabilistic decoder $p_\beta(\vect x | \vect z)$, which is usually assumed to be either Gaussian or Bernoulli. Considering the desired application of educational measurement where data is given as binary responses, we assume that the decoder is Bernoulli. To deal with the expectation over $q_\alpha$, we simply sample $L$ times from $q_\alpha(\vect z | \vect x)$. In practice, it is often simplest to just choose $L=1$ \cite{kingma2014}. So then 
-%\begin{equation}
-%  \begin{split}
-%    \mathbb{E}_{q_\alpha(\vect z | \vect x)} \left[ \log p_\beta(\vect x | \vect z) \right] &\approx \frac{1}{L}\sum_{l=1}^L \log p_\beta(\vect x | \vect z^{(l)}) \\
-%    &\approx \log p_\beta(\vect x| \vect z^*) \\
-%    &= \log\left( \prod_{i=1}^n p_\beta(x_i = 1 | \vect z^*)^{x_i} \cdot p_\beta(x_i=0 | \vect z^*)^{x_i} \right) \\
-%  &= \sum_{i=1}^n x_i\log \hat x_i + (1-x_i)\log (1-\hat x_i)
-%  \end{split}
-%  \label{eq:bernoulli}
-%\end{equation}
-%where $\hat x_i = p_\beta(x_i=1 | \vect z^*)$ gives $\hat{\vect x} = \{\hat x_i\}_{i=1}^n$, the reconstruction of the input $\vect x$ from the encoder $q_\alpha$. Note that the final line of Equation \ref{eq:bernoulli} results in the negative binary cross-entropy loss function commonly used in classification problems.
-%
-%The process is summarized as follows: given an input vector $\vect x_0 \in \R^n$, we obtain the posterior distribution $q_\alpha(\vect z | \vect x_0)$ (this is done by feeding $\vect x_0$ through a neural network). Sample $\vect z^* \sim q_\alpha(\vect z |\vect x_0)$, and compute $\hat{\vect x} = p_\beta(\vect x | \vect z^*)$ (this is done by feeding $\vect z^*$ through a neural network). As demonstrated in Equation \ref{eq:ind_gauss_kl} and Equation \ref{eq:bernoulli}, we can easily compute the objective function $\tilde{\mathcal{L}}(\alpha, \beta; \vect x_0)$.
-%
-%Usually when working with neural networks, goal is to minimize an loss function, rather than maximize an objective function. As such, we define the loss function 
-%\begin{equation}
-%  \label{eq:vae_loss}
-%  \begin{split}
-%  \mathcal{L}&(\alpha, \beta; \vect x) = - \tilde{\mathcal{L}}(\alpha, \beta;\vect x) \\
-%  &= \Big(\sum_{i=1}^n - x_i\log p_\beta(x_i | \vect z^*) - (1-x_i)\log (1-p_\beta(x_i | \vect z^*)) \Big) + \mathcal{D}_{KL}\left[ q_\alpha(\vect z | \vect x) || p_\beta(\vect z) \right]
-%  \end{split}
-%\end{equation}
-%where $\vect z^* \sim p_\beta(\vect z) = \mathcal{N}(0,I)$. The parameters $\alpha$ and $\beta$ represent the weights and biases of the encoder and decoder, and are updated via a gradient descent algorithm in order to minimize Equation \ref{eq:vae_loss}. Note that $\mathcal{L}(\alpha, \beta; \vect x)$ can simply be understood as reconstructing a binary input $\vect x$ via the first term, while regularizing on the latent code via the second term.
-%
-%
-%\subsubsection{Implementation Details}
-%Recall that each observed data point $\vect x_i \in \R^n$ and the corresponding latent code $\vect z_i \in \R^d$. To parameterize the encoder $q_\alpha(\vect z | \vect x)$ as a neural network, an input layer with $n$ nodes is required. The encoder can (but does not need to) include a number of hidden layers of varying size. The output of the encoder must include $2\cdot d$ nodes, assuming that $p_\beta(\vect z) = \mathcal{N}(0,I)$. 
-%
-%Notice that in Equation \ref{eq:ind_gauss_kl}, there is a term $\log(\sigma_{0,k}^2)$, dependent on input $\vect x_0$ and all parameters of the encoder. If at any point during training $\sigma_{0,k}^2 \leq 0$ for any $k$, then the VAE loss would not be possible to calculate. To avoid this issue and ensure that $\sigma_{0,k}^2 > 0$ regardless of inputs or encoder parameters, the encoder outputs the log-variances rather than the variances. The first $d$ nodes outputted by the encoder represent the latent mean vector $\vect \mu$, and the last $d$ nodes represent the $\log$ latent variances $\log \vect \sigma^2$. So for an observed input $\vect x_0$, the encoder will output a $d$-dimensional standard normal distribution $\mathcal{N}(\vect \mu_0, \vect \sigma_0^2I)$.
-%
-%The input layer of the decoder $p_\beta(\vect x | \vect z)$ has $d$ nodes and takes in a sample from $\mathcal{N}(\vect \mu_0, \vect \sigma_0^2I)$, given the original input $\vect x_0$. But the sampling operation is not differentiable, posing a problem for backpropagation-based gradient descent. A re-parameterization is used: sample $\vect \e_0 \sim \mathcal{N}(0,I)$, then calculate $\vect z_0 = \vect \mu_0 + \vect \e_0 \odot \vect \sigma_0^2$ where $\odot$ is element-wise vector multiplication. Then $\vect z_0$ is fed through an optional number of hidden layers to an output layer of size $n$. The output can be interpreted as a reconstruction $\hat{\vect x_0}$.
-%
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=.95\textwidth]{img/vae_visual.png}
-%  \caption{Visualization of a VAE architecture with $n=10$ and $d=2$.}
-%  \label{fig:vae_visual}
-%\end{figure}
-%The VAE architecture is summarized in Figure \ref{fig:vae_visual}. Note that the VAE does not need to be symmetric; the encoder and decoder can have a different number of hidden layers of different sizes.
-%
-%
-
-\sideremark{TODO: What if I move neural net background, then put Variational IRT and others in this section?}
 \subsection{Variational Methods}
-%TODO
-\sideremark{TODO: Wu et al, Wang et al}
+Very recently, variational inference approaches to IRT parameter estimation have gained attention. The idea of variational inference is to treat difficult-to-compute probability density estimation as an optimization problem, and pick a distribution which most closely approximates the true posterior \cite{Blei2017}. When applied to parameter estimation in IRT, this translates to learning a probability distribution, rather than directly maximizing individual parameters. So in contrast to the previously described techniques such as MLE and MHRM, variational inference methods do not directly optimize any student parameters $\vect \Theta$. In other words, there is no desire to solve $\frac{\partial \log L}{\partial \theta_{jk}} = 0$. ML2P-VAE, the primary work of this thesis described in Chapter \ref{ch:ml2pvae_methods}, can be understood as a variational inference method for IRT.
+
+Two new methods which are most closely related to this thesis also have ties to variational autoencoders, described in Section \ref{sec:vae}. Wu et al. \cite{wu2020} presents a new objective function, the variational IRT lower bound (VIBO). This approach assumes additional knowledge of the prior distribution of item parameters. This is used to then add an additional KL divergence term to the VAE loss function in Equation \ref{eq:vae_loss}. This approach is much faster than MLE approaches, and utilizes neural networks to parameterize the approximate distributions.
+
+In a related application, Wang et al. \cite{wang2020} introduce VarFA, which uses variational inference in a factor analysis framework. Though factor analysis is not quite the same as parameter estimation, IRT can be considered a factor analysis model -- an unknown student parameter explains how the student answers questions to an assessment. VarFA uses neural networks to approximate a variational distribution in order to speed up Bayesian inference. This approach is applicable to many factor analysis models (including IRT), and can be described as a VAE with the decoder being an FA model.
+
+
