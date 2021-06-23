@@ -596,4 +596,9 @@ Quanshi Zhang, Ying Nian~Wu, and Song-Chun Zhu.
 \newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
   Pattern Recognition}, pages 8827--8836, 2018.
 
+\bibitem{zhao2017}
+Shengjia Zhao, Jiaming Song, and Stefano Ermon.
+\newblock Towards deeper understanding of variational autoencoding models.
+\newblock {\em arXiv preprint arXiv:1702.08658}, 2017.
+
 \end{thebibliography}

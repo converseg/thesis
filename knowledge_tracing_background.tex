@@ -1,13 +1,12 @@
-\chapter{Temporal ANN and Knowledge Tracing}
-In this chapter, we present the relevant background for Part II, the incorporation of IRT into knowledge tracing. The application of knowledge tracing extends educational measurement to a more dynamic setting. Rather than receiving all student's responses to an assessment after the assessment is completed, data is gathered in real-time as the student progresses through the assessment. So the data is structured as a time series, and the task is to track student knowledge as more information comes in.
+\chapter{Temporal ANN and Knowledge Tracing}\label{ch:kt_background}
+In this chapter, we present the relevant background for Part II, the incorporation of IRT into knowledge tracing. The application of knowledge tracing extends educational measurement to a more dynamic setting. Rather than receiving all student's responses to an assessment after the exam is completed, data is gathered in real-time as the student progresses through each question. So the data is structured as a time series, and the task is to track student knowledge as more information comes in.
 
-Because of this different format of data, this chapter first reviews popular neural networks which are equipped to deal with time series data. Though these ANN are often referred to as ``recurrent'' neural networks, we avoid that terminology because not all of them have a truly recurrent structure (see Section \ref{sec:transformers}). Instead, the we classify these neural networks as ``temporal neural networks,'' (TNN) since they relate to time-dependent data.
+Because of the different format of data, this chapter first reviews popular neural networks which are equipped to deal with time series data. Though these ANN are often referred to as ``recurrent'' neural networks, we avoid that terminology because not all of them have a truly recurrent structure (see Section \ref{sec:transformers}). Instead, the we classify these neural networks as ``temporal neural networks,'' (TNN) since they relate to time-dependent data.
 
 After providing background on various TNN in a more general setting, a literature review of previous knowledge tracing methods is provided. Specifically, we explain how TNN are adapted to better fit the knowledge tracing application, including the methods for representing student interaction data and modifications to TNN architecture.
 
-
 \section*{Temporal Neural Networks}
-In many deep learning applications such as video processing, natural language processing, or dynamical systems, the observed data is time-dependent \cite{kahou2015} \cite{vaswani2017} \cite{gilpin2020}.In such datasets, a single observation of $n$ features can not represented as a vector $\vect x_0 \in \R^n$, but must take into account the $T$ different measurements of the $n$ features, each taken at a different timestep $1 \leq t \leq T$. As such, a data point is represented as a matrix $X_0 \in \R^{n \times T}$, where the $t$-th column of $X_0$ gives a snapshot of the observation at time $t$. For example, in the natural language application, a data point $X_0$ may represent a sentence or paragraph, and a column $\vect x_{0,t}$ of $X_0$ would represent a word in that sentence/paragraph.
+In many deep learning applications such as video processing, natural language processing, or dynamical systems, the observed data is time-dependent \cite{kahou2015, gilpin2020, vaswani2017}. In such datasets, a single observation of $n$ features can not represented as a vector $\vect x_0 \in \R^n$, but must take into account the $T$ different measurements of the $n$ features, each taken at a different timestep $1 \leq t \leq T$. As such, a data point is represented as a matrix $X_0 \in \R^{n \times T}$, where the $t$-th column of $X_0$ gives a snapshot of the observation at time $t$. For example, in the natural language application, a data point $X_0$ may represent a sentence or paragraph, and a column $\vect x_{0,t}$ of $X_0$ would represent a word in that sentence/paragraph.
 
 \section{Recurrent Neural Networks}
 Recurrent Neural Networks (RNN) are the most simple adaptation of neural networks to deal with time-series data. Recall that a regular feed-forward neural network layer of size $h$ takes an input vector $\vect x \in \R^n$ and outputs
@@ -34,7 +33,7 @@ where $W_{hh} \in \R^{h\times h}$, $W_{hx}\in \R^{h\times n}$, $\vect b_h \in \R
   \label{fig:rnn_visual}
 \end{figure}
 
-One issue that RNN face is the exploding or vanishing gradient problem \cite{bengio1994}, where the norm of the gradient can become very large or very small during training. This is due to the fact that partial derivatives calculated during back-propagation between hidden states at time $t_1$ and $t_2$ is found by a product of $t_2 - t_1$ Jacobian matrices \cite{pascanu2013}. As the difference between $t_1$ and $t_2$ increases, the corresponding partial derivatives $\frac{\partial \vect h_{t_1}}{\partial \vect h_{t_2}}$ can exponentially grow or exponentially decay in norm.
+One issue that RNN face is the exploding or vanishing gradient problem \cite{bengio1994}, where the norm of the gradient can become very large or very small during training. This is due to the fact that partial derivatives calculated during back-propagation between hidden states at time $t_1$ and $t_2$ is found by a product of $(t_2 - t_1)$ Jacobian matrices \cite{pascanu2013}. As the difference between $t_1$ and $t_2$ increases, the corresponding partial derivatives $\frac{\partial \vect h_{t_1}}{\partial \vect h_{t_2}}$ can exponentially grow or exponentially decay in norm.
 
 Related to the exploding/vanishing gradient issue, RNN experience difficulty in retaining important information for multiple timesteps is difficult. For example, if an important phenomena happens to data point $X_0$ at time $t$, then that information should still influence the values of $\vect h_{t+10}$ and $\vect y_{t+10}$. But the structure described in Equation \ref{eq:rnn_layer} and Figure \ref{fig:rnn_visual} causes the impact of $\vect x_t$ and $\vect h_t$ to fade over time.
 
@@ -59,12 +58,12 @@ The first three vectors in Equation \ref{eq:lstm_vects} are used to perform elem
 
 Using $\vect f_t$, unimportant aspects (elements in $\vect f_t$ near zero) of $\vect c_{t-1}$ are forgotten:
 \begin{equation}
-  \vect c_{t-1}^* = \vect c_{t-1} \times \vect f_t
+  \tilde{\vect c}_{t-1} = \vect c_{t-1} \times \vect f_t
   \label{eq:lstm_forget}
 \end{equation}
 where $\times$ is element-wise multiplication. Next, $\vect u_t$ decides what information to update (elements in $\vect u_t$ near one), and $\vect a_t$ gives the value (an increase or decrease) of the information to be updated:
 \begin{equation}
-  \vect c_t = \vect c_{t-1}^* + \left( \vect u_t \times \vect a_t \right)
+  \vect c_t = \tilde{\vect c}_{t-1} + \left( \vect u_t \times \vect a_t \right)
   \label{eq:lstm_update}
 \end{equation}
 where $+$ and $\times$ are element-wise addition and multiplication, respectively. Lastly, compute the next hidden state using $\vect g_t$, which filters the information to be passed to the next network layer and next timestep:
@@ -88,7 +87,7 @@ Though LSTM networks presented a significant breakthrough in natural language pr
 
 While transformers are large neural networks with many components and parameters, they lean heavily on a simple attention mechanism. Given an $n$-dimensional feature vector $\vect x_t$ at each timestep $1\leq t\leq T$, define three trainable matrices $W_q, W_k, W_v \in \R^{n\times d}$. These are used to obtain a \textit{query}, \textit{key}, and \textit{value} vectors $\vect q_t$, $\vect k_t$, and $\vect v_t$ for each timestep. 
 
-The query and key vectors are representations of the observations $\vect x_t$ which are used to quantify the relationship between observations $\vect x_{t_1}$ and $\vect x_{t_2}$, with the distinction between them being that a query typically refers to the current timestep. In other words, if event $t$ just occurred, we may be interested in comparing $\vect q_t$ to a previous observation $\vect k_{t-1}$. The value vector $\vect v_t$ is a representation of $\vect x_t$ which holds deeper, more contextual information of the observation. Note that $\vect q_t$, $k_t$, and $v_t$ can be stacked into matrices $Q,K,V \in \R^{T\times d}$. 
+The query and key vectors are representations of the observations $\vect x_t$ which are used to quantify the relationship between observations $\vect x_{t_1}$ and $\vect x_{t_2}$, with the distinction between them being that a query typically refers to the current timestep. In other words, if event $t$ just occurred, we may be interested in comparing $\vect q_t$ to a previous observation $\vect k_{t-1}$. The value vector $\vect v_t$ is a representation of $\vect x_t$ which holds deeper, more contextual information of the observation. Note that $\vect q_t$, $\vect k_t$, and $\vect v_t$ can be stacked into matrices $Q,K,V \in \R^{T\times d}$. 
 
 The queries and keys are used first, to calculate the correlation between observation $t$ and all other timesteps:
 \begin{equation}
@@ -118,7 +117,7 @@ It should be pointed out that transformers and attention networks were developed
 \section*{Knowledge Tracing Overview}
 Knowledge Tracing (KT) is a task introduced by Corbett and Anderson in 1995 \cite{corbett1995}. Their goal was to model the changing knowledge state of students as they progress through an online intelligent tutoring program. This tutoring system helps students practice writing computer programs by testing them on various rules, such as correct use of in-built functions, and providing feedback on their mistakes. The model tracks each student's knowledge as being in either a learned or unlearned state for each rule. After each interaction, there is a probability $P(T)$ that a student makes the transition from the unlearned state to the learned state.
 
-The probability that a student has learned a particular rule at timestep $n$ is given by
+The probability that a student has learned a particular rule at timestep $t$ is given by
 \begin{equation}
   P(L_t) = P(L_{t-1} | \text{evidence}) + (1 - P(L_{t-1} | \text{evidence})) \cdot P(T),
 \label{eq:kt}
@@ -128,7 +127,7 @@ where ``evidence'' refers to whether or not previous interactions were correct o
   P(c_t = 1) = P(L_t) \cdot (1 - P(s)) + (1 - P(L_t))\cdot P(g)
   \label{eq:kt_prob_correct}
 \end{equation}
-where $P(s)$ is the probability that the student slips (makes a silly mistake) and $P(g)$ is the probability that the student randomly guesses correctly. The parameters $P(T)$, $P(g)$, and $P(s)$ are estiamted using hidden Markov model, along with an initial value $P(L_0)$. Then Equation \ref{eq:kt} is updated via Bayes' rule.
+where $P(s)$ is the probability that the student slips (makes a silly mistake) and $P(g)$ is the probability that the student randomly guesses correctly. The parameters $P(T)$, $P(g)$, and $P(s)$ are estimated using hidden Markov model, along with an initial value $P(L_0)$. Then Equation \ref{eq:kt} is updated via Bayes' rule.
 
 In recent years, Bayesian Knowledge Tracing (BKT) has been overcome by deep learning methods. The popularity of deep neural networks has brought black-box models that yield high accuracy. Many of these methods, detailed in Section \ref{sec:kt_lit}, do not provide a concrete measure of student ability over time. Instead, the only way to track student knowledge is through the predicted probability of them answering questions correctly at a given timestep. 
 
@@ -153,7 +152,7 @@ Similar to natural language processing, tokens (student interactions) need to be
 The architecture of DKT is as follows: The one-hot encoding input layer is followed by a $d$-dimensional embedding. Then, an LSTM layer of size $d$, and a feed-forward output layer with $n$ nodes. The final layer uses a sigmoid activation function, and the output at each node represents the probability of answering the corresponding item correctly at the given timestep. To calculate loss, only the item tag for the next interaction and corresponding output node is used in the cross-entropy loss calculation. Output nodes corresponding with items that don't match the interaction sequence are masked out.
 
   \subsection{Dynamic Key-Value Memory Networks}\label{sec:dkvmn}
-A more sophisticated neural network approach to knowledge tracing was introduced by Zhang et al. with Dynamic Key-Value Memory Networks (DKVMN) \cite{zhang2017}. They modify a memory-augmented neural network (MANN) in order to fit into the knowledge tracing framework. A MANN is a temporal neural network which uses a value matrix $M^v$ stored in memory for each student. The entries in $M^v$ are updated in each timestep with elementwise addition and multiplication, similar to an LSTM in Section \ref{sec:lstm}. The output is a probability dependent on the previous value of $M^v$ in timestep $t-1$, as well as the current neural network input in timestep $t$.
+A more sophisticated neural network approach to knowledge tracing was introduced by Zhang et al. with Dynamic Key-Value Memory Networks (DKVMN) \cite{zhang2017}. They modify a memory-augmented neural network (MANN) in order to fit into the knowledge tracing framework. A MANN is a temporal neural network which uses a value matrix $M^v$ stored in memory for each student. The entries in $M^v$ are updated in each timestep with element-wise addition and multiplication, similar to an LSTM in Section \ref{sec:lstm}. The output is a probability dependent on the previous value of $M^v$ in timestep $t-1$, as well as the current neural network input in timestep $t$.
 
 In DKVMN, there is some added interpretability by requiring the number of columns of $M^v$ to be equal to the number of knowledge concepts $K$. In this way, the columns of $M^v$ offer an $h$-dimensional representation of the student's skill. DKVMN splits the computations into two parts: \textit{read} from $M^v$ to make a prediction of answering an item correctly, and \textit{write} to $M^v$ to update its information after observing a true outcome. The predictive part inputs only an exercise tag $q_t$ without the true response $c_t$. The question tag is linearly embedded into a vector $\vect k_t$, so that $\vect k_t$ is a representation of question $q_t$, and is then multiplied by a learned matrix $M^k$ and softmaxed: 
 \begin{equation}
@@ -168,19 +167,19 @@ Next, \textit{read} from the value matrix by computing
   \vect r_t = \sum_{i=1}^K \vect w_t(i) M_t^v(i).
   \label{eq:dkvmn_read}
 \end{equation}
-Note that $\vect r_t$ is simply a weighted sum of the columns of $M^v$ and can be treated as a summary of the student's predicted master level of exercise $q_t$. Next, the item embedding $\vect k_t$ is appended to the read content $\vect r_t$ and fed forward through two linear layers. The first uses a $\tanh$ activation function, and the output $p_t$ produces a single node with sigmoidal activation. In this way, the single value $p_t$ represents the probability that the student will answer item $q_t$ correctly at timestep $t$.
+Note that $\vect r_t$ is simply a weighted sum of the columns of $M^v$ and can be treated as a summary of the student's predicted mastery level of exercise $q_t$. Next, the item embedding $\vect k_t$ is appended to the read content $\vect r_t$ and fed forward through two linear layers. The first uses a $\tanh$ activation function, and the output $p_t$ produces a single node with sigmoidal activation. In this way, the single value $p_t$ represents the probability that the student will answer item $q_t$ correctly at timestep $t$.
 
-The second part of DKVMN is to \textit{write} new values into $M^v$ based on the true response of students. Different from the prediction phase, the full tuple $(q_t,c_t)$ is embedded into a vector $\vect v_t$. The manner in which $M^v$ is updated is actually similar to that of an LSTM, allowing for ``remembering'' and ``forgetting''. Two trainable matrices are multiplied by $\vect v_t$ to produce an ``erase'' vector $\vect e_t$ and an ``add vector'' $\vect a_t$. The erase vector has a sigmoidal activation function, so that values near zero do not get erased much at all, and values near one are mostly erased. The add vector uses a $\tanh$ activation function, so memory slots in $M^v$ can either be increased or decreased. Finally, the columns of the memory matrix are updated via
+The second part of DKVMN is to \textit{write} new values into $M^v$ based on the true response of students. Different from the prediction phase, the full tuple $(q_t,c_t)$ is embedded into a vector $\vect v_t$. The manner in which $M^v$ is updated is actually similar to that of an LSTM, allowing for ``remembering'' and ``forgetting''. $\vect v_t$ is multiplied by two trainable matrices to produce an ``erase'' vector $\vect e_t$ and an ``add vector'' $\vect a_t$. The erase vector has a sigmoidal activation function, so that values near zero do not get erased much at all, and values near one are mostly erased. The add vector uses a $\tanh$ activation function, so memory slots in $M^v$ can either be increased or decreased. Finally, the columns of the memory matrix are updated via
 \begin{equation}
   M_{t}^v(i) = (M_{t-1}^v(i) [\vect 1 - \vect w_t(i) \vect e_t] ) + \vect w_t(i) \vect a_t
   \label{eq:update_dkvmn}
 \end{equation}
 Note that the correlation weights $\vect w_t$ computed in the predictive step are again used to determine \textit{how much} of memory slot $i$ should be updated.
 
-DKVMN's use of a matrix stored in memory allows for longer range dependencies than RNN or LSTM. There is also a bit of interpretability in this method, since a single column of the memory matrix $M_t^v$ gives an $h$-dimensional representation of a single skill for the student at time $t$. However, it cannot be determined \textit{which} skill the column represents, as they could be perumted in any order. Additionally, if a student answers each available item, then stacking each weights vector $\vect w_t$ into a matrix $W = \{\vect w_t\}_{t=1}^L$ should result in a matrix similar to the item-skill association $Q$-matrix. But again, the columns of this ``learned $Q$-matrix'' $W$ are in no particular order, and can be difficult to interpret.
+DKVMN's use of a matrix stored in memory allows for longer range dependencies than RNN or LSTM. There is also a bit of interpretability in this method, since a single column of the memory matrix $M_t^v$ gives an $h$-dimensional representation of a single skill for the student at time $t$. However, it cannot be determined \textit{which} skill the column represents, as they could be permuted in any order. Additionally, if a student answers each available item, then stacking each weights vector $\vect w_t$ into a matrix $W = \{\vect w_t\}_{t=1}^L$ should result in a matrix similar to the item-skill association $Q$-matrix. But again, the columns of this ``learned $Q$-matrix'' $W$ are in no particular order, and can be difficult to interpret.
 
 \subsubsection{Deep-IRT}
-Deep-IRT, proposed by Chun-Kit Yeung \cite{yeung_2019}, modifies the DKVMN architecture to allow a connection with Item Response Theory. Specifically, two separate feed forward layers are inserted representing $\theta_{tk}$, a student's $k$-th ability at time $t$ and concept difficulty $\beta_k$. Then the output probability is not another linear layer (as in DVKVMN), but is instead a function of $\theta_{tk}$ and $\beta_k$:
+Deep-IRT, proposed by Chun-Kit Yeung \cite{yeung_2019}, modifies the DKVMN architecture to allow a connection with Item Response Theory. Specifically, two separate feed forward layers are inserted representing $\theta_{tk}$, a student's $k$-th ability at time $t$ and concept difficulty $\beta_k$. Then the output probability is not another linear layer (as in DKVMN), but is instead a function of $\theta_{tk}$ and $\beta_k$:
 
 \begin{equation}
   p_t = \frac{1}{1 + \exp\left( \beta_k - 3\cdot \theta_{tk} \right)}
@@ -195,7 +194,7 @@ In the field of natural language processing (NLP), the most state-of-the-art met
 
 Similar to other deep learning methods, at timestep $t$, SAKT first embeds each interaction $(q_i, c_i)$, $i<t$ into a learned $d$-dimensional vector $\vect m_i$. Additionally, like DKVMN, the current question $q_t$ without the response is also embedded into a $d$-dimensional vector $\vect e_t$. 
 
-The exercise embedding $\vect e_t$ is multiplied by a weights matrix to obtain a \textit{query} vector $\vect q_t = W^{Q} \vect e_t$. The interaction embedding $\vect m_i$ is used to create two vectors: a \textit{key} vector $\vect k_i = W^{K} \vect m_i$ and a \textit{value} vector $\vect v_i = W^V \vect m_i$. 
+The exercise embedding $\vect e_t$ is multiplied by a weights matrix to obtain a \textit{query} vector $\vect q_t = W_{q} \vect e_t$. The interaction embedding $\vect m_i$ is used to create two vectors: a \textit{key} vector $\vect k_i = W_{k} \vect m_i$ and a \textit{value} vector $\vect v_i = W_v \vect m_i$. 
 
 The general idea is that $\vect k_i$ serves as the identifier of a past interaction, and $\vect q_t$ serves as an identifier for the current exercise. If the two exercises are similar in content, then the dot product between these two vectors should be large. The value vector $\vect v_i$ holds more abstract information about the corresponding interaction. The keys and values are organized into matrices $K$ and $V$. We calculate the attention
 \begin{equation}
@@ -212,8 +211,8 @@ The attention value $\vect a_t$ is sent through a few feed-forward layers, resul
 An earlier approach to knowledge tracing was proposed by Pavlik et al. in 2009 with Performance Factors Analysis (PFA) \cite{pavlik2009}. The general idea is that a student's learning at a given timestep is a function of the student's past interactions with items related to various knowledge concepts. Specifically, the logit of student $j$ answering item $i$ correctly is a linear combination of concept difficulty, previous successes, and previous failures:
 \begin{equation}
   \begin{split}
-    \log \frac{p}{1-p} &= \sum_{k \in K}(\beta_k + \gamma_k s_{jk} + \rho_k f_{jk}) \\
-  p(c_i = 1 | k\in \text{K}_i, \vect s_j, \vect f_j) &= \sigma\left(\sum_{k \in K}(\beta_k + \gamma_k s_{jk} + \rho_k f_{jk}\right)
+    \log \frac{p}{1-p} &= \sum_{k \in K_i}(\beta_k + \gamma_k s_{jk} + \rho_k f_{jk}) \\
+  p(c_i = 1 | k\in \text{K}_i, \vect s_j, \vect f_j) &= \sigma\left(\sum_{k \in K_i}(\beta_k + \gamma_k s_{jk} + \rho_k f_{jk}\right)
   \end{split}
   \label{eq:pfa}
 \end{equation}
@@ -221,12 +220,12 @@ An earlier approach to knowledge tracing was proposed by Pavlik et al. in 2009 w
 In Equation \ref{eq:pfa}, $\text{K}_i$ is a set indicating which knowledge concepts are required for item $i$, the trainable parameter $\beta_k$ represents concept $k$'s difficulty, and $\gamma_k$ and $\rho_k$ serve as trainable weights. $s_{jk}$ and $f_{jk}$ track the prior successes and failures, respectively, of student $j$ on concept $k$. At timestep $t$, we can write $s_{jk}$ and $f_{jk}$ as 
 \begin{equation}
   \begin{split}
-    s_{jk} = \sum_{i<t} \chi_{c_i=1} \cdot \chi_{k \in \text{K}_i} \\
-    f_{jk} = \sum_{i<t} \chi_{c_i=0} \cdot \chi_{k \in \text{K}_i}
+    s_{jk} = \sum_{i<t} \chi_{(c_i=1)} \cdot \chi_{(k \in \text{K}_i)} \\
+    f_{jk} = \sum_{i<t} \chi_{(c_i=0)} \cdot \chi_{(k \in \text{K}_i)}
   \end{split}
   \label{eq:pfa_indicator}
 \end{equation}
-where $\chi$ is the indicator function on some condition. For example, $\chi_{k\in \text{K}_i}$ indicates whether the previous item $q_i$, $i<t$, required knowledge concept $k$ or not.
+where $\chi$ is the indicator function. For example, $\chi_{(k\in \text{K}_i)}$ indicates whether the previous item $q_i$, $i<t$, required knowledge concept $k$ or not.
 
 The parameters $\beta_k$, $\gamma_k$, and $\rho_k$ are learned so that they maximize the log-likelihood of the given dataset. This is a well-studied problem, as the form of Equation \ref{eq:pfa} is essentially a logistic regression. Note that similar to Deep-IRT, PFA focuses on the concept-level, rather than item-level, parameters. 
 
@@ -241,8 +240,8 @@ For the current question $q_{t+1}$, the attention between previous exercises is 
 
 The mastery of knowledge concepts after a student completes interaction $(q_i, c_i)$ is given as $\vect v_i = [v_i^0, v_i^1] \in \R^2$. The numbers $v_i^0$ and $v_i^1$ represent the expected mastery of the skills for item $i$ if the item is answered incorrectly or correctly, respectively. DPFA gives the probability of a student answering item $q_{t+1}$ correctly as
 \begin{equation}
-  p_{t+1} = \sigma\left( \beta_{t+1} + \sum_{i \leq t} \left( \chi_{c_i=0}\cdot w_i v_i^0 + \chi_{c_i=1} \cdot w_i v_i^1 \right) \right)
+  p_{t+1} = \sigma\left( \beta_{t+1} + \sum_{i \leq t} \left( \chi_{(c_i=0)}\cdot w_i v_i^0 + \chi_{(c_i=1)} \cdot w_i v_i^1 \right) \right)
   \label{eq:dpfa}
 \end{equation}
-where $\beta_{t+1}$ corresponds to the difficulty of the current item and $\sigma(\cdot)$ is the sigmoid function. In comparison with regular PFA in Equation \ref{eq:pfa}, DPFA substitutes the terms $\chi_{c_i=0}\cdot w_i v_i^0$ for $\rho_k f_k$ and substitutes $\chi_{c_i=1} \cdot w_i v_i^1$ for $\gamma_k s_k$.
+where $\beta_{t+1}$ corresponds to the difficulty of the current item and $\sigma(\cdot)$ is the sigmoid function. In comparison with regular PFA in Equation \ref{eq:pfa}, DPFA substitutes the terms $\chi_{(c_i=0)}\cdot w_i v_i^0$ for $\rho_k f_k$ and substitutes $\chi_{(c_i=1)} \cdot w_i v_i^1$ for $\gamma_k s_k$.
 

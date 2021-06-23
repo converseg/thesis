@@ -46,7 +46,7 @@ For classification, the true label $\vect y$ is often a one-hot encoding, so the
 \section{Activation Functions} \label{apdx:activation_fcns}
 The main purpose of activation functions is to rescale each layer so that every activation value falls in the same range. Performing many matrix multiplications in a row can easily cause values to become very large, leading to over-fitting and other complications \cite{sibi2013}. It can be helpful to use an activation function to map values to the range of $(0,1)$ because of the effect of the numbers $0$ and $1$ in multiplication, map to $(-1,1)$ to utilize positive and negative values, or map to $[0,\infty)$ to avoid negative values. 
 
-Though custom activation functions can be defined and easily implemented, below are a few examples of popular activation functions used in neural networks \cite{tensorflow} \cite{keras_r}. Each of these are independently applied to a vector element-wise, except for the softmax function which maps an $n$-dimensional vector to an $n$-dimensional probability distribution.
+Though custom activation functions can be defined and easily implemented, below are a few examples of popular activation functions used in neural networks \cite{tensorflow} \cite{keras_r}. Each of these are independently applied to a vector element-wise, except for the softmax function which maps an $n$-dimensional vector to a discrete probability distribution with $n$ possible values. Denote $z = \sum_k a_k w_k + b$ as the input to a node's activation function.
 
 \begin{equation}
   \text{Sigmoid: } \sigma(z) = \frac{1}{1 + e^{-z}} \quad \quad \R \to (0,1) 
@@ -70,7 +70,7 @@ The ReLU function is often used to combat the ``learning slowdown'' problem that
   \text{Softmax: } \text{softmax}(\vect z)_i = \frac{e^{z_i}}{\sum_{j=1}^n e^{z_j}} \quad \quad \R^n \to \{P(x=i)\}_{i=1}^n
   \label{eq:softmax_eqn}
 \end{equation}
-When using the softmax activation function, the activation a single node is a function of the activation of all other nodes within the same layer. This is seen in the summation over $n$ nodes in Equation \ref{eq:softmax_eqn}. It is also straightforward to see that for any input, the sum of all $n$ nodes in the layer always adds up to exactly 1 -- so a softmax layer with $n$ nodes can be understood as a discrete probability distribution of dimension $n$. This can be particularly useful in the output layer of a multi-class classification neural network model.
+When using the softmax activation function, the activation a single node is a function of the activation of all other nodes within the same layer. This is seen in the summation over $n$ nodes in Equation \ref{eq:softmax_eqn}. It is also straightforward to see that for any input, the sum of all $n$ nodes in the layer always adds up to exactly 1 -- so a softmax layer with $n$ nodes can be understood as a discrete probability distribution with $n$ classes. This can be particularly useful in the output layer of a multi-class classification neural network model.
 
 
 \section{Optimization and Backpropagation}\label{apdx:backprop}
@@ -83,9 +83,9 @@ Though there are many candidates for loss functions such as cross-entropy (see E
 \end{equation}
 where $K$ is the dimension of the target (i.e. the number of output nodes).
 
-Recall that if an input (or set of inputs) $\vect x^*$ is fixed, then the prediction outputted by the neural network is a function of the weights and biases $W_l$ and $\vect b_l$. As such, we can compute partial derivatives of $\mathcal{L}$ with respect to each trainable parameter and use a gradient descent algorithm to minimize Equation \ref{eq:mse_loss}.
+Recall that if an input (or set of inputs) $\vect x^*$ is fixed, then the prediction $\hat{\vect y}^*$ outputted by the neural network is a function of the weights and biases $W_l$ and $\vect b_l$. As such, we can compute partial derivatives of $\mathcal{L}$ with respect to each trainable parameter and use a gradient descent algorithm to minimize Equation \ref{eq:mse_loss}.
 
-Though deep neural networks can have thousands, millions, or billions of parameters \cite{gpt3}, calculating gradients remains feasible because of the backpropagation algorithm \cite{rojas1996}. While obtaining predictions from a neural networks works in a left-to-right fashion ($\vect a_3$ depends on $\vect a_2$ depends on $\vect a_1$ depends on $\vect x$), gradient calculations are computed right-to-left. This is due to the role of the chain rule.
+Though deep neural networks can have thousands, millions, or billions of parameters \cite{gpt3}, calculating gradients remains feasible because of the backpropagation algorithm \cite{rojas1996}. While obtaining predictions from a neural networks works in a left-to-right fashion ($\vect a_3$ depends on $\vect a_2$, which depends on $\vect a_1$, which depends on $\vect x$), gradient calculations are computed right-to-left. This is due to the role of the chain rule.
 
 First consider calculating the partial derivative of a particular weight in the final layer, $w_{ij}^3$. Denote the input to an activation function at layer $l$ as $\vect z_l = W_l \vect a_{l-1} + b_l$ so that $\vect a_l = f_l(\vect z_l)$. Using Equation \ref{eq:ffn_comp}, we can write
 \begin{equation}
@@ -128,7 +128,7 @@ The \textbf{ML2Pvae} package has five easy-to-use functions to assist in buildin
 
 To train a VAE on a dataset, the function {\color{blue}\verb!train_model()!} can be used. After the model has been fitted, the function {\color{blue}\verb!get_item_parameter_estimates()!} grabs the relevant trainable weights from the decoder which serve as estimates of $\vect a_i$ and $b_i$. The function {\color{blue}\verb!get_ability_parameter_estimates()!} feeds student responses through the encoder to obtain estimates to $\vect \Theta_j$.
 
-The functionality of \textbf{ML2Pvae} is displayed below. Note that while the neural network models are created with Tensorflow and Keras \cite{keras_r} inside of \textbf{ML2Pvae}, those packages are not employed by the user. This is by design to make the ML2P-VAE method accessible to IRT researchers who may not have knowledge of neural networks. Further explanation and documentation for \textbf{ML2Pvae} can be found at {\color{violet}\href{https://cran.r-project.org/web/packages/ML2Pvae}{https://cran.r-project.org/web/packages/ML2Pvae}}. Source code of the software is found at {\color{violet}\href{https://github.com/converseg/ML2Pvae}{https://github.com/converseg/ML2Pvae}}.
+The functionality of \textbf{ML2Pvae} is displayed below. Note that while the neural network models are created with Tensorflow and Keras \cite{keras_r} inside of \textbf{ML2Pvae}, those packages are not employed by the user. This is by design in order to make the ML2P-VAE method accessible to IRT researchers in psychometrics who may not have knowledge of neural networks. Further explanation and documentation for \textbf{ML2Pvae} can be found at {\color{violet}\href{https://cran.r-project.org/web/packages/ML2Pvae}{https://cran.r-project.org/web/packages/ML2Pvae}}. Source code of the software is found at {\color{violet}\href{https://github.com/converseg/ML2Pvae}{https://github.com/converseg/ML2Pvae}}.
 
 \section{Software Tutorial}
 \vspace{.5cm}

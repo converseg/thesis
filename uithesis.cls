@@ -522,7 +522,7 @@
      \singlespace
      \titlepg
      \copyrightpg
-     \signaturepg
+     %\signaturepg
      \setcounter{page}{2}
      \dedicationpg
      \epigraphpg      %epigraph/frontspiece (optional)
@@ -719,26 +719,26 @@
 %      }
 %   \end{center}
  \begin{center}\begin{minipage}{4in}
-   %\settowidth{\uitrule}{Thesis Committee: }
-   {Thesis Supervisor: Professor \@memberOne}
+   \settowidth{\uitrule}{Thesis Committee: }
+     {Thesis Committee: \@memberOne, Thesis Supervisor}
        
         \ifthenelse{\boolean{multipleSupervisors}}{
-            \hspace*{\uitrule}{Professor \@memberTwo}\\
-          }{}%{
-%            \hspace*{\uitrule}{\@memberTwo}\\
-%        }
-%        \hspace*{\uitrule}{\@memberThree}
-%   \ifthenelse{\boolean{phd}}{\\
-%        \hspace*{\uitrule}{\@memberFour}\\
+            \hspace*{\uitrule}{\@memberTwo}\\
+          }{}{
+            \hspace*{\uitrule}{\@memberTwo}\\
+        }
+        \hspace*{\uitrule}{\@memberThree}
+   \ifthenelse{\boolean{phd}}{\\
+        \hspace*{\uitrule}{\@memberFour}\\
 % If you need more signature lines, uncomment and duplicate these
 % following two lines:
-%        \hspace*{\uitrule}\hrulefill\\
-%        \hspace*{\uitrule}{Member}\\[2\li]
-%        \hspace*{\uitrule}{\@memberFive}
+        %\hspace*{\uitrule}\hrulefill\\
+        %\hspace*{\uitrule}{Member}\\[2\li]
+        \hspace*{\uitrule}{\@memberFive}
         % Comment in if there are six committee members
         %\hspace*{\uitrule}{\@memberSix}}{}
-        %}
-        %{}
+        }
+        {}
    \end{minipage}\end{center}
    \vfill
    \newpage

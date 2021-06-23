@@ -18,7 +18,7 @@ enc_arch <- c(16L, 8L)
 enc_act <- c('relu', 'tanh')
 out_act <- 'sigmoid'
 (*@ \pagebreak @*)
-# Build ML2P-VAE model assuming known correlation between latent traits
+# Build ML2P-VAE assuming known correlation between latent traits
 models <- build_vae_correlated(
   num_items,
   num_skills,
@@ -64,11 +64,11 @@ true_theta_test <- theta_params_true[(num_train+1):num_students,]
 (*@ \pagebreak @*)
 # Plot estimates against true values
 plot(true_diff, diff_est, pch = '*',
-     main = 'Difficulty Parameters',
-     xlab = 'True', ylab = 'Estimated')
+  main = 'Difficulty Parameters',
+  xlab = 'True', ylab = 'Estimated')
 matplot(t(true_disc), t(disc_est), pch = '*',
-        main = 'Discrimination Parameters',
-        xlab = 'True', ylab = 'Estimated')
+  main = 'Discrimination Parameters',
+  xlab = 'True', ylab = 'Estimated')
 matplot(true_theta_test, test_theta_est, pch = '*',
-        main = 'Ability Parameters',
-        xlab = 'True', ylab = 'Estimated')
+  main = 'Ability Parameters',
+  xlab = 'True', ylab = 'Estimated')
