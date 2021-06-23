@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  23 JUN 2021 12:49
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  23 JUN 2021 17:58
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1326,7 +1326,7 @@ File: img/ml2pvae_tutorial_plots.png Graphic file (type bmp)
 
 ] [138] [139]
 [140]
-Underfull \hbox (badness 1584) in paragraph at lines 331--334
+Underfull \hbox (badness 1584) in paragraph at lines 318--321
 []\TU/lmr/m/n/12 Sports Reference LLC.  Baseball-reference batting statistics. 
  Baseball-
  []

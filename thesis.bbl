@@ -1,15 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{tensorflow}
-Mart\'{\i}n Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
-  Craig Citro, Greg~S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin,
-  Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard,
-  Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh
-  Levenberg, Dan Man\'{e}, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah,
-  Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar,
-  Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\'{e}gas, Oriol
-  Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang
-  Zheng.
+Mart\'{\i}n Abadi et~al.
 \newblock {TensorFlow}: Large-scale machine learning on heterogeneous systems,
   2015.
 \newblock Software available from tensorflow.org.
@@ -71,13 +63,7 @@ R.~D. Bock and M.~Aitkin.
 \newblock {\em Psychometrika}, 46(4):443--459, 1981.
 
 \bibitem{gpt3}
-Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
-  Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
-  Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon
-  Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris
-  Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess,
-  Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever,
-  and Dario Amodei.
+Tom Brown et~al.
 \newblock Language models are few-shot learners.
 \newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
   editors, {\em Advances in Neural Information Processing Systems}, volume~33,
@@ -91,8 +77,8 @@ Li~Cai.
 
 \bibitem{cai2010}
 Li~Cai.
-\newblock Metropolis-hastings robbins-monro algorithm for confirmatory item
-  factor analysis.
+\newblock Metropolis-{H}astings {R}obbins-{M}onro algorithm for confirmatory
+  item factor analysis.
 \newblock {\em Journal of Educational and Behavioral Statistics},
   35(3):307--335, 2010.
 
@@ -110,8 +96,8 @@ Yunxiao Chen, Xiaoou Li, and Siliang Zhang.
 
 \bibitem{chou2020}
 Aaron Chou.
-\newblock What's in the "black box"? balancing financial inclusion and privacy
-  in digital consumer lending.
+\newblock What's in the ``black box''? {B}alancing financial inclusion and
+  privacy in digital consumer lending.
 \newblock {\em Duke Law Journal}, 69:1183--1217, 2020.
 
 \bibitem{aied_paper}
@@ -123,7 +109,7 @@ G.~Converse, M.~Curi, and S.~Oliveira.
 
 \bibitem{r_package}
 Geoffrey Converse.
-\newblock {\em ML2Pvae: Variational Autoencoder Models for IRT Parameter
+\newblock {\em ML2Pvae: Variational Autoencoder Models for {IRT} Parameter
   Estimation}, 2020.
 \newblock R package version 1.0.0.
 
@@ -180,7 +166,7 @@ Antonio~Reis de~S{\'a}~Junior, Graziela Liebel, Arthur Guerra~de Andrade,
 
 \bibitem{dempster1977}
 A.~P. Dempster, N.~M. Laird, and D.~B. Rubin.
-\newblock Maximum likelihood from incomplete data via the em algorithm.
+\newblock Maximum likelihood from incomplete data via the {EM} algorithm.
 \newblock {\em Journal of the Royal Statistical Society: Series B
   (Methodological)}, 39(1):1--22, 1977.
 
@@ -192,7 +178,8 @@ J.~Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
 
 \bibitem{doersch2016}
 Carl Doersch.
-\newblock Tutorial on variational autoencoders, 2016.
+\newblock Tutorial on variational autoencoders.
+\newblock {\em arXiv:1606.05908}, 2016.
 
 \bibitem{kahou2015}
 Samira Ebrahimi~Kahou, Vincent Michalski, Kishore Konda, Roland Memisevic, and
@@ -208,12 +195,12 @@ Jeffrey~L. Elman.
 
 \bibitem{Feng2014}
 Y.~Feng, B.~T. Habing, and A.~Huebner.
-\newblock Parameter estimation of the reduced rum using the em algorithm.
+\newblock Parameter estimation of the reduced {RUM} using the {EM} algorithm.
 \newblock {\em Applied Psychological Measurement}, 38:137--150, 2014.
 
 \bibitem{fragoso2013}
 T.M. Fragoso and M.~Curi.
-\newblock Improving psychometric assessment of the beck depression inventory
+\newblock Improving psychometric assessment of the {Beck} depression inventory
   using multidimensional item response theory.
 \newblock {\em Biometrical Journal}, pages 527--540, 2013.
 
@@ -236,7 +223,7 @@ William Gilpin.
 \bibitem{goebel2018}
 Randy Goebel, Ajay Chander, Katharina Holzinger, Freddy Lecue, Zeynep Akata,
   Simone Stumpf, Peter Kieseberg, and Andreas Holzinger.
-\newblock Explainable ai: the new 42?
+\newblock Explainable {AI}: the new 42?
 \newblock In {\em International cross-domain conference for machine learning
   and knowledge extraction}, pages 295--303. Springer, 2018.
 
@@ -258,7 +245,7 @@ Shelby~J. Haberman.
 Aric~A. Hagberg, Daniel~A. Schult, and Pieter~J. Swart.
 \newblock Exploring network structure, dynamics, and function using networkx.
 \newblock In Ga\"el Varoquaux, Travis Vaught, and Jarrod Millman, editors, {\em
-  Proceedings of the 7th Python in Science Conference}, pages 11 -- 15,
+  Proceedings of the 7th {Python} in Science Conference}, pages 11 -- 15,
   Pasadena, CA USA, 2008.
 
 \bibitem{hammerstrom1993}
@@ -268,13 +255,13 @@ D.~Hammerstrom.
 
 \bibitem{han2014}
 Kyung (Chris)~T. Han and Insu Paek.
-\newblock A review of commercial software packages for multidimensional irt
+\newblock A review of commercial software packages for multidimensional {IRT}
   modeling.
 \newblock {\em Applied Psychological Measurement}, 38(6):486--498, 2014.
 
 \bibitem{hastings1970}
 W.~K. Hastings.
-\newblock Monte carlo sampling methods using markov chains and their
+\newblock {Monte Carlo} sampling methods using {Markov} chains and their
   applications.
 \newblock {\em Biometrika}, 57(1):97--109, 1970.
 
@@ -291,8 +278,8 @@ Sepp Hochreiter and J{\"u}rgen Schmidhuber.
 
 \bibitem{huang2015}
 Chiungjung Huang and Jyun-Hong Chen.
-\newblock Meta-analysis of the factor structures of the beck depression
-  inventory--ii.
+\newblock Meta-analysis of the factor structures of the {Beck} depression
+  inventory--{II}.
 \newblock {\em Assessment}, 22(4):459--472, 2015.
 
 \bibitem{jiang2018}
@@ -339,7 +326,7 @@ F.~Lord and M.~R Novick.
 
 \bibitem{masters1982}
 Geoff~N Masters.
-\newblock A rasch model for partial credit scoring.
+\newblock A {Rasch} model for partial credit scoring.
 \newblock {\em Psychometrika}, 47(2):149--174, 1982.
 
 \bibitem{meijer1999}
@@ -364,7 +351,7 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
 
 \bibitem{myers1962}
 Isabel~Briggs Myers.
-\newblock The myers-briggs type indicator: Manual (1962).
+\newblock The {Myers-Briggs} type indicator: Manual (1962).
 \newblock 1962.
 
 \bibitem{myung2003}
@@ -383,7 +370,7 @@ The United States~Department of~Justice.
 
 \bibitem{olah2015}
 Christopher Olah.
-\newblock Understanding lstm networks, 2015.
+\newblock Understanding {LSTM} networks, 2015.
 
 \bibitem{ong2003}
 James Ong and Sowmya Ramachandran.
@@ -404,7 +391,7 @@ Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio.
 
 \bibitem{patz1999}
 Richard~J. Patz and Brian~W. Junker.
-\newblock A straightforward approach to markov chain monte carlo methods for
+\newblock A straightforward approach to {Markov Chain Monte Carlo} methods for
   item response models.
 \newblock {\em Journal of Educational and Behavioral Statistics}, 24(2):146,
   1999.
@@ -462,7 +449,7 @@ Herbert Robbins and Sutton Monro.
 \bibitem{robie2001}
 Chet Robie, Michael~J Zickar, and Mark~J Schmit.
 \newblock Measurement equivalence between applicant and incumbent groups: An
-  irt analysis of personality scales.
+  {IRT} analysis of personality scales.
 \newblock {\em Human Performance}, 14(2):187--207, 2001.
 
 \bibitem{cdm}
@@ -512,10 +499,10 @@ Sandip Sinharay and Russell~G. Almond.
 
 \bibitem{smarr2011}
 Karen~L. Smarr and Autumn~L. Keefer.
-\newblock Measures of depression and depressive symptoms: Beck depression
-  inventory-ii (bdi-ii), center for epidemiologic studies depression scale
-  (ces-d), geriatric depression scale (gds), hospital anxiety and depression
-  scale (hads), and patient health questionnaire-9 (phq-9).
+\newblock Measures of depression and depressive symptoms: {Beck} depression
+  inventory-{II} ({BDI-II}), center for epidemiologic studies depression scale
+  ({CES-D}), geriatric depression scale ({GDS}), hospital anxiety and
+  depression scale ({HADS}), and patient health questionnaire-9 ({PHQ-9}).
 \newblock {\em Arthritis Care \& Research}, 63(S11):S454--S466, 2011.
 
 \bibitem{tatsuoka1983}
@@ -549,22 +536,15 @@ Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol.
   1096--1103, 2008.
 
 \bibitem{SciPy}
-Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, Matt Haberland, Tyler Reddy,
-  David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren {Weckesser},
-  Jonathan {Bright}, Stefan~J. {van der Walt}, Matthew {Brett}, Joshua
-  {Wilson}, K.~{Jarrod Millman}, Nikolay {Mayorov}, Andrew R.~J. {Nelson}, Eric
-  {Jones}, Robert {Kern}, Eric {Larson}, CJ~{Carey}, lhan {Polat}, Yu~{Feng},
-  Eric~W. {Moore}, Jake {Vand erPlas}, Denis {Laxalde}, Josef {Perktold},
-  Robert {Cimrman}, Ian {Henriksen}, E.~A. {Quintero}, Charles~R {Harris},
-  Anne~M. {Archibald}, Antonio~H. {Ribeiro}, Fabian {Pedregosa}, Paul {van
-  Mulbregt}, and SciPy 1.~0 {Contributors}.
-\newblock Scipy 1.0: Fundamental algorithms for scientific computing in python.
+Pauli Virtanen et~al.
+\newblock Scipy 1.0: Fundamental algorithms for scientific computing in
+  {Python}.
 \newblock {\em Nature Methods}, 2020.
 
 \bibitem{wang2020}
 Zichao Wang, Yi~Gu, Andrew Lan, and Richard Baraniuk.
-\newblock Varfa: A variational factor analysis framework for efficient bayesian
-  learning analytics.
+\newblock Varfa: A variational factor analysis framework for efficient
+  {Bayesian} learning analytics.
 \newblock {\em arXiv preprint arXiv:2005.13107}, 2020.
 
 \bibitem{wu2020}
@@ -574,7 +554,7 @@ Mike Wu, Richard~L Davis, Benjamin~W Domingue, Chris Piech, and Noah Goodman.
 
 \bibitem{yeung_2019}
 Chun{-}Kit Yeung.
-\newblock Deep-irt: Make deep learning based knowledge tracing explainable
+\newblock Deep-{IRT}: Make deep learning based knowledge tracing explainable
   using item response theory.
 \newblock {\em CoRR}, abs/1904.11738, 2019.
 
