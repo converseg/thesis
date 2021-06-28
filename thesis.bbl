@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{100}
 
 \bibitem{tensorflow}
 Mart\'{\i}n Abadi et~al.
@@ -282,6 +282,11 @@ Chiungjung Huang and Jyun-Hong Chen.
   inventory--{II}.
 \newblock {\em Assessment}, 22(4):459--472, 2015.
 
+\bibitem{jaynes1957}
+Edwin~T Jaynes.
+\newblock Information theory and statistical mechanics.
+\newblock {\em Physical review}, 106(4):620, 1957.
+
 \bibitem{jiang2018}
 Zhehan Jiang and Jonathan Templin.
 \newblock Gibbs samplers for logistic item response models via the
@@ -477,6 +482,11 @@ Fumiko Samejima.
 \newblock Graded response model.
 \newblock In {\em Handbook of modern item response theory}, pages 85--100.
   Springer, 1997.
+
+\bibitem{shannon1948}
+C.~E. Shannon.
+\newblock A mathematical theory of communication.
+\newblock {\em The Bell System Technical Journal}, 27(3):379--423, 1948.
 
 \bibitem{sharma2020}
 Sagar Sharma, Simone Sharma, and Anidhya Athaiya.
