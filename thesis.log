@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  27 JUN 2021 21:28
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  28 JUN 2021 09:34
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -967,14 +967,11 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [8] [9] [10] [11] [12] [13] [14] [15] [16]
 File: img/vae_visual.png Graphic file (type bmp)
 <img/vae_visual.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[17] [18] [19] [20]
+ [17] [18] [19]
 File: img/logistic_2param_icc.jpg Graphic file (type bmp)
 <img/logistic_2param_icc.jpg>
- [21] [22] [23] [24] [25] [26] [27]
+ [20] [21] [22]
+[23] [24] [25] [26] [27]
 Overfull \hbox (2.13948pt too wide) detected at line 302
 [] [][] \OT1/cmr/m/n/12 = []
  []

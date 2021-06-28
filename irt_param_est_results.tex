@@ -209,7 +209,7 @@ VAE   & 0.965 & 0.940 & 0.969 & \\
 \label{tab:vae_vs_ae_theta}
 \end{table}
 
-The lack of a KL-divergence term in a regular AE also helps explain the poor discrimination parameter estimates shown in the right plot of Figure \ref{fig:vae_vs_ae_a}. The ML2P model can suffer from an identifiability issue without the assumption that student ability parameters follow some probability distribution \cite{ets2005}. Fixing this problem often requires an anchoring or rotation procedure after estimation \cite{baker_kim2004}. For a VAE, this is avoided by incorporating the KL-divergence term in Equation \ref{eq:vae_loss} between the encoder output and the prior distribution $p(\vect \theta) = \mathcal{N}(0,I)$.
+The lack of a KL-divergence term in a regular AE also helps explain the poor discrimination parameter estimates shown in the right plot of Figure \ref{fig:vae_vs_ae_a}. The ML2P model can suffer from an identifiability issue without the assumption that student ability parameters follow some probability distribution \cite{ets2005}. Fixing this problem often requires an anchoring or rotation procedure after estimation \cite{baker_kim2004}. For a VAE, this is avoided by incorporating the KL-divergence term in Equation \ref{eq:vae_loss} between the encoder output and the prior distribution $p_\theta^*(\vect \Theta) = \mathcal{N}(0,I)$.
 
 \begin{figure}[h!]
 \minipage{0.5\textwidth}
