@@ -64,7 +64,7 @@ Hyperbolic tangent has a similar curvature to that of the sigmoid, but maps valu
   \text{Rectified Linear Unit (ReLU): } \text{relu}(z) = \max\{0, z\} \quad \quad \R \to (0,\infty)
   \label{eq:relu_eqn}
 \end{equation}
-The ReLU function is often used to combat the ``learning slowdown'' problem that the sigmoid and $\tanh$ can face -- if an input $z_0$ is very large or very small, then the derivative $\frac{d\sigma}{dz} \Big|_{z=z_0}$ is very small, causing gradient descent iterations to improve slowly. The derivative of the ReLU function is either exactly 0 or exactly 1, which helps speed up the training process.
+The ReLU function is often used to combat the ``learning slowdown'' problem that the sigmoid and $\tanh$ can face -- if an input $z_0$ is very large or very small, then the derivative $\displaystyle\frac{d\sigma}{dz} \Big|_{z=z_0}$ is very small, causing gradient descent iterations to improve slowly. The derivative of the ReLU function is either exactly 0 or exactly 1, which helps speed up the training process.
 
 \begin{equation}
   \text{Softmax: } \text{softmax}(\vect z)_i = \frac{e^{z_i}}{\sum_{j=1}^n e^{z_j}} \quad \quad \R^n \to \{P(x=i)\}_{i=1}^n

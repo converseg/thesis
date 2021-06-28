@@ -259,6 +259,12 @@ Kyung (Chris)~T. Han and Insu Paek.
   modeling.
 \newblock {\em Applied Psychological Measurement}, 38(6):486--498, 2014.
 
+\bibitem{epcal}
+Jiangang Hao, Lei Liu, Alina~A von Davier, Nathan Lederer, Diego Zapata-Rivera,
+  Peter Jakl, and Michael Bakkenson.
+\newblock Epcal: Ets platform for collaborative assessment and learning.
+\newblock {\em ETS Research Report Series}, 2017(1):1--14, 2017.
+
 \bibitem{hastings1970}
 W.~K. Hastings.
 \newblock {Monte Carlo} sampling methods using {Markov} chains and their
@@ -407,6 +413,12 @@ Philip~I. Pavlik, Hao Cen, and Kenneth~R. Koedinger.
   tracing.
 \newblock In {\em Conference on Artificial Intelligence in Education}, page
   531–538, NLD, 2009. IOS Press.
+
+\bibitem{act_academy}
+J~Scott Payne and Jeff Allen.
+\newblock An early look at act academy usage and effectiveness. research report
+  2019-5.
+\newblock {\em ACT, Inc.}, 2019.
 
 \bibitem{piech2015}
 Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami,
