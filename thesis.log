@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  28 JUN 2021 14:55
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  6 JUL 2021 10:23
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1174,15 +1174,15 @@ ile (type bmp)
 File: img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png Graphic f
 ile (type bmp)
 <img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png>
-File: img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png Graphic 
-file (type bmp)
-<img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png>
-File: img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png Graphic f
-ile (type bmp)
-<img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png>
-File: img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png Graphic f
-ile (type bmp)
-<img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png>
+File: img/ml_journal_results/4skills/mhrm_disc_4skills_cropped.png Graphic file
+ (type bmp)
+<img/ml_journal_results/4skills/mhrm_disc_4skills_cropped.png>
+File: img/ml_journal_results/4skills/qmcem_disc_4skills_cropped.png Graphic fil
+e (type bmp)
+<img/ml_journal_results/4skills/qmcem_disc_4skills_cropped.png>
+File: img/ml_journal_results/4skills/mcem_disc_4skills_cropped.png Graphic file
+ (type bmp)
+<img/ml_journal_results/4skills/mcem_disc_4skills_cropped.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1329,22 +1329,22 @@ Underfull \hbox (badness 1087) in paragraph at lines 329--332
  []
 
 [142] [143] [144] [145]) [146]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 152.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 152.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 151.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 151.
  (thesis.aux (introduction.aux)
 (irt_param_est_background.aux) (irt_param_est_methods.aux)
 (irt_param_est_results.aux) (knowledge_tracing_background.aux)
 (knowledge_tracing_methods.aux) (knowledge_tracing_results.aux) (conclusion.aux
 ) (appendix.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 152.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 152.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 152.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 151.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 151.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 151.
  ) 
 Here is how much of TeX's memory you used:
- 27668 strings out of 427839
- 498878 string characters out of 3155939
+ 27680 strings out of 427839
+ 499548 string characters out of 3155939
  801429 words of memory out of 3000000
- 31095 multiletter control sequences out of 15000+200000
+ 31104 multiletter control sequences out of 15000+200000
  14061 words of font info for 61 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  56i,21n,82p,1271b,1743s stack positions out of 5000i,500n,10000p,200000b,50000s
