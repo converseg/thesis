@@ -3,6 +3,7 @@
 % For more themes, color themes and font themes, see:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
 %
+\definecolor{craneorange}{RGB}{252,187,6}
 \mode<presentation>
 {
 % Madrid is a good basic theme
@@ -13,7 +14,7 @@
   \usefonttheme{serif}    % or try default, structurebold, ...
   \setbeamertemplate{navigation symbols}{}
   \setbeamertemplate{caption}[numbered]
-  \setbeamertemplate{bibliography item}[text]
+  \setbeamertemplate{bibliography item}{\tiny \color{craneorange}$\vect{-}$}
   %\setbeamercolor{titlelike}{fg=black, bg=white}
 } 
 \usepackage[english]{babel}
@@ -52,6 +53,8 @@
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{cor}{Corollary}
 
+\let\oldfootnotesize\footnotesize
+\renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
 
 % For figures
 \newcommand*{\figuretitle}[1]{
@@ -84,13 +87,6 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Overview}
-  \begin{itemize}
-    \item How can we quantify student learning?
-    \item How can we deal with large datasets?
-  \end{itemize}
-\end{frame}
-
 \begin{frame}{Outline}
   \scriptsize
   \tableofcontents
@@ -99,9 +95,9 @@
 \section{Neural Networks}
 
 \begin{frame}{Artificial Neural Networks (ANN)}
-\begin{center}
+\begin{figure}
   \includegraphics[width=.55\textwidth]{../img/ffn_visual.png}
-\end{center}
+\end{figure}
 \scriptsize{Input $\vect x$, approximate a true target $\vect y$ via a series of (learned) linear transformations $W_l$ and nonlinear re-scaling $\sigma(\cdot) : \R^d \to (0,1)^d$}
 \[\hat{\vect y} = \sigma(W_3\sigma(W_2\sigma(W_1 \vect x + \vect b_1) + \vect b_2) + \vect b_3)\]
 \end{frame}
@@ -109,9 +105,9 @@
 \subsection{Autoencoders}
 
 \begin{frame}{Autoencoder (AE)}
-  \begin{center}
+  \begin{figure}
     \includegraphics[width=.8\textwidth]{../img/ae_visual.png}
-  \end{center}
+  \end{figure}
 \begin{itemize}
   \item Encode data into smaller dimension
     \begin{itemize}
@@ -129,7 +125,7 @@
   \item Latent code is assumed to follow a normal distribution $p_z^*(\vect z) = \mathcal{N}(0,I)$
   \item If $\vect z$ is high dimensional, the posterior is intractable:
     \[p_z^*(\vect z | \vect x) = \frac{p_x^*(\vect x | \vect z) p_z^*(\vect z)}{\displaystyle \int p_x^*(\vect x | \vect z) p_z^*(\vect z) d\vect z}\]
-  \item Approximate the true posteriors $p_z^*(\vect z | \vect x)$ and $p_x^*(\vect x | \vect z)$ with neural networks $q_\alpha(\vect z | \vect x)$ and $p_\beta(\vect x | \vect z)$
+  \item<2-> Approximate the true posteriors $p_z^*(\vect z | \vect x)$ and $p_x^*(\vect x | \vect z)$ with neural networks $q_\alpha(\vect z | \vect x)$ and $p_\beta(\vect x | \vect z)$
 
 %\item Learn a low-dimensional latent representation $\vect z$ which is capable of generating original data $\vect x$ from some distribution
 %\[
@@ -166,38 +162,64 @@
     &= \int q_\alpha(\vect z | \vect x) \log \left( \frac{p_z^*(\vect z | \vect x) p_x^*(\vect x)}{p_z^*(\vect z | \vect x)} \right) d\vect z  \\
     &= \int q_\alpha(\vect z | \vect x) \log \left( \frac{p^*(\vect x, \vect z)}{p_z^*(\vect z | \vect x)} \right) d\vect z\\
     &= \int q_\alpha(\vect z | \vect x) \left( \log \frac{q_\alpha(\vect z | \vect x)}{p_z^*(\vect z | \vect x)} + \log \frac{p^*(\vect x, \vect z)}{q_\alpha(\vect z | \vect x)}\right) d\vect z \\
-    &= \mathcal{D}_{KL}\left[ q_\alpha(\cdot |\vect x) \big|\big| p_z^*(\cdot | \vect x) \right] + \int q_\alpha(\vect z | \vect x) \log \left( \frac{p^*(\vect x, \vect z)}{q_\alpha(\vect z | \vect x)} \right)d\vect z \\
+    \onslide<2->{&= \mathcal{D}_{KL}\left[ q_\alpha(\cdot |\vect x) \big|\big| p_z^*(\cdot | \vect x) \right] + \int q_\alpha(\vect z | \vect x) \log \left( \frac{p^*(\vect x, \vect z)}{q_\alpha(\vect z | \vect x)} \right)d\vect z \\
     &= \mathcal{D}_{KL}\left[ q_\alpha(\cdot |\vect x) \big|\big| p_z^*(\cdot | \vect x) \right] + {\displaystyle\mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}}\left[ -\log q_\alpha(\vect z | \vect x) + \log p^*(\vect x, \vect z) \right] \\
-    &= \mathcal{D}_{KL}\left[ q_\alpha(\cdot |\vect x) \big|\big| p_z^*(\cdot | \vect x) \right] + \tilde{\mathcal{L}}_*(\alpha; \vect x)
+  &= \mathcal{D}_{KL}\left[ q_\alpha(\cdot |\vect x) \big|\big| p_z^*(\cdot | \vect x) \right] + \tilde{\mathcal{L}}_*(\alpha; \vect x)}
 \label{eq:vae_derive}
   \end{split}
 \end{equation*}
 
+\medskip
+\onslide<2->{\tiny where $\mathcal{D}_{KL}\left[q \big|\big| p\right] = \displaystyle\int q(x)\log\left(\displaystyle\frac{q(x)}{p(x)} \right) dx$ measures the information lost from using an approximate distribution $p$ instead of true distribution $q$}
 \end{frame}
 
 \begin{frame}{VAE Derivation}
   \scriptsize
   \begin{itemize}
-    \item KL-Divergence is non-negative, so we look at the evidence lower bound (ELBO) $\tilde{\mathcal{L}}_*$
+    \item KL-Divergence is non-negative, so we look at the evidence lower bound $\tilde{\mathcal{L}}_*$
+    \item Maximize $\tilde{\mathcal{L}}_* \Rightarrow$ maximize $\log p_x^*(\vect x)$
   \end{itemize}
   \begin{equation*}
   \begin{split}
     \log p_x^* (\vect x) \geq \tilde{\mathcal{L}}_*(\alpha; \vect x)  &= \mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ -\log q_\alpha(\vect z | \vect x) + \log p^*(\vect x, \vect z) \right] \\
     &= \mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ -\log q_\alpha(\vect z | \vect x) + \log p_x^*(\vect x | \vect z) + \log p_z^*(\vect z) \right] \\
-  &\approx \mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ -\log q_\alpha(\vect z | \vect x) + \log p_\beta(\vect x | \vect z) + \log p_z^*(\vect z) \right] \\
+  \onslide<2->{&\approx \mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ -\log q_\alpha(\vect z | \vect x) + \log p_\beta(\vect x | \vect z) + \log p_z^*(\vect z) \right] \\
   &= -\mathcal{D}_{KL}\left[ q_\alpha(\cdot | \vect x) \big|\big| p_z^*(\cdot) \right] + \mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ \log p_\beta(\vect x | \vect z) \right] \\
-  &= \tilde{\mathcal{L}}(\alpha, \beta; \vect x)
+&= \tilde{\mathcal{L}}(\alpha, \beta; \vect x)}
   \label{eq:elbo}
 \end{split}
 \end{equation*}
 
 \begin{itemize}
-  \item We've replaced all unknown distributions $p_\cdot^*(\cdot)$ with assumed or approximate distributions
-  \item VAE loss is given as $\mathcal{L}(\alpha,\beta;\vect x) = - \tilde{\mathcal{L}}(\alpha, \beta; \vect x)$ where $\alpha$ and $\beta$ reference the trainable parameters in the encoder and decoder
+  \item<3-> We've replaced all unknown distributions $p_\cdot^*(\cdot)$ with assumed or approximate distributions
+  \item<3-> VAE loss is given as $\mathcal{L}(\alpha,\beta;\vect x) = - \tilde{\mathcal{L}}(\alpha, \beta; \vect x)$ where $\alpha$ and $\beta$ reference the trainable parameters in the encoder and decoder
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Variational Autoencoder (VAE)}
+\begin{frame}{VAE Derivation}
+  \begin{itemize}
+    \item Binary data: $\vect x = (x_1,\ldots,x_n)^\top\in \R^n$ 
+      \begin{itemize}
+        \item $p_\beta(\vect x | \vect z)$ is a Bernoulli distribution:
+        \item $\hat{\vect x} = (p_\beta(x_1 = 1 | \vect z), \ldots, p_\beta(x_n = 1 | \vect z))^\top$
+      \end{itemize}
+  \end{itemize}
+  \onslide<2->{
+  \begin{equation*}
+    \begin{split}
+      \mathcal{L}(\alpha,\beta;\vect x) = &-\tilde{\mathcal{L}}(\alpha,\beta;\vect x) \\
+      = &-\mathbb{E}_{\vect z\sim q_\alpha(\cdot | \vect x)}\left[ \log p_\beta(\vect x | \vect z) \right] + \mathcal{D}_{KL}\left[ q_\alpha(\cdot | \vect x) \big|\big| p_z^*(\cdot) \right] \\
+      = & \sum_{i=1}^n -x_i \log p_\beta(x_i = 1 | \vect z) - (1-x_i) \log p_\beta(x_i = 0 | \vect z) \\
+      &+ \mathcal{D}_{KL}\left[ q_\alpha(\cdot | \vect x) \big|\big| p_z^*(\cdot) \right] 
+    \end{split}
+\end{equation*}}
+\begin{itemize}
+  \item<3-> VAE loss is the binary cross-entropy loss function with a KL-divergence regularizer on the latent code
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{VAE Architecture}
 \begin{figure}
   \includegraphics[width=.75\textwidth]{../img/vae_visual.png}
 \end{figure}
@@ -209,8 +231,7 @@
   \item<2-> Feed $\vect z_0$ through decoder to obtain reconstruction $\hat{\vect x}_0 \sim p_\beta(\cdot | \vect z_0)$
 \end{itemize}
 \end{frame}
-
-\begin{frame}{Variational Autoencoder (VAE)}
+\begin{frame}{VAE Applications}
   \scriptsize
   \begin{itemize}
     \item VAE are used as a generative model
@@ -233,7 +254,8 @@
     \item<2-> $\theta$ is not directly observable
     \item<2-> Naive solution: $\theta \approx \displaystyle\frac{\text{questions answered correctly}}{\text{total number of questions}}$
   \end{itemize}
-  \item<3> For an assessment with $n$ items taken by $N$ subjects, what is the probability that student $j$ answers item $i$ correctly?
+  \smallskip
+  \item<3> What is the probability that student $j$ answers item $i$ correctly?
   \[P(u_{ij}=1 | \theta_j) = f(\theta_j; \Lambda_i)\]
   \begin{itemize}
     \item<3> $\theta_j =$ latent ability of subject $j$
@@ -280,7 +302,7 @@
   \item Now assume that an assessment is testing $K$ skills
   \begin{itemize}
     \item For example, a math exam can test skills add, subtract, multiply, divide
-    \item Student $j$ has a vector of skills $\Theta_j = (\theta_{j1},.., \theta_{jK})^T$
+    \item Student $j$ has a vector of skills $\vect \Theta_j = (\theta_{j1},.., \theta_{jK})^T$
     \item Multiple skills can be assessed by a single item
   \end{itemize}
   \item<2-> Binary $Q$-matrix defines relationship between items and skills
@@ -295,9 +317,9 @@
 
 \begin{frame}{Multidimensional Logistic 2-Parameter (ML2P) Model}
 \begin{itemize}
-\item Probability of correct response given by:
+  \item Probability of correct response given by:\footnote{da Silva et al., 2018}
   \begin{align*}
-  P(u_{ij}=1 | \Theta_j; \vect a_i, b_i) &= \frac{1}{1+\exp\left[-\vect a_i^\top \Theta_j + b_i\right]} \\
+  P(u_{ij}=1 | \vect\Theta_j; \vect a_i, b_i) &= \frac{1}{1+\exp\left[-\vect a_i^\top \vect \Theta_j + b_i\right]} \\
   &= \frac{1}{1 + \exp[-\sum_{k=1}^K q_{ik}a_{ik}\theta_{jk} + b_i]}
 \end{align*}
   \begin{itemize}
@@ -316,26 +338,26 @@
       \begin{itemize}
         \item $\vect u_j \in \R^n$ details student $j$'s correct/incorrect responses to $n$ items
       \end{itemize}
-    \item How to obtain the item parameters $\vect a_i$ and $b_i$ and student ability parameters $\vect \Theta_j$?
-    \item Maximize the log-likelihood of the data
+    \item How to obtain the item parameters $\vect a_i$ and $b_i$ and student ability parameters $\vect \Theta_j$?\footnote{Baker and Kim, 2004}
+    \item<2-> Maximize the log-likelihood of the data
       \[\log L = \sum_{j=1}^N \sum_{i=1}^n u_{ij}\log P(u_{ij} = 1) + (1-u_{ij})\log P(u_{ij}=0)\]
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Joint Maximum Likelihood Estimation (JMLE)}
-\begin{itemize}
-  \item Estimate student and item parameters simultaneously
-  \item Gradient vector $\vect f(\vect x) = \nabla_{\theta,a,b} \log L\big|_{\vect x}$ 
-  \item Jacobian $J(\vect x) = \left[\displaystyle \frac{\partial^2 \log L}{\partial x \partial y} \right] \Big|_{\vect x} \in \R^{(NK+nK + n) \times (NK + nK + n)}$ 
-    \begin{itemize}
-      \item $x,y \in \{\theta_{jk}, a_{ik}, b_i\}_{j,k,i}$
-    \end{itemize}
-  \item Newton-Raphson iterations
-    \[\vect x_{t+1} = \vect x_t - J^{-1}(\vect x_t) \vect f(\vect x_t)\]
-  \item<2-> $J$ can be very large, difficult to invert
-  \item<2-> Possibly unbounded parameter estimates
-\end{itemize}
-\end{frame}
+%\begin{frame}{Joint Maximum Likelihood Estimation (JMLE)}
+%\begin{itemize}
+%  \item Estimate student and item parameters simultaneously\footnote{Chen et al., 2019}
+%  \item Gradient vector $\vect f(\vect x) = \nabla_{\theta,a,b} \log L\big|_{\vect x}$ 
+%  \item Jacobian $J(\vect x) = \left[\displaystyle \frac{\partial^2 \log L}{\partial x \partial y} \right] \Big|_{\vect x} \in \R^{(NK+nK + n) \times (NK + nK + n)}$ 
+%    \begin{itemize}
+%      \item $x,y \in \{\theta_{jk}, a_{ik}, b_i\}_{j,k,i}$
+%    \end{itemize}
+%  \item Newton-Raphson iterations
+%    \[\vect x_{t+1} = \vect x_t - J^{-1}(\vect x_t) \vect f(\vect x_t)\]
+%  \item<2-> $J$ can be very large, difficult to invert
+%  \item<2-> Possibly unbounded parameter estimates
+%\end{itemize}
+%\end{frame}
 
 %\begin{frame}{Joint Maximum Likelihood Estimation (JMLE)}
 %\begin{itemize}
@@ -391,22 +413,22 @@
 %\end{itemize}
 %\end{frame}
 
-\begin{frame}{Marginal Maximum Likelihood (MMLE)}
-  TODO: clean and summarize MMLE in one slide %TODO
-\begin{itemize}
-  \item Assume that $\vect \Theta$ follows some distribution $g(\vect \Theta)$
-  \item Maximize the mariginal likelihood 
-  \[L = \prod_{j=1}^N P(\vect u_j) = \prod_{j=1}^N \int P(\vect u_j | \vect \Theta) g(\vect \Theta) d\vect \Theta\]
-  \item<2-> The EM algorithm:
-    \begin{itemize}
-      \item Compute expectation of $\vect \Theta$
-        \begin{itemize}
-          \item Compute $K$ dimensional integral
-        \end{itemize}
-      \item Maximize $L$ with respect to item parameters
-    \end{itemize}
-\end{itemize}
-\end{frame}
+%\begin{frame}{Marginal Maximum Likelihood (MMLE)}
+% %TODO
+%\begin{itemize}
+%  \item Assume that $\vect \Theta$ follows some distribution $g(\vect \Theta)$
+%  \item Maximize the mariginal likelihood\footnote{Bock and Aitken, 1981}
+%  \[L = \prod_{j=1}^N P(\vect u_j) = \prod_{j=1}^N \int P(\vect u_j | \vect \Theta) g(\vect \Theta) d\vect \Theta\]
+%  \item<2-> The EM algorithm:
+%    \begin{itemize}
+%      \item Compute expectation of $\vect \Theta$
+%        \begin{itemize}
+%          \item Compute $K$ dimensional integral
+%        \end{itemize}
+%      \item Maximize $L$ with respect to item parameters
+%    \end{itemize}
+%\end{itemize}
+%\end{frame}
 
 %\begin{frame}{Marginal Maximum Likelihood (MMLE)}
 %  \begin{align*}
@@ -422,12 +444,28 @@
 %  quadrature or mcmc - difficult for high dim theta
 %\end{frame}
 
-\begin{frame}{Difficulties of IRT Parameter Estimation}
-  TODO: summarize the problems with high-dim theta %TODO
+\begin{frame}{Difficulties of Estimating IRT Parameters}
+%TODO
+ High dimensional IRT is hard
   \begin{itemize}
-    \item High dimensional IRT is hard
-    \item Large matrix inversion
-    \item High-dimensional integral
+    \item Joint Maximum Likelihood Estimation (JMLE)\footnote{Chen et al., 2019}
+      \begin{itemize}
+        \item Newton-Raphson iterations
+          \begin{itemize}
+            \item Large matrix inversions
+          \end{itemize}
+        \item Possibly unbounded estimates
+        \item Requires anchoring procedure
+      \end{itemize}
+    \item<2-> Marginal Maximum Likelihood Estimation (MMLE)\footnote{Bock and Aitken, 1981}
+      \begin{itemize}
+        \item EM algorithm requires computing a high-dimensional integral:
+        \begin{itemize}
+          \item $\vect \Theta \in \R^{20} \Longrightarrow$ 20-dimensional integral
+          \item 3 quadrature points per dimension $\Longrightarrow 3^{20} = 3,486,784,401$
+        \end{itemize}
+        \item Separate estimation of student parameters
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -435,7 +473,7 @@
 \section{ML2P-VAE for Parameter Estimation}
 
 \begin{frame}{Similarities between IRT and VAE}
-  TODO: I think there is one more thing %TODO
+ %TODO
   \begin{itemize}
     \item IRT and VAE assume normally distributed latent space
       \begin{itemize}
@@ -446,13 +484,16 @@
   \begin{align*}
   \onslide<2->{
   P(u_{ij}=1 | \vect \Theta_j) &= \frac{1}{1 + \exp[-\sum_{k=1}^K a_{ik}\theta_{jk} + b_i]} \\
-  \sigma(z) = \sigma(\vec{w}^T \vec{a} + b) &= \frac{1}{1 + \exp[-\sum_{k=1} w_k a_k - b]}}
+  \sigma(z) = \sigma(\vect{w}^\top \vect{a} + b) &= \frac{1}{1 + \exp[-\sum_{k} w_k a_k - b]}}
   \end{align*}
+  \begin{itemize}
+    \item<3-> Log-likelihood and binary cross-entropy loss
+  \end{itemize}
 \end{frame}
 
 \subsection{ML2P-VAE Method}
 
-\begin{frame}{Model Description}
+\begin{frame}{Model Description\footnote{First presented at the International Joint Conference on Neural Networks (IJCNN) 2019}}
   %TODO: formatting
   \small
 \begin{itemize}
@@ -464,8 +505,8 @@
   \begin{itemize}
     \item Avoids reflection $\theta\cdot (-a) = (-\theta)\cdot a$
   \end{itemize}
-\item<4-> Sigmoidal activation function in output layer
-\item<5-> Decoder interpreted as the ML2P model
+\item<3-> Sigmoidal activation function in output layer
+\item<4-> Decoder interpreted as the ML2P model
   \begin{itemize}
     \item<5-> Activation of nodes in encoded layer $\Rightarrow$ latent ability estimates 
     \item<5-> Weights in decoder $\Rightarrow$ discrimination parameter estimates
@@ -476,9 +517,9 @@
 \end{frame}
 
 \begin{frame}{ML2P-VAE}
-\begin{center}
+\begin{figure}
   \includegraphics[width=0.95\textwidth]{../img/ml2p_vae_ind.png}
-\end{center}
+\end{figure}
 \begin{itemize}
   \item Trainable weights in decoder are item parameter estimates
   \item Feed responses $\vect u_0$ through encoder to obtain ability estimates $\vect \Theta_0 = \vect \mu_0$
@@ -506,7 +547,6 @@
     \item Explainable trainable parameters in decoder
   \end{itemize}
 }%TODO: clean this slide up
-\onslide<3->{Method originally presented at the International Joint Conference on Neural Networks (IJCNN) 2019}
 \end{frame}
 
 %TODO -- maybe include IJCNN results, but only if there is plenty of room
@@ -592,22 +632,20 @@
 %\end{frame}
 
 
-\subsection{Why use a \textit{Variational} Autoencoder?}
-
-\begin{frame}{VAE vs AE Comparison}
-  TODO: clean up and be better %TODO
-\begin{itemize}
-  \item Guo, Cutumisu, and Cui proposed using AE in skill estimation %TODO citation
-  \item Directly compare neural networks in ML2P application
-  \begin{itemize}
-    \item Item parameter recovery
-    \item Skill estimation
-  \end{itemize}
-\item<2-> How useful is prior $p(\vect \Theta)$?
-\item<2-> What is the effect of the KL-Divergence term in the loss function?
-\end{itemize}
-\onslide<3->{Results presented at Artificial Intelligence in Education (AIED) 2019}
-\end{frame}
+%\subsection{Why use a \textit{Variational} Autoencoder?}
+%
+%\begin{frame}{VAE vs AE Comparison}
+%\begin{itemize}
+%  \item Autoencoding structure was first proposed for estimating skill mastery\footnote{Guo et al., 2017}
+%  \item Directly compare neural networks in ML2P application\footnote{First presented at the Conference on Artificial Intelligence in Education (AIED), 2019}
+%  \begin{itemize}
+%    \item Item parameter recovery
+%    \item Skill estimation
+%  \end{itemize}
+%\item<2-> How useful is prior $p(\vect \Theta)$?
+%\item<2-> What is the effect of the KL-Divergence term in the loss function?
+%\end{itemize}
+%\end{frame}
 
 %%%% probably don't want these tables
 % \begin{frame}{VAE vs AE Comparison}
@@ -632,43 +670,43 @@
 % \end{table}
 % \end{frame}
 
-\begin{frame}{VAE vs AE Comparison}
-\begin{figure}[h!]
-\minipage{0.4\textwidth}
-\includegraphics[width=.9\textwidth]{../img/aied_results/ae_a_corr.png}
-\endminipage\hfill
-\minipage{0.4\textwidth}
-\includegraphics[width=.9\textwidth]{../img/aied_results/vae_a_corr.png}
-\endminipage\hfill
-\minipage{.2\textwidth}
-{\footnotesize Discrimination \\ parameters $a_{ik}$}
-\endminipage\hfill
-\minipage{0.4\textwidth}
-\includegraphics[width=.9\textwidth]{../img/aied_results/ae_b_corr.png}
-\endminipage\hfill
-\minipage{0.4\textwidth}
-\includegraphics[width=.9\textwidth]{../img/aied_results/vae_b_corr.png}
-\endminipage\hfill
-\minipage{.2\textwidth}
-{\footnotesize Difficulty \\ parameters $b_i$}
-\endminipage\hfill
-\end{figure}
-\end{frame}
-
-\begin{frame}{VAE vs AE Comparison}
-\begin{figure}
-\minipage{0.39\textwidth}
-\includegraphics[width=\textwidth]{../img/aied_results/ae_theta1_corr.png}
-\endminipage\hfill
-\minipage{0.39\textwidth}
-\includegraphics[width=\textwidth]{../img/aied_results/vae_theta1_corr.png}
-\endminipage\hfill
-\end{figure}
-\begin{itemize}
-  \item Similar skill estimate correlation, but on different scale %TODO: clean this up
-  \item VAE much more accurate parameter recovery
-\end{itemize}
-\end{frame}
+%\begin{frame}{VAE vs AE Comparison}
+%\begin{figure}[h!]
+%\minipage{0.4\textwidth}
+%\includegraphics[width=.9\textwidth]{../img/aied_results/ae_a_corr.png}
+%\endminipage\hfill
+%\minipage{0.4\textwidth}
+%\includegraphics[width=.9\textwidth]{../img/aied_results/vae_a_corr.png}
+%\endminipage\hfill
+%\minipage{.2\textwidth}
+%{\footnotesize Discrimination \\ parameters $a_{ik}$}
+%\endminipage\hfill
+%\minipage{0.4\textwidth}
+%\includegraphics[width=.9\textwidth]{../img/aied_results/ae_b_corr.png}
+%\endminipage\hfill
+%\minipage{0.4\textwidth}
+%\includegraphics[width=.9\textwidth]{../img/aied_results/vae_b_corr.png}
+%\endminipage\hfill
+%\minipage{.2\textwidth}
+%{\footnotesize Difficulty \\ parameters $b_i$}
+%\endminipage\hfill
+%\end{figure}
+%\end{frame}
+%
+%\begin{frame}{VAE vs AE Comparison}
+%\begin{figure}
+%\minipage{0.45\textwidth}
+%\includegraphics[width=\textwidth]{../img/aied_results/ae_theta1_corr.png}
+%\endminipage\hfill
+%\minipage{0.45\textwidth}
+%\includegraphics[width=\textwidth]{../img/aied_results/vae_theta1_corr.png}
+%\endminipage\hfill
+%\end{figure}
+%\begin{itemize}
+%  \item Similar skill estimate correlation, but on different scale %TODO: clean this up
+%  \item VAE much more accurate parameter recovery
+%\end{itemize}
+%\end{frame}
 
 
 \subsection{Generalizing to Correlated Latent Traits}
@@ -740,7 +778,7 @@
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Correlated VAE Implementation}
+\begin{frame}{Correlated VAE Implementation\footnote{Published in \textit{Machine Learning}, 2021}}
 \begin{itemize}
   \item Architecture: Encoder outputs $K + K(K+1)/2$ nodes
   \begin{itemize}
@@ -784,29 +822,29 @@
 \begin{frame}{VAE architecture for correlated latent traits}
   \begin{figure}
   \includegraphics[width=.7\textwidth]{../img/ml2pvae_visual.png}
-\caption*{Encoder structure for VAE learning $\mathcal{N}(\vect\mu,\Sigma)$}
+\caption*{Encoder structure for a VAE fit to latent space $\mathcal{N}(\vect\mu,\Sigma)$}
 \end{figure}
 \end{frame}
 
 
 \subsection{Method Comparison}
 
-\begin{frame}{Comparison of ML2P-VAE vs Other Methods}
+\begin{frame}{Comparison of IRT Parameter Estimation Methods}
   \begin{itemize}
     \item MH-RM 
     \item MC-EM 
     \item QMC-EM
-    \item ML2P-VAE$_{full}$ 
+    \item<2-> ML2P-VAE$_{full}$ 
       \begin{itemize}
         \item Assume full knowledge of correlation matrix $\Sigma_1$
         \item Fit VAE with $\mathcal{N}(\vect 0, \Sigma_1)$
       \end{itemize}
-    \item ML2P-VAE$_{est}$ 
+    \item<3-> ML2P-VAE$_{est}$ 
       \begin{itemize}
         \item Unknown correlation matrix $\Sigma_1$ $\Rightarrow$ estimate it with $\tilde \Sigma_1$
         \item Fit VAE with $\mathcal{N}(\vect 0, \tilde \Sigma_1)$
       \end{itemize}
-    \item ML2P-VAE$_{ind}$ 
+    \item<4-> ML2P-VAE$_{ind}$ 
       \begin{itemize}
         \item Unknown correlation matrix $\Sigma_1$ $\Rightarrow$ assume independent $\vect \Theta$
         \item Fit VAE with $\mathcal{N}(\vect 0, I)$
@@ -826,6 +864,12 @@
       Sim-4 & 27 & 4 & 3,000  
     \end{tabular}
   \end{table}
+  %TODO: explain a few things about datasets
+  \begin{itemize}
+    \item ECPE is a real-world dataset -- no true parameter values
+    \item Sim-6 and Sim-20 have randomly and highly correlated latent skills
+    \item Sim-4 has smaller and more particular correlations
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Sim-6 Discrimination Parameter Estimates}
@@ -855,7 +899,7 @@
       \centering
       \includegraphics[width=.9\linewidth]{../img/ml_journal_results/6skills/mcem_disc_6skills.png}
     \end{subfigure}
-    \caption{Correlation plots of discrimination parameter estimates for the Sim-6 dataset with 50 items and 6 latent traits. ML2P-VAE estimates are on the top row, and traditional method estimates are on the bottom row.}
+    \caption*{\scriptsize Correlation plots of discrimination parameter estimates -- 50 items assessing 6 latent traits.}
     \label{fig:6skill_cor}
 \end{figure}
 \end{frame}
@@ -890,11 +934,43 @@
       \centering
       \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png}
     \end{subfigure}
-    \caption{Estimates from ML2P-VAE methods plotted against ``accepted'' MHRM estimates from the ECPE dataset.}
+    \caption*{\scriptsize Correlation plots of item and student parameters -- 28 items assessing 3 latent traits. No true values -- compare against ``accepted'' MHRM estimates.}
     \label{fig:ecpe_cor}
 \end{figure}
 
 
+\end{frame}
+\begin{frame}{Sim-4 Discrimination Parameter Estimates}
+\begin{figure}[h]
+\centering
+\figuretitle{Discrimination Parameter Estimates}\\
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/mhrm_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/qmcem_disc_4skills_cropped.png}
+    \end{subfigure}
+    \begin{subfigure}{.32\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/mcem_disc_4skills_cropped.png}
+    \end{subfigure}
+    \caption*{\scriptsize Correlation plots for discrimination parameters -- 27 items assessing 4 latent skills.}
+    \label{fig:4skills_disc}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Sim-20 Parameter Estimates}
@@ -925,85 +1001,86 @@
       \centering
       \includegraphics[width=.9\linewidth]{../img/ml_journal_results/20skills/vae_ind_theta_20skills.png}
     \end{subfigure}
-    \caption{ML2P-VAE parameter estimates for Sim-20 with 200 items and 20 latent traits. The top row shows discrimination parameter correlation, and the bottom row shows ability parameter correlation.}
+    \caption*{\scriptsize Correlation plots for item and student parameters -- 200 items assessing 20 latent traits. Traditional methods fail to return estimates on assessments of this size.}
     \label{fig:20skill_cor}
 \end{figure}
-
-
-\end{frame}
-
-\begin{frame}{Sim-4 Discrimination Parameter Estimates}
-\begin{figure}[h]
-\centering
-\figuretitle{Discrimination Parameter Estimates}\\
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_full_disc_4skills_cropped.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_est_disc_4skills_cropped.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/4skills/vae_ind_disc_4skills_cropped.png}
-    \end{subfigure}
-    \caption{Discrimination parameter estimates for Sim-4 with 27 items and 4 latent skills. The top row shows estimates from ML2P-VAE methods, and the bottom row gives estimates yielded by traditional methods.}
-    \label{fig:4skills_disc}
-\end{figure}
-
 
 \end{frame}
 
 \begin{frame}{Correlated ML2P-VAE Results}
   %TODO maybe put into two slides?
   \tiny
-\begin{tabular}{c|c|ccc|ccc|ccc|c}
+\begin{tabular}{c|c|ccc|ccc}
   \hline
-    Data Set & Method & $\vect a$.RMSE & $\vect a$.BIAS & $\vect a$.COR & $\vect b$.RMSE & $\vect b$.BIAS & $\vect b$.COR &  $\vect \Theta$.RMSE & $\vect \Theta$.BIAS & $\vect \Theta$.COR & Runtime \\
+    Data Set & Method & $\vect a$.RMSE & $\vect a$.BIAS & $\vect a$.COR & $\vect b$.RMSE & $\vect b$.BIAS & $\vect b$.COR \\
     \hline
-& MHRM & 0.0693 & 0.0319  & 0.9986   & 0.0256 & -0.0021 & 0.9999  & 0.714  & -0.0033  & 0.7006 & 1110s \\ 
-(i)& QMCEM & 0.149 & -0.067 & 0.9939 & 0.0376 & -0.002 & 0.9998 & 0.7206 & 0.0023 & 0.6939 & 322s\\
-6 abilities& MCEM & 0.1497 & -0.0633 &  0.9936 &  0.0383 & 0.0035 & 0.9997 &  0.7206 & -0.0016 & 0.6938 & 1009s\\
-Sim-6& ML2P-VAE$_{full}$ & 0.0705 &  0.0255  & 0.9985   & 0.0471 & -0.0079 & 0.9996  & 0.6649   & -0.0178  & 0.7476 & 343s\\
-& ML2P-VAE$_{est}$ & 0.1803 & 0.0871  & 0.9891 &  0.064 & -0.0131 & 0.9993  & 0.7109 &  0.0772  & 0.7082 & 364s \\
-& ML2P-VAE$_{ind}$ & 0.1218 & -0.0004 & 0.9944   & 0.0597 & -0.0145 & 0.9994  & 0.7222 &  0.0316  & 0.6928 & 252s\\
+& MHRM & 0.0693 & 0.0319  & 0.9986   & 0.0256 & -0.0021 & 0.9999 \\
+(i)& QMCEM & 0.149 & -0.067 & 0.9939 & 0.0376 & -0.002 & 0.9998\\
+6 abilities& MCEM & 0.1497 & -0.0633 &  0.9936 &  0.0383 & 0.0035 & 0.9997\\
+Sim-6& ML2P-VAE$_{full}$ & 0.0705 &  0.0255  & 0.9985   & 0.0471 & -0.0079 & 0.9996\\
+& ML2P-VAE$_{est}$ & 0.1803 & 0.0871  & 0.9891 &  0.064 & -0.0131 & 0.9993 \\
+& ML2P-VAE$_{ind}$ & 0.1218 & -0.0004 & 0.9944   & 0.0597 & -0.0145 & 0.9994\\ 
 \hline 
-& MHRM* & 0* & 0*&  1* &  0* &  0* &  1* & 0* & 0* &  1* & 162s \\
-(ii)& QMCEM & 0.0159  & 0.0035 & 0.9999 & 0.0067  & -0.0005 & 1   & 0.0111 & 0.0007 & 0.9999 & 33s\\
-3 abilities & MCEM & 0.0228 & 0.0148 & 0.9998 & 0.0064  & -0.0008 & 1   & 0.0132 & 0.0026 & 0.9998 & 192s \\
-ECPE & ML2P-VAE$_{full}$ & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-& ML2P-VAE$_{est}$ & 0.2794 & 0.2152 & 0.9713 & 0.148 & 0.0951  & 0.993 & 0.443 & -0.0628 & 0.8237 & 61s  \\
-& ML2P-VAE$_{ind}$ & 0.3208 & 0.2184 & 0.9504 & 0.154 & 0.0872  & 0.9932  & 0.3063 & 0.01 & 0.9017 & 49s \\
+& MHRM* & 0* & 0*&  1* &  0* &  0* &  1*\\
+(ii)& QMCEM & 0.0159  & 0.0035 & 0.9999 & 0.0067  & -0.0005 & 1  \\
+3 abilities & MCEM & 0.0228 & 0.0148 & 0.9998 & 0.0064  & -0.0008 & 1\\ 
+ECPE & ML2P-VAE$_{full}$ & N/A & N/A & N/A & N/A & N/A & N/A\\
+& ML2P-VAE$_{est}$ & 0.2794 & 0.2152 & 0.9713 & 0.148 & 0.0951  & 0.993\\
+& ML2P-VAE$_{ind}$ & 0.3208 & 0.2184 & 0.9504 & 0.154 & 0.0872  & 0.9932\\ 
 \hline
-& MHRM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-(iii)& QMCEM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A \\
-20 abilities & MCEM & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A & N/A  \\
-Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.9996  & 0.6145 &  0.0065  & 0.7893 & 1292s \\
-& ML2P-VAE$_{est}$ & 0.2992  & -0.1304  & 0.9822  & 0.1655 &  0.1215  & 0.9987  & 0.7364   & -0.0276  & 0.7257 & 961s \\
-& ML2P-VAE$_{ind}$ & 0.2043 &   0.0592  & 0.9792  & 0.0958   & -0.0029  & 0.9992  & 0.7054 &  0.0747  & 0.7135 & 850s \\
+& MHRM & N/A & N/A & N/A & N/A & N/A & N/A\\
+(iii)& QMCEM & N/A & N/A & N/A & N/A & N/A & N/A\\
+20 abilities & MCEM & N/A & N/A & N/A & N/A & N/A & N/A\\
+Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.9996\\ 
+& ML2P-VAE$_{est}$ & 0.2992  & -0.1304  & 0.9822  & 0.1655 &  0.1215  & 0.9987 \\
+& ML2P-VAE$_{ind}$ & 0.2043 &   0.0592  & 0.9792  & 0.0958   & -0.0029  & 0.9992\\ 
 \hline 
-        & MHRM & 0.0953 & -0.0158	&	0.9966 & 0.0614 & -0.0101 &	0.9988 & 0.6325	& 0.0118	& 0.7697 & 94s \\
-        (iv)& QMCEM & 0.0938 & -0.0160	&	0.9967 & 0.0614 & -0.0179 &	0.9989 & 0.6326	& 0.0154	& 0.7696 & 29s \\
-        4 abilities & MCEM & 0.0951 & -0.0138	&	0.9966 & 0.0644 & -0.0199 &	0.9987 & 0.6326	& 0.0150	& 0.7696 & 196s \\
-       Sim-4 & ML2P-VAE$_{full}$ & 0.1326 & 0.0780		&	0.9960 & 0.0872 & -0.0311 &	0.9978 & 0.6384	& 0.0210	& 0.7648 & 37s \\
-        & ML2P-VAE$_{est}$ & 0.2526 & 0.2106		&	0.9883 & 0.1035 & -0.0337 &	0.9980 & 0.6897	& -0.0256 	& 0.7182 & 38s \\
-        & ML2P-VAE$_{ind}$ & 0.1658 & 0.1099		&	0.9939 & 0.0944 & -0.0254 &	0.9976 & 0.6474	& -0.0397	& 0.7579 & 30s \\
+& MHRM & 0.0953 & -0.0158	&	0.9966 & 0.0614 & -0.0101 &	0.9988\\
+(iv)& QMCEM & 0.0938 & -0.0160	&	0.9967 & 0.0614 & -0.0179 &	0.9989\\
+4 abilities & MCEM & 0.0951 & -0.0138	&	0.9966 & 0.0644 & -0.0199 &	0.9987\\
+Sim-4 & ML2P-VAE$_{full}$ & 0.1326 & 0.0780		&	0.9960 & 0.0872 & -0.0311 &	0.9978\\
+& ML2P-VAE$_{est}$ & 0.2526 & 0.2106		&	0.9883 & 0.1035 & -0.0337 &	0.9980\\
+& ML2P-VAE$_{ind}$ & 0.1658 & 0.1099		&	0.9939 & 0.0944 & -0.0254 &	0.9976\\
 
 \hline
 \end{tabular}
+\end{frame}
+
+\begin{frame}{Correlated ML2P-VAE Results}
+   \tiny
+\begin{tabular}{c|c|ccc|c}
+\hline
+Data Set & Method & $\vect \Theta$.RMSE & $\vect \Theta$.BIAS & $\vect \Theta$.COR & Runtime \\
+\hline
+& MHRM & 0.714  & -0.0033  & 0.7006 & 1110s \\ 
+(i)& QMCEM & 0.7206 & 0.0023 & 0.6939 & 322s\\
+6 abilities& MCEM & 0.7206 & -0.0016 & 0.6938 & 1009s\\
+Sim-6& ML2P-VAE$_{full}$ & 0.6649   & -0.0178  & 0.7476 & 343s\\
+& ML2P-VAE$_{est}$ & 0.7109 &  0.0772  & 0.7082 & 364s \\
+& ML2P-VAE$_{ind}$ & 0.7222 &  0.0316  & 0.6928 & 252s\\
+\hline 
+& MHRM* & 0* & 0* &  1* & 162s \\
+(ii)& QMCEM & 0.0111 & 0.0007 & 0.9999 & 33s\\
+3 abilities & MCEM & 0.0132 & 0.0026 & 0.9998 & 192s \\
+ECPE & ML2P-VAE$_{full}$ & N/A & N/A & N/A & N/A  \\
+& ML2P-VAE$_{est}$ & 0.443 & -0.0628 & 0.8237 & 61s  \\
+& ML2P-VAE$_{ind}$ & 0.3063 & 0.01 & 0.9017 & 49s \\
+\hline
+& MHRM &               N/A & N/A & N/A & N/A  \\
+(iii)& QMCEM &         N/A & N/A & N/A & N/A \\
+20 abilities & MCEM &  N/A & N/A & N/A & N/A  \\
+Sim-20 & ML2P-VAE$_{full}$ & 0.6145 &  0.0065  & 0.7893 & 1292s \\
+& ML2P-VAE$_{est}$         & 0.7364   & -0.0276  & 0.7257 & 961s \\
+& ML2P-VAE$_{ind}$         & 0.7054 &  0.0747  & 0.7135 & 850s \\
+\hline 
+& MHRM &              0.6325	& 0.0118	& 0.7697 & 94s \\
+(iv)& QMCEM &         0.6326	& 0.0154	& 0.7696 & 29s \\
+4 abilities & MCEM &  0.6326	& 0.0150	& 0.7696 & 196s \\
+Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
+& ML2P-VAE$_{est}$       & 0.6897	& -0.0256 	& 0.7182 & 38s \\
+& ML2P-VAE$_{ind}$       & 0.6474	& -0.0397	& 0.7579 & 30s \\
+\hline
+\end{tabular} 
 \end{frame}
 
 \begin{frame}{Scalability of ML2P-VAE}
@@ -1017,17 +1094,15 @@ Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.
       \centering
       \includegraphics[width=\linewidth]{../img/ml_journal_results/vae_full_train_size_time.png}
     \end{subfigure}
-    \caption{Performance of ML2P-VAE$_{full}$ on data set (iii) when trained on data sets of increasing size. The left plot gives the test RMSE after using different sizes of training data, and the right plot shows the time required to train the neural network.}
-    \label{fig:train_size}
+    \caption*{\scriptsize How does the size of data affect the performance of ML2P-VAE methods?}
 \end{figure}
-
 
 \end{frame}
 
 \subsection{ML2Pvae R Package}
 \begin{frame}{ML2Pvae Package in R}
 \begin{itemize}
-  \item Software package on CRAN for easy implementation of ML2P-VAE methods
+  \item Software package on CRAN\footnote{https://cran.r-project.org/web/packages/ML2Pvae} for easy implementation of ML2P-VAE methods
     \begin{itemize}
       \item For IRT researchers -- requires no knowledge of neural networks or TensorFlow
     \end{itemize}
@@ -1035,7 +1110,7 @@ Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.
   \begin{itemize}
     \item<2-> Construct ML2P-VAE model to desired architecture
       \begin{itemize}
-        \item<2-> Option for independent latent traits or full covariance matrix
+        \item<2-> Independent latent traits or full covariance matrix
       \end{itemize}
     \item<2-> Wrapper function to train neural network
     \item<2-> Simple functions to obtain parameter estimates after training
@@ -1044,122 +1119,432 @@ Sim-20 & ML2P-VAE$_{full}$ & 0.078 &  0.0473  & 0.9983  & 0.0608 &  0.0054  & 0.
 \end{frame}
 
 
+\subsection{Future Work}
+
+\begin{frame}{Extending ML2P-VAE to other IRT models}
+  \begin{itemize}
+    \item 3-parameter logistic model uses a ``guessing'' parameter:
+      \[P(u_{ij} = 1 | \vect \Theta_j; \vect a_i, b_i, c_i) = c_i + \frac{1-c_i}{1 + \exp\left[-\vect a_i^\top \vect \Theta_j + b_i \right]}\]
+    \item<2-> Samejima's graded response model allows for partial credit:
+      {\small
+      \begin{align*}
+        P(u_{ij} \geq \frac{0}{3} | \vect \Theta_j; \vect a_{0i}, b_{0i}) &= 1\\
+        P(u_{ij} \geq \frac{1}{3} | \vect \Theta_j; \vect a_{1i}, b_{1i}) &= \frac{1}{1 + \exp\left[-\vect a_{1i}^\top \vect \Theta_j + b_{1i} \right]} \\ 
+        P(u_{ij} \geq \frac{2}{3} | \vect \Theta_j; \vect a_{2i}, b_{2i}) &= \frac{1}{1 + \exp\left[-\vect a_{2i}^\top \vect \Theta_j + b_{2i} \right]} \\ 
+        P(u_{ij} = \frac{3}{3} | \vect \Theta_j; \vect a_{3i}, b_{3i}) &= \frac{1}{1 + \exp\left[-\vect a_{3i}^\top \vect \Theta_j + b_{3i} \right]} 
+      \end{align*}
+    }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Other Application Areas}
+    IRT has been applied to other psychometric applications outside of education
+      \begin{itemize}
+        \item Beck Depression Inventory (BDI)
+          \begin{itemize}
+            \item 21 item self-reported assessment to diagnose depression
+            \item Could incorporate other non-response features of respondents (e.g. gender, age)
+          \end{itemize}
+        \item<2-> Personalilty Questionnaires
+          \begin{itemize}
+            \item Big Five, Myers-Briggs
+            \item Incorporate Samejima's graded response model for items on a Likert scale
+          \end{itemize}
+        \item<3-> Sports analytics and player evaluation\footnote{Work presented at Conference on Fuzzy Systems and Data Mining (FSDM), 2019}
+          \begin{itemize}
+            \item Latent athletic ability influences measurable in-game performance
+          \end{itemize}
+      \end{itemize}
+\end{frame}
+
+
 \section{Knowledge Tracing}
 
-\begin{frame}{Bayesian Knowledge Tracing}
-  TODO: background/motivation of KT
+%\begin{frame}{Bayesian Knowledge Tracing\footnote{Corbett and Anderson, 1995}}
+%  \begin{itemize}
+%    \item Track student's mastery of particular rule as they are tutored
+%      \begin{itemize}
+%        \item Learned or unlearned state $L_t$
+%      \end{itemize}
+%    \item Model the acquisition of procedural knowledge with parameters:
+%      \onslide<2->{\scriptsize
+%      \begin{equation*}
+%        \begin{split}
+%          P(L_0) &= \text{probability of the rule already being known}\\
+%          P(T) &= \text{probability that the student transitions to learned state} \\
+%          P(s) &= \text{probability that the student ``slips''} \\
+%          P(g) &= \text{probability that the student randomly guesses correctly}
+%        \end{split}
+%      \end{equation*}
+%    }
+%      \onslide<3->{
+%      \[P(L_t) = P(L_{t-1} | \text{evidence}) + (1-P(L_{t-1} | \text{evidence}))\cdot P(T)\]
+%      \[P(c_t = 1) = P(L_t)\cdot(1-P(s) + (1-P(L_t)) \cdot P(g)\]
+%      }
+%  \end{itemize}
+%\end{frame}
+
+\begin{frame}{Knowledge Tracing\footnote{Corbett and Anderson, 1995}}
+  \begin{itemize}
+    \item In online learning environments, students have many items available to help learn material
+      \begin{itemize}
+        \item AI tutoring systems can suggest which items to present next
+      \end{itemize}
+    \item Dynamically track student's knowledge as they progress through questions
+    \item<2-> Given a sequence of student interactions $(q_t, c_t)$
+      \begin{itemize}
+        \item $q_t$ indicates the item answered
+        \item $c_t \in \{0,1\}$ indicates correctness
+      \end{itemize}
+    \item<3-> \underline{Goal}: predict the probability of success on the next item:
+      \[p_{t+1} = P(c_{t+1} = 1 | (q_1, c_1),\ldots, (q_t, c_t), (q_t, ?))\]
+    \item<4-> Most recent methods use neural networks, similar to NLP application
+  \end{itemize}
 \end{frame}
 
 \subsection{Temporal Neural Networks}
-\begin{frame}{RNN / LSTM}
-  RNN, LSTM 
+\begin{frame}{RNN and LSTM}
+  \minipage{.43\textwidth}
+  \begin{figure}
+  \includegraphics[width=\textwidth]{../img/rnn_visual.png}
+  \end{figure}
+  {\footnotesize
+  \[\vect h_t =\tanh\left(W_{hh}\vect h_{t-1} + W_{hx}\vect x_t + \vect b_h \right)\]
+}
+  \endminipage 
+  \minipage{.57\textwidth}
+  \begin{figure}
+    \includegraphics[width=.9\textwidth]{../img/lstm_visual.png}
+  {\footnotesize
+  \begin{align*}
+    \vect f_t &= \sigma(W_f[\vect x_t, \vect h_{t-1}]) \\
+    \vect a_t &= \left(\sigma(W_u[\vect x_t, \vect h_{t-1}]) \times \tanh(W_a[\vect x_t, \vect h_{t-1}]) \right) \\
+    \vect c_t &= \vect c_{t-1} \times \vect f_t + \vect a_t \\
+    \vect h_t &= \tanh(\vect c_t) \times \sigma(W_h[\vect x_t, \vect h_{t-1}])
+  \end{align*}
+  }
+  \end{figure}
+  \endminipage
+  \begin{itemize}
+      \begin{itemize}
+        \item In NLP, $\vect x_t$ represents a word
+        \item The sequence $\vect x_0, \vect x_1, \ldots, \vect x_T$ represents a sentence
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Attention-based networks}
-  Transformer / Attention
+\begin{frame}{Attention Networks\footnote{Vaswani et al., 2017}}
+\begin{itemize}
+  \item Given sequence of $T$ observations $\vect x_t \in \R^d$, calculate queries, keys, and values:
+    \[\vect q_t = W^Q \vect x_t, \quad \vect k_t = W^K \vect x_t, \quad \vect v_t = W^V \vect x_t\]
+  \item Organize into matrices $Q, K, V \in \R^{d\times T}$
+  \item<2-> Calculate correlation between current and other timesteps:
+    \[\vect c_t = \text{softmax}\left(\displaystyle \frac{K\vect q_t}{\sqrt d}\right) \in \R^T\]
+  \item<3-> Attention given as $\vect a_t = V\vect c_t \in \R^d$, 
+      \[A = \text{softmax}\left(\displaystyle \frac{QK^\top}{\sqrt d} \right) \cdot V \in \R^{T \times d}\]
+  \item<4-> Feed each $\vect a_t$ through feed-forward network to obtain contextual representation $\vect f_t = FFN(\vect a_t)$
+\end{itemize}
 \end{frame}
 
 \subsection{Deep Knowledge Tracing Methods}
-\begin{frame}{Deep Knowledge Tracing}
-  DKT
+\begin{frame}{From NLP to Knowledge Tracing}
+  \begin{itemize}
+    \item NLP parallels:
+      \begin{itemize}
+        \item Predictive text $\iff$ Predict success on next item
+        \item One sentence $\iff$ One student's sequence of responses
+        \item One word $\iff$ One question + response interaction
+      \end{itemize}
+    \item<2-> $n$ distinct questions available to student
+    \item<2-> Interaction at time $t$ given as tuple $(q_t, c_t)$
+      \begin{itemize}
+        \item $q_t \in \{0,1,\ldots,n\}$ indexes an item
+        \item $c_t \in \{0,1\}$ indicates correctness
+        \item $\Rightarrow$ $2n+1$ possible interactions
+      \end{itemize}
+    \item<3-> Trainable embedding matrix $W_e \in \R^{d \times (2n+1)}$
+      \begin{itemize}
+        \item Even (resp. odd) columns give $d$-dimensional representation $\vect x_t$ of answering an item correctly (resp. incorrectly)
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{SAKT}
-  SAKT
+\begin{frame}{DKT and SAKT}
+  \begin{itemize}
+    \item Deep Knowledge Tracing (DKT)\footnote{Piech et al., 2015}
+      \begin{itemize}
+        \item Use RNN or LSTM to approximate $P(c_{t+1} = 1 | \text{evidence})$
+      \end{itemize}
+          \[p_{t+1} = \text{FFN}(\text{LSTM}(\vect x_t, \vect x_{t-1},\ldots,\vect x_1))\]
+          \smallskip
+    \item<2-> Self-Attentive Knowledge Tracing (SAKT)\footnote{Pandey and Karypis, 2019}
+      \begin{itemize}
+        \item Use attention networks to approximate $P(c_{t+1} = 1 | \text{evidence})$
+        \item Attention between interactions quantifies similarity between items
+      \end{itemize}
+          \[p_{t+1} = \text{FFN}(\text{Attention}(\vect x_t, \vect x_{t-1}, \ldots, \vect x_1))\]
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Other methods}
-  might want to mention DKVMN or PFA
-\end{frame}
+%\begin{frame}{Other methods}
+%  might want to mention DKVMN\footnote{Zhang et al., 2017} or PFA
+%\end{frame}
 
 \subsection{Incorporating IRT into Knowledge Tracing}
+
 \begin{frame}{Do deep models actually ``trace'' knowledge?}
-  motivation
+  %TODO
+  \begin{itemize}
+    \item Best performing deep models: DKT, SAKT, DKVMN\footnote{Zhang et al., 2017}
+      \begin{itemize}
+        \item Input $(q_t, c_t)$ and $q_{t+1}$, output $p_{t+1}$
+        \item<2-> Not interpretable
+        \item<2-> No explicit quantification of ``knowledge''
+          \begin{itemize}
+            \item Post hoc methods to quantify skill mastery
+          \end{itemize}
+      \end{itemize}
+    \item<3-> How can we utilize deep methods, while explicitly tracing student knowledge?
+      \begin{itemize}
+        \item<4-> Multidimensional Item Response Theory already provides a framework for computing $P(u_{ij} = 1)$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{IRT-inspired Knowledge Tracing\footnote{First presented at the Conference on Artificial Intelligence in Education (AIED), 2021}}
+   %TODO
+  \begin{itemize}
+    \item IRT already provides models of the probability of correct response 
+      \begin{itemize}
+        \item Utilize this in computing $p_{t+1}$
+      \end{itemize}
+    \item<2-> Inject domain-knowledge of $Q$-matrix and IRT into knowledge tracing framework
+      \begin{itemize}
+        \item Output $n$ nodes, representing probability of success on each item
+        \item Second-to-last layer has $K$ nodes representing $K$ skills
+        \item Similar to ML2P-VAE, restrict non-zero weights in final layer according to $Q$-matrix
+      \end{itemize}
+    \item<3-> Knowledge tracing model $+$ IRT parameter estimation method
+    \item<3-> Presents trade-off between explainability and predictive power
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{IRT-inspired Knowledge Tracing}
-  method description
-\end{frame}
-
-\begin{frame}{IRT-inspired Knowledge Tracing}
-  image of architecture
+  \begin{figure}
+  \includegraphics[width=.9\textwidth]{../img/kt_irt/kt_irt_visual_with_equation_2.png}
+\end{figure}
 \end{frame}
 
 \subsection{Results}
 \begin{frame}{Datasets}
-  datasets
+\begin{table}
+  \centering
+  \begin{tabular}{l c c c c}
+    \hline
+    Dataset & Items & Skills & Students & Interactions \\
+    \hline
+    Synth5 & 50 & 5 & 4,000 & 20K \\
+    Sim200 & 200 & 20 & 50,000 & 10M \\
+    Statics2011 & 987 & 61 & 316 & 135K \\
+    Assist2017 & 4,117 & 102 & 1,709 & 392K \\
+  \end{tabular}
+\end{table}
+
+\begin{itemize}
+  \item Synth5 is generated by Rasch model with guessing
+    \begin{itemize}
+      \item Difficulty parameters are publicly available
+    \end{itemize}
+  \item Sim200 has all item and student parameters available
+  \item Statics2011 and Assist2017 have no true parameters
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Results}
-  Table and theta trace plot
+\begin{table}
+  \centering
+  \begin{tabular}{l c c c c}
+    \hline
+    Method & Synth5 & Sim200 & Statics2011 & Assist2017 \\
+    \hline 
+    DKT & 0.803 & 0.838 & 0.793 & 0.731 \\
+    SAKT & 0.801 & 0.834 & 0.791  & 0.754 \\
+    DKVMN & 0.827 & 0.829 & 0.805 & 0.796 \\
+    \textbf{DKT-IRT} & 0.799 & 0.824 & 0.777 & 0.724 \\
+    \textbf{SAKT-IRT} & 0.798 & 0.833 & 0.775 & 0.728
+  \end{tabular}
+  \caption*{Test AUC values for various models on each dataset.}
+  \label{tab:kt_results}
+\end{table}
+
 \end{frame}
 
 \begin{frame}{Recovery of IRT parameters}
-  disc and theta recovery plots
+  \minipage{.5\textwidth}
+  \centering
+  \begin{figure}
+    \includegraphics[width=.95\textwidth]{../img/kt_irt/disc_est_attn2.png}
+    \caption*{\footnotesize Discrimination parameters from Sim200 data}
+  \end{figure}
+  \endminipage
+  \minipage{.5\textwidth}
+  \centering
+  \begin{figure}
+    \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_diff_est_lstm.png}
+    \caption*{\footnotesize Difficulty parameters from Synth5}
+  \end{figure}
+  \endminipage
+\end{frame}
+
+\begin{frame}{Tracing Student Knowledge}
+  \minipage{.6\textwidth}
+  \centering
+\begin{figure}[h]
+  \includegraphics[width=.97\textwidth]{../img/kt_irt/knowledge_trace_lstm_edited.png}
+  \caption*{\footnotesize DKT-IRT tracing of student knowledge}
+\end{figure}
+  \medskip
+\begin{figure}[h]
+    \includegraphics[width=.97\textwidth]{../img/kt_irt/knowledge_trace_attn_edited.png}
+    \caption*{\footnotesize SAKT-IRT tracing of student knowledge}
+\end{figure}
+  \endminipage
+  \minipage{.4\textwidth}
+  \centering
+  \begin{figure}
+    \includegraphics[width=.9\textwidth]{../img/kt_irt/theta_est_attn2.png}
+    \caption*{\centering \footnotesize $\vect \Theta$ estimates taken from the final timestep}
+  \end{figure}
+  \endminipage
 \end{frame}
 
 \begin{frame}{Learning a $Q$-matrix}
-  cor heatmap and clustering
+  \minipage{.5\textwidth}
+  \begin{figure}
+  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_attn_weights_no_ffn_axis2.png}
+  \caption*{\centering \footnotesize Heatmap of attention weights between Synth5 items}
+  \end{figure}
+  \endminipage
+  \minipage{.5\textwidth}
+  \centering
+  \begin{figure}
+  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_clusters_no_ffn.png}
+  \caption*{\footnotesize Graph clustering of Synth5 items of similar skill}
+  \end{figure}
+  \endminipage
 \end{frame}
 
+\subsection{Future Work}
 
-\section{Future Work}
-
-\subsection{ML2P-VAE}
-\begin{frame}{Extending ML2P-VAE to other IRT models}
-  3PL and Samejima
-\end{frame}
-
-\begin{frame}{Other application areas}
-  BDI and personality questionnaires
-\end{frame}
-
-\subsection{IRT-inspired Knowledge Tracing}
 \begin{frame}{Utilizing more domain knowledge}
-  use Q matrix in attn calculation
-  missing responses with embedding of interactions
+  \begin{itemize}
+    \item Use $Q$-matrix in attention calculation
+      \begin{itemize}
+        \item Mask out previous interactions from unrelated skills
+      \end{itemize}
+      \[\text{score}_{i,t} = \begin{cases}
+        \displaystyle\frac{\vect k_i^\top \vect q_t}{\sqrt{d}} & \text{if interaction } i \text{ shares a skill}\\ & \text{with interaction } t \\
+        & \\ 
+        -\infty & \text{otherwise}
+      \end{cases}\]
+\item<2-> Extend embedding of interactions to static assessments
+  \begin{itemize}
+    \item Deal with unanswered items (missing data) 
+  \end{itemize}
+  \end{itemize}
 \end{frame}
 
 
 \section{Conclusions}
-\begin{frame}{Summary}
-  
-\end{frame}
 
 \begin{frame}{Summary}
-  
+  \begin{itemize}
+    \item ML2P-VAE
+      \begin{itemize}
+        \item Variational autoencoder for confirmatory IRT
+        \item<2-> Competitive with traditional methods
+        \item<2-> Scalable: capable of estimating high-dimensional $\vect \Theta$
+        \item<3-> Novel VAE architecture for correlated latent code
+        \item<3-> Interpretable hidden layer and trainable weights
+      \end{itemize}
+      \bigskip
+    \item IRT-inspired knowledge tracing
+      \begin{itemize}
+        \item Uses ML2P model to predict probability of the next success
+        \item<4-> Explicit tracing of student knowledge
+        \item<4-> Recover IRT item parameters
+        \item<4-> Interpretability vs. accuracy trade-off
+      \end{itemize}
+  \end{itemize}
 \end{frame}
+
 
 \section*{Acknowledgements}
 \begin{frame}{Thank you!}
-  
+  \begin{itemize}
+    \item My committee: Suely, Mariana, Jonathan, David, and Colleen
+    \item The Mathematics and Computer Science departments
+    \item<2-> ACT -- specifically Scott and Yuchi
+    \item<2-> FineTune Learning
+    \item<3-> My parents: Ken and Karna
+    \item<3-> The rest of my family and friends
+    \item<3-> My wife: Danielle
+      \begin{itemize}
+        \item<4-> $\ldots$ and our cat Margot
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \section{}
 \begin{frame}{References}
-    TODO: choose citations in the right way %TODO
-\begin{thebibliography}{2}
+\begin{thebibliography}{20}
+\tiny
+%TODO
+
+%\bibitem{thissen} Wainer and Thissen, D. ``Test Scoring.'' Erlbaum Associates, Publishers, 2001.
+
+\bibitem{dasilva} da Silva, Liu, Huggins-Manley, Bazan. ``Incorporating the Q-matrix into Multidimensional Item Response Models.'' \textit{Journal of Educational and Psychological Measurement}, 2018.
+
+\bibitem{baker} Baker and Kim. ``Item Response Theory: Parameter Estimation Techniques.'' CRC Press, 2004.
+
+\bibitem{jmle} Chen et al. ``Joint Maximum Likelihood Estimation for high-dimsensional Exploratory Item Factor Analysis.'' \textit{Psychometrika}, 84: 124--146, 2019.
+
+\bibitem{bock} Bock and Aitken. ``Marginal Maximum Likelihood Estimation of Item Parameters: Application of an EM Algorithm.'' \textit{Psychometrika}, 1981.
+
+\bibitem{cai} Li Cai. ``Metropolis-Hastings Robins-Monro Algorithm for Confirmatory Item Factor Analysis.'' \textit{Journal of Educational and Behavioral Statistics}, 35: 307--335, 2010.
+
+\bibitem{guo} Q. Guo, M. Cutumisu, Y. Cui. ``A Neural Network Approach to Estimate Student Skill Mastery in Cognitive Diagnostic Assessments.'' In: 10th International Conference on Educational Data Mining. 2017.
+
+\bibitem{corbett} Corbett and Anderson. ``Knowledge Tracing: Modeling the Acquisition of Procedural Knowledge.'' \textit{User Modeling and User-Adapted Interaction}, 4: 253--278, 1995.
+
+\bibitem{vaswani} Vaswani et al. ``Attention is All You Need.'' \textit{Advances in Neural Information Processing Systems}, 5998--6008, 2017.
+
+\bibitem{piech} Piech et al. ``Deep Knowledge Tracing.'' \textit{Advances in Neural Information Processing Systems}, 505--513, 2015.
+
+\bibitem{pandey} Pandey and Karypis. ``A Self-Attentive Model for Knowledge Tracing.'' \textit{International Conference on Educational Data Mining}, 2019.
+
+\bibitem{zhang} Zhang et al. ``Dynamic Key-Value Memory Networks for Knowledge Tracing.'' \textit{26th international World Wide Wedb Conference}, 765--774, 2017.
+
+\end{thebibliography}
+\end{frame}
+
+\begin{frame}{References}
+\begin{thebibliography}{6}
 \tiny
 
-\bibitem{thissen} Wainer and Thissen, D. ``Test Scoring''. Erlbaum Associates, Publishers, 2001.
-
-\bibitem{dasilva} da Silva, Liu, Huggins-Manley, Bazan. ``Incorporating the Q-matrix into Multidimensional Item Response Models.'' Journal of Educational and Psychological Measurement, 2018.
-
-\bibitem{baker} Baker and Kim. ``Item Response Theory: Parameter Estimation Techniques''. CRC Press, 2004.
-
-\bibitem{bock} Bock and Aitken. ``Marginal Maximum Likelihood Estimation of Item Parameters: Application of an EM Algorithm''. Psychometrika, 1981.
-
-\bibitem{nielsen} Nielsen, Michael. ``Neural Networks and Deep Learning''. Determination Press, 2015.
-
-\bibitem{ijcnn} Curi, Converse, Hajewski, Oliveira. ``Interpretable Variational Autoencoders for Cognitive Models.'' In Proceddings of the International Joint Conference on Neural Networks (IJCNN), 2019.
-
-\bibitem{guo} Q. Guo, M. Cutumisu, and Y. Cui. ``A Neural Network Approach to Estimate Student Skill Mastery in Cognitive Diagnostic Assessments''. In: 10th International Conference on Educational Data Mining. 2017.
+\bibitem{ijcnn} Curi, Converse, Hajewski, Oliveira. ``Interpretable Variational Autoencoders for Cognitive Models.'' In Proceedings of the International Joint Conference on Neural Networks (IJCNN), 2019.
 
 \bibitem{aied} Converse, Curi, Oliveira. ``Autoencoders for Educational Assessment.'' In Proceedings of the Conference on Artifical Intelligence in Education (AIED), 2019.
 
-\bibitem{fsdm} Converse, Curi, Oliveira, and Arnold. ``Variational Autoencoders for Baseball Player Evaluation.'' In Proceedings of the Fuzzy Systems and Data Mining Conference (FSDM), 2019.  
+\bibitem{fsdm} Converse, Curi, Oliveira, Arnold. ``Variational Autoencoders for Baseball Player Evaluation.'' In Proceedings of the Fuzzy Systems and Data Mining Conference (FSDM), 2019.  
 
+\bibitem{package} Geoffrey Converse. ``\textit{ML2Pvae}: Variational Autoencoder Models for IRT Parameter Estimation.'' R package version 1.0.0. The Comprehensive R Archive Network (CRAN), 2020.
 
+\bibitem{mach} Converse, Curi, Oliveira, Templin. ``Estimation of Multidimensional Item Response Theory Models with Correlated Latent Variables using Variational Autoencoders.'' \textit{Machine Learning}, 110: 1463--1480, 2021.
+
+\bibitem{kt-irt} Converse, Oliveira, Pu. ``Incorporating Item Response Theory into Knowledge Tracing.'' In Proceedings of the Conference on Artificial Intelligence in Education (AIED), 2021.
+
+\bibitem{deep-pfa} Pu, Converse, Huang. ``Deep Performance Factors Analysis for knowledge Tracing.'' In Proceedings of the Conference on Artificial Intelligence in Education (AIED), 2021.
 \end{thebibliography}
 \end{frame}
 

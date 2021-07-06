@@ -1,7 +1,7 @@
 \beamer@slide {eq:vae_derive}{7}
-\beamer@slide {eq:elbo}{8}
-\beamer@slide {fig:6skill_cor}{68}
-\beamer@slide {fig:ecpe_cor}{69}
-\beamer@slide {fig:20skill_cor}{70}
-\beamer@slide {fig:4skills_disc}{71}
-\beamer@slide {fig:train_size}{73}
+\beamer@slide {eq:elbo}{9}
+\beamer@slide {fig:6skill_cor}{70}
+\beamer@slide {fig:ecpe_cor}{71}
+\beamer@slide {fig:4skills_disc}{72}
+\beamer@slide {fig:20skill_cor}{73}
+\beamer@slide {tab:kt_results}{107}
