@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  6 JUL 2021 11:49
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2017.12.21)  9 JUL 2021 14:47
 entering extended mode
 **./defense_presentation.tex
 (defense_presentation.tex
@@ -1071,7 +1071,7 @@ File: ../img/vae_visual.png Graphic file (type bmp)
 File: ../img/vae_mnist_latent_gen.png Graphic file (type bmp)
 <../img/vae_mnist_latent_gen.png>
 
-Overfull \vbox (7.87125pt too high) detected at line 244
+Overfull \vbox (7.87125pt too high) detected at line 245
  []
 
 [17
@@ -1086,14 +1086,14 @@ Overfull \vbox (7.87125pt too high) detected at line 244
 
 ] [22
 
-] [23
-
-] [24
-
 ]
 File: ../img/logistic_2param_icc.jpg Graphic file (type bmp)
 <../img/logistic_2param_icc.jpg>
- [25
+ [23
+
+] [24
+
+] [25
 
 ] [26
 
@@ -1124,14 +1124,14 @@ File: ../img/logistic_2param_icc.jpg Graphic file (type bmp)
 
 ] [39
 
-] [40
-
-] [41
-
 ]
 File: ../img/ml2p_vae_ind.png Graphic file (type bmp)
 <../img/ml2p_vae_ind.png>
- [42
+ [40
+
+] [41
+
+] [42
 
 ] [43
 
@@ -1142,23 +1142,22 @@ File: ../img/ml2p_vae_ind.png Graphic file (type bmp)
 ] [46
 
 ]
+Overfull \hbox (16.86243pt too wide) detected at line 756
+[]
+ []
+
 [47
 
-] [48
-
 ]
-Overfull \hbox (16.86243pt too wide) detected at line 755
+Overfull \hbox (16.86243pt too wide) detected at line 756
 []
  []
 
-[49
+[48
 
-]
-Overfull \hbox (16.86243pt too wide) detected at line 755
-[]
- []
+] [49
 
-[50
+] [50
 
 ] [51
 
@@ -1170,60 +1169,56 @@ Overfull \hbox (16.86243pt too wide) detected at line 755
 
 ] [55
 
-] [56
+]
+Overfull \vbox (12.75282pt too high) detected at line 821
+ []
 
-] [57
+[56
 
 ]
-Overfull \vbox (12.75282pt too high) detected at line 820
+Overfull \vbox (12.75282pt too high) detected at line 821
+ []
+
+[57
+
+]
+Overfull \vbox (12.75282pt too high) detected at line 821
  []
 
 [58
 
 ]
-Overfull \vbox (12.75282pt too high) detected at line 820
+Overfull \vbox (12.75282pt too high) detected at line 821
  []
 
 [59
 
 ]
-Overfull \vbox (12.75282pt too high) detected at line 820
+Overfull \vbox (12.75282pt too high) detected at line 821
  []
 
 [60
 
 ]
-Overfull \vbox (12.75282pt too high) detected at line 820
+Overfull \vbox (12.75282pt too high) detected at line 821
  []
 
 [61
 
 ]
-Overfull \vbox (12.75282pt too high) detected at line 820
- []
-
-[62
-
-]
-Overfull \vbox (12.75282pt too high) detected at line 820
- []
-
-[63
-
-]
 File: ../img/ml2pvae_visual.png Graphic file (type bmp)
 <../img/ml2pvae_visual.png>
- [64
+ [62
+
+] [63
+
+] [64
 
 ] [65
 
 ] [66
 
 ] [67
-
-] [68
-
-] [69
 
 ]
 File: ../img/ml_journal_results/6skills/vae_full_disc_6skills.png Graphic file 
@@ -1244,28 +1239,7 @@ pe bmp)
 File: ../img/ml_journal_results/6skills/mcem_disc_6skills.png Graphic file (typ
 e bmp)
 <../img/ml_journal_results/6skills/mcem_disc_6skills.png>
- [70
-
-]
-File: ../img/ml_journal_results/ecpe/vae_est_disc_ecpe.png Graphic file (type b
-mp)
-<../img/ml_journal_results/ecpe/vae_est_disc_ecpe.png>
-File: ../img/ml_journal_results/ecpe/vae_est_diff_ecpe.png Graphic file (type b
-mp)
-<../img/ml_journal_results/ecpe/vae_est_diff_ecpe.png>
-File: ../img/ml_journal_results/ecpe/vae_est_theta_ecpe.png Graphic file (type 
-bmp)
-<../img/ml_journal_results/ecpe/vae_est_theta_ecpe.png>
-File: ../img/ml_journal_results/ecpe/vae_ind_disc_ecpe.png Graphic file (type b
-mp)
-<../img/ml_journal_results/ecpe/vae_ind_disc_ecpe.png>
-File: ../img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png Graphic file (type b
-mp)
-<../img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png>
-File: ../img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png Graphic file (type 
-bmp)
-<../img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png>
- [71
+ [68
 
 ]
 
@@ -1275,7 +1249,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.974 \end{frame}
+l.975 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1299,7 +1273,7 @@ file (type bmp)
 File: ../img/ml_journal_results/4skills/mcem_disc_4skills_cropped.png Graphic f
 ile (type bmp)
 <../img/ml_journal_results/4skills/mcem_disc_4skills_cropped.png>
-[72
+[69
 
 ]
 
@@ -1309,7 +1283,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1008 \end{frame}
+l.1009 \end{frame}
                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1333,25 +1307,24 @@ e (type bmp)
 File: ../img/ml_journal_results/20skills/vae_ind_theta_20skills.png Graphic fil
 e (type bmp)
 <../img/ml_journal_results/20skills/vae_ind_theta_20skills.png>
-[73
+[70
 
 ]
-Overfull \hbox (11.20313pt too wide) in paragraph at lines 1047--1047
+Overfull \hbox (11.20313pt too wide) in paragraph at lines 1048--1048
 [][]  
  []
 
-[74
+[71
+
+] [72
+
+] [73
+
+] [74
 
 ] [75
 
-]
-File: ../img/ml_journal_results/vae_full_train_size_error.png Graphic file (typ
-e bmp)
-<../img/ml_journal_results/vae_full_train_size_error.png>
-File: ../img/ml_journal_results/vae_full_train_size_time.png Graphic file (type
- bmp)
-<../img/ml_journal_results/vae_full_train_size_time.png>
- [76
+] [76
 
 ] [77
 
@@ -1367,14 +1340,6 @@ File: ../img/ml_journal_results/vae_full_train_size_time.png Graphic file (type
 
 ] [83
 
-] [84
-
-] [85
-
-] [86
-
-] [87
-
 ]
 File: ../img/rnn_visual.png Graphic file (type bmp)
 <../img/rnn_visual.png>
@@ -1388,16 +1353,24 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1234 \end{frame}
+l.1236 \end{frame}
                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \vbox (4.09012pt too high) detected at line 1234
+Overfull \vbox (4.09012pt too high) detected at line 1236
  []
 
-[88
+[84
+
+] [85
+
+] [86
+
+] [87
+
+] [88
 
 ] [89
 
@@ -1417,36 +1390,22 @@ Overfull \vbox (4.09012pt too high) detected at line 1234
 
 ] [97
 
-] [98
-
-] [99
-
-] [100
-
-] [101
-
-]
-[102
-
-] [103
-
-] [104
-
 ]
 File: ../img/kt_irt/kt_irt_visual_with_equation_2.png Graphic file (type bmp)
 <../img/kt_irt/kt_irt_visual_with_equation_2.png>
- [105
+ [98
 
-] [106
+]
+[99
 
-] [107
+] [100
 
 ]
 File: ../img/kt_irt/disc_est_attn2.png Graphic file (type bmp)
 <../img/kt_irt/disc_est_attn2.png>
 File: ../img/kt_irt/synth5_diff_est_lstm.png Graphic file (type bmp)
 <../img/kt_irt/synth5_diff_est_lstm.png>
- [108
+ [101
 
 ]
 File: ../img/kt_irt/knowledge_trace_lstm_edited.png Graphic file (type bmp)
@@ -1455,42 +1414,32 @@ File: ../img/kt_irt/knowledge_trace_attn_edited.png Graphic file (type bmp)
 <../img/kt_irt/knowledge_trace_attn_edited.png>
 File: ../img/kt_irt/theta_est_attn2.png Graphic file (type bmp)
 <../img/kt_irt/theta_est_attn2.png>
- [109
+ [102
 
-]
-File: ../img/kt_irt/synth5_attn_weights_no_ffn_axis2.png Graphic file (type bmp
-)
-<../img/kt_irt/synth5_attn_weights_no_ffn_axis2.png>
-File: ../img/kt_irt/synth5_clusters_no_ffn.png Graphic file (type bmp)
-<../img/kt_irt/synth5_clusters_no_ffn.png>
- [110
+] [103
+
+] [104
+
+] [105
+
+] [106
+
+] [107
+
+] [108
+
+] [109
+
+] [110
 
 ] [111
 
-] [112
+]
+[112
 
 ] [113
 
-]
-[114
-
-] [115
-
-] [116
-
-] [117
-
-] [118
-
-] [119
-
-] [120
-
-] [121
-
-] [122
-
-] [123
+] [114
 
 ]
 \tf@nav=\write6
@@ -1502,23 +1451,22 @@ File: ../img/kt_irt/synth5_clusters_no_ffn.png Graphic file (type bmp)
 \tf@snm=\write8
 \openout8 = `defense_presentation.snm'.
 
- [124
+ [115
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1555.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1555.
-
-(defense_presentation.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1555.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1555.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1554.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1554.
+ (defense_presentation.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1554.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1554.
  ) 
 Here is how much of TeX's memory you used:
- 22551 strings out of 427839
- 405178 string characters out of 3155939
- 517371 words of memory out of 3000000
- 25991 multiletter control sequences out of 15000+200000
+ 22498 strings out of 427839
+ 403101 string characters out of 3155939
+ 517165 words of memory out of 3000000
+ 25950 multiletter control sequences out of 15000+200000
  17651 words of font info for 94 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  56i,22n,60p,789b,704s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on defense_presentation.pdf (123 pages).
+Output written on defense_presentation.pdf (114 pages).

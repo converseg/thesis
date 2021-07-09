@@ -156,6 +156,7 @@
 
 \begin{frame}{VAE Derivation}
   \scriptsize
+  {\footnotesize \underline{Goal}: Maximize the log-likelihood $\displaystyle \sum_{\vect x \in \mathbb{X}} \log p_x^*(\vect x)$}
 \begin{equation*}
   \begin{split}
     \log p_x^*(\vect x) &= \int q_\alpha(\vect z |\vect x) \log p_x^*(\vect x)d\vect z \\
@@ -264,16 +265,16 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Rasch Model}
-\begin{itemize}
-  \item Define $\d_i > 0$ as the difficulty of item $i$, and $\eta_j > 0$ the ability of subject $j$.
-  \item Rasch: Probability of success depends on ratio $\displaystyle \frac{\d_i}{\eta_j}$
-    \[P(u_{ij} = 1 | \eta_j, \d_i) = \frac{1}{1 + \d_i/\eta_j} = \frac{\eta_j}{\eta_j + \d_i}\]
-  \item<2-> Logarithmic transformation: $\theta_j = \log \eta_j$ and $\beta_i = \log \d_i$
-  \item<2-> Rasch Model:
-    \[P(u_{ij} = 1 | \theta_j, \beta_i) = \frac{1}{1 + e^{\beta_i - \theta_j}}\]
-\end{itemize}
-\end{frame}
+%\begin{frame}{Rasch Model}
+%\begin{itemize}
+%  \item Define $\d_i > 0$ as the difficulty of item $i$, and $\eta_j > 0$ the ability of subject $j$.
+%  \item Rasch: Probability of success depends on ratio $\displaystyle \frac{\d_i}{\eta_j}$
+%    \[P(u_{ij} = 1 | \eta_j, \d_i) = \frac{1}{1 + \d_i/\eta_j} = \frac{\eta_j}{\eta_j + \d_i}\]
+%  \item<2-> Logarithmic transformation: $\theta_j = \log \eta_j$ and $\beta_i = \log \d_i$
+%  \item<2-> Rasch Model:
+%    \[P(u_{ij} = 1 | \theta_j, \beta_i) = \frac{1}{1 + e^{\beta_i - \theta_j}}\]
+%\end{itemize}
+%\end{frame}
 
 \begin{frame}{2-Parameter Logistic Model (2PL)}
 \begin{itemize}
@@ -904,42 +905,42 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}{ECPE Parameter Estimates}
-\begin{figure}[h]
-\centering
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \figuretitlesmall{Discrimination Parameters}
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_disc_ecpe.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \figuretitlesmall{Difficulty Parameters}
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_diff_ecpe.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \figuretitlesmall{Ability Parameters}
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_theta_ecpe.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_disc_ecpe.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png}
-    \end{subfigure}
-    \begin{subfigure}{.32\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png}
-    \end{subfigure}
-    \caption*{\scriptsize Correlation plots of item and student parameters -- 28 items assessing 3 latent traits. No true values -- compare against ``accepted'' MHRM estimates.}
-    \label{fig:ecpe_cor}
-\end{figure}
+%\begin{frame}{ECPE Parameter Estimates}
+%\begin{figure}[h]
+%\centering
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \figuretitlesmall{Discrimination Parameters}
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_disc_ecpe.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \figuretitlesmall{Difficulty Parameters}
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_diff_ecpe.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \figuretitlesmall{Ability Parameters}
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_est_theta_ecpe.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_disc_ecpe.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_diff_ecpe.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.32\textwidth}
+%      \centering
+%      \includegraphics[width=.9\linewidth]{../img/ml_journal_results/ecpe/vae_ind_theta_ecpe.png}
+%    \end{subfigure}
+%    \caption*{\scriptsize Correlation plots of item and student parameters -- 28 items assessing 3 latent traits. No true values -- compare against ``accepted'' MHRM estimates.}
+%    \label{fig:ecpe_cor}
+%\end{figure}
+%
+%\end{frame}
 
-
-\end{frame}
 \begin{frame}{Sim-4 Discrimination Parameter Estimates}
 \begin{figure}[h]
 \centering
@@ -1083,21 +1084,21 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
 \end{tabular} 
 \end{frame}
 
-\begin{frame}{Scalability of ML2P-VAE}
-\begin{figure}[h]
-\centering
-    \begin{subfigure}{.47\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{../img/ml_journal_results/vae_full_train_size_error.png}
-    \end{subfigure}
-    \begin{subfigure}{.47\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{../img/ml_journal_results/vae_full_train_size_time.png}
-    \end{subfigure}
-    \caption*{\scriptsize How does the size of data affect the performance of ML2P-VAE methods?}
-\end{figure}
-
-\end{frame}
+%\begin{frame}{Scalability of ML2P-VAE}
+%\begin{figure}[h]
+%\centering
+%    \begin{subfigure}{.47\textwidth}
+%      \centering
+%      \includegraphics[width=\linewidth]{../img/ml_journal_results/vae_full_train_size_error.png}
+%    \end{subfigure}
+%    \begin{subfigure}{.47\textwidth}
+%      \centering
+%      \includegraphics[width=\linewidth]{../img/ml_journal_results/vae_full_train_size_time.png}
+%    \end{subfigure}
+%    \caption*{\scriptsize How does the size of data affect the performance of ML2P-VAE methods?}
+%\end{figure}
+%
+%\end{frame}
 
 \subsection{ML2Pvae R Package}
 \begin{frame}{ML2Pvae Package in R}
@@ -1195,9 +1196,10 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
       \begin{itemize}
         \item $q_t$ indicates the item answered
         \item $c_t \in \{0,1\}$ indicates correctness
+        \item Embed each interaction with trainable $W_e \in \R^{2n \times d}$
       \end{itemize}
     \item<3-> \underline{Goal}: predict the probability of success on the next item:
-      \[p_{t+1} = P(c_{t+1} = 1 | (q_1, c_1),\ldots, (q_t, c_t), (q_t, ?))\]
+      \[p_{t+1} = P(c_{t+1} = 1 | (q_1, c_1),\ldots, (q_t, c_t), (q_{t+1}, ?))\]
     \item<4-> Most recent methods use neural networks, similar to NLP application
   \end{itemize}
 \end{frame}
@@ -1247,27 +1249,27 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
 \end{frame}
 
 \subsection{Deep Knowledge Tracing Methods}
-\begin{frame}{From NLP to Knowledge Tracing}
-  \begin{itemize}
-    \item NLP parallels:
-      \begin{itemize}
-        \item Predictive text $\iff$ Predict success on next item
-        \item One sentence $\iff$ One student's sequence of responses
-        \item One word $\iff$ One question + response interaction
-      \end{itemize}
-    \item<2-> $n$ distinct questions available to student
-    \item<2-> Interaction at time $t$ given as tuple $(q_t, c_t)$
-      \begin{itemize}
-        \item $q_t \in \{0,1,\ldots,n\}$ indexes an item
-        \item $c_t \in \{0,1\}$ indicates correctness
-        \item $\Rightarrow$ $2n+1$ possible interactions
-      \end{itemize}
-    \item<3-> Trainable embedding matrix $W_e \in \R^{d \times (2n+1)}$
-      \begin{itemize}
-        \item Even (resp. odd) columns give $d$-dimensional representation $\vect x_t$ of answering an item correctly (resp. incorrectly)
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+%\begin{frame}{From NLP to Knowledge Tracing}
+%  \begin{itemize}
+%    \item NLP parallels:
+%      \begin{itemize}
+%        \item Predictive text $\iff$ Predict success on next item
+%        \item One sentence $\iff$ One student's sequence of responses
+%        \item One word $\iff$ One question + response interaction
+%      \end{itemize}
+%    \item<2-> $n$ distinct questions available to student
+%    \item<2-> Interaction at time $t$ given as tuple $(q_t, c_t)$
+%      \begin{itemize}
+%        \item $q_t \in \{0,1,\ldots,n\}$ indexes an item
+%        \item $c_t \in \{0,1\}$ indicates correctness
+%        \item $\Rightarrow$ $2n+1$ possible interactions
+%      \end{itemize}
+%    \item<3-> Trainable embedding matrix $W_e \in \R^{d \times (2n+1)}$
+%      \begin{itemize}
+%        \item Even (resp. odd) columns give $d$-dimensional representation $\vect x_t$ of answering an item correctly (resp. incorrectly)
+%      \end{itemize}
+%  \end{itemize}
+%\end{frame}
 
 \begin{frame}{DKT and SAKT}
   \begin{itemize}
@@ -1418,21 +1420,21 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
   \endminipage
 \end{frame}
 
-\begin{frame}{Learning a $Q$-matrix}
-  \minipage{.5\textwidth}
-  \begin{figure}
-  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_attn_weights_no_ffn_axis2.png}
-  \caption*{\centering \footnotesize Heatmap of attention weights between Synth5 items}
-  \end{figure}
-  \endminipage
-  \minipage{.5\textwidth}
-  \centering
-  \begin{figure}
-  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_clusters_no_ffn.png}
-  \caption*{\footnotesize Graph clustering of Synth5 items of similar skill}
-  \end{figure}
-  \endminipage
-\end{frame}
+%\begin{frame}{Learning a $Q$-matrix}
+%  \minipage{.5\textwidth}
+%  \begin{figure}
+%  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_attn_weights_no_ffn_axis2.png}
+%  \caption*{\centering \footnotesize Heatmap of attention weights between Synth5 items}
+%  \end{figure}
+%  \endminipage
+%  \minipage{.5\textwidth}
+%  \centering
+%  \begin{figure}
+%  \includegraphics[width=.95\textwidth]{../img/kt_irt/synth5_clusters_no_ffn.png}
+%  \caption*{\footnotesize Graph clustering of Synth5 items of similar skill}
+%  \end{figure}
+%  \endminipage
+%\end{frame}
 
 \subsection{Future Work}
 
@@ -1486,12 +1488,9 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
     \item The Mathematics and Computer Science departments
     \item<2-> ACT -- specifically Scott and Yuchi
     \item<2-> FineTune Learning
-    \item<3-> My parents: Ken and Karna
+    \item<3-> My parents, Ken and Karna
     \item<3-> The rest of my family and friends
-    \item<3-> My wife: Danielle
-      \begin{itemize}
-        \item<4-> $\ldots$ and our cat Margot
-      \end{itemize}
+    \item<3-> My wife, Danielle
   \end{itemize}
 \end{frame}
 
@@ -1523,7 +1522,7 @@ Sim-4 & ML2P-VAE$_{full}$ & 0.6384	& 0.0210	& 0.7648 & 37s \\
 
 \bibitem{pandey} Pandey and Karypis. ``A Self-Attentive Model for Knowledge Tracing.'' \textit{International Conference on Educational Data Mining}, 2019.
 
-\bibitem{zhang} Zhang et al. ``Dynamic Key-Value Memory Networks for Knowledge Tracing.'' \textit{26th international World Wide Wedb Conference}, 765--774, 2017.
+\bibitem{zhang} Zhang et al. ``Dynamic Key-Value Memory Networks for Knowledge Tracing.'' \textit{26th international World Wide Web Conference}, 765--774, 2017.
 
 \end{thebibliography}
 \end{frame}

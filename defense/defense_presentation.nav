@@ -32,140 +32,130 @@
 \headcommand {\beamer@framepages {18}{20}}
 \headcommand {\slideentry {2}{0}{2}{21/22}{}{0}}
 \headcommand {\beamer@framepages {21}{22}}
-\headcommand {\slideentry {2}{0}{3}{23/24}{}{0}}
-\headcommand {\beamer@framepages {23}{24}}
-\headcommand {\slideentry {2}{0}{4}{25/25}{}{0}}
-\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {2}{0}{3}{23/23}{}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\slideentry {2}{0}{4}{24/25}{}{0}}
+\headcommand {\beamer@framepages {24}{25}}
 \headcommand {\slideentry {2}{0}{5}{26/27}{}{0}}
 \headcommand {\beamer@framepages {26}{27}}
-\headcommand {\slideentry {2}{0}{6}{28/29}{}{0}}
+\headcommand {\beamer@subsectionpages {18}{27}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{28}{IRT Parameter Estimation Methods}}
+\headcommand {\slideentry {2}{1}{1}{28/29}{IRT Parameter Estimation Methods}{0}}
 \headcommand {\beamer@framepages {28}{29}}
-\headcommand {\beamer@subsectionpages {18}{29}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{30}{IRT Parameter Estimation Methods}}
-\headcommand {\slideentry {2}{1}{1}{30/31}{IRT Parameter Estimation Methods}{0}}
+\headcommand {\slideentry {2}{1}{2}{30/31}{IRT Parameter Estimation Methods}{0}}
 \headcommand {\beamer@framepages {30}{31}}
-\headcommand {\slideentry {2}{1}{2}{32/33}{IRT Parameter Estimation Methods}{0}}
-\headcommand {\beamer@framepages {32}{33}}
-\headcommand {\beamer@sectionpages {18}{33}}
-\headcommand {\beamer@subsectionpages {30}{33}}
-\headcommand {\sectionentry {3}{ML2P-VAE for Parameter Estimation}{34}{ML2P-VAE for Parameter Estimation}{0}}
-\headcommand {\slideentry {3}{0}{1}{34/36}{}{0}}
-\headcommand {\beamer@framepages {34}{36}}
-\headcommand {\beamer@subsectionpages {34}{36}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{37}{ML2P-VAE Method}}
-\headcommand {\slideentry {3}{1}{1}{37/41}{ML2P-VAE Method}{0}}
-\headcommand {\beamer@framepages {37}{41}}
-\headcommand {\slideentry {3}{1}{2}{42/42}{ML2P-VAE Method}{0}}
-\headcommand {\beamer@framepages {42}{42}}
-\headcommand {\slideentry {3}{1}{3}{43/44}{ML2P-VAE Method}{0}}
+\headcommand {\beamer@sectionpages {18}{31}}
+\headcommand {\beamer@subsectionpages {28}{31}}
+\headcommand {\sectionentry {3}{ML2P-VAE for Parameter Estimation}{32}{ML2P-VAE for Parameter Estimation}{0}}
+\headcommand {\slideentry {3}{0}{1}{32/34}{}{0}}
+\headcommand {\beamer@framepages {32}{34}}
+\headcommand {\beamer@subsectionpages {32}{34}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{35}{ML2P-VAE Method}}
+\headcommand {\slideentry {3}{1}{1}{35/39}{ML2P-VAE Method}{0}}
+\headcommand {\beamer@framepages {35}{39}}
+\headcommand {\slideentry {3}{1}{2}{40/40}{ML2P-VAE Method}{0}}
+\headcommand {\beamer@framepages {40}{40}}
+\headcommand {\slideentry {3}{1}{3}{41/42}{ML2P-VAE Method}{0}}
+\headcommand {\beamer@framepages {41}{42}}
+\headcommand {\beamer@subsectionpages {35}{42}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{43}{Generalizing to Correlated Latent Traits}}
+\headcommand {\slideentry {3}{2}{1}{43/44}{Generalizing to Correlated Latent Traits}{0}}
 \headcommand {\beamer@framepages {43}{44}}
-\headcommand {\beamer@subsectionpages {37}{44}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{45}{Generalizing to Correlated Latent Traits}}
-\headcommand {\slideentry {3}{2}{1}{45/46}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\slideentry {3}{2}{2}{45/46}{Generalizing to Correlated Latent Traits}{0}}
 \headcommand {\beamer@framepages {45}{46}}
-\headcommand {\slideentry {3}{2}{2}{47/48}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\slideentry {3}{2}{3}{47/48}{Generalizing to Correlated Latent Traits}{0}}
 \headcommand {\beamer@framepages {47}{48}}
-\headcommand {\slideentry {3}{2}{3}{49/50}{Generalizing to Correlated Latent Traits}{0}}
-\headcommand {\beamer@framepages {49}{50}}
-\headcommand {\slideentry {3}{2}{4}{51/53}{Generalizing to Correlated Latent Traits}{0}}
-\headcommand {\beamer@framepages {51}{53}}
-\headcommand {\slideentry {3}{2}{5}{54/57}{Generalizing to Correlated Latent Traits}{0}}
-\headcommand {\beamer@framepages {54}{57}}
-\headcommand {\slideentry {3}{2}{6}{58/63}{Generalizing to Correlated Latent Traits}{0}}
-\headcommand {\beamer@framepages {58}{63}}
-\headcommand {\slideentry {3}{2}{7}{64/64}{Generalizing to Correlated Latent Traits}{0}}
-\headcommand {\beamer@framepages {64}{64}}
-\headcommand {\beamer@subsectionpages {45}{64}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{65}{Method Comparison}}
-\headcommand {\slideentry {3}{3}{1}{65/68}{Method Comparison}{0}}
-\headcommand {\beamer@framepages {65}{68}}
-\headcommand {\slideentry {3}{3}{2}{69/69}{Method Comparison}{0}}
+\headcommand {\slideentry {3}{2}{4}{49/51}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\beamer@framepages {49}{51}}
+\headcommand {\slideentry {3}{2}{5}{52/55}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\beamer@framepages {52}{55}}
+\headcommand {\slideentry {3}{2}{6}{56/61}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\beamer@framepages {56}{61}}
+\headcommand {\slideentry {3}{2}{7}{62/62}{Generalizing to Correlated Latent Traits}{0}}
+\headcommand {\beamer@framepages {62}{62}}
+\headcommand {\beamer@subsectionpages {43}{62}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{63}{Method Comparison}}
+\headcommand {\slideentry {3}{3}{1}{63/66}{Method Comparison}{0}}
+\headcommand {\beamer@framepages {63}{66}}
+\headcommand {\slideentry {3}{3}{2}{67/67}{Method Comparison}{0}}
+\headcommand {\beamer@framepages {67}{67}}
+\headcommand {\slideentry {3}{3}{3}{68/68}{Method Comparison}{0}}
+\headcommand {\beamer@framepages {68}{68}}
+\headcommand {\slideentry {3}{3}{4}{69/69}{Method Comparison}{0}}
 \headcommand {\beamer@framepages {69}{69}}
-\headcommand {\slideentry {3}{3}{3}{70/70}{Method Comparison}{0}}
+\headcommand {\slideentry {3}{3}{5}{70/70}{Method Comparison}{0}}
 \headcommand {\beamer@framepages {70}{70}}
-\headcommand {\slideentry {3}{3}{4}{71/71}{Method Comparison}{0}}
+\headcommand {\slideentry {3}{3}{6}{71/71}{Method Comparison}{0}}
 \headcommand {\beamer@framepages {71}{71}}
-\headcommand {\slideentry {3}{3}{5}{72/72}{Method Comparison}{0}}
+\headcommand {\slideentry {3}{3}{7}{72/72}{Method Comparison}{0}}
 \headcommand {\beamer@framepages {72}{72}}
-\headcommand {\slideentry {3}{3}{6}{73/73}{Method Comparison}{0}}
-\headcommand {\beamer@framepages {73}{73}}
-\headcommand {\slideentry {3}{3}{7}{74/74}{Method Comparison}{0}}
-\headcommand {\beamer@framepages {74}{74}}
-\headcommand {\slideentry {3}{3}{8}{75/75}{Method Comparison}{0}}
-\headcommand {\beamer@framepages {75}{75}}
-\headcommand {\slideentry {3}{3}{9}{76/76}{Method Comparison}{0}}
-\headcommand {\beamer@framepages {76}{76}}
-\headcommand {\beamer@subsectionpages {65}{76}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{77}{ML2Pvae R Package}}
-\headcommand {\slideentry {3}{4}{1}{77/78}{ML2Pvae R Package}{0}}
-\headcommand {\beamer@framepages {77}{78}}
-\headcommand {\beamer@subsectionpages {77}{78}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{79}{Future Work}}
-\headcommand {\slideentry {3}{5}{1}{79/80}{Future Work}{0}}
-\headcommand {\beamer@framepages {79}{80}}
-\headcommand {\slideentry {3}{5}{2}{81/83}{Future Work}{0}}
-\headcommand {\beamer@framepages {81}{83}}
-\headcommand {\beamer@sectionpages {34}{83}}
-\headcommand {\beamer@subsectionpages {79}{83}}
-\headcommand {\sectionentry {4}{Knowledge Tracing}{84}{Knowledge Tracing}{0}}
-\headcommand {\slideentry {4}{0}{1}{84/87}{}{0}}
-\headcommand {\beamer@framepages {84}{87}}
-\headcommand {\beamer@subsectionpages {84}{87}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{88}{Temporal Neural Networks}}
-\headcommand {\slideentry {4}{1}{1}{88/88}{Temporal Neural Networks}{0}}
-\headcommand {\beamer@framepages {88}{88}}
-\headcommand {\slideentry {4}{1}{2}{89/92}{Temporal Neural Networks}{0}}
-\headcommand {\beamer@framepages {89}{92}}
-\headcommand {\beamer@subsectionpages {88}{92}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{93}{Deep Knowledge Tracing Methods}}
-\headcommand {\slideentry {4}{2}{1}{93/95}{Deep Knowledge Tracing Methods}{0}}
-\headcommand {\beamer@framepages {93}{95}}
-\headcommand {\slideentry {4}{2}{2}{96/97}{Deep Knowledge Tracing Methods}{0}}
-\headcommand {\beamer@framepages {96}{97}}
-\headcommand {\beamer@subsectionpages {93}{97}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{98}{Incorporating IRT into Knowledge Tracing}}
-\headcommand {\slideentry {4}{3}{1}{98/101}{Incorporating IRT into Knowledge Tracing}{0}}
-\headcommand {\beamer@framepages {98}{101}}
-\headcommand {\slideentry {4}{3}{2}{102/104}{Incorporating IRT into Knowledge Tracing}{0}}
-\headcommand {\beamer@framepages {102}{104}}
-\headcommand {\slideentry {4}{3}{3}{105/105}{Incorporating IRT into Knowledge Tracing}{0}}
-\headcommand {\beamer@framepages {105}{105}}
-\headcommand {\beamer@subsectionpages {98}{105}}
-\headcommand {\beamer@subsectionentry {0}{4}{4}{106}{Results}}
-\headcommand {\slideentry {4}{4}{1}{106/106}{Results}{0}}
-\headcommand {\beamer@framepages {106}{106}}
-\headcommand {\slideentry {4}{4}{2}{107/107}{Results}{0}}
-\headcommand {\beamer@framepages {107}{107}}
-\headcommand {\slideentry {4}{4}{3}{108/108}{Results}{0}}
-\headcommand {\beamer@framepages {108}{108}}
-\headcommand {\slideentry {4}{4}{4}{109/109}{Results}{0}}
-\headcommand {\beamer@framepages {109}{109}}
-\headcommand {\slideentry {4}{4}{5}{110/110}{Results}{0}}
-\headcommand {\beamer@framepages {110}{110}}
-\headcommand {\beamer@subsectionpages {106}{110}}
-\headcommand {\beamer@subsectionentry {0}{4}{5}{111}{Future Work}}
-\headcommand {\slideentry {4}{5}{1}{111/112}{Future Work}{0}}
-\headcommand {\beamer@framepages {111}{112}}
-\headcommand {\beamer@sectionpages {84}{112}}
-\headcommand {\beamer@subsectionpages {111}{112}}
-\headcommand {\sectionentry {5}{Conclusions}{113}{Conclusions}{0}}
-\headcommand {\slideentry {5}{0}{1}{113/116}{}{0}}
-\headcommand {\beamer@framepages {113}{116}}
-\headcommand {\beamer@sectionpages {113}{116}}
-\headcommand {\beamer@subsectionpages {113}{116}}
-\headcommand {\sectionentry {6}{Acknowledgements}{117}{Acknowledgements}{0}}
-\headcommand {\slideentry {6}{0}{1}{117/120}{}{0}}
-\headcommand {\beamer@framepages {117}{120}}
-\headcommand {\beamer@sectionpages {117}{120}}
-\headcommand {\beamer@subsectionpages {117}{120}}
-\headcommand {\slideentry {7}{0}{1}{121/121}{}{0}}
-\headcommand {\beamer@framepages {121}{121}}
-\headcommand {\slideentry {7}{0}{2}{122/122}{}{0}}
-\headcommand {\beamer@framepages {122}{122}}
-\headcommand {\beamer@partpages {1}{123}}
-\headcommand {\beamer@subsectionpages {121}{123}}
-\headcommand {\beamer@sectionpages {121}{123}}
-\headcommand {\beamer@documentpages {123}}
-\headcommand {\gdef \inserttotalframenumber {60}}
-\headcommand {\slideentry {7}{0}{3}{123/123}{}{0}}
-\headcommand {\beamer@framepages {123}{123}}
+\headcommand {\beamer@subsectionpages {63}{72}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{73}{ML2Pvae R Package}}
+\headcommand {\slideentry {3}{4}{1}{73/74}{ML2Pvae R Package}{0}}
+\headcommand {\beamer@framepages {73}{74}}
+\headcommand {\beamer@subsectionpages {73}{74}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{75}{Future Work}}
+\headcommand {\slideentry {3}{5}{1}{75/76}{Future Work}{0}}
+\headcommand {\beamer@framepages {75}{76}}
+\headcommand {\slideentry {3}{5}{2}{77/79}{Future Work}{0}}
+\headcommand {\beamer@framepages {77}{79}}
+\headcommand {\beamer@sectionpages {32}{79}}
+\headcommand {\beamer@subsectionpages {75}{79}}
+\headcommand {\sectionentry {4}{Knowledge Tracing}{80}{Knowledge Tracing}{0}}
+\headcommand {\slideentry {4}{0}{1}{80/83}{}{0}}
+\headcommand {\beamer@framepages {80}{83}}
+\headcommand {\beamer@subsectionpages {80}{83}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{84}{Temporal Neural Networks}}
+\headcommand {\slideentry {4}{1}{1}{84/84}{Temporal Neural Networks}{0}}
+\headcommand {\beamer@framepages {84}{84}}
+\headcommand {\slideentry {4}{1}{2}{85/88}{Temporal Neural Networks}{0}}
+\headcommand {\beamer@framepages {85}{88}}
+\headcommand {\beamer@subsectionpages {84}{88}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{89}{Deep Knowledge Tracing Methods}}
+\headcommand {\slideentry {4}{2}{1}{89/90}{Deep Knowledge Tracing Methods}{0}}
+\headcommand {\beamer@framepages {89}{90}}
+\headcommand {\beamer@subsectionpages {89}{90}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{91}{Incorporating IRT into Knowledge Tracing}}
+\headcommand {\slideentry {4}{3}{1}{91/94}{Incorporating IRT into Knowledge Tracing}{0}}
+\headcommand {\beamer@framepages {91}{94}}
+\headcommand {\slideentry {4}{3}{2}{95/97}{Incorporating IRT into Knowledge Tracing}{0}}
+\headcommand {\beamer@framepages {95}{97}}
+\headcommand {\slideentry {4}{3}{3}{98/98}{Incorporating IRT into Knowledge Tracing}{0}}
+\headcommand {\beamer@framepages {98}{98}}
+\headcommand {\beamer@subsectionpages {91}{98}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{99}{Results}}
+\headcommand {\slideentry {4}{4}{1}{99/99}{Results}{0}}
+\headcommand {\beamer@framepages {99}{99}}
+\headcommand {\slideentry {4}{4}{2}{100/100}{Results}{0}}
+\headcommand {\beamer@framepages {100}{100}}
+\headcommand {\slideentry {4}{4}{3}{101/101}{Results}{0}}
+\headcommand {\beamer@framepages {101}{101}}
+\headcommand {\slideentry {4}{4}{4}{102/102}{Results}{0}}
+\headcommand {\beamer@framepages {102}{102}}
+\headcommand {\beamer@subsectionpages {99}{102}}
+\headcommand {\beamer@subsectionentry {0}{4}{5}{103}{Future Work}}
+\headcommand {\slideentry {4}{5}{1}{103/104}{Future Work}{0}}
+\headcommand {\beamer@framepages {103}{104}}
+\headcommand {\beamer@sectionpages {80}{104}}
+\headcommand {\beamer@subsectionpages {103}{104}}
+\headcommand {\sectionentry {5}{Conclusions}{105}{Conclusions}{0}}
+\headcommand {\slideentry {5}{0}{1}{105/108}{}{0}}
+\headcommand {\beamer@framepages {105}{108}}
+\headcommand {\beamer@sectionpages {105}{108}}
+\headcommand {\beamer@subsectionpages {105}{108}}
+\headcommand {\sectionentry {6}{Acknowledgements}{109}{Acknowledgements}{0}}
+\headcommand {\slideentry {6}{0}{1}{109/111}{}{0}}
+\headcommand {\beamer@framepages {109}{111}}
+\headcommand {\beamer@sectionpages {109}{111}}
+\headcommand {\beamer@subsectionpages {109}{111}}
+\headcommand {\slideentry {7}{0}{1}{112/112}{}{0}}
+\headcommand {\beamer@framepages {112}{112}}
+\headcommand {\slideentry {7}{0}{2}{113/113}{}{0}}
+\headcommand {\beamer@framepages {113}{113}}
+\headcommand {\beamer@partpages {1}{114}}
+\headcommand {\beamer@subsectionpages {112}{114}}
+\headcommand {\beamer@sectionpages {112}{114}}
+\headcommand {\beamer@documentpages {114}}
+\headcommand {\gdef \inserttotalframenumber {55}}
+\headcommand {\slideentry {7}{0}{3}{114/114}{}{0}}
+\headcommand {\beamer@framepages {114}{114}}
